@@ -2,71 +2,77 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>RedVortexNetwork | Pro Gaming</title>
+    <title>RedVortexNetwork | Pro Animation</title>
     <style>
-        :root {
-            --neon-red: #ff0055;
-            --neon-blue: #00d4ff;
-            --dark-bg: #0a0a0c;
+        :root { --red: #ff003c; --blue: #00f2ff; --bg: #050505; }
+        
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+        /* Animáció: Pulzáló ragyogás */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--red); }
+            50% { box-shadow: 0 0 20px var(--red); }
+            100% { box-shadow: 0 0 5px var(--red); }
         }
 
-        body { 
-            margin: 0; font-family: 'Montserrat', sans-serif; 
-            background: radial-gradient(circle at 50% 50%, #1a0a1a, #000); 
-            color: white; 
+        /* Animáció: Belúszás */
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Navigáció színátmenettel */
-        .nav { 
-            display: flex; justify-content: center; padding: 25px; 
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px);
-            border-bottom: 2px solid transparent;
-            border-image: linear-gradient(to right, var(--neon-red), var(--neon-blue)) 1;
-        }
-        .nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: 800; text-transform: uppercase; }
-        .nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+        .animated { animation: slideUp 1s ease-out; }
 
-        /* Kártya dizájn (Üveg hatás) */
-        .card { 
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px; border-radius: 20px; text-align: center;
+        .btn-animate {
+            background: var(--red);
+            padding: 15px 30px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            animation: glow 2s infinite;
+            transition: 0.3s;
+        }
+
+        .btn-animate:hover { transform: scale(1.1); background: var(--blue); }
+
+        .card {
+            background: #111;
+            padding: 30px;
+            margin: 20px;
+            border-left: 5px solid var(--red);
             transition: 0.5s;
         }
-        .card:hover { border-color: var(--neon-red); box-shadow: 0 0 30px rgba(255,0,85,0.2); }
 
-        /* Színes gombok */
-        .btn-red { background: linear-gradient(45deg, #ff0055, #ff0000); padding: 15px 30px; border-radius: 50px; border: none; color: white; font-weight: bold; cursor: pointer; }
-        .btn-blue { background: linear-gradient(45deg, #00d4ff, #0055ff); padding: 15px 30px; border-radius: 50px; border: none; color: white; font-weight: bold; cursor: pointer; }
+        .card:hover { transform: rotate(2deg) scale(1.05); }
 
-        .title { font-size: 3rem; background: linear-gradient(to right, var(--neon-red), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h1 { text-align: center; color: var(--red); animation: glow 3s infinite; }
     </style>
 </head>
 <body>
 
-<div class="nav">
-    <a href="#">Főoldal</a>
-    <a href="#">Rangok</a>
-    <a href="#">Coin Shop</a>
-    <a href="#">Szabályzat</a>
-</div>
+    <h1 class="animated">REDVORTEX NETWORK</h1>
 
-<div style="max-width: 900px; margin: 50px auto; padding: 20px;">
-    <h1 class="title">REDVORTEX NETWORK</h1>
-    
-    <div class="card">
-        <h2>Vásárlási központ</h2>
-        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
-            <button class="btn-red">Rangok vásárlása</button>
-            <button class="btn-blue">Coinok vásárlása</button>
-        </div>
-        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
-            <div style="background: white; padding: 10px; border-radius: 8px; color: black; font-weight: bold;">PAYPAL</div>
-            <div style="background: white; padding: 10px; border-radius: 8px; color: black; font-weight: bold;">STRIPE</div>
-        </div>
+    <div class="card animated">
+        <h2>Prémium Rangok</h2>
+        <p>Vásárold meg a legmenőbb rangokat!</p>
+        <button class="btn-animate">VÁSÁRLÁS</button>
     </div>
-</div>
+
+    <div class="card animated" style="animation-delay: 0.3s;">
+        <h2>Coin Rendszer</h2>
+        <p>Válts coinokat és nyisd ki a ládákat!</p>
+        <button class="btn-animate">COIN SHOP</button>
+    </div>
+
+    <div class="card animated" style="animation-delay: 0.6s;">
+        <h2>Szabályzat</h2>
+        <p>Tiszteld a szervert, vagy repülsz!</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" style="filter: invert(1);">
+        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" style="filter: invert(1);">
+    </div>
 
 </body>
 </html>
