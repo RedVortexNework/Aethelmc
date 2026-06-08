@@ -2,79 +2,70 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>RedVortexNetwork - Hivatalos Weboldal</title>
+    <title>RedVortexNetwork | Pro Gaming</title>
     <style>
-        /* CSS Stílusok */
-        body { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #0f0f0f; color: #ffffff; }
-        header { background: #1a1a1a; padding: 40px; text-align: center; border-bottom: 3px solid #ff0000; }
-        nav { display: flex; justify-content: center; background: #000; padding: 15px; }
-        nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; }
-        h1, h2 { color: #ff0000; }
-        .box { background: #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .ip-field { background: #000; padding: 15px; text-align: center; font-size: 24px; border: 1px solid #ff0000; cursor: pointer; }
-        .footer { text-align: center; padding: 30px; font-size: 12px; color: #666; }
-        
-        /* Sok-sok sor kitöltése a szerkezet miatt */
-        .card { border: 1px solid #333; padding: 15px; margin-bottom: 10px; }
-        .highlight { color: #ff0000; }
+        :root {
+            --neon-red: #ff0055;
+            --neon-blue: #00d4ff;
+            --dark-bg: #0a0a0c;
+        }
+
+        body { 
+            margin: 0; font-family: 'Montserrat', sans-serif; 
+            background: radial-gradient(circle at 50% 50%, #1a0a1a, #000); 
+            color: white; 
+        }
+
+        /* Navigáció színátmenettel */
+        .nav { 
+            display: flex; justify-content: center; padding: 25px; 
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px);
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(to right, var(--neon-red), var(--neon-blue)) 1;
+        }
+        .nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: 800; text-transform: uppercase; }
+        .nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+        /* Kártya dizájn (Üveg hatás) */
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px; border-radius: 20px; text-align: center;
+            transition: 0.5s;
+        }
+        .card:hover { border-color: var(--neon-red); box-shadow: 0 0 30px rgba(255,0,85,0.2); }
+
+        /* Színes gombok */
+        .btn-red { background: linear-gradient(45deg, #ff0055, #ff0000); padding: 15px 30px; border-radius: 50px; border: none; color: white; font-weight: bold; cursor: pointer; }
+        .btn-blue { background: linear-gradient(45deg, #00d4ff, #0055ff); padding: 15px 30px; border-radius: 50px; border: none; color: white; font-weight: bold; cursor: pointer; }
+
+        .title { font-size: 3rem; background: linear-gradient(to right, var(--neon-red), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>REDVORTEX NETWORK</h1>
-    <p>A jövő Minecraft élménye.</p>
-</header>
-
-<nav>
+<div class="nav">
     <a href="#">Főoldal</a>
     <a href="#">Rangok</a>
+    <a href="#">Coin Shop</a>
     <a href="#">Szabályzat</a>
-    <a href="https://discord.gg/WYAUgvNjKE">Discord</a>
-</nav>
-
-<div class="container">
-    <h2>Szerver IP</h2>
-    <div class="ip-field" onclick="alert('Másolva: play.redvortexnetwork.xyz')">
-        play.redvortexnetwork.xyz
-    </div>
-
-    <div class="box">
-        <h2>Üdvözlünk a RedVortexen!</h2>
-        <p>Üdvözlünk a RedVortexNetwork hivatalos weboldalán. Szerverünk célja, hogy a legmagasabb minőségű játékélményt nyújtsa minden játékos számára.</p>
-    </div>
-
-    <div class="box">
-        <h2>Miért minket válassz?</h2>
-        <div class="card">Szakértelem: Tapasztalt staff csapatunk mindig segít.</div>
-        <div class="card">Stabilitás: 24/7 üzemidő, lag-mentes élmény.</div>
-        <div class="card">Egyedi tartalom: Saját fejlesztésű pluginok.</div>
-        <div class="card">Közösség: Barátságos játékosok és rendszeres események.</div>
-    </div>
-
-    <div class="box">
-        <h2>Rangok táblázata</h2>
-        <table style="width:100%; border-collapse:collapse;">
-            <tr><th style="border:1px solid #444; padding:10px;">Rang</th><th style="border:1px solid #444; padding:10px;">Előnyök</th></tr>
-            <tr><td style="border:1px solid #444; padding:10px;">VIP</td><td style="border:1px solid #444; padding:10px;">Kit VIP, Repülés</td></tr>
-            <tr><td style="border:1px solid #444; padding:10px;">MVP</td><td style="border:1px solid #444; padding:10px;">Minden korábbi + prefix</td></tr>
-        </table>
-    </div>
-
-    <div class="box">
-        <h2>Fontos linkek</h2>
-        <ul>
-            <li><a href="https://discord.gg/WYAUgvNjKE" style="color:red;">Discord Szerver</a></li>
-            <li>Webshop link ide kerül...</li>
-            <li>Szavazás a szerverre...</li>
-        </ul>
-    </div>
 </div>
 
-<div class="footer">
-    &copy; 2026 RedVortexNetwork. Minden jog fenntartva.
-    <br>Ez a weboldal nem hivatalos Mojang termék.
+<div style="max-width: 900px; margin: 50px auto; padding: 20px;">
+    <h1 class="title">REDVORTEX NETWORK</h1>
+    
+    <div class="card">
+        <h2>Vásárlási központ</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+            <button class="btn-red">Rangok vásárlása</button>
+            <button class="btn-blue">Coinok vásárlása</button>
+        </div>
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+            <div style="background: white; padding: 10px; border-radius: 8px; color: black; font-weight: bold;">PAYPAL</div>
+            <div style="background: white; padding: 10px; border-radius: 8px; color: black; font-weight: bold;">STRIPE</div>
+        </div>
+    </div>
 </div>
 
 </body>
