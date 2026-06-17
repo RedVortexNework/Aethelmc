@@ -3,151 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REDVORTEX // ELITE NETWORK</title>
+    <title>RedVortexNetwork - Kezdőlap</title>
     <style>
-        /* =========================================================
-           REDVORTEX NETWORK - FRONTEND CORE v4.2
-           Developed by: System Architect
-           =========================================================
-        */
-        :root {
-            --red: #ff003c;
-            --blue: #00f2ff;
-            --void: #050505;
-            --panel: #0a0a0a;
-            --text: #e0e0e0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--void); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; }
-
-        /* Globális animációk */
-        @keyframes strobe { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-
-        /* Navigációs rendszer */
-        .navbar { display: flex; padding: 30px 10%; background: #000; border-bottom: 2px solid var(--red); justify-content: space-between; }
-        .nav-links a { color: #fff; margin: 0 20px; text-decoration: none; font-weight: 700; transition: 0.3s; }
-        .nav-links a:hover { color: var(--red); text-shadow: 0 0 10px var(--red); }
-
-        /* Fő szekció */
-        .main-hero { padding: 150px 10%; text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://wallpapercave.com/wp/wp4078516.jpg'); background-size: cover; }
-        .main-hero h1 { font-size: 5rem; text-transform: uppercase; letter-spacing: 15px; margin-bottom: 20px; }
-
-        /* Shop Szakaszok */
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 50px 10%; }
-        .card { background: var(--panel); border: 1px solid #222; padding: 40px; text-align: center; position: relative; overflow: hidden; transition: 0.5s; }
-        .card:hover { border-color: var(--blue); transform: scale(1.03); }
-        .card h3 { color: var(--red); font-size: 1.8rem; margin-bottom: 20px; }
-        .price-tag { font-size: 2rem; font-weight: bold; margin: 20px 0; display: block; }
-        .btn-buy { background: transparent; border: 2px solid var(--red); color: white; padding: 15px 30px; cursor: pointer; transition: 0.4s; text-transform: uppercase; }
-        .btn-buy:hover { background: var(--red); box-shadow: 0 0 20px var(--red); }
-
-        /* Footer & Extra infók */
-        footer { padding: 80px 10%; background: #020202; text-align: center; border-top: 1px solid #333; }
-        .security-badge { font-size: 0.8rem; color: #666; margin-top: 20px; }
-
-        /* Hosszabbítás céljából hozzáadott extra osztályok 
-           A kód hossza és a profi strukturáltság miatt 
-        */
-        .separator { width: 100px; height: 3px; background: var(--red); margin: 20px auto; }
-        .feature-list { list-style: none; margin: 20px 0; text-align: left; }
-        .feature-list li { margin-bottom: 10px; border-bottom: 1px solid #222; padding: 5px 0; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #121212; color: #ffffff; }
+        header { background-color: #1f1f1f; padding: 20px; text-align: center; border-bottom: 3px solid #ff4757; }
+        .main-container { padding: 50px; text-align: center; }
+        .btn-rank { background-color: #ff4757; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; }
         
-        /* 400 sor eléréséhez szükséges további CSS szabályok */
-        .glass-panel { background: rgba(255,255,255,0.03); backdrop-filter: blur(5px); padding: 30px; border-radius: 10px; }
-        .social-row { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
+        footer { background-color: #000; padding: 30px; text-align: center; margin-top: 50px; border-top: 1px solid #333; }
+        .payment-methods img { width: 50px; margin: 0 10px; filter: grayscale(100%); opacity: 0.7; }
+        .payment-methods img:hover { filter: grayscale(0%); opacity: 1; }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div style="font-weight: 900; color: var(--red); font-size: 1.5rem;">REDVORTEX // SYSTEM</div>
-        <nav class="nav-links">
-            <a href="#">DASHBOARD</a>
-            <a href="#">RANKS_PROTOCOL</a>
-            <a href="#">CREDIT_VAULT</a>
-            <a href="#">ACCESS_DISCORD</a>
-        </nav>
-    </header>
+<header>
+    <h1>RedVortexNetwork</h1>
+</header>
 
-    <section class="main-hero">
-        <h1 style="animation: strobe 2s infinite;">REDVORTEX</h1>
-        <p>A HÁLÓZAT, AMI FELEMÉSZT // OFFICIAL NETWORK</p>
-    </section>
+<div class="main-container">
+    <h2>Üdvözöllek a szerver webshopjában!</h2>
+    <p>Vásárolj rangokat, és alakítsd ki saját, egyedi megjelenésedet a szerveren.</p>
+    <br>
+    <a href="/login" class="btn-rank">Bejelentkezés & Rangvásárlás</a>
+</div>
 
-    <section class="grid-layout">
-        <div class="card glass-panel">
-            <h3>VORTEX_INITIATE</h3>
-            <div class="separator"></div>
-            <ul class="feature-list">
-                <li>» Alap Kit hozzáférés</li>
-                <li>» Színes rangjelzés</li>
-                <li>» Prioritásos belépés</li>
-            </ul>
-            <span class="price-tag">1.990 HUF</span>
-            <button class="btn-buy">Beszerez</button>
-        </div>
+<footer>
+    <p>© 2026 RedVortexNetwork - Minden jog fenntartva.</p>
+    <div class="payment-methods">
+        <img src="paypal-logo.png" alt="PayPal">
+        <img src="stripe-logo.png" alt="Stripe">
+        <img src="paysafecard-logo.png" alt="Paysafecard">
+    </div>
+</footer>
 
-        <div class="card glass-panel">
-            <h3>NEBULA_COMMANDER</h3>
-            <div class="separator"></div>
-            <ul class="feature-list">
-                <li>» Minden Vortex előny</li>
-                <li>» Repülési jog (/fly)</li>
-                <li>» Exkluzív effektek</li>
-            </ul>
-            <span class="price-tag">4.990 HUF</span>
-            <button class="btn-buy">Beszerez</button>
-        </div>
-
-        <div class="card glass-panel">
-            <h3>VOID_LEGEND</h3>
-            <div class="separator"></div>
-            <ul class="feature-list">
-                <li>» Abszolút privilégiumok</li>
-                <li>» Saját klan létrehozás</li>
-                <li>» VIP támogatás</li>
-            </ul>
-            <span class="price-tag">9.990 HUF</span>
-            <button class="btn-buy">Beszerez</button>
-        </div>
-    </section>
-
-    <section class="grid-layout" style="background: rgba(255,255,255,0.02);">
-        <div class="card">
-            <h3>500 V-CREDITS</h3>
-            <span class="price-tag">500 HUF</span>
-            <button class="btn-buy">Vásárlás</button>
-        </div>
-        <div class="card">
-            <h3>2.500 V-CREDITS</h3>
-            <span class="price-tag">2.000 HUF</span>
-            <button class="btn-buy">Vásárlás</button>
-        </div>
-        <div class="card">
-            <h3>10.000 V-CREDITS</h3>
-            <span class="price-tag">7.500 HUF</span>
-            <button class="btn-buy">Vásárlás</button>
-        </div>
-    </section>
-
-    <footer>
-        <p>SYSTEM STATUS: <span style="color:var(--blue);">OPERATIONAL</span></p>
-        <div class="social-row">
-            <span>[PAYPAL_GATEWAY]</span>
-            <span>[STRIPE_ENCRYPTED]</span>
-            <span>[BTC_PROTOCOL]</span>
-        </div>
-        <p class="security-badge">2026 // REDVORTEX NETWORK // MINDEN JOG FENNTARTVA</p>
-    </footer>
-
-    <script>
-        // Placeholder for future interaction script
-        console.log("RedVortex System Initialized...");
-        document.querySelectorAll('.btn-buy').forEach(btn => {
-            btn.addEventListener('click', () => alert('Fizetési folyamat inicializálva...'));
-        });
-    </script>
 </body>
 </html>
