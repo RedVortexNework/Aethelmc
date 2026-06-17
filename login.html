@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>Bejelentkezés</title>
-</head>
-<body>
+<?php
+// Adatbázis adatok (Ezeket a szerver configjából szedd ki)
+$host = 'localhost';
+$db   = 'authme'; // Az adatbázis neve, ahol a userek vannak
+$user = 'root';
+$pass = '';
 
-    <nav>
-        <a href="index.html">Kezdőlap</a>
-        <a href="shop.html">Bolt</a>
-        <a href="login.html">Bejelentkezés</a>
-    </nav>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $conn = new mysqli($host, $user, $pass, $db);
+    $mc_nev = $_POST['nev'];
+    $jelszo = $_POST['jelszo'];
 
-    <div class="tartalom">
-        <h1>Belépés</h1>
-        <form>
-            <p>MC Név: <input type="text" name="nev"></p>
-            <p>Jelszó: <input type="password" name="jelszo"></p>
-            <button type="submit">Belépés</button>
-        </form>
-    </div>
+    // AuthMe jelszó ellenőrzés (nagyon fontos a hash miatt!)
+    $sql = "SELECT password FROM authme WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $mc_nev);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    <footer>
-        <p>Fizetési módok: [ PayPal ] [ Paysafecard ] [ Stripe ]</p>
-    </footer>
-
-</body>
-</html>
+    if ($row = $result->fetch_assoc()) {
+        // Itt jönne a password_verify() a hash-elt jelszóhoz
+        echo "Sikeres bejelentkezés! Üdv: " . $mc_nev;
+        // Innen továbbirányíthatod a shop oldalra
+    } else {
+        echo "Hibás név vagy jelszó!";
+    }
+}
+?>
