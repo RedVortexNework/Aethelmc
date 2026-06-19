@@ -2,50 +2,498 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <title>RedVortexNetwork - Otthonod a hálózaton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedVortexNetwork - Webshop</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b1120;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Navigáció */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #0d1527;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #4f46e5;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ffffff;
+        }
+
+        nav a.shop-btn {
+            background-color: #4f46e5;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        /* Fő hős szekció */
         .hero {
-            padding: 100px 20px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://wallpaperaccess.com/full/2215642.jpg');
-            background-size: cover;
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: #6366f1;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        /* IP másolás sáv */
+        .ip-bar {
+            background-color: #111c35;
+            border: 1px solid #1e293b;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .ip-text {
+            font-family: monospace;
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        .ip-btn {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .ip-btn:hover {
+            background-color: #4338ca;
+        }
+
+        .version-info {
+            color: #4ade80;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        /* Csomagok Szekció */
+        .packages-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Kártyák */
+        .card {
+            background-color: #111c30;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 260px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card.vip { border-left: 4px solid #38bdf8; }
+        .card.vip-plus { border: 2px solid #4f46e5; }
+        .card.surfer { border-left: 4px solid #06b6d4; }
+        .card.flame { border-left: 4px solid #f97316; }
+        .card.god { border: 2px solid #ec4899; box-shadow: 0 0 15px rgba(236, 72, 153, 0.2); }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            color: white;
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge.purple { background-color: #4f46e5; }
+        .badge.pink { background-color: #ec4899; }
+
+        .package-type {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card .desc {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: normal;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: #4ade80;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .buy-btn {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
             text-align: center;
         }
-        .hero h1 { font-size: 3.5rem; color: #ff4757; text-shadow: 0 0 10px #ff4757; }
-        .stats { display: flex; justify-content: center; gap: 40px; margin-top: 30px; }
-        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 10px; border: 1px solid #333; }
-        .glow-text { color: #00d2d3; font-weight: bold; }
+
+        .buy-btn:hover { background-color: #4338ca; }
+        .buy-btn.god-btn { background-color: #ec4899; }
+        .buy-btn.god-btn:hover { background-color: #db2777; }
+
+        /* FIZETÉSI MODAL (Ablak) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background-color: #111c35;
+            border: 1px solid #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal h4 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .modal .selected-rank {
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .modal input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #0b1120;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pay-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .pay-option:hover { opacity: 0.9; }
+        .pay-card { background-color: #ffffff; color: #000000; }
+        .pay-paypal { background-color: #003087; color: #ffffff; }
+        .pay-apple { background-color: #000000; color: #ffffff; }
+
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 15px; }
+            .cards-container { flex-direction: column; align-items: center; }
+            .card { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.php">KEZDŐLAP</a>
-    <a href="shop.php">SHOP</a>
-    <a href="login.php">FIÓK</a>
-</nav>
+    <header>
+        <div class="logo">RedVortexnetwork</div>
+        <nav>
+            <a href="#">Főoldal</a>
+            <a href="#">Szabályzat</a>
+            <a href="#">Discord</a>
+            <a href="#" class="shop-btn active">Rang Vásárlás</a>
+        </nav>
+    </header>
 
-<div class="hero">
-    <h1>REDVORTEX NETWORK</h1>
-    <p>A szerver, ahol a te képességeid határozzák meg a rangodat.</p>
-    <br>
-    <a href="shop.php" style="background:#ff4757; padding: 15px 30px; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">CSATLAKOZZ MOST</a>
-</div>
+    <section class="hero">
+        <h1>Üdvözöl a <span>RedVortexnetwork</span></h1>
+        <p>Támogasd a szerver működését biztonságos fizetéssel!</p>
+        <div class="ip-bar">
+            <span class="ip-text" id="server-ip">mc.redvortexnetwork.xyz</span>
+            <button class="ip-btn" onclick="copyIp()">IP Másolása</button>
+        </div>
+        <span class="version-info">● Elérhető verziók: 1.19.4 - 1.20.1</span>
+    </section>
 
-<div class="stats">
-    <div class="stat-card">
-        <p>Játékosok száma</p>
-        <span class="glow-text">142 / 500</span>
+    <section class="packages-section">
+        <h2 class="section-title">Válassz csomagot</h2>
+        <div class="cards-container">
+            
+            <div class="card vip">
+                <div class="package-type">Alap csomag</div>
+                <h3>VIP Rang</h3>
+                <p class="desc">Ideális kezdő támogatóknak.</p>
+                <div class="price">5.00 <span>EUR</span></div>
+                <ul class="features">
+                    <li>[VIP] kék prefix</li>
+                    <li>Belépés teli szerverre</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('VIP Rang', '5.00 EUR')">Vásárlás / Küldés</button>
+            </div>
+
+            <div class="card vip-plus">
+                <div class="badge purple">Népszerű</div>
+                <div class="package-type">Premium csomag</div>
+                <h3>VIP+ Rang</h3>
+                <p class="desc">A maximális alap élményért.</p>
+                <div class="price">10.00 <span>EUR</span></div>
+                <ul class="features">
+                    <li>[VIP+] lila prefix</li>
+                    <li>Repülés a lobbiban</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('VIP+ Rang', '10.00 EUR')">Vásárlás / Küldés</button>
+            </div>
+
+            <div class="card surfer">
+                <div class="package-type">Szezonális</div>
+                <h3>Surfer Rang</h3>
+                <p class="desc">Egyedi nyári hangulatú rang.</p>
+                <div class="price">15.00 <span>EUR</span></div>
+                <ul class="features">
+                    <li>[Surfer] cián prefix</li>
+                    <li>Víz részecske effektek</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('Surfer Rang', '15.00 EUR')">Vásárlás / Küldés</button>
+            </div>
+
+            <div class="card flame">
+                <div class="package-type">Elite csomag</div>
+                <h3>Flame Rang</h3>
+                <p class="desc">Forró hangulat és egyedi kit.</p>
+                <div class="price">25.00 <span>EUR</span></div>
+                <ul class="features">
+                    <li>[Flame] animált prefix</li>
+                    <li>Heti exkluzív /kit flame</li>
+                </ul>
+                <button class="buy-btn" onclick="openCheckout('Flame Rang', '25.00 EUR')">Vásárlás / Küldés</button>
+            </div>
+
+            <div class="card god">
+                <div class="badge pink">Isten</div>
+                <div class="package-type">Egyedi rang</div>
+                <h3>Vortex God</h3>
+                <p class="desc">A szerver abszolút ura.</p>
+                <div class="price">50.00 <span>EUR</span></div>
+                <ul class="features">
+                    <li>[VORTEX] egyedi prefix</li>
+                    <li>Korlátlan /fly mindenhol</li>
+                </ul>
+                <button class="buy-btn god-btn" onclick="openCheckout('Vortex God Rang', '50.00 EUR')">Vásárlás / Küldés</button>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeCheckout()">&times;</button>
+            <h4>Vásárlás indítása</h4>
+            <span class="selected-rank" id="modalRankName">Rang név</span>
+            
+            <input type="text" id="mcUsername" placeholder="Minecraft Játékosneved" required>
+            
+            <div class="payment-methods">
+                <button class="pay-option pay-card" onclick="processPayment('Bankkártya')">💳 Hitel- / Bankkártya</button>
+                <button class="pay-option pay-paypal" onclick="processPayment('PayPal')">🔹 PayPal</button>
+                <button class="pay-option pay-apple" onclick="processPayment('Apple Pay')">🍏 Apple Pay</button>
+            </div>
+        </div>
     </div>
-    <div class="stat-card">
-        <p>Szerver verzió</p>
-        <span class="glow-text">1.21.x</span>
-    </div>
-</div>
 
-<footer style="margin-top: 100px; text-align: center; color: #666;">
-    <p>© 2026 RedVortexNetwork | Nem hivatalos Minecraft szerver</p>
-</footer>
+    <script>
+        function copyIp() {
+            const ipText = document.getElementById('server-ip').innerText;
+            navigator.clipboard.writeText(ipText).then(() => { alert('IP kimásolva!'); });
+        }
 
+        // Fizetési ablak kezelése
+        const modal = document.getElementById('checkoutModal');
+        const modalRankName = document.getElementById('modalRankName');
+        const mcUsernameInput = document.getElementById('mcUsername');
+
+        function openCheckout(rankName, price) {
+            modalRankName.innerText = rankName + " (" + price + ")";
+            modal.classList.add('active');
+        }
+
+        function closeCheckout() {
+            modal.classList.remove('active');
+            mcUsernameInput.value = "";
+        }
+
+        function processPayment(method) {
+            const username = mcUsernameInput.value.trim();
+            if(!username) {
+                alert("Kérlek, add meg a Minecraft játékosnevedet a vásárláshoz!");
+                return;
+            }
+            
+            alert(`Átirányítás a biztonságos ${method} fizetéshez...\nFelhasználó: ${username}\nTétel: ${modalRankName.innerText}`);
+            
+            // TIPP: Ide jön majd a Tebex vagy PayPal API linked!
+            // window.location.href = "https://yourserver.tebex.io/checkout?...";
+        }
+    </script>
 </body>
 </html>
