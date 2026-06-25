@@ -1,125 +1,147 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedVortexnetwork | Limitált Ajánlatok</title>
+    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Animate.css az animációkhoz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- FontAwesome ikonok -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .glow-limited:hover {
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
-            transform: translateY(-4px);
-        }
-    </style>
 </head>
-<body class="bg-[#070a13] text-gray-200 font-sans antialiased">
+<body class="bg-[#070a13] text-gray-200 font-sans antialiased selection:bg-red-500 selection:text-white">
 
+    <!-- NAVIGÁCIÓS SÁV -->
     <nav class="sticky top-0 z-50 bg-[#070a13]/90 backdrop-blur-md border-b border-gray-900 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <a href="index.html" class="text-xl font-bold tracking-wide text-indigo-500 hover:scale-105 transition-transform duration-300">
             RedVortexnetwork
         </a>
         <div class="flex flex-wrap gap-4 md:gap-6 items-center font-medium text-sm text-gray-400">
             <a href="index.html" class="hover:text-white transition-colors">Főoldal</a>
-            <a href="index.html#shop" class="hover:text-white transition-colors">Standard Rangok</a>
-            <a href="limited.html" class="text-red-400 font-bold flex items-center gap-1 border-b-2 border-red-500 pb-1">
-                <i class="fas fa-fire"></i> Limitáltak
-            </a>
-            <a href="index.html#lootbox-section" class="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1">
-                <i class="fas fa-box-open"></i> Láda
-            </a>
-            <a href="index.html#forum-section" class="text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1">
-                <i class="fas fa-comments"></i> Fórum
-            </a>
-            
-            <a href="index.html" class="border border-gray-800 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg text-xs transition-all">
-                <i class="fas fa-arrow-left"></i> Vissza a főoldalra
+            <a href="index.html#shop" class="hover:text-white transition-colors">Alap Rangok</a>
+            <a href="limited.html" class="text-red-400 font-bold transition-colors flex items-center gap-1">
+                <i class="fas fa-fire animate-pulse"></i> Limitáltak
             </a>
         </div>
     </nav>
 
-    <header class="max-w-4xl mx-auto text-center pt-20 pb-12 px-4 animate__animated animate__fadeIn">
-        <span class="bg-red-500/10 text-red-400 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full border border-red-500/20 tracking-widest animate-pulse">Szezonális Kiadások</span>
-        <h1 class="text-3xl md:text-5xl font-black mt-3 text-white tracking-tight">
-            LIMITÁLT KIADÁSÚ RANGOK
+    <!-- HERO SZEKCIÓ -->
+    <header class="max-w-4xl mx-auto text-center pt-16 pb-8 px-4 animate__animated animate__fadeIn">
+        <span class="bg-red-500/10 text-red-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-red-500/20">
+            Prémium Kategóriák
+        </span>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-4 mb-3 text-white">
+            Limitált <span class="text-red-500">Mester-Rangok</span>
         </h1>
-        <p class="text-gray-400 text-xs mt-2 max-w-md mx-auto">Ezek a csomagok csak korlátozott ideig vagy darabszámban érhetőek el. Ne maradj le róluk!</p>
+        <p class="text-gray-400 text-sm max-w-md mx-auto">
+            Válassz kategóriát, és fedezd fel a RedVortexnetwork legritkább, egyedi fejlesztésű rangjait!
+        </p>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 pb-24 animate__animated animate__fadeInUp">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-            
-            <div class="bg-[#0a0f1d] border border-red-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 glow-limited">
-                <div class="absolute top-3 right-3 bg-red-500/20 text-red-300 text-[9px] font-black uppercase px-2 py-0.5 rounded border border-red-500/40">
-                    Csak 5 db maradt!
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-red-400"><i class="fas fa-bolt"></i> Isteni Csomag</span>
-                        <h3 class="text-2xl font-black text-white mt-1">Vortex-God</h3>
-                        <p class="text-gray-400 text-xs mt-1">A szerver abszolút uralkodó rangja exkluzív jogokkal.</p>
-                    </div>
-                    <div class="py-2">
-                        <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400">50.00</span> 
-                        <span class="text-xs text-gray-500 font-bold uppercase">EUR</span>
-                    </div>
-                    <ul class="text-xs text-gray-400 space-y-2 pt-3 border-t border-gray-900">
-                        <li class="flex items-center gap-2"><i class="fas fa-star text-amber-500 text-[10px]"></i> **[VortexGod]** egyedi izzó prefix</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Minden egyedi kozmetikai kiegészítő</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Korlátlan teleportálás és chunk töltés</li>
-                    </ul>
-                </div>
-                <button onclick="buyLimited('Vortex-God', 50)" class="w-full mt-8 bg-gradient-to-r from-red-600 to-amber-600 hover:opacity-90 text-white font-black py-3 rounded-lg text-xs tracking-wider transition-all cursor-pointer">
-                    ISTENI RANG MEGVÉTELE
-                </button>
-            </div>
-
-            <div class="bg-[#0a0f1d] border border-purple-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 glow-limited">
-                <div class="absolute top-3 right-3 bg-purple-500/20 text-purple-300 text-[9px] font-black uppercase px-2 py-0.5 rounded border border-purple-500/40">
-                    Csak 2 db maradt!
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400"><i class="fas fa-crown"></i> Halhatatlan Legenda</span>
-                        <h3 class="text-2xl font-black text-white mt-1">Red-Immortal</h3>
-                        <p class="text-gray-400 text-xs mt-1">Örökös tisztelet és a létező legnagyobb kitek a játékban.</p>
-                    </div>
-                    <div class="py-2">
-                        <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">100.00</span> 
-                        <span class="text-xs text-gray-500 font-bold uppercase">EUR</span>
-                    </div>
-                    <ul class="text-xs text-gray-400 space-y-2 pt-3 border-t border-gray-900">
-                        <li class="flex items-center gap-2"><i class="fas fa-crown text-purple-400 text-[10px]"></i> **[Immortal]** sötétvörös prefix</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Hozzáférés a /fly parancshoz mindenhol</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Havonta 5 ingyen Vortex Láda kulcs</li>
-                    </ul>
-                </div>
-                <button onclick="buyLimited('Red-Immortal', 100)" class="w-full mt-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-black py-3 rounded-lg text-xs tracking-wider transition-all cursor-pointer">
-                    HALHATATLAN RANG MEGVÉTELE
-                </button>
-            </div>
-
+    <!-- KATEGÓRIA VÁLASZTÓ GOMBOK -->
+    <section class="max-w-4xl mx-auto px-4 mb-12">
+        <div class="flex flex-wrap justify-center gap-3 bg-[#0a0f1d] p-2 rounded-xl border border-gray-900 shadow-xl">
+            <button onclick="switchCategory('elemental')" id="btn-elemental" class="cat-btn bg-red-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer">🔥 Elemi Erők</button>
+            <button onclick="switchCategory('cosmic')" id="btn-cosmic" class="cat-btn bg-transparent text-gray-400 hover:text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer">🌌 Kozmikus</button>
+            <button onclick="switchCategory('mythic')" id="btn-mythic" class="cat-btn bg-transparent text-gray-400 hover:text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer">🔱 Mitologikus</button>
+            <button onclick="switchCategory('cyber')" id="btn-cyber" class="cat-btn bg-transparent text-gray-400 hover:text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer">⚡ Cyber/Kvantum</button>
         </div>
-        
-        <div class="text-center mt-12">
-            <a href="index.html" class="text-xs text-gray-500 hover:text-indigo-400 transition-colors">
-                <i class="fas fa-chevron-left mr-1"></i> Vissza a standard shophoz és a közösségi fórumhoz
-            </a>
+    </section>
+
+    <!-- RANGLISTA KÁRTYÁK -->
+    <main class="max-w-6xl mx-auto px-4 py-4 mb-24">
+        <div id="limited-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__fadeInUp">
+            <!-- A JavaScript ide fogja generálni a kártyákat dinamikusan -->
         </div>
     </main>
 
     <script>
-        function buyLimited(rankName, price) {
-            // Ellenőrizzük, hogy be van-e lépve a főoldalon (mivel a localStorage közös)
+        // A 16 LIMITÁLT RANG ADATBÁZISA
+        const ranksData = {
+            elemental: [
+                { name: "Pyro-Phoenix", price: 30, desc: "Tűzben újjászülető izzó prefix, egyedi lángcsóva részecskék és /kit pyro.", color: "border-orange-500", tagColor: "bg-orange-600", tag: "Tűz" },
+                { name: "Aqua-Leviathan", price: 30, desc: "Mélytengeri ciánkék prefix, víz alatti végtelen légzés és /feed parancs.", color: "border-cyan-500", tagColor: "bg-cyan-600", tag: "Víz" },
+                { name: "Terra-Golem", price: 35, desc: "Földrengés-barna prefix, fix +2 szív bónusz a játékon belül és /kit terra.", color: "border-amber-700", tagColor: "bg-amber-800", tag: "Föld" },
+                { name: "Aero-Zephyr", price: 40, desc: "Hófehér szél-prefix, lobbi dupla ugrás (DoubleJump) és egyedi belépési üzenet.", color: "border-slate-400", tagColor: "bg-slate-500", tag: "Levegő" }
+            ],
+            cosmic: [
+                { name: "Nebula-Drifter", price: 45, desc: "Lila-rózsaszín színátmenetes prefix, kozmikus csillagpor effekt és 2x szorzó a lottón.", color: "border-purple-500", tagColor: "bg-purple-600", tag: "Köd" },
+                { name: "Pulsar-Knight", price: 50, desc: "Kék villogó lovagi titulus, fix lila név a tablistán és /heal parancs (60p cooldown).", color: "border-blue-500", tagColor: "bg-blue-600", tag: "Csillag" },
+                { name: "Supernova", price: 65, desc: "Vakító sárga animált prefix, robbanás effekt elhalálozáskor és /kit supernova.", color: "border-yellow-500", tagColor: "bg-yellow-600", tag: "Végső" },
+                { name: "Quasar-Lord", price: 80, desc: "Mély-űr fekete/fehér prefix, teljes hozzáférés a lobbi kalapokhoz és 3x szavazat érték.", color: "border-zinc-500", tagColor: "bg-zinc-600", tag: "Galaktikus" }
+            ],
+            mythic: [
+                { name: "Asgard-Hero", price: 55, desc: "Arany színű északi prefix, villámcsapás effekt belépéskor és /workbench bárhol.", color: "border-yellow-600", tagColor: "bg-yellow-700", tag: "Isteni" },
+                { name: "Olympus-Titan", price: 60, desc: "Márványfehér prémium prefix, egyedi titulus a chaten és /enderchest parancs bárhol.", color: "border-teal-600", tagColor: "bg-teal-700", tag: "Titán" },
+                { name: "Hades-Wraith", price: 70, desc: "Alvilági sötétvörös prefix, lávatűrés a lobbiban és egyedi /kit hades hetente.", color: "border-red-700", tagColor: "bg-red-800", tag: "Alvilág" },
+                { name: "Anubis-Crypt", price: 75, desc: "Homokvihar-arany prefix, egyedi múmia kisállat a lobbiban és +50% XP bónusz.", color: "border-amber-600", tagColor: "bg-amber-700", tag: "Misztikus" }
+            ],
+            cyber: [
+                { name: "Neon-Runner", price: 50, desc: "Neon zöld világító prefix, állandó Speed I effekt a lobbikban és egyedi chat szín.", color: "border-green-500", tagColor: "bg-green-600", tag: "Futurisztikus" },
+                { name: "Cyber-Samurai", price: 65, desc: "Metálszürke/piros prefix, egyedi katana kiegészítő (kozmetika) és /extinguish.", color: "border-rose-600", tagColor: "bg-rose-700", tag: "Kiber" },
+                { name: "Matrix-Glitch", price: 85, desc: "Zöld hibakódos prefix, karakter-vibrálás effekt és /vanish a lobbiban.", color: "border-emerald-500", tagColor: "bg-emerald-600", tag: "Hacker" },
+                { name: "Quantum-God", price: 120, desc: "A létező legmagasabb rang. Animált kvantum prefix, repülés, és minden egyedi kit.", color: "border-fuchsia-600", tagColor: "bg-fuchsia-700", tag: "Végtelen" }
+            ]
+        };
+
+        // KATEGÓRIA VÁLTÓ LOGIKA
+        function switchCategory(catId) {
+            // Gombok színének resetelése
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn bg-transparent text-gray-400 hover:text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
+            });
+
+            // Aktív gomb átszínezése (kategóriától függő szín)
+            const activeBtn = document.getElementById(`btn-${catId}`);
+            if(catId === 'elemental') activeBtn.className = "cat-btn bg-red-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
+            if(catId === 'cosmic') activeBtn.className = "cat-btn bg-purple-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
+            if(catId === 'mythic') activeBtn.className = "cat-btn bg-amber-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
+            if(catId === 'cyber') activeBtn.className = "cat-btn bg-fuchsia-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
+
+            // Kártyák újragenerálása
+            const grid = document.getElementById('limited-grid');
+            grid.innerHTML = "";
+
+            ranksData[catId].forEach(rank => {
+                grid.innerHTML += `
+                    <div class="bg-[#0b0c16] border-2 ${rank.color} rounded-xl p-5 flex flex-col justify-between shadow-2xl relative overflow-hidden min-h-[440px] animate__animated animate__fadeIn">
+                        <div class="absolute top-2 right-2 ${rank.tagColor} text-[9px] font-black uppercase text-white px-2 py-0.5 rounded shadow">${rank.tag}</div>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500">Exkluzív</span>
+                                <h3 class="text-xl font-black text-white mt-0.5 tracking-wide">${rank.name}</h3>
+                                <p class="text-gray-400 text-xs mt-2 min-h-[64px] leading-relaxed">${rank.desc}</p>
+                            </div>
+                            <div class="py-2">
+                                <span class="text-3xl font-black text-white">${rank.price}.00</span> <span class="text-xs text-gray-400 font-bold uppercase">EUR</span>
+                            </div>
+                            <ul class="text-xs text-gray-500 space-y-2 pt-3 border-t border-gray-900">
+                                <li class="flex items-center gap-2"><i class="fas fa-certificate text-indigo-500 text-[9px]"></i> Örökös jogok</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-star text-indigo-500 text-[9px]"></i> Egyedi kozmetika</li>
+                            </ul>
+                        </div>
+                        <button onclick="buyLimitedPackage('${rank.name}', ${rank.price})" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 rounded-lg text-xs transition-all tracking-wide cursor-pointer shadow-lg">Vásárlás</button>
+                    </div>
+                `;
+            });
+        }
+
+        function buyLimitedPackage(name, price) {
             const user = localStorage.getItem('rv_user');
             if(!user) {
-                alert("A vásárláshoz előbb be kell jelentkezned a főoldalon!");
+                alert("A vásárláshoz előbb jelentkezz be a főoldalon!");
                 window.location.href = "index.html";
                 return;
             }
-            alert(`🎉 Elindítottad a(z) ${rankName} megvásárlását ${price} EUR értékben a következő fiókra: ${user}!`);
+            alert(`Sikeresen kiválasztottad a limitált ${name} rangot (${price} EUR).\nA fizetési felület betöltése folyamatban...`);
         }
+
+        // Első betöltésre az Elemental kategóriát mutatjuk
+        window.addEventListener('DOMContentLoaded', () => {
+            switchCategory('elemental');
+        });
     </script>
 </body>
 </html>
