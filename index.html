@@ -55,15 +55,18 @@
                     <i class="far fa-copy"></i> <span>IP Másolása</span>
                 </button>
             </div>
-            <div class="mt-4 flex items-center justify-center gap-2 text-sm text-gray-400 border-t border-gray-800/60 pt-4">
+            
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-gray-400 border-t border-gray-800/60 pt-4">
                 <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    <span id="statusPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                    <span id="statusDot" class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
                 </span>
-                <span>Elérhető verziók: <strong class="text-gray-200">1.19.4 - 1.20.1</strong></span>
-                <span class="mx-2 text-gray-600">|</span>
-                <span>Online: <strong id="player-count" class="text-green-400">42</strong> játékos</span>
+                
+                <span class="mr-2">Szerver: <strong id="serverStatus" class="text-yellow-400 uppercase tracking-wider text-xs">Frissítés...</strong></span>
+                <span class="text-gray-600">|</span>
+                <span>Online: <strong id="player-count" class="text-gray-200">-</strong> játékos</span>
             </div>
+            <div class="text-[11px] text-gray-500 mt-1">Verzió: 1.19.4 - 1.20.1</div>
         </div>
     </header>
 
@@ -146,7 +149,7 @@
     </section>
 
     <div id="loginModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 animate__animated animate__fadeIn">
-        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative animate__animated animate__scaleIn">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative">
             <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 cursor-pointer text-xl">&times;</button>
             <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-white"><i class="fas fa-link text-indigo-400"></i> Fiók Összekapcsolás</h3>
             <p class="text-gray-400 text-xs mb-6">Add meg a pontos Minecraft játékosneved az automatikus kézbesítéshez.</p>
@@ -163,6 +166,45 @@
 
     <script>
         let loggedInUser = null;
+        const SERVER_IP = "mc.redvortexnetwork.xyz"; // Ide írd a pontos IP-det ha változik
+
+        // Élő státusz lekérő funkció (Minecraft API)
+        async function updateServerStatus() {
+            const statusText = document.getElementById('serverStatus');
+            const playerText = document.getElementById('player-count');
+            const dot = document.getElementById('statusDot');
+            const ping = document.getElementById('statusPing');
+
+            try {
+                const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
+                const data = await response.json();
+
+                if (data.online) {
+                    statusText.innerText = "ONLINE";
+                    statusText.className = "text-green-400 uppercase tracking-wider text-xs font-bold";
+                    playerText.innerText = data.players.online;
+                    playerText.className = "text-green-400 font-bold";
+                    
+                    dot.className = "relative inline-flex rounded-full h-2 w-2 bg-green-500";
+                    ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                } else {
+                    statusText.innerText = "OFFLINE";
+                    statusText.className = "text-red-500 uppercase tracking-wider text-xs font-bold";
+                    playerText.innerText = "0";
+                    playerText.className = "text-gray-400";
+                    
+                    dot.className = "relative inline-flex rounded-full h-2 w-2 bg-red-500";
+                    ping.className = ""; // Nincs villogás ha offline
+                }
+            } catch (error) {
+                statusText.innerText = "HIBA";
+                statusText.className = "text-amber-500 uppercase tracking-wider text-xs font-bold";
+            }
+        }
+
+        // Oldal betöltésekor azonnal lefut, majd 30 másodpercenként frissít
+        updateServerStatus();
+        setInterval(updateServerStatus, 30000);
 
         // IP másoló
         function copyIP() {
@@ -194,17 +236,15 @@
             document.getElementById('loginModal').classList.replace('flex', 'hidden');
         }
 
-        // MC Fiók összekapcsolása (Mojang avatar API-val)
+        // MC Fiók összekapcsolása
         function linkMinecraftAccount() {
             const username = document.getElementById('mcUsername').value.trim();
             if(!username) {
                 alert("Kérlek adj meg egy nevet!");
                 return;
             }
-
             loggedInUser = username;
             
-            // Navigáció frissítése a játékos fejével (Crafatar API)
             const authSection = document.getElementById('auth-section');
             authSection.innerHTML = `
                 <div class="flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-1.5 rounded-xl">
@@ -213,7 +253,6 @@
                     <button onclick="logout()" class="text-xs text-red-400 hover:text-red-300 ml-2 cursor-pointer"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             `;
-            
             closeLoginModal();
         }
 
@@ -222,19 +261,14 @@
             location.reload();
         }
 
-        // Vásárlás és Automatikus parancsküldés a szervernek
+        // Vásárlás szimuláció
         function buyPackage(packageName, price) {
             if(!loggedInUser) {
                 alert("Hoppá! A vásárláshoz előbb be kell jelentkezned a Minecraft fiókoddal felül!");
                 openLoginModal();
                 return;
             }
-
-            // Ez a rész szimulálja a fizetés utáni szerver-összeköttetést (RCON parancs futtatás)
             alert(`Fizetés indítása: ${packageName} rang (${price} EUR)\nFelhasználó: ${loggedInUser}`);
-            
-            // Itt küldené el a háttérrendszered (pl. CraftingStore, Tebex vagy egy saját Node.js/PHP backend) a parancsot a szervernek:
-            console.log(`Szerver parancs végrehajtása automatikusan: /lp user ${loggedInUser} parent add ${packageName.toLowerCase()}`);
         }
     </script>
 </body>
