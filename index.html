@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedVortexnetwork | Főoldal</title>
-    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Animate.css az animációkhoz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- FontAwesome ikonok -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-[#070a13] text-gray-200 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
-    <!-- NAVIGÁCIÓS SÁV -->
     <nav class="sticky top-0 z-50 bg-[#070a13]/90 backdrop-blur-md border-b border-gray-900 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <a href="index.html" class="text-xl font-bold tracking-wide text-indigo-500 hover:scale-105 transition-transform duration-300">
             RedVortexnetwork
@@ -26,22 +22,25 @@
             </a>
             <a href="szabalyzat.html" class="hover:text-white transition-colors">Szabályzat</a>
             
-            <!-- BEJELENTKEZÉSI ÁLLAPOT -->
-            <div id="auth-zone" class="border-l border-gray-800 pl-4 md:pl-6">
+            <div id="auth-zone" class="border-l border-gray-800 pl-4 md:pl-6 flex items-center gap-3">
                 <button onclick="openLoginModal()" id="nav-login-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all cursor-pointer shadow-lg shadow-indigo-600/10">
                     <i class="fas fa-user-plus mr-1"></i> Bejelentkezés
                 </button>
-                <div id="user-display" class="hidden flex items-center gap-2">
+                
+                <div id="user-display" class="hidden flex items-center gap-3">
+                    <div onclick="openCoinModal()" class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1.5 rounded-lg cursor-pointer hover:bg-amber-500/20 transition-all" title="Coin egyenleg / Vásárlás">
+                        <i class="fas fa-coins text-amber-400 text-xs animate-pulse"></i>
+                        <span id="user-coins" class="text-xs font-black text-amber-400">0 RVC</span>
+                    </div>
                     <span id="username-text" class="text-xs text-white font-bold bg-[#0a0f1d] px-3 py-1.5 rounded-lg border border-gray-900"></span>
-                    <button onclick="logout()" class="text-gray-500 hover:text-red-400 text-xs transition-colors p-1 cursor-pointer" title="Kijelentkezés">
-                        <i class="fas fa-right-from-bracket"></i>
+                    <button onclick="openProfileModal()" class="text-gray-400 hover:text-white text-sm transition-colors p-1 cursor-pointer" title="Profil és Beállítások">
+                        <i class="fas fa-gear"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO / BEVEZETŐ SZEKCIÓ -->
     <header class="max-w-4xl mx-auto text-center pt-24 pb-16 px-4 animate__animated animate__fadeIn">
         <span class="bg-indigo-500/10 text-indigo-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-indigo-500/20">
             Üdvözlünk a RedVortexnetwork boltjában
@@ -60,7 +59,6 @@
         </div>
     </header>
 
-    <!-- SHOP / ALAP RANGOK SZEKCIÓ -->
     <section id="shop" class="max-w-6xl mx-auto px-4 py-12 scroll-mt-24 animate__animated animate__fadeInUp">
         <div class="text-center mb-12">
             <h2 class="text-2xl md:text-3xl font-extrabold text-white">Állandó Alap Rangjaink</h2>
@@ -68,7 +66,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- VIP RANG -->
             <div class="bg-[#0a0f1d] border border-gray-900 rounded-xl p-6 flex flex-col justify-between shadow-xl min-h-[380px]">
                 <div>
                     <h3 class="text-lg font-bold text-white">VIP</h3>
@@ -82,7 +79,6 @@
                 <button onclick="buyBasePackage('VIP', 10)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer">Vásárlás</button>
             </div>
 
-            <!-- MVP RANG -->
             <div class="bg-[#0a0f1d] border-2 border-indigo-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative min-h-[380px]">
                 <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-[10px] font-black text-white px-3 py-1 rounded-full shadow">LEGNÉPSZERŰBB</div>
                 <div>
@@ -98,7 +94,6 @@
                 <button onclick="buyBasePackage('MVP', 20)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer shadow-lg shadow-indigo-600/10">Vásárlás</button>
             </div>
 
-            <!-- ELITE RANG -->
             <div class="bg-[#0a0f1d] border border-gray-900 rounded-xl p-6 flex flex-col justify-between shadow-xl min-h-[380px]">
                 <div>
                     <h3 class="text-lg font-bold text-white">ELITE</h3>
@@ -115,11 +110,9 @@
         </div>
     </section>
 
-    <!-- BIZTONSÁGOS FIZETÉS & HITELESSÉG SZEKCIÓ -->
     <section class="max-w-6xl mx-auto px-6 py-12 my-12 bg-[#0a0f1d] border border-gray-950 rounded-2xl shadow-2xl animate__animated animate__fadeIn">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             
-            <!-- Bal oldal: Szöveges garanciák -->
             <div class="space-y-4">
                 <div class="flex items-center gap-2 text-indigo-400 text-xs font-black uppercase tracking-widest">
                     <i class="fas fa-shield-halved text-sm animate-pulse"></i> 100% Biztonságos Tranzakciók
@@ -131,7 +124,6 @@
                     A RedVortexnetwork felületén végzett minden tranzakció banki szintű titkosítással van védve. A megvásárolt rangok és előfizetések a fizetés után azonnal, automatikusan jóváírásra kerülnek a szerveren.
                 </p>
                 
-                <!-- Kis minősítési ikonok -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                     <div class="flex items-center gap-3 bg-[#070a13] p-3 rounded-xl border border-gray-900">
                         <i class="fas fa-lock text-emerald-500 text-lg"></i>
@@ -157,17 +149,14 @@
                 </div>
             </div>
 
-            <!-- Jobb oldal: Fizetési logók rácsa -->
             <div class="bg-[#070a13] border border-gray-900 rounded-xl p-6 text-center space-y-6">
                 <div class="text-gray-400 text-xs font-bold uppercase tracking-wider">Támogatott fizetési módok</div>
                 
                 <div class="grid grid-cols-2 gap-4">
-                    <!-- PayPal -->
                     <div class="bg-[#0a0f1d] hover:border-blue-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
                         <i class="fa-brands fa-paypal text-3xl text-[#003087] group-hover:scale-110 transition-transform"></i>
                         <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">PayPal</span>
                     </div>
-                    <!-- Visa / Mastercard -->
                     <div class="bg-[#0a0f1d] hover:border-amber-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
                         <div class="flex gap-2 items-center justify-center group-hover:scale-110 transition-transform">
                             <i class="fa-brands fa-cc-visa text-2xl text-[#1a1f71]"></i>
@@ -175,12 +164,10 @@
                         </div>
                         <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">Bankkártya</span>
                     </div>
-                    <!-- Paysafecard -->
                     <div class="bg-[#0a0f1d] hover:border-cyan-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
                         <i class="fas fa-ticket text-2xl text-[#009cdb] group-hover:scale-110 transition-transform"></i>
                         <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">Paysafecard</span>
                     </div>
-                    <!-- Google Pay -->
                     <div class="bg-[#0a0f1d] hover:border-purple-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
                         <i class="fa-brands fa-google-pay text-3xl text-gray-300 group-hover:text-white group-hover:scale-110 transition-transform"></i>
                         <span class="text-[11px] font-bold text-gray-400 mt-1 group-hover:text-white transition-colors">Google Pay</span>
@@ -195,11 +182,10 @@
         </div>
     </section>
 
-    <!-- MINECRAFT KÜTYÜ / MODAL BEJELENTKEZÉSHEZ -->
     <div id="login-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
             <div class="flex justify-between items-center">
-                <h3 class="text-md font-bold text-white flex items-center gap-2"><i class="fas fa-user-astronaut text-indigo-500"></i> Karakter azonosítás</h3>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-user-astronaut text-indigo-500"></i> Karakter azonosítás</h3>
                 <button onclick="closeLoginModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
             </div>
             <p class="text-xs text-gray-400">Add meg a pontos Minecraft játékosneved, hogy a vásárolt rangot kézbesíteni tudjuk.</p>
@@ -208,9 +194,65 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIKA -->
+    <div id="profile-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
+            <div class="flex justify-between items-center border-b border-gray-900 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-user text-indigo-400"></i> Fiók Kezelés</h3>
+                <button onclick="closeProfileModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="space-y-2">
+                <div class="text-xs text-gray-400">Bejelentkezett karakter:</div>
+                <div id="profile-name" class="text-sm font-black text-white bg-[#070a13] p-2 rounded border border-gray-900"></div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-xs text-gray-400">Aktuális egyenleged:</div>
+                <div class="flex justify-between items-center bg-[#070a13] p-2 rounded border border-gray-900">
+                    <span id="profile-coins" class="text-xs font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> 0 RVC</span>
+                    <button onclick="closeProfileModal(); openCoinModal();" class="bg-amber-500 hover:bg-amber-400 text-gray-900 font-black text-[10px] px-2 py-1 rounded transition-colors cursor-pointer">Coin Vásárlás</button>
+                </div>
+            </div>
+            <button onclick="logout()" class="w-full bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white font-bold py-2 rounded-lg text-xs border border-red-500/20 hover:border-transparent transition-all cursor-pointer">
+                <i class="fas fa-right-from-bracket mr-1"></i> Kijelentkezés a fiókból
+            </button>
+        </div>
+    </div>
+
+    <div id="coin-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-md w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
+            <div class="flex justify-between items-center border-b border-gray-900 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-coins text-amber-400"></i> RV-Coin Feltöltés</h3>
+                <button onclick="closeCoinModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-gray-400">Válassz egy Coin csomagot az egyenleged feltöltéséhez. A Coinok segítségével exkluzív ládákat és játékbeli cuccokat vehetsz.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div class="bg-[#070a13] border border-gray-900 p-3 rounded-xl text-center flex flex-col justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-gray-400">Kezdő</div>
+                        <div class="text-md font-black text-amber-400 my-1">500 RVC</div>
+                    </div>
+                    <button onclick="buyCoins(500, 5)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">5.00 EUR</button>
+                </div>
+                <div class="bg-[#070a13] border-2 border-amber-500/30 p-3 rounded-xl text-center flex flex-col justify-between relative">
+                    <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-gray-950 text-[8px] font-black px-1.5 py-0.5 rounded shadow">+10% Bónusz</div>
+                    <div>
+                        <div class="text-[11px] font-bold text-gray-400 mt-1">Népszerű</div>
+                        <div class="text-md font-black text-amber-400 my-1">1100 RVC</div>
+                    </div>
+                    <button onclick="buyCoins(1100, 10)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">10.00 EUR</button>
+                </div>
+                <div class="bg-[#070a13] border border-gray-900 p-3 rounded-xl text-center flex flex-col justify-between">
+                    <div>
+                        <div class="text-[11px] font-bold text-gray-400">Királyi</div>
+                        <div class="text-md font-black text-amber-400 my-1">3000 RVC</div>
+                    </div>
+                    <button onclick="buyCoins(3000, 25)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">25.00 EUR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Bejelentkezési állapot ellenőrzése betöltéskor
         window.addEventListener('DOMContentLoaded', () => {
             checkAuth();
         });
@@ -220,28 +262,42 @@
             const loginBtn = document.getElementById('nav-login-btn');
             const userDisplay = document.getElementById('user-display');
             const usernameText = document.getElementById('username-text');
+            const coinsDisplay = document.getElementById('user-coins');
 
             if(storedUser) {
                 loginBtn.classList.add('hidden');
                 userDisplay.classList.remove('hidden');
                 usernameText.innerText = storedUser;
+                
+                if(!localStorage.getItem(`rv_coins_${storedUser}`)) {
+                    localStorage.setItem(`rv_coins_${storedUser}`, "750");
+                }
+                
+                coinsDisplay.innerText = localStorage.getItem(`rv_coins_${storedUser}`) + " RVC";
             } else {
                 loginBtn.classList.remove('hidden');
                 userDisplay.classList.add('hidden');
             }
         }
 
-        function openLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-        }
+        // MODAL DESKTRUKTOROK ÉS NYITÓK
+        function openLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
+        
+        document.getElementById('login-modal').addEventListener('click', function(e) { if (e.target === this) closeLoginModal(); });
+        document.getElementById('profile-modal').addEventListener('click', function(e) { if (e.target === this) closeProfileModal(); });
+        document.getElementById('coin-modal').addEventListener('click', function(e) { if (e.target === this) closeCoinModal(); });
 
-        document.getElementById('login-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeLoginModal();
-        });
-
-        function closeLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
+        function openProfileModal() { 
+            const user = localStorage.getItem('rv_user');
+            document.getElementById('profile-name').innerText = user;
+            document.getElementById('profile-coins').innerHTML = `<i class="fas fa-coins mr-1"></i> ${localStorage.getItem(`rv_coins_${user}`)} RVC`;
+            document.getElementById('profile-modal').classList.remove('hidden'); 
         }
+        function closeProfileModal() { document.getElementById('profile-modal').classList.add('hidden'); }
+
+        function openCoinModal() { document.getElementById('coin-modal').classList.remove('hidden'); }
+        function closeCoinModal() { document.getElementById('coin-modal').classList.add('hidden'); }
 
         function saveLogin() {
             const name = document.getElementById('mc-username').value.trim();
@@ -256,17 +312,29 @@
 
         function logout() {
             localStorage.removeItem('rv_user');
+            closeProfileModal();
+            checkAuth();
+        }
+
+        function buyCoins(amount, price) {
+            const user = localStorage.getItem('rv_user');
+            alert(`Biztonságos fizetési ablak megnyitása: ${price} EUR...\nSikeres tranzakció után a ${amount} RV-Coin jóváíródik.`);
+            
+            let currentCoins = parseInt(localStorage.getItem(`rv_coins_${user}`) || "0");
+            localStorage.setItem(`rv_coins_${user}`, (currentCoins + amount).toString());
+            
+            closeCoinModal();
             checkAuth();
         }
 
         function buyBasePackage(packageName, price) {
             const storedUser = localStorage.getItem('rv_user');
             if(!storedUser) {
-                alert("A vásárláshoz kérjük, előbb jelentkezz be a jobb felső sarokban található gombbal!");
+                alert("A vásárláshoz kérjük, előbb jelentkezz be!");
                 openLoginModal();
                 return;
             }
-            alert(`Sikeres választás!\nFiók: ${storedUser}\nCsomag: ${packageName}\nÁr: ${price}.00 EUR\nA fizetési felület betöltése folyamatban...`);
+            alert(`Sikeres választás!\nFiók: ${storedUser}\nCsomag: ${packageName}\nÁr: ${price}.00 EUR\nA fizetési felület betöltése...`);
         }
     </script>
 </body>
