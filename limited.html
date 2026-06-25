@@ -30,13 +30,13 @@
     <!-- HERO SZEKCIÓ -->
     <header class="max-w-4xl mx-auto text-center pt-16 pb-8 px-4 animate__animated animate__fadeIn">
         <span class="bg-red-500/10 text-red-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-red-500/20">
-            Prémium Kategóriák
+            Előfizetéses Rendszer
         </span>
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-4 mb-3 text-white">
-            Limitált <span class="text-red-500">Mester-Rangok</span>
+            Havi és Éves <span class="text-red-500">Mester-Rangok</span>
         </h1>
         <p class="text-gray-400 text-sm max-w-md mx-auto">
-            Válassz kategóriát, és fedezd fel a RedVortexnetwork legritkább, egyedi fejlesztésű rangjait!
+            Válaszd ki a neked megfelelő időtartamot! Az éves bérletekre **óriási kedvezményt** biztosítunk!
         </p>
     </header>
 
@@ -53,92 +53,125 @@
     <!-- RANGLISTA KÁRTYÁK -->
     <main class="max-w-6xl mx-auto px-4 py-4 mb-24">
         <div id="limited-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__fadeInUp">
-            <!-- A JavaScript ide fogja generálni a kártyákat dinamikusan -->
+            <!-- A JavaScript ide generálja a kártyákat -->
         </div>
     </main>
 
     <script>
-        // A 16 LIMITÁLT RANG ADATBÁZISA
+        let currentCategory = 'elemental';
+
+        // A 16 LIMITÁLT RANG ADATBÁZISA (Havi és Éves árakkal külön megadva)
         const ranksData = {
             elemental: [
-                { name: "Pyro-Phoenix", price: 30, desc: "Tűzben újjászülető izzó prefix, egyedi lángcsóva részecskék és /kit pyro.", color: "border-orange-500", tagColor: "bg-orange-600", tag: "Tűz" },
-                { name: "Aqua-Leviathan", price: 30, desc: "Mélytengeri ciánkék prefix, víz alatti végtelen légzés és /feed parancs.", color: "border-cyan-500", tagColor: "bg-cyan-600", tag: "Víz" },
-                { name: "Terra-Golem", price: 35, desc: "Földrengés-barna prefix, fix +2 szív bónusz a játékon belül és /kit terra.", color: "border-amber-700", tagColor: "bg-amber-800", tag: "Föld" },
-                { name: "Aero-Zephyr", price: 40, desc: "Hófehér szél-prefix, lobbi dupla ugrás (DoubleJump) és egyedi belépési üzenet.", color: "border-slate-400", tagColor: "bg-slate-500", tag: "Levegő" }
+                { id: "e1", name: "Pyro-Phoenix", mPrice: 5, yPrice: 45, desc: "Tűzben újjászülető izzó prefix, egyedi lángcsóva részecskék és /kit pyro.", color: "border-orange-500", tagColor: "bg-orange-600", tag: "Tűz" },
+                { id: "e2", name: "Aqua-Leviathan", mPrice: 5, yPrice: 45, desc: "Mélytengeri ciánkék prefix, víz alatti végtelen légzés és /feed parancs.", color: "border-cyan-500", tagColor: "bg-cyan-600", tag: "Víz" },
+                { id: "e3", name: "Terra-Golem", mPrice: 7, yPrice: 60, desc: "Földrengés-barna prefix, fix +2 szív bónusz a játékon belül és /kit terra.", color: "border-amber-700", tagColor: "bg-amber-800", tag: "Föld" },
+                { id: "e4", name: "Aero-Zephyr", mPrice: 8, yPrice: 70, desc: "Hófehér szél-prefix, lobbi dupla ugrás (DoubleJump) és egyedi belépési üzenet.", color: "border-slate-400", tagColor: "bg-slate-500", tag: "Levegő" }
             ],
             cosmic: [
-                { name: "Nebula-Drifter", price: 45, desc: "Lila-rózsaszín színátmenetes prefix, kozmikus csillagpor effekt és 2x szorzó a lottón.", color: "border-purple-500", tagColor: "bg-purple-600", tag: "Köd" },
-                { name: "Pulsar-Knight", price: 50, desc: "Kék villogó lovagi titulus, fix lila név a tablistán és /heal parancs (60p cooldown).", color: "border-blue-500", tagColor: "bg-blue-600", tag: "Csillag" },
-                { name: "Supernova", price: 65, desc: "Vakító sárga animált prefix, robbanás effekt elhalálozáskor és /kit supernova.", color: "border-yellow-500", tagColor: "bg-yellow-600", tag: "Végső" },
-                { name: "Quasar-Lord", price: 80, desc: "Mély-űr fekete/fehér prefix, teljes hozzáférés a lobbi kalapokhoz és 3x szavazat érték.", color: "border-zinc-500", tagColor: "bg-zinc-600", tag: "Galaktikus" }
+                { id: "c1", name: "Nebula-Drifter", mPrice: 10, yPrice: 90, desc: "Lila-rózsaszín színátmenetes prefix, kozmikus csillagpor effekt és 2x szorzó a lottón.", color: "border-purple-500", tagColor: "bg-purple-600", tag: "Köd" },
+                { id: "c2", name: "Pulsar-Knight", mPrice: 12, yPrice: 110, desc: "Kék villogó lovagi titulus, fix lila név a tablistán és /heal parancs (60p cooldown).", color: "border-blue-500", tagColor: "bg-blue-600", tag: "Csillag" },
+                { id: "c3", name: "Supernova", mPrice: 15, yPrice: 135, desc: "Vakító sárga animált prefix, robbanás effekt elhalálozáskor és /kit supernova.", color: "border-yellow-500", tagColor: "bg-yellow-600", tag: "Végső" },
+                { id: "c4", name: "Quasar-Lord", mPrice: 20, yPrice: 180, desc: "Mély-űr fekete/fehér prefix, teljes hozzáférés a lobbi kalapokhoz és 3x szavazat érték.", color: "border-zinc-500", tagColor: "bg-zinc-600", tag: "Galaktikus" }
             ],
             mythic: [
-                { name: "Asgard-Hero", price: 55, desc: "Arany színű északi prefix, villámcsapás effekt belépéskor és /workbench bárhol.", color: "border-yellow-600", tagColor: "bg-yellow-700", tag: "Isteni" },
-                { name: "Olympus-Titan", price: 60, desc: "Márványfehér prémium prefix, egyedi titulus a chaten és /enderchest parancs bárhol.", color: "border-teal-600", tagColor: "bg-teal-700", tag: "Titán" },
-                { name: "Hades-Wraith", price: 70, desc: "Alvilági sötétvörös prefix, lávatűrés a lobbiban és egyedi /kit hades hetente.", color: "border-red-700", tagColor: "bg-red-800", tag: "Alvilág" },
-                { name: "Anubis-Crypt", price: 75, desc: "Homokvihar-arany prefix, egyedi múmia kisállat a lobbiban és +50% XP bónusz.", color: "border-amber-600", tagColor: "bg-amber-700", tag: "Misztikus" }
+                { id: "m1", name: "Asgard-Hero", mPrice: 14, yPrice: 125, desc: "Arany színű északi prefix, villámcsapás effekt belépéskor és /workbench bárhol.", color: "border-yellow-600", tagColor: "bg-yellow-700", tag: "Isteni" },
+                { id: "m2", name: "Olympus-Titan", mPrice: 16, yPrice: 145, desc: "Márványfehér prémium prefix, egyedi titulus a chaten és /enderchest parancs bárhol.", color: "border-teal-600", tagColor: "bg-teal-700", tag: "Titán" },
+                { id: "m3", name: "Hades-Wraith", mPrice: 22, yPrice: 195, desc: "Alvilági sötétvörös prefix, lávatűrés a lobbiban és egyedi /kit hades hetente.", color: "border-red-700", tagColor: "bg-red-800", tag: "Alvilág" },
+                { id: "m4", name: "Anubis-Crypt", mPrice: 25, yPrice: 220, desc: "Homokvihar-arany prefix, egyedi múmia kisállat a lobbiban és +50% XP bónusz.", color: "border-amber-600", tagColor: "bg-amber-700", tag: "Misztikus" }
             ],
             cyber: [
-                { name: "Neon-Runner", price: 50, desc: "Neon zöld világító prefix, állandó Speed I effekt a lobbikban és egyedi chat szín.", color: "border-green-500", tagColor: "bg-green-600", tag: "Futurisztikus" },
-                { name: "Cyber-Samurai", price: 65, desc: "Metálszürke/piros prefix, egyedi katana kiegészítő (kozmetika) és /extinguish.", color: "border-rose-600", tagColor: "bg-rose-700", tag: "Kiber" },
-                { name: "Matrix-Glitch", price: 85, desc: "Zöld hibakódos prefix, karakter-vibrálás effekt és /vanish a lobbiban.", color: "border-emerald-500", tagColor: "bg-emerald-600", tag: "Hacker" },
-                { name: "Quantum-God", price: 120, desc: "A létező legmagasabb rang. Animált kvantum prefix, repülés, és minden egyedi kit.", color: "border-fuchsia-600", tagColor: "bg-fuchsia-700", tag: "Végtelen" }
+                { id: "cy1", name: "Neon-Runner", mPrice: 12, yPrice: 110, desc: "Neon zöld világító prefix, állandó Speed I effekt a lobbikban és egyedi chat szín.", color: "border-green-500", tagColor: "bg-green-600", tag: "Futurisztikus" },
+                { id: "cy2", name: "Cyber-Samurai", mPrice: 18, yPrice: 160, desc: "Metálszürke/piros prefix, egyedi katana kiegészítő (kozmetika) és /extinguish.", color: "border-rose-600", tagColor: "bg-rose-700", tag: "Kiber" },
+                { id: "cy3", name: "Matrix-Glitch", mPrice: 25, yPrice: 225, desc: "Zöld hibakódos prefix, karakter-vibrálás effekt és /vanish a lobbiban.", color: "border-emerald-500", tagColor: "bg-emerald-600", tag: "Hacker" },
+                { id: "cy4", name: "Quantum-God", mPrice: 35, yPrice: 315, desc: "A létező legmagasabb rang. Animált kvantum prefix, repülés, és minden egyedi kit.", color: "border-fuchsia-600", tagColor: "bg-fuchsia-700", tag: "Végtelen" }
             ]
         };
 
         // KATEGÓRIA VÁLTÓ LOGIKA
         function switchCategory(catId) {
-            // Gombok színének resetelése
+            currentCategory = catId;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.className = "cat-btn bg-transparent text-gray-400 hover:text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
             });
 
-            // Aktív gomb átszínezése (kategóriától függő szín)
             const activeBtn = document.getElementById(`btn-${catId}`);
             if(catId === 'elemental') activeBtn.className = "cat-btn bg-red-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
             if(catId === 'cosmic') activeBtn.className = "cat-btn bg-purple-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
             if(catId === 'mythic') activeBtn.className = "cat-btn bg-amber-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
             if(catId === 'cyber') activeBtn.className = "cat-btn bg-fuchsia-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-all cursor-pointer";
 
-            // Kártyák újragenerálása
+            renderCards();
+        }
+
+        // KÁRTYÁK MEGJELENÍTÉSE
+        function renderCards() {
             const grid = document.getElementById('limited-grid');
             grid.innerHTML = "";
 
-            ranksData[catId].forEach(rank => {
+            ranksData[currentCategory].forEach(rank => {
                 grid.innerHTML += `
-                    <div class="bg-[#0b0c16] border-2 ${rank.color} rounded-xl p-5 flex flex-col justify-between shadow-2xl relative overflow-hidden min-h-[440px] animate__animated animate__fadeIn">
+                    <div class="bg-[#0b0c16] border-2 ${rank.color} rounded-xl p-5 flex flex-col justify-between shadow-2xl relative overflow-hidden min-h-[460px] animate__animated animate__fadeIn">
                         <div class="absolute top-2 right-2 ${rank.tagColor} text-[9px] font-black uppercase text-white px-2 py-0.5 rounded shadow">${rank.tag}</div>
+                        
                         <div class="space-y-4">
                             <div>
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500">Exkluzív</span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500">Bérletes Rang</span>
                                 <h3 class="text-xl font-black text-white mt-0.5 tracking-wide">${rank.name}</h3>
                                 <p class="text-gray-400 text-xs mt-2 min-h-[64px] leading-relaxed">${rank.desc}</p>
                             </div>
-                            <div class="py-2">
-                                <span class="text-3xl font-black text-white">${rank.price}.00</span> <span class="text-xs text-gray-400 font-bold uppercase">EUR</span>
+
+                            <!-- IDŐTARTAM VÁLASZTÓ KIS MENÜ -->
+                            <div class="bg-[#070a13] p-1.5 rounded-lg border border-gray-900 flex justify-between items-center">
+                                <label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Időtartam:</label>
+                                <select id="period-${rank.id}" onchange="updatePrice('${rank.id}', ${rank.mPrice}, ${rank.yPrice})" class="bg-[#0b0c16] border border-gray-800 text-xs text-white rounded px-2 py-1 focus:outline-none">
+                                    <option value="monthly">Havi bérlet</option>
+                                    <option value="yearly">Éves bérlet (-20%)</option>
+                                </select>
                             </div>
-                            <ul class="text-xs text-gray-500 space-y-2 pt-3 border-t border-gray-900">
-                                <li class="flex items-center gap-2"><i class="fas fa-certificate text-indigo-500 text-[9px]"></i> Örökös jogok</li>
-                                <li class="flex items-center gap-2"><i class="fas fa-star text-indigo-500 text-[9px]"></i> Egyedi kozmetika</li>
-                            </ul>
+
+                            <div class="py-1">
+                                <span id="price-${rank.id}" class="text-3xl font-black text-white">${rank.mPrice}.00</span> 
+                                <span id="unit-${rank.id}" class="text-xs text-gray-400 font-bold uppercase">EUR / HÓ</span>
+                            </div>
                         </div>
-                        <button onclick="buyLimitedPackage('${rank.name}', ${rank.price})" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 rounded-lg text-xs transition-all tracking-wide cursor-pointer shadow-lg">Vásárlás</button>
+
+                        <button onclick="buyLimitedPackage('${rank.id}', '${rank.name}')" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 rounded-lg text-xs transition-all tracking-wide cursor-pointer shadow-lg">Előfizetés</button>
                     </div>
                 `;
             });
         }
 
-        function buyLimitedPackage(name, price) {
+        // ÁR FRISSÍTÉSE KIVÁLASZTÁS UTÁN
+        function updatePrice(id, mPrice, yPrice) {
+            const select = document.getElementById(`period-${id}`);
+            const priceSpan = document.getElementById(`price-${id}`);
+            const unitSpan = document.getElementById(`unit-${id}`);
+
+            if(select.value === 'monthly') {
+                priceSpan.innerText = mPrice + ".00";
+                unitSpan.innerText = "EUR / HÓ";
+            } else {
+                priceSpan.innerText = yPrice + ".00";
+                unitSpan.innerText = "EUR / ÉV";
+            }
+        }
+
+        // VÁSÁRLÁS LOGIKA
+        function buyLimitedPackage(id, name) {
             const user = localStorage.getItem('rv_user');
             if(!user) {
                 alert("A vásárláshoz előbb jelentkezz be a főoldalon!");
                 window.location.href = "index.html";
                 return;
             }
-            alert(`Sikeresen kiválasztottad a limitált ${name} rangot (${price} EUR).\nA fizetési felület betöltése folyamatban...`);
+            const period = document.getElementById(`period-${id}`).value;
+            const textPeriod = period === 'monthly' ? 'Havi' : 'Éves';
+            const price = document.getElementById(`price-${id}`).innerText;
+
+            alert(`Sikeres választás!\nFiók: ${user}\nCsomag: [${textPeriod}] ${name}\nÖsszeg: ${price} EUR\nA biztonságos fizetési átjáró betöltése...`);
         }
 
-        // Első betöltésre az Elemental kategóriát mutatjuk
         window.addEventListener('DOMContentLoaded', () => {
             switchCategory('elemental');
         });
