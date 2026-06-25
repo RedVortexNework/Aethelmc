@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedVortexnetwork | Webshop és Portál</title>
+    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Animate.css az animációkhoz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- FontAwesome ikonok -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cloudflare Turnstile Script -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         @keyframes float {
@@ -27,6 +31,7 @@
 </head>
 <body class="bg-[#070a13] text-gray-200 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
+    <!-- NAVIGÁCIÓS SÁV -->
     <nav class="sticky top-0 z-50 bg-[#070a13]/90 backdrop-blur-md border-b border-gray-900 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <a href="#home" class="text-xl font-bold tracking-wide text-indigo-500 hover:scale-105 transition-transform duration-300">
             RedVortexnetwork
@@ -48,6 +53,7 @@
                 <i class="fas fa-comments"></i> Fórum
             </a>
             
+            <!-- MC FIÓK / PROFIL RENDSZER -->
             <div id="auth-section" class="relative">
                 <button onclick="openLoginModal()" class="border border-gray-800 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg text-xs transition-all cursor-pointer">
                     <i class="fas fa-user"></i> Belépés
@@ -56,12 +62,14 @@
         </div>
     </nav>
 
+    <!-- FŐOLDAL / HERO SZEKCIÓ -->
     <header id="home" class="max-w-4xl mx-auto text-center pt-24 pb-16 px-4 animate__animated animate__fadeIn">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">
             Üdvözöl a <span class="text-indigo-500">RedVortexnetwork</span>
         </h1>
         <p class="text-gray-400 text-sm mb-8">Támogasd a szerver működését biztonságos fizetéssel!</p>
 
+        <!-- IP és Élő Státusz kártya -->
         <div class="bg-[#0b1021] border border-gray-900 p-4 rounded-xl max-w-md mx-auto shadow-2xl">
             <div class="flex items-center justify-between bg-[#070a13] px-4 py-2 rounded-lg border border-gray-900 gap-4">
                 <span id="ipText" class="font-mono text-gray-300 text-sm tracking-wide">mc.redvortexnetwork.xyz</span>
@@ -78,11 +86,13 @@
         </div>
     </header>
 
+    <!-- SHOP / RANG VÁLASZTÁS SZEKCIÓ -->
     <main id="shop" class="max-w-6xl mx-auto px-4 py-12 animate__animated animate__fadeInUp">
         <h2 class="text-2xl font-bold text-center mb-12 tracking-wide text-white">Válassz csomagot</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
             
+            <!-- VIP RANG -->
             <div class="bg-[#0a0f1d] border-l-2 border-cyan-500 rounded-xl p-5 flex flex-col justify-between shadow-xl min-h-[420px]">
                 <div class="space-y-4">
                     <div>
@@ -101,6 +111,7 @@
                 <button onclick="buyPackage('VIP', 5)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-lg text-xs transition-colors cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
+            <!-- VIP+ RANG -->
             <div class="bg-[#0a0f1d] border border-indigo-600 rounded-xl p-5 flex flex-col justify-between shadow-xl min-h-[420px] relative">
                 <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-indigo-600 text-[9px] font-black uppercase text-white px-3 py-0.5 rounded-md tracking-wider">Népszerű</div>
                 <div class="space-y-4">
@@ -120,6 +131,7 @@
                 <button onclick="buyPackage('VIP+', 10)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-lg text-xs transition-colors cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
+            <!-- SURFER RANG -->
             <div class="bg-[#0a0f1d] border-l-2 border-teal-500 rounded-xl p-5 flex flex-col justify-between shadow-xl min-h-[420px]">
                 <div class="space-y-4">
                     <div>
@@ -138,6 +150,7 @@
                 <button onclick="buyPackage('Surfer', 15)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-lg text-xs transition-colors cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
+            <!-- FLAME RANG -->
             <div class="bg-[#0a0f1d] border-l-2 border-orange-500 rounded-xl p-5 flex flex-col justify-between shadow-xl min-h-[420px]">
                 <div class="space-y-4">
                     <div>
@@ -159,6 +172,7 @@
         </div>
     </main>
 
+    <!-- SZEKCIÓ: LÁDA NYITÁS -->
     <section id="lootbox-section" class="max-w-6xl mx-auto px-4 py-16 border-t border-gray-900">
         <div class="text-center mb-8">
             <h2 class="text-2xl font-bold text-white">Vortex Misztikus Láda</h2>
@@ -185,6 +199,7 @@
         </div>
     </section>
 
+    <!-- FÓRUM SZEKCIÓ -->
     <section id="forum-section" class="max-w-5xl mx-auto px-4 py-16 border-t border-gray-900">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
@@ -205,40 +220,74 @@
         </div>
     </section>
 
+    <!-- BEJELENTKEZÉS ÉS OTP MODAL -->
     <div id="loginModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-[#0b1021] border border-gray-900 w-full max-w-sm rounded-xl p-6 relative shadow-2xl">
             <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 text-lg cursor-pointer">&times;</button>
             
-            <div class="flex border-b border-gray-900 mb-6 text-sm font-bold">
+            <div id="modal-tabs" class="flex border-b border-gray-900 mb-6 text-sm font-bold">
                 <button id="tab-login" onclick="switchTab('login')" class="w-1/2 pb-3 text-center border-b-2 border-indigo-500 text-white">Bejelentkezés</button>
                 <button id="tab-register" onclick="switchTab('register')" class="w-1/2 pb-3 text-center border-b-2 border-transparent text-gray-500">Regisztráció</button>
             </div>
 
-            <div id="form-login" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Minecraft Felhasználónév</label>
-                    <input type="text" id="loginUsername" placeholder="Pl: Steve" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Jelszó</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
-                </div>
-                
-                <div class="flex justify-center py-2 bg-[#161b2c]/50 rounded-lg border border-red-900/30 p-2 text-center">
-                    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
+            <!-- FŐ BEJELENTKEZŐ / REGISZTRÁCIÓS PANEL -->
+            <div id="auth-forms">
+                <div id="form-login" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Minecraft Felhasználónév</label>
+                        <input type="text" id="loginUsername" placeholder="Pl: Steve" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">E-mail cím</label>
+                        <input type="email" id="loginEmail" placeholder="pelda@gmail.com" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Jelszó</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500">
+                    </div>
+                    
+                    <div class="flex justify-center py-2 bg-[#161b2c]/50 rounded-lg border border-red-900/30 p-2 text-center">
+                        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
+                    </div>
+
+                    <button onclick="requestVerification('login')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg text-sm transition-colors cursor-pointer">Kód küldése</button>
                 </div>
 
-                <button onclick="handleAuth('login')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-lg text-sm transition-colors cursor-pointer">Belépés</button>
+                <div id="form-register" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Minecraft Felhasználónév</label>
+                        <input type="text" id="regUsername" placeholder="Minecraft Felhasználónév" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">E-mail cím</label>
+                        <input type="email" id="regEmail" placeholder="pelda@gmail.com" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Új Jelszó</label>
+                        <input type="password" id="regPassword" placeholder="Új Jelszó" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm">
+                    </div>
+                    <button onclick="requestVerification('register')" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg text-sm cursor-pointer">Kód küldése</button>
+                </div>
             </div>
 
-            <div id="form-register" class="space-y-4 hidden">
-                <input type="text" id="regUsername" placeholder="Minecraft Felhasználónév" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm">
-                <input type="password" id="regPassword" placeholder="Új Jelszó" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-2.5 text-white text-sm">
-                <button onclick="handleAuth('register')" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-lg text-sm cursor-pointer">Fiók létrehozása</button>
+            <!-- EMAIL KÓD MEGERŐSÍTŐ PANEL (REJTETT) -->
+            <div id="otp-verify-panel" class="space-y-4 hidden animate__animated animate__fadeIn">
+                <div class="text-center">
+                    <i class="fas fa-envelope-open-text text-3xl text-amber-400 mb-2"></i>
+                    <h3 class="text-sm font-bold text-white">E-mail ellenőrzés</h3>
+                    <p class="text-xs text-gray-400 mt-1">Elküldtünk egy 6 jegyű kódot a megadott e-mail címre.</p>
+                </div>
+                <div>
+                    <input type="text" id="otpCodeInput" maxlength="6" placeholder="123456" class="w-full bg-[#070a13] border border-gray-900 rounded-lg px-3 py-3 text-white text-center font-mono text-xl tracking-widest focus:outline-none focus:border-indigo-500">
+                </div>
+                <button onclick="verifyOTP()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-lg text-sm transition-colors cursor-pointer">Kód Ellenőrzése és Belépés</button>
+                <button onclick="cancelVerification()" class="w-full text-xs text-gray-500 hover:text-gray-300 underline text-center block">Vissza az adatokhoz</button>
             </div>
+
         </div>
     </div>
 
+    <!-- TÉMA MEGTEKINTÉSE MODAL -->
     <div id="topicModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-[#0b1021] border border-gray-900 w-full max-w-xl rounded-xl p-6 relative flex flex-col max-h-[80vh]">
             <button onclick="closeTopicModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 text-xl cursor-pointer">&times;</button>
@@ -250,6 +299,7 @@
         </div>
     </div>
 
+    <!-- ÚJ TÉMA MODAL -->
     <div id="newTopicModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-[#0b1021] border border-gray-900 w-full max-w-md rounded-xl p-6 relative space-y-4">
             <button onclick="closeNewTopicModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 text-lg cursor-pointer">&times;</button>
@@ -264,13 +314,21 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT LOGIKA -->
     <script>
+        // BEILLESZTETT GOOGLE APPS SCRIPT WEBAPP URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxF_8nt3hrw7bK5kbhnX9KOrmFYq1nsK3e5GU2SkD2QzDHnztz4Z75RYDXieehDiTVAVw/exec";
+
         let loggedInUser = null;
         let userBalance = 50.00; 
         let userRank = "Játékos";
         let userKeys = 0;
         let activeForumFilter = "all";
         let currentOpenTopicId = null;
+
+        // Ideiglenes változók az e-mail kód hitelesítéshez
+        let currentTargetUser = "";
+        let expectedCodeHashed = "";
 
         let forumTopics = [
             { id: 1, category: "kibeszelo", title: "Szerver verziófrissítések vélemények", author: "VortexFan", body: "Mit gondoltok az 1.20-as támogatásról? Nálatok stabil a ping?", date: "2026.06.25", comments: [] }
@@ -285,6 +343,61 @@
             updateServerStatus();
             renderForumTopics();
         });
+
+        // KÓD KÉRÉSE A GOOGLE API-TÓL
+        async function requestVerification(type) {
+            const username = type === 'login' ? document.getElementById('loginUsername').value.trim() : document.getElementById('regUsername').value.trim();
+            const email = type === 'login' ? document.getElementById('loginEmail').value.trim() : document.getElementById('regEmail').value.trim();
+            
+            if(!username || !email) return alert("Kérlek tölts ki minden mezőt!");
+            
+            currentTargetUser = username;
+            
+            alert("Kód küldése folyamatban... Kérlek várj.");
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "cors",
+                    body: JSON.stringify({ action: "sendCode", email: email })
+                });
+                const data = await response.json();
+                
+                if(data.success) {
+                    expectedCodeHashed = data.generatedCode;
+                    document.getElementById('auth-forms').classList.add('hidden');
+                    document.getElementById('modal-tabs').classList.add('hidden');
+                    document.getElementById('otp-verify-panel').classList.remove('hidden');
+                } else {
+                    alert("Hiba történt a kód küldésekor. Ellenőrizd a Google Script beállításait!");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Nem sikerült elérni a hitelesítő szervert (Script URL hibás vagy CORS hiba).");
+            }
+        }
+
+        // KÓD ELLENŐRZÉSE
+        function verifyOTP() {
+            const inputCode = document.getElementById('otpCodeInput').value.trim();
+            if(btoa(inputCode) === expectedCodeHashed) {
+                loggedInUser = currentTargetUser;
+                localStorage.setItem('rv_user', currentTargetUser);
+                renderProfileMenu();
+                closeLoginModal();
+                alert("Sikeres biztonságos belépés!");
+                cancelVerification();
+            } else {
+                alert("Hibás ellenőrző kód! Próbáld újra.");
+            }
+        }
+
+        function cancelVerification() {
+            document.getElementById('auth-forms').classList.remove('hidden');
+            document.getElementById('modal-tabs').classList.remove('hidden');
+            document.getElementById('otp-verify-panel').classList.add('hidden');
+            document.getElementById('otpCodeInput').value = "";
+        }
 
         async function updateServerStatus() {
             try {
@@ -400,13 +513,6 @@
         }
         function openLoginModal() { document.getElementById('loginModal').classList.replace('hidden', 'flex'); }
         function closeLoginModal() { document.getElementById('loginModal').classList.replace('flex', 'hidden'); }
-
-        function handleAuth(type) {
-            const username = type === 'login' ? document.getElementById('loginUsername').value.trim() : document.getElementById('regUsername').value.trim();
-            if(!username) return alert("Adj meg egy nevet!");
-            loggedInUser = username; localStorage.setItem('rv_user', username);
-            renderProfileMenu(); closeLoginModal();
-        }
 
         function renderProfileMenu() {
             document.getElementById('auth-section').innerHTML = `
