@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedVortexnetwork | Főoldal</title>
-    <!-- Tailwind CSS a modern dizájnhoz -->
+    <title>RedVortexnetwork | Főoldal és Shop</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Animate.css a látványos belépő animációkhoz -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- FontAwesome ikonok -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @keyframes float {
@@ -17,44 +14,47 @@
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
         .glow-hover:hover {
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.6);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
             transform: translateY(-8px);
         }
     </style>
 </head>
 <body class="bg-[#0b0f19] text-gray-200 font-sans antialiased selection:bg-indigo-500 selection:text-white">
 
-    <!-- Navigációs sáv -->
-    <nav class="sticky top-0 z-50 bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-800/50 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto rounded-b-xl">
-        <div class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-indigo-500 cursor-pointer hover:scale-105 transition-transform duration-300">
+    <nav class="sticky top-0 z-50 bg-[#0b0f19]/90 backdrop-blur-md border-b border-gray-800/50 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto rounded-b-xl">
+        <a href="#home" class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-indigo-500 hover:scale-105 transition-transform duration-300">
             RedVortexnetwork
-        </div>
+        </a>
         <div class="hidden md:flex space-x-8 items-center font-medium">
-            <a href="#" class="hover:text-red-400 transition-colors">Főoldal</a>
+            <a href="#home" class="hover:text-red-400 transition-colors">Főoldal</a>
             <a href="#szabalyzat" class="hover:text-red-400 transition-colors">Szabályzat</a>
             <a href="https://discord.gg/yourlink" target="_blank" class="hover:text-indigo-400 transition-colors"><i class="fab fa-discord mr-1"></i>Discord</a>
+            
+            <div id="auth-section">
+                <button onclick="openLoginModal()" class="border border-indigo-500/50 hover:bg-indigo-500/10 text-indigo-400 px-4 py-2 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fas fa-user-astronaut"></i> MC Bejelentkezés
+                </button>
+            </div>
+
             <a href="#shop" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-semibold shadow-lg shadow-indigo-600/30 transition-all duration-300 hover:scale-105">
                 <i class="fas fa-shopping-cart mr-2"></i>Rang Vásárlás
             </a>
         </div>
     </nav>
 
-    <!-- Hero / Köszöntő szekció -->
-    <header class="max-w-4xl mx-auto text-center mt-20 px-4 animate__animated animate__fadeIn">
+    <header id="home" class="max-w-4xl mx-auto text-center pt-20 pb-10 px-4 animate__animated animate__fadeIn">
         <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
             Üdvözöl a <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-indigo-500 drop-shadow-[0_5px_15px_rgba(239,68,68,0.3)]">RedVortexnetwork</span>
         </h1>
         <p class="text-gray-400 text-lg md:text-xl mb-8 font-light">Támogasd a szerver működését biztonságos fizetéssel!</p>
 
-        <!-- IP és státusz kártya -->
         <div class="bg-gray-900/60 border border-gray-800 p-6 rounded-2xl max-w-md mx-auto shadow-2xl backdrop-blur-sm animate-float">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <span id="ipText" class="font-mono text-indigo-300 text-lg tracking-wide">mc.redvortexnetwork.xyz</span>
-                <button onclick="copyIP()" id="copyBtn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2">
+                <button onclick="copyIP()" id="copyBtn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer">
                     <i class="far fa-copy"></i> <span>IP Másolása</span>
                 </button>
             </div>
-            <!-- ÉLŐ JÁTÉKOSSZÁM (Funkció) -->
             <div class="mt-4 flex items-center justify-center gap-2 text-sm text-gray-400 border-t border-gray-800/60 pt-4">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -67,89 +67,104 @@
         </div>
     </header>
 
-    <!-- Bolt / Csomagok szekció -->
-    <main id="shop" class="max-w-7xl mx-auto px-4 mt-32 mb-24 animate__animated animate__fadeInUp animate__delay-1s">
-        <h2 class="text-3xl font-bold text-center mb-16 tracking-wide">Válassz csomagot</h2>
+    <main id="shop" class="max-w-7xl mx-auto px-4 pt-24 pb-12 animate__animated animate__fadeInUp">
+        <h2 class="text-3xl font-bold text-center mb-4 tracking-wide">Válassz csomagot</h2>
+        <p class="text-center text-gray-400 mb-12 text-sm">A vásárláshoz be kell jelentkezned a Minecraft fiókoddal felül!</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <!-- 1. VIP RANG -->
-            <div class="bg-gray-950/70 border-t-4 border-cyan-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover relative overflow-hidden group">
+            <div class="bg-gray-950/70 border-t-4 border-cyan-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover group">
                 <div>
                     <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Alap Csomag</span>
                     <h3 class="text-2xl font-bold mt-1 text-white">VIP Rang</h3>
                     <p class="text-gray-400 text-sm mt-2 min-h-[40px]">Ideális kezdő támogatóknak.</p>
-                    <div class="my-6">
-                        <span class="text-4xl font-black text-white">5.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span>
-                    </div>
+                    <div class="my-6"><span class="text-4xl font-black text-white">5.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span></div>
                     <ul class="space-y-3 text-sm text-gray-300 border-t border-gray-800/60 pt-4">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> [VIP] kék prefix</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-cyan-400"></i> Belépés teli szerverre</li>
                     </ul>
                 </div>
-                <button class="w-full mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-cyan-600/20 group-hover:scale-[1.02]">Vásárlás / Küldés</button>
+                <button onclick="buyPackage('VIP', 5.00)" class="w-full mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-cyan-600/20 cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
-            <!-- 2. VIP+ RANG (Népszerű / Animált kártya) -->
-            <div class="bg-gray-950/70 border-t-4 border-indigo-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover relative overflow-hidden group ring-2 ring-indigo-500/30 scale-105 md:scale-100 lg:scale-105">
-                <div class="absolute top-3 right-[-35px] bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-extrabold uppercase py-1 px-10 rotate-45 shadow-md animate-pulse">
-                    Népszerű
-                </div>
+            <div class="bg-gray-950/70 border-t-4 border-indigo-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover relative group ring-2 ring-indigo-500/30 lg:scale-105">
+                <div class="absolute top-3 right-[-35px] bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-[10px] font-extrabold uppercase py-1 px-10 rotate-45 animate-pulse">Népszerű</div>
                 <div>
                     <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Premium Csomag</span>
                     <h3 class="text-2xl font-bold mt-1 text-white">VIP+ Rang</h3>
                     <p class="text-gray-400 text-sm mt-2 min-h-[40px]">A maximális alap élményért.</p>
-                    <div class="my-6">
-                        <span class="text-4xl font-black text-white">10.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span>
-                    </div>
+                    <div class="my-6"><span class="text-4xl font-black text-white">10.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span></div>
                     <ul class="space-y-3 text-sm text-gray-300 border-t border-gray-800/60 pt-4">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> [VIP+] lila prefix</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-400"></i> Repülés a lobbiban</li>
                     </ul>
                 </div>
-                <button class="w-full mt-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-indigo-600/20 group-hover:scale-[1.02]">Vásárlás / Küldés</button>
+                <button onclick="buyPackage('VIP+', 10.00)" class="w-full mt-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-indigo-600/20 cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
-            <!-- 3. SURFER RANG -->
-            <div class="bg-gray-950/70 border-t-4 border-teal-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover relative overflow-hidden group">
+            <div class="bg-gray-950/70 border-t-4 border-teal-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover group">
                 <div>
                     <span class="text-xs font-semibold uppercase tracking-wider text-teal-400">Szezonális</span>
                     <h3 class="text-2xl font-bold mt-1 text-white">Surfer Rang</h3>
                     <p class="text-gray-400 text-sm mt-2 min-h-[40px]">Egyedi nyári hangulatú rang.</p>
-                    <div class="my-6">
-                        <span class="text-4xl font-black text-white">15.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span>
-                    </div>
+                    <div class="my-6"><span class="text-4xl font-black text-white">15.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span></div>
                     <ul class="space-y-3 text-sm text-gray-300 border-t border-gray-800/60 pt-4">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-teal-400"></i> [Surfer] cián prefix</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-teal-400"></i> Víz részecske effektek</li>
                     </ul>
                 </div>
-                <button class="w-full mt-8 bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-teal-600/20 group-hover:scale-[1.02]">Vásárlás / Küldés</button>
+                <button onclick="buyPackage('Surfer', 15.00)" class="w-full mt-8 bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-teal-600/20 cursor-pointer">Vásárlás / Küldés</button>
             </div>
 
-            <!-- 4. FLAME RANG -->
-            <div class="bg-gray-950/70 border-t-4 border-red-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover relative overflow-hidden group">
+            <div class="bg-gray-950/70 border-t-4 border-red-500 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 glow-hover group">
                 <div>
                     <span class="text-xs font-semibold uppercase tracking-wider text-red-400">Elite Csomag</span>
                     <h3 class="text-2xl font-bold mt-1 text-white">Flame Rang</h3>
                     <p class="text-gray-400 text-sm mt-2 min-h-[40px]">Forró hangulat és egyedi kit.</p>
-                    <div class="my-6">
-                        <span class="text-4xl font-black text-white">25.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span>
-                    </div>
+                    <div class="my-6"><span class="text-4xl font-black text-white">25.00</span> <span class="text-sm text-gray-400 font-bold">EUR</span></div>
                     <ul class="space-y-3 text-sm text-gray-300 border-t border-gray-800/60 pt-4">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-red-400"></i> [Flame] animált prefix</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-red-400"></i> Heti exkluzív /kit flame</li>
                     </ul>
                 </div>
-                <button class="w-full mt-8 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-red-600/20 group-hover:scale-[1.02]">Vásárlás / Küldés</button>
+                <button onclick="buyPackage('Flame', 25.00)" class="w-full mt-8 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-red-600/20 cursor-pointer">Vásárlás / Küldés</button>
             </div>
-
         </div>
     </main>
 
-    <!-- Funkciók scriptjei -->
+    <section id="szabalyzat" class="max-w-4xl mx-auto px-4 pt-24 pb-24">
+        <div class="bg-gray-900/40 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm">
+            <h2 class="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-indigo-400 flex items-center gap-3">
+                <i class="fas fa-gavel"></i> Szerver Szabályzat
+            </h2>
+            <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+                <p class="border-l-2 border-red-500 pl-4"><strong>1. Általános viselkedés:</strong> Tiszteld a játékostársaidat és a vezetőséget. A trágár beszéd, zaklatás tiltást vonhat maga után.</p>
+                <p class="border-l-2 border-indigo-500 pl-4"><strong>2. Csalások és Segédprogramok:</strong> Minden kliensoldali módosítás (X-Ray, Fly, Killaura stb.), ami jogosulatlan előnyhöz juttat, örökös kitiltást eredményez.</p>
+                <p class="border-l-2 border-cyan-500 pl-4"><strong>3. Kereskedelem:</strong> A szerveren belüli tárgyak valós pénzre való váltása (a hivatalos shopon kívül) szigorúan tilos.</p>
+                <p class="border-l-2 border-teal-500 pl-4"><strong>4. Automatikus Aktiválás:</strong> A shopban vásárolt rangok automatikusan jóváíródnak a szerveren. Ha nem kapsz meg valamit 15 percen belül, jelezd Discordon!</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="loginModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 animate__animated animate__fadeIn">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative animate__animated animate__scaleIn">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 cursor-pointer text-xl">&times;</button>
+            <h3 class="text-xl font-bold mb-2 flex items-center gap-2 text-white"><i class="fas fa-link text-indigo-400"></i> Fiók Összekapcsolás</h3>
+            <p class="text-gray-400 text-xs mb-6">Add meg a pontos Minecraft játékosneved az automatikus kézbesítéshez.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Minecraft Felhasználónév</label>
+                    <input type="text" id="mcUsername" placeholder="Pl: Steve" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                </div>
+                <button onclick="linkMinecraftAccount()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition-all cursor-pointer">Összekapcsolás</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // IP másoló funkció animációval
+        let loggedInUser = null;
+
+        // IP másoló
         function copyIP() {
             const ipText = document.getElementById('ipText').innerText;
             const btn = document.getElementById('copyBtn');
@@ -171,7 +186,56 @@
             });
         }
 
-        // Ide írhatsz majd egy valódi Minecraft API lekérést (pl. api.mcsrvstat.us), hogy valós játékosszámot mutasson.
+        // Modal kezelés
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.replace('hidden', 'flex');
+        }
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.replace('flex', 'hidden');
+        }
+
+        // MC Fiók összekapcsolása (Mojang avatar API-val)
+        function linkMinecraftAccount() {
+            const username = document.getElementById('mcUsername').value.trim();
+            if(!username) {
+                alert("Kérlek adj meg egy nevet!");
+                return;
+            }
+
+            loggedInUser = username;
+            
+            // Navigáció frissítése a játékos fejével (Crafatar API)
+            const authSection = document.getElementById('auth-section');
+            authSection.innerHTML = `
+                <div class="flex items-center gap-3 bg-gray-900 border border-gray-800 px-4 py-1.5 rounded-xl">
+                    <img src="https://crafatar.com/avatars/${username}?size=32&overlay" alt="skin" class="w-6 h-6 rounded border border-gray-700 shadow-md">
+                    <span class="text-sm font-semibold text-gray-200">${username}</span>
+                    <button onclick="logout()" class="text-xs text-red-400 hover:text-red-300 ml-2 cursor-pointer"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            `;
+            
+            closeLoginModal();
+        }
+
+        function logout() {
+            loggedInUser = null;
+            location.reload();
+        }
+
+        // Vásárlás és Automatikus parancsküldés a szervernek
+        function buyPackage(packageName, price) {
+            if(!loggedInUser) {
+                alert("Hoppá! A vásárláshoz előbb be kell jelentkezned a Minecraft fiókoddal felül!");
+                openLoginModal();
+                return;
+            }
+
+            // Ez a rész szimulálja a fizetés utáni szerver-összeköttetést (RCON parancs futtatás)
+            alert(`Fizetés indítása: ${packageName} rang (${price} EUR)\nFelhasználó: ${loggedInUser}`);
+            
+            // Itt küldené el a háttérrendszered (pl. CraftingStore, Tebex vagy egy saját Node.js/PHP backend) a parancsot a szervernek:
+            console.log(`Szerver parancs végrehajtása automatikusan: /lp user ${loggedInUser} parent add ${packageName.toLowerCase()}`);
+        }
     </script>
 </body>
 </html>
