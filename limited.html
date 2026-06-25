@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedVortexnetwork | Limitált Ajánlatok</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glow-limited:hover {
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-[#070a13] text-gray-200 font-sans antialiased">
 
+    <nav class="sticky top-0 z-50 bg-[#070a13]/90 backdrop-blur-md border-b border-gray-900 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+        <a href="index.html" class="text-xl font-bold tracking-wide text-indigo-500 hover:scale-105 transition-transform duration-300">
+            RedVortexnetwork
+        </a>
+        <div class="flex flex-wrap gap-4 md:gap-6 items-center font-medium text-sm text-gray-400">
+            <a href="index.html" class="hover:text-white transition-colors">Főoldal</a>
+            <a href="index.html#shop" class="hover:text-white transition-colors">Standard Rangok</a>
+            <a href="limited.html" class="text-red-400 font-bold flex items-center gap-1 border-b-2 border-red-500 pb-1">
+                <i class="fas fa-fire"></i> Limitáltak
+            </a>
+            <a href="index.html#lootbox-section" class="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1">
+                <i class="fas fa-box-open"></i> Láda
+            </a>
+            <a href="index.html#forum-section" class="text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1">
+                <i class="fas fa-comments"></i> Fórum
+            </a>
+            
+            <a href="index.html" class="border border-gray-800 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg text-xs transition-all">
+                <i class="fas fa-arrow-left"></i> Vissza a főoldalra
+            </a>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center pt-20 pb-12 px-4 animate__animated animate__fadeIn">
+        <span class="bg-red-500/10 text-red-400 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full border border-red-500/20 tracking-widest animate-pulse">Szezonális Kiadások</span>
+        <h1 class="text-3xl md:text-5xl font-black mt-3 text-white tracking-tight">
+            LIMITÁLT KIADÁSÚ RANGOK
+        </h1>
+        <p class="text-gray-400 text-xs mt-2 max-w-md mx-auto">Ezek a csomagok csak korlátozott ideig vagy darabszámban érhetőek el. Ne maradj le róluk!</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 pb-24 animate__animated animate__fadeInUp">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+            
+            <div class="bg-[#0a0f1d] border border-red-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 glow-limited">
+                <div class="absolute top-3 right-3 bg-red-500/20 text-red-300 text-[9px] font-black uppercase px-2 py-0.5 rounded border border-red-500/40">
+                    Csak 5 db maradt!
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-red-400"><i class="fas fa-bolt"></i> Isteni Csomag</span>
+                        <h3 class="text-2xl font-black text-white mt-1">Vortex-God</h3>
+                        <p class="text-gray-400 text-xs mt-1">A szerver abszolút uralkodó rangja exkluzív jogokkal.</p>
+                    </div>
+                    <div class="py-2">
+                        <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400">50.00</span> 
+                        <span class="text-xs text-gray-500 font-bold uppercase">EUR</span>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 pt-3 border-t border-gray-900">
+                        <li class="flex items-center gap-2"><i class="fas fa-star text-amber-500 text-[10px]"></i> **[VortexGod]** egyedi izzó prefix</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Minden egyedi kozmetikai kiegészítő</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Korlátlan teleportálás és chunk töltés</li>
+                    </ul>
+                </div>
+                <button onclick="buyLimited('Vortex-God', 50)" class="w-full mt-8 bg-gradient-to-r from-red-600 to-amber-600 hover:opacity-90 text-white font-black py-3 rounded-lg text-xs tracking-wider transition-all cursor-pointer">
+                    ISTENI RANG MEGVÉTELE
+                </button>
+            </div>
+
+            <div class="bg-[#0a0f1d] border border-purple-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 glow-limited">
+                <div class="absolute top-3 right-3 bg-purple-500/20 text-purple-300 text-[9px] font-black uppercase px-2 py-0.5 rounded border border-purple-500/40">
+                    Csak 2 db maradt!
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-purple-400"><i class="fas fa-crown"></i> Halhatatlan Legenda</span>
+                        <h3 class="text-2xl font-black text-white mt-1">Red-Immortal</h3>
+                        <p class="text-gray-400 text-xs mt-1">Örökös tisztelet és a létező legnagyobb kitek a játékban.</p>
+                    </div>
+                    <div class="py-2">
+                        <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">100.00</span> 
+                        <span class="text-xs text-gray-500 font-bold uppercase">EUR</span>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 pt-3 border-t border-gray-900">
+                        <li class="flex items-center gap-2"><i class="fas fa-crown text-purple-400 text-[10px]"></i> **[Immortal]** sötétvörös prefix</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Hozzáférés a /fly parancshoz mindenhol</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500 text-[10px]"></i> Havonta 5 ingyen Vortex Láda kulcs</li>
+                    </ul>
+                </div>
+                <button onclick="buyLimited('Red-Immortal', 100)" class="w-full mt-8 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-black py-3 rounded-lg text-xs tracking-wider transition-all cursor-pointer">
+                    HALHATATLAN RANG MEGVÉTELE
+                </button>
+            </div>
+
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="index.html" class="text-xs text-gray-500 hover:text-indigo-400 transition-colors">
+                <i class="fas fa-chevron-left mr-1"></i> Vissza a standard shophoz és a közösségi fórumhoz
+            </a>
+        </div>
+    </main>
+
+    <script>
+        function buyLimited(rankName, price) {
+            // Ellenőrizzük, hogy be van-e lépve a főoldalon (mivel a localStorage közös)
+            const user = localStorage.getItem('rv_user');
+            if(!user) {
+                alert("A vásárláshoz előbb be kell jelentkezned a főoldalon!");
+                window.location.href = "index.html";
+                return;
+            }
+            alert(`🎉 Elindítottad a(z) ${rankName} megvásárlását ${price} EUR értékben a következő fiókra: ${user}!`);
+        }
+    </script>
+</body>
+</html>
