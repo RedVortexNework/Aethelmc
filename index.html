@@ -1,340 +1,1778 @@
 <!DOCTYPE html>
-<html lang="hu" class="scroll-smooth">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedVortexnetwork | Főoldal</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>RedVortexNetwork | Fekete-Fehér Élmény, Bolt & Fiók</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome ikonok -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(20, 20, 20, 0.75);
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --accent: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Háttér animált rács */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+            animation: fadeInDown 1s ease-out;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            text-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+
+        .auth-nav-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--accent);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-nav-btn img {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .auth-nav-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        /* Hero szekció */
+        .hero {
+            padding: 60px 20px 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: floatText 4s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        /* Valódi API alapú Élő Szerver státusz widget */
+        .server-status-widget {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 22px 35px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            max-width: 650px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-dot {
+            width: 14px;
+            height: 14px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #22c55e;
+            animation: pulseDot 2s infinite;
+        }
+
+        .status-dot.offline {
+            background-color: #ef4444;
+            box-shadow: 0 0 12px #ef4444;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .status-details h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-align: left;
+        }
+
+        .status-details p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* IP másoló doboz */
+        .ip-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ip-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.1);
+        }
+
+        .ip-text {
+            font-family: monospace;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .copy-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #cccccc;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn-discord {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-discord:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .home-section-title {
+            text-align: center;
+            margin: 60px 0 30px 0;
+        }
+
+        .home-section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .home-section-title p {
+            color: var(--text-muted);
+        }
+
+        /* Jellemzők rács */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Ranglista & Online játékosok elemek */
+        .grid-dual {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        @media(max-width: 900px) {
+            .grid-dual {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .players-tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .player-tag {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-tag img {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+
+        /* Játékmódok Kártyák */
+        .modes-grid {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .mode-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px 25px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mode-card:hover {
+            border-color: #fff;
+            transform: translateY(-8px);
+        }
+
+        .mode-card i {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .mode-card h4 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .mode-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Idézetek / Közösségi vélemények szekció */
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .testimonial-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-box p {
+            color: var(--text-main);
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-author img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            image-rendering: pixelated;
+        }
+
+        .testimonial-author span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        /* GYIK Szekció */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 25px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        /* Rejtett Kincs / Easter Egg stílus a főoldalon */
+        .hidden-treasure-spot {
+            text-align: center;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .treasure-clue {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: inline-block;
+            padding: 10px;
+            letter-spacing: 2px;
+            font-family: monospace;
+        }
+
+        .treasure-clue:hover {
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        /* Bolt / Rangok */
+        .store-header {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .store-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .store-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .ranks-grid {
+            max-width: 1200px;
+            margin: 30px auto 80px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .rank-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .rank-card.featured {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+            transform: scale(1.03);
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: -12px;
+            right: 30px;
+            background: #fff;
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .rank-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .rank-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 25px;
+            font-family: monospace;
+        }
+
+        .rank-price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .rank-features {
+            list-style: none;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rank-features li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rank-features li i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .buy-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .rank-card.featured .buy-btn, .buy-btn:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        /* Napi ajándék & szerencsekerék */
+        .rewards-layout {
+            max-width: 1100px;
+            margin: 40px auto 80px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 0 20px;
+            align-items: start;
+        }
+
+        @media(max-width: 850px) {
+            .rewards-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .reward-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .reward-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .reward-box p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 25px auto;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            position: relative;
+            overflow: hidden;
+            transition: transform 4s cubic-bezier(0.15, 0.9, 0.2, 1);
+            background: #111;
+        }
+
+        .wheel-slice {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .slice-1 { transform: rotate(0deg) skewY(-30deg); background: #111; }
+        .slice-2 { transform: rotate(60deg) skewY(-30deg); background: #222; }
+        .slice-3 { transform: rotate(120deg) skewY(-30deg); background: #1a1a1a; }
+        .slice-4 { transform: rotate(180deg) skewY(-30deg); background: #2c2c2c; }
+        .slice-5 { transform: rotate(240deg) skewY(-30deg); background: #151515; }
+        .slice-6 { transform: rotate(300deg) skewY(-30deg); background: #333; }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 20px solid #fff;
+            z-index: 10;
+        }
+
+        /* Bejelentkezés / Regisztráció */
+        .auth-container {
+            max-width: 450px;
+            margin: 60px auto 100px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding-bottom: 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .auth-tab.active {
+            color: var(--accent);
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active-form {
+            display: block;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #050505;
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #fff;
+        }
+
+        .auth-submit-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+
+        .auth-submit-btn:hover {
+            background: #cccccc;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        /* Felhasználói Profil / Dashboard nézet */
+        .profile-dashboard {
+            max-width: 700px;
+            margin: 40px auto 80px auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .profile-header-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-skin-head {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            image-rendering: pixelated;
+        }
+
+        .profile-header-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .profile-header-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .dashboard-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            text-align: left;
+        }
+
+        .dash-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .dash-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .purchase-history-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .purchase-item {
+            background: rgba(0,0,0,0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #111;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: #050505;
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .modal-input:focus {
+            border-color: #fff;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-8px); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 3000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
 </head>
-<body class="bg-[#070a13] text-gray-200 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+<body>
 
-    <nav class="sticky top-0 z-50 bg-[#070a13]/90 backdrop-blur-md border-b border-gray-900 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
-        <a href="index.html" class="text-xl font-bold tracking-wide text-indigo-500 hover:scale-105 transition-transform duration-300">
-            RedVortexnetwork
-        </a>
-        <div class="flex flex-wrap gap-4 md:gap-6 items-center font-medium text-sm text-gray-400">
-            <a href="index.html" class="text-white transition-colors">Főoldal</a>
-            <a href="#shop" class="hover:text-white transition-colors">Alap Rangok</a>
-            <a href="limited.html" class="hover:text-red-400 transition-colors flex items-center gap-1">
-                <i class="fas fa-fire"></i> Limitáltak
-            </a>
-            <a href="szabalyzat.html" class="hover:text-white transition-colors">Szabályzat</a>
-            
-            <div id="auth-zone" class="border-l border-gray-800 pl-4 md:pl-6 flex items-center gap-3">
-                <button onclick="openLoginModal()" id="nav-login-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all cursor-pointer shadow-lg shadow-indigo-600/10">
-                    <i class="fas fa-user-plus mr-1"></i> Bejelentkezés
-                </button>
-                
-                <div id="user-display" class="hidden flex items-center gap-3">
-                    <div onclick="openCoinModal()" class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1.5 rounded-lg cursor-pointer hover:bg-amber-500/20 transition-all" title="Coin egyenleg / Vásárlás">
-                        <i class="fas fa-coins text-amber-400 text-xs animate-pulse"></i>
-                        <span id="user-coins" class="text-xs font-black text-amber-400">0 RVC</span>
-                    </div>
-                    <span id="username-text" class="text-xs text-white font-bold bg-[#0a0f1d] px-3 py-1.5 rounded-lg border border-gray-900"></span>
-                    <button onclick="openProfileModal()" class="text-gray-400 hover:text-white text-sm transition-colors p-1 cursor-pointer" title="Profil és Beállítások">
-                        <i class="fas fa-gear"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="bg-grid"></div>
 
-    <header class="max-w-4xl mx-auto text-center pt-24 pb-16 px-4 animate__animated animate__fadeIn">
-        <span class="bg-indigo-500/10 text-indigo-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full border border-indigo-500/20">
-            Üdvözlünk a RedVortexnetwork boltjában
-        </span>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 text-white">
-            Fejleszd a Játékélményed <br><span class="text-indigo-500">Egyedi Rangokkal</span>
-        </h1>
-        <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-            Támogasd a szerver működését, és cserébe exkluzív kozmetikumokat, parancsokat és egyedi megkülönböztetéseket kapsz a játékban.
-        </p>
-        <div class="mt-8 flex justify-center gap-4">
-            <a href="#shop" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-xl shadow-indigo-600/10">Alap Rangok megtekintése</a>
-            <a href="limited.html" class="bg-red-600/10 hover:bg-red-600/20 text-red-400 font-bold text-xs px-6 py-3 rounded-xl border border-red-500/20 transition-all flex items-center gap-2">
-                <i class="fas fa-fire animate-pulse"></i> Új Limitált Bérletek
-            </a>
-        </div>
+    <header>
+        <div class="logo" onclick="switchPage('home')">REDVORTEXNETWORK</div>
+        <ul class="nav-links">
+            <li><a onclick="switchPage('home')" id="nav-home" class="active">Kezdőlap</a></li>
+            <li><a onclick="switchPage('store')" id="nav-store">Rangok (Bolt)</a></li>
+            <li><a onclick="switchPage('rewards')" id="nav-rewards">Jutalmak & Kerék</a></li>
+            <li><a href="https://discord.gg/wSuXbjYNq6" target="_blank">Discord</a></li>
+            <li><button class="auth-nav-btn" id="authNavBtn" onclick="handleAuthNavClick()"><i class="fa-solid fa-user"></i> Fiók</button></li>
+        </ul>
     </header>
 
-    <section id="shop" class="max-w-6xl mx-auto px-4 py-12 scroll-mt-24 animate__animated animate__fadeInUp">
-        <div class="text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-white">Állandó Alap Rangjaink</h2>
-            <p class="text-gray-500 text-xs mt-1">Örökös hozzáférést biztosító alapvető csomagok</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-[#0a0f1d] border border-gray-900 rounded-xl p-6 flex flex-col justify-between shadow-xl min-h-[380px]">
-                <div>
-                    <h3 class="text-lg font-bold text-white">VIP</h3>
-                    <div class="text-2xl font-black text-indigo-400 mt-2">10.00 EUR</div>
-                    <ul class="text-xs text-gray-400 space-y-2.5 pt-4 mt-4 border-t border-gray-900">
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> [VIP] előtag a chaten</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> /fly parancs a lobbiban</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> Soron kívüli belépés telített szerverre</li>
-                    </ul>
-                </div>
-                <button onclick="buyBasePackage('VIP', 10)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer">Vásárlás</button>
-            </div>
-
-            <div class="bg-[#0a0f1d] border-2 border-indigo-500/30 rounded-xl p-6 flex flex-col justify-between shadow-2xl relative min-h-[380px]">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-[10px] font-black text-white px-3 py-1 rounded-full shadow">LEGNÉPSZERŰBB</div>
-                <div>
-                    <h3 class="text-lg font-bold text-white">MVP</h3>
-                    <div class="text-2xl font-black text-indigo-400 mt-2">20.00 EUR</div>
-                    <ul class="text-xs text-gray-400 space-y-2.5 pt-4 mt-4 border-t border-gray-900">
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> [MVP] zöld előtag a chaten</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> Minden VIP privilégium</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> /feed parancs játék közben</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> 2x szorzó a napi jutalmakra</li>
-                    </ul>
-                </div>
-                <button onclick="buyBasePackage('MVP', 20)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer shadow-lg shadow-indigo-600/10">Vásárlás</button>
-            </div>
-
-            <div class="bg-[#0a0f1d] border border-gray-900 rounded-xl p-6 flex flex-col justify-between shadow-xl min-h-[380px]">
-                <div>
-                    <h3 class="text-lg font-bold text-white">ELITE</h3>
-                    <div class="text-2xl font-black text-indigo-400 mt-2">35.00 EUR</div>
-                    <ul class="text-xs text-gray-400 space-y-2.5 pt-4 mt-4 border-t border-gray-900">
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> [ELITE] lila színű előtag</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> Minden MVP privilégium</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> /heal parancs (30p cooldown)</li>
-                        <li><i class="fas fa-check text-indigo-500 mr-1"></i> Egyedi részecske effektek</li>
-                    </ul>
-                </div>
-                <button onclick="buyBasePackage('ELITE', 35)" class="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer">Vásárlás</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-6 py-12 my-12 bg-[#0a0f1d] border border-gray-950 rounded-2xl shadow-2xl animate__animated animate__fadeIn">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+    <!-- KEZDŐLAP SZEKCIÓ -->
+    <div id="page-home" class="page-section active-page">
+        <main class="hero">
+            <h1>LÉPJ BE A REDVORTEXNETWORK-BE</h1>
+            <p>Egyedülálló játékmenet, prémium fekete-fehér látványvilág és egy összetartó közösség vár rád a szerveren.</p>
             
-            <div class="space-y-4">
-                <div class="flex items-center gap-2 text-indigo-400 text-xs font-black uppercase tracking-widest">
-                    <i class="fas fa-shield-halved text-sm animate-pulse"></i> 100% Biztonságos Tranzakciók
+            <!-- Valódi mcstatus.io API alapú Élő Szerver státusz widget -->
+            <div class="server-status-widget">
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <div class="status-details">
+                        <h4>Szerver Státusz</h4>
+                        <p id="liveStatusText">Betöltés...</p>
+                    </div>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-                    Vásárolj Biztonságosan és <span class="text-indigo-500">Hitelesen</span>
-                </h2>
-                <p class="text-gray-400 text-sm leading-relaxed max-w-xl">
-                    A RedVortexnetwork felületén végzett minden tranzakció banki szintű titkosítással van védve. A megvásárolt rangok és előfizetések a fizetés után azonnal, automatikusan jóváírásra kerülnek a szerveren.
-                </p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    <div class="flex items-center gap-3 bg-[#070a13] p-3 rounded-xl border border-gray-900">
-                        <i class="fas fa-lock text-emerald-500 text-lg"></i>
-                        <div>
-                            <div class="text-white text-xs font-bold">SSL Titkosítás</div>
-                            <div class="text-gray-500 text-[10px]">Védett adatfolyam</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 bg-[#070a13] p-3 rounded-xl border border-gray-900">
-                        <i class="fas fa-bolt text-amber-500 text-lg"></i>
-                        <div>
-                            <div class="text-white text-xs font-bold">Azonnali Aktiválás</div>
-                            <div class="text-gray-500 text-[10px]">Automatikus rendszer</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 bg-[#070a13] p-3 rounded-xl border border-gray-900">
-                        <i class="fas fa-headset text-indigo-500 text-lg"></i>
-                        <div>
-                            <div class="text-white text-xs font-bold">24/7 Support</div>
-                            <div class="text-gray-500 text-[10px]">Segítség a Discordon</div>
-                        </div>
-                    </div>
+                <div class="status-details" style="text-align: right;">
+                    <h4>Játékosok Online</h4>
+                    <p id="livePlayerCount">- / -</p>
                 </div>
             </div>
 
-            <div class="bg-[#070a13] border border-gray-900 rounded-xl p-6 text-center space-y-6">
-                <div class="text-gray-400 text-xs font-bold uppercase tracking-wider">Támogatott fizetési módok</div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-[#0a0f1d] hover:border-blue-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
-                        <i class="fa-brands fa-paypal text-3xl text-[#003087] group-hover:scale-110 transition-transform"></i>
-                        <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">PayPal</span>
-                    </div>
-                    <div class="bg-[#0a0f1d] hover:border-amber-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
-                        <div class="flex gap-2 items-center justify-center group-hover:scale-110 transition-transform">
-                            <i class="fa-brands fa-cc-visa text-2xl text-[#1a1f71]"></i>
-                            <i class="fa-brands fa-cc-mastercard text-2xl text-[#eb001b]"></i>
-                        </div>
-                        <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">Bankkártya</span>
-                    </div>
-                    <div class="bg-[#0a0f1d] hover:border-cyan-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
-                        <i class="fas fa-ticket text-2xl text-[#009cdb] group-hover:scale-110 transition-transform"></i>
-                        <span class="text-[11px] font-bold text-gray-400 mt-2 group-hover:text-white transition-colors">Paysafecard</span>
-                    </div>
-                    <div class="bg-[#0a0f1d] hover:border-purple-500 border border-gray-900 rounded-xl p-4 flex flex-col items-center justify-center transition-all duration-300 group cursor-pointer shadow-md">
-                        <i class="fa-brands fa-google-pay text-3xl text-gray-300 group-hover:text-white group-hover:scale-110 transition-transform"></i>
-                        <span class="text-[11px] font-bold text-gray-400 mt-1 group-hover:text-white transition-colors">Google Pay</span>
-                    </div>
-                </div>
-
-                <div class="text-[10px] text-gray-500 flex items-center justify-center gap-1.5">
-                    <i class="fas fa-shield text-emerald-600 text-[9px]"></i> PCI-DSS Megfelelőség & Biztonságos Átjáró
-                </div>
+            <!-- IP Másoló Doboz -->
+            <div class="ip-box" onclick="copyIP()">
+                <span class="ip-text" id="serverIpLabel">play.redvortex.hu</span>
+                <button class="copy-btn"><i class="fa-regular fa-copy"></i> Másolás</button>
             </div>
 
+            <div class="cta-container">
+                <a href="https://discord.gg/wSuXbjYNq6" target="_blank" class="btn-discord">
+                    <i class="fa-brands fa-discord"></i> Csatlakozz a Discordhoz
+                </a>
+            </div>
+        </main>
+
+        <div class="home-section-title">
+            <h2>Miért válassz minket?</h2>
+            <p>A legmagasabb minőségű Minecraft élmény</p>
         </div>
-    </section>
 
-    <div id="login-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
-            <div class="flex justify-between items-center">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-user-astronaut text-indigo-500"></i> Karakter azonosítás</h3>
-                <button onclick="closeLoginModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
+        <section class="features">
+            <div class="feature-card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <h3>Lag-mentes Élmény</h3>
+                <p>Erőszintű dedikált gép biztosítja a stabil 20 TPS-t, hogy semmi se akasszon meg a kalandjaid során.</p>
             </div>
-            <p class="text-xs text-gray-400">Add meg a pontos Minecraft játékosneved, hogy a vásárolt rangot kézbesíteni tudjuk.</p>
-            <input type="text" id="mc-username" placeholder="Minecraft játékosnév..." class="w-full bg-[#070a13] border border-gray-900 rounded-lg p-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500">
-            <button onclick="saveLogin()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-lg text-xs transition-all cursor-pointer">Csatlakozás a bolthoz</button>
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Biztonságos Környezet</h3>
+                <p>Fejlett védelem a csalók és grieferek ellen, így az építményeid és értékeid mindig biztonságban lesznek.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-users"></i>
+                <h3>Aktív Közösség</h3>
+                <p>Barátságos játékosok, segítőkész staff csapat és rendszeres közösségi eventek várnak rád.</p>
+            </div>
+        </section>
+
+        <!-- Játékmódok Kártyák -->
+        <div class="home-section-title">
+            <h2>Elérhető Játékmódok</h2>
+            <p>Válassz stílusodnak megfelelő kihívást</p>
+        </div>
+
+        <div class="modes-grid">
+            <div class="mode-card">
+                <i class="fa-solid fa-mountain-sun"></i>
+                <h4>Survival</h4>
+                <p>Klasszikus túlélés gazdasággal, klánokkal, saját telekvédelemmel és egyedi küldetésekkel.</p>
+            </div>
+            <div class="mode-card">
+                <i class="fa-solid fa-chess-rook"></i>
+                <h4>SkyBlock</h4>
+                <p>Kezdj egy apró szigeten a semmiben, építs birodalmat, teljesíts kihívásokat és légy a leggazdagabb.</p>
+            </div>
+            <div class="mode-card">
+                <i class="fa-solid fa-skull"></i>
+                <h4>Hardcore Lifesteal</h4>
+                <p>Minden megölt játékosért szívet kapsz, de ha elveszíted az összeset, örökre kitiltást kapsz!</p>
+            </div>
+            <div class="mode-card">
+                <i class="fa-solid fa-store"></i>
+                <h4>BedWars & MiniGames</h4>
+                <p>Gyors tempójú harcok, izgalmas arénák és napi bajnokságok a barátaiddal.</p>
+            </div>
+        </div>
+
+        <!-- Kétoszlopos szekció: Valós idejű játékoslista + Szerverinfó adatok -->
+        <div class="grid-dual">
+            <div class="panel-box">
+                <h3><i class="fa-solid fa-user-group"></i> Online Játékosok Listája</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">A szerveren jelenleg tartózkodó játékosok:</p>
+                <div class="players-tag-cloud" id="playersTagCloud">
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Adatok lekérése...</span>
+                </div>
+            </div>
+
+            <div class="panel-box">
+                <h3><i class="fa-solid fa-server"></i> Technikai Adatok</h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-muted); font-size: 0.95rem;">
+                    <li><strong style="color: #fff;">Verzió:</strong> <span id="serverVersionText">1.20+ / Keresztplatform</span></li>
+                    <li><strong style="color: #fff;">Protokoll:</strong> <span id="serverProtocolText">-</span></li>
+                    <li><strong style="color: #fff;">Szerver szoftver:</strong> <span id="serverSoftwareText">Paper / Spigot</span></li>
+                    <li><strong style="color: #fff;">Üzemidő garancia:</strong> 99.9%</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Játékos Vélemények -->
+        <div class="home-section-title">
+            <h2>Mit mondanak a játékosok?</h2>
+            <p>A közösségünk visszajelzései alapján</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-box">
+                <p>"Imádom a fekete-fehér stílust és a közösség annyira befogadó. A SkyBlock szerver pedig egyszerűen fantasztikusan van optimalizálva!"</p>
+                <div class="testimonial-author">
+                    <img src="https://minotar.net/avatar/BenceGamer/35" alt="Avatar">
+                    <span>BenceGamer</span>
+                </div>
+            </div>
+            <div class="testimonial-box">
+                <p>"Végre egy olyan magyar szerver, ahol nincs lag és a staff is azonnal segít, ha valami gond van. Csak ajánlani tudom mindenkinek!"</p>
+                <div class="testimonial-author">
+                    <img src="https://minotar.net/avatar/AlexPro/35" alt="Avatar">
+                    <span>AlexPro</span>
+                </div>
+            </div>
+            <div class="testimonial-box">
+                <p>"A napi jutalmak és a szerencsekerék miatt minden nap visszatérek pörgetni. Nagyon adja a hangulatot!"</p>
+                <div class="testimonial-author">
+                    <img src="https://minotar.net/avatar/LiliCraft/35" alt="Avatar">
+                    <span>LiliCraft</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- GYIK Szekció -->
+        <div class="home-section-title">
+            <h2>Gyakran Ismételt Kérdések</h2>
+            <p>Minden, amit tudnod kell a csatlakozás előtt</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Hogyan tudok csatlakozni a szerverhez? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">Csak másold ki a fenti IP címet, nyisd meg a Minecraftot (Multiplayer -> Direct Connection vagy Add Server), illeszd be, majd csatlakozz!</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Milyen verziók támogatottak? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">A szerver a legújabb Minecraft verziókat támogatja, de régebbi kliensekkel is fel tudsz lépni a plugin kompatibilitásnak köszönhetően.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Hogyan kaphatok rangot vagy jutalmat? <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">A Rangok menüpontban vásárolhatsz prémium csomagokat, a Jutalmak oldalon pedig naponta ingyen ajándékokat és szerencsekerék pörgetést kapsz!</div>
+            </div>
+        </div>
+
+        <!-- REJTETT KINCS / EASTER EGG SZEKCIÓ -->
+        <div class="hidden-treasure-spot">
+            <span class="treasure-clue" onclick="claimSecretTreasure()" title="Kattints ide a titok felfedezéséhez!">✨ [ TITOKZATOS REJTETT KINCS - Kattints ide a 30 napos VIP-ért! ] ✨</span>
         </div>
     </div>
 
-    <div id="profile-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
-            <div class="flex justify-between items-center border-b border-gray-900 pb-3">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-user text-indigo-400"></i> Fiók Kezelés</h3>
-                <button onclick="closeProfileModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
-            </div>
-            <div class="space-y-2">
-                <div class="text-xs text-gray-400">Bejelentkezett karakter:</div>
-                <div id="profile-name" class="text-sm font-black text-white bg-[#070a13] p-2 rounded border border-gray-900"></div>
-            </div>
-            <div class="space-y-2">
-                <div class="text-xs text-gray-400">Aktuális egyenleged:</div>
-                <div class="flex justify-between items-center bg-[#070a13] p-2 rounded border border-gray-900">
-                    <span id="profile-coins" class="text-xs font-bold text-amber-400"><i class="fas fa-coins mr-1"></i> 0 RVC</span>
-                    <button onclick="closeProfileModal(); openCoinModal();" class="bg-amber-500 hover:bg-amber-400 text-gray-900 font-black text-[10px] px-2 py-1 rounded transition-colors cursor-pointer">Coin Vásárlás</button>
+    <!-- RANGOK / BOLT SZEKCIÓ -->
+    <div id="page-store" class="page-section">
+        <div class="store-header">
+            <h2>Szerver Rangok & Előfizetések</h2>
+            <p>Támogasd a szerver fenntartását, és szerezz különleges előnyöket a játékon belül!</p>
+        </div>
+
+        <div class="ranks-grid">
+            <div class="rank-card">
+                <div>
+                    <div class="rank-title">VIP</div>
+                    <div class="rank-price">1 500 Ft <span>/ hónap</span></div>
+                    <ul class="rank-features">
+                        <li><i class="fa-solid fa-check"></i> /fly parancs használata</li>
+                        <li><i class="fa-solid fa-check"></i> 3 db Otthon (Home) hely</li>
+                        <li><i class="fa-solid fa-check"></i> VIP Kit igénylés</li>
+                        <li><i class="fa-solid fa-check"></i> Egyedi VIP chat szín</li>
+                    </ul>
                 </div>
+                <button class="buy-btn" onclick="openCheckout('VIP', '1 500 Ft')">Vásárlás</button>
             </div>
-            <button onclick="logout()" class="w-full bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white font-bold py-2 rounded-lg text-xs border border-red-500/20 hover:border-transparent transition-all cursor-pointer">
-                <i class="fas fa-right-from-bracket mr-1"></i> Kijelentkezés a fiókból
-            </button>
+
+            <div class="rank-card featured">
+                <div class="rank-badge">Népszerű</div>
+                <div>
+                    <div class="rank-title">MVP</div>
+                    <div class="rank-price">3 500 Ft <span>/ hónap</span></div>
+                    <ul class="rank-features">
+                        <li><i class="fa-solid fa-check"></i> Minden VIP előny</li>
+                        <li><i class="fa-solid fa-check"></i> /feed és /heal parancsok</li>
+                        <li><i class="fa-solid fa-check"></i> 7 db Otthon (Home) hely</li>
+                        <li><i class="fa-solid fa-check"></i> Exkluzív MVP+ Előtag</li>
+                        <li><i class="fa-solid fa-check"></i> Hozzáférés a prémium kithez</li>
+                    </ul>
+                </div>
+                <button class="buy-btn" onclick="openCheckout('MVP', '3 500 Ft')">Vásárlás</button>
+            </div>
+
+            <div class="rank-card">
+                <div>
+                    <div class="rank-title">VORTEX KING</div>
+                    <div class="rank-price">6 000 Ft <span>/ örökös</span></div>
+                    <ul class="rank-features">
+                        <li><i class="fa-solid fa-check"></i> Minden rang jogai és bónusza</li>
+                        <li><i class="fa-solid fa-check"></i> Korlátlan Otthon (Home)</li>
+                        <li><i class="fa-solid fa-check"></i> Egyedi szerver rang előtag</li>
+                        <li><i class="fa-solid fa-check"></i> Különleges Discord rang</li>
+                        <li><i class="fa-solid fa-check"></i> Végleges örökös státusz</li>
+                    </ul>
+                </div>
+                <button class="buy-btn" onclick="openCheckout('VORTEX KING', '6 000 Ft')">Vásárlás</button>
+            </div>
         </div>
     </div>
 
-    <div id="coin-modal" class="fixed inset-0 z-50 bg-[#070a13]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#0a0f1d] border border-gray-900 rounded-2xl p-6 max-w-md w-full space-y-4 shadow-2xl animate__animated animate__zoomIn animate__md">
-            <div class="flex justify-between items-center border-b border-gray-900 pb-3">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fas fa-coins text-amber-400"></i> RV-Coin Feltöltés</h3>
-                <button onclick="closeCoinModal()" class="text-gray-500 hover:text-white cursor-pointer"><i class="fas fa-xmark"></i></button>
+    <!-- NAPI AJÁNDÉK ÉS SZERENCSKERÉK OLDAL -->
+    <div id="page-rewards" class="page-section">
+        <div class="store-header">
+            <h2>Napi Jutalmak & Szerencsekerék</h2>
+            <p>Gyűjtsd be a napi ajándékodat, vagy pörgesd meg a kereket értékes in-game nyereményekért!</p>
+        </div>
+
+        <div class="rewards-layout">
+            <div class="reward-box">
+                <i class="fa-solid fa-gift" style="font-size: 3rem; color: #fff; margin-bottom: 20px;"></i>
+                <h3>Napi Ajándék</h3>
+                <p>Minden nap 24 óránként egyszer igényelhetsz ingyen nyersanyagokat és pénzjutalmat a szerveren.</p>
+                <button class="buy-btn" id="dailyRewardBtn" onclick="claimDailyReward()">Ajándék Igénylése</button>
             </div>
-            <p class="text-xs text-gray-400">Válassz egy Coin csomagot az egyenleged feltöltéséhez. A Coinok segítségével exkluzív ládákat és játékbeli cuccokat vehetsz.</p>
+
+            <div class="reward-box">
+                <h3>Szerencsekerék</h3>
+                <p>Pörgess és nyerj VIP napokat, ládákat vagy ritka tárgyakat! (Napi 1 ingyen pörgetés)</p>
+                
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <div class="wheel" id="fortuneWheel">
+                        <div class="wheel-slice slice-1"><span>VIP 1 Nap</span></div>
+                        <div class="wheel-slice slice-2"><span>10k Pénz</span></div>
+                        <div class="wheel-slice slice-3"><span>Ritka Láda</span></div>
+                        <div class="wheel-slice slice-4"><span>Kagati Kit</span></div>
+                        <div class="wheel-slice slice-5"><span>5k Pénz</span></div>
+                        <div class="wheel-slice slice-6"><span>Semmi</span></div>
+                    </div>
+                </div>
+
+                <button class="buy-btn" id="spinWheelBtn" onclick="spinWheel()">Kerék Pörgetése</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEJELENTKEZÉS / REGISZTRÁCIÓ -->
+    <div id="page-auth" class="page-section">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Bejelentkezés</button>
+                <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Regisztráció</button>
+            </div>
+
+            <form id="form-login" class="auth-form active-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-username">Minecraft Név</label>
+                    <input type="text" id="login-username" class="form-input" placeholder="pl. BenceGamer" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Jelszó</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Bejelentkezés</button>
+            </form>
+
+            <form id="form-register" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="reg-username">Minecraft Név</label>
+                    <input type="text" id="reg-username" class="form-input" placeholder="Pontos in-game név" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email cím</label>
+                    <input type="email" id="reg-email" class="form-input" placeholder="pelda@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Jelszó</label>
+                    <input type="password" id="reg-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Fiók létrehozása</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FIÓK / SETTINGS / DASHBOARD SZEKCIÓ -->
+    <div id="page-profile" class="page-section">
+        <div class="profile-dashboard">
+            <div class="profile-header-card">
+                <img id="userSkinHead" src="https://minotar.net/avatar/Steve/80" alt="Skin Fej" class="profile-skin-head">
+                <h3 id="profileUsernameDisplay">Felhasználó</h3>
+                <p id="profileEmailDisplay">pelda@email.com</p>
+                <button class="auth-nav-btn" onclick="handleLogout()" style="margin-top: 5px; color: #ef4444; border-color: rgba(239,68,68,0.3);">Kijelentkezés</button>
+            </div>
+
+            <div class="dashboard-sections">
+                <!-- Korábbi vásárlások -->
+                <div class="dash-box">
+                    <h4><i class="fa-solid fa-bag-shopping"></i> Korábbi Vásárlások & Előzmények</h4>
+                    <ul class="purchase-history-list" id="purchaseHistoryList">
+                        <li class="purchase-item"><span>Még nincsenek vásárlásaid.</span><span>-</span></li>
+                    </ul>
+                </div>
+
+                <!-- Jelszó változtatás -->
+                <div class="dash-box">
+                    <h4><i class="fa-solid fa-key"></i> Jelszó Megváltoztatása</h4>
+                    <form onsubmit="handlePasswordChange(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                        <div class="form-group" style="margin: 0;">
+                            <label for="current-password">Jelenlegi jelszó</label>
+                            <input type="password" id="current-password" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label for="new-password">Új jelszó</label>
+                            <input type="password" id="new-password" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="auth-submit-btn" style="margin: 0;">Jelszó Frissítése</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VÁSÁRLÁSI MODAL -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modalRankName">Rang Vásárlás</h3>
+            <p id="modalRankPrice">Add meg a pontos Minecraft neved a tranzakció hitelesítéséhez:</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div class="bg-[#070a13] border border-gray-900 p-3 rounded-xl text-center flex flex-col justify-between">
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-400">Kezdő</div>
-                        <div class="text-md font-black text-amber-400 my-1">500 RVC</div>
-                    </div>
-                    <button onclick="buyCoins(500, 5)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">5.00 EUR</button>
-                </div>
-                <div class="bg-[#070a13] border-2 border-amber-500/30 p-3 rounded-xl text-center flex flex-col justify-between relative">
-                    <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-500 text-gray-950 text-[8px] font-black px-1.5 py-0.5 rounded shadow">+10% Bónusz</div>
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-400 mt-1">Népszerű</div>
-                        <div class="text-md font-black text-amber-400 my-1">1100 RVC</div>
-                    </div>
-                    <button onclick="buyCoins(1100, 10)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">10.00 EUR</button>
-                </div>
-                <div class="bg-[#070a13] border border-gray-900 p-3 rounded-xl text-center flex flex-col justify-between">
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-400">Királyi</div>
-                        <div class="text-md font-black text-amber-400 my-1">3000 RVC</div>
-                    </div>
-                    <button onclick="buyCoins(3000, 25)" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-1 rounded text-[10px] transition-colors cursor-pointer">25.00 EUR</button>
-                </div>
-            </div>
+            <input type="text" class="modal-input" id="mcUsername" placeholder="Minecraft neved (pl. BenceGamer)">
+            <button class="buy-btn" onclick="completePurchase()">Tovább a fizetéshez</button>
         </div>
     </div>
+
+    <!-- KINCS / VIP NYEREMÉNY MODAL -->
+    <div class="modal" id="treasureModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeTreasureModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h3><i class="fa-solid fa-trophy" style="color: #fbbf24;"></i> Gratulálunk! Megtaláltad a Kincset!</h3>
+            <p>Sikeresen feltörted a rejtett rejtvényt! Add meg a Minecraft neved, hogy jóváírjuk Neked a <strong>30 napos Ingyen VIP rangot</strong>:</p>
+            
+            <input type="text" class="modal-input" id="treasureUsername" placeholder="Minecraft neved (pl. BenceGamer)">
+            <button class="buy-btn" onclick="claimTreasureReward()">VIP Igénylése Ingyen</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 RedVortexNetwork. Minden jog fenntartva. Nem hivatalos Minecraft termék.</p>
+    </footer>
+
+    <div class="toast" id="toast">IP-cím vágólapra másolva!</div>
 
     <script>
+        let currentUser = JSON.parse(localStorage.getItem('redvortex_user')) || null;
+        let purchaseHistory = JSON.parse(localStorage.getItem('redvortex_purchases')) || [];
+
         window.addEventListener('DOMContentLoaded', () => {
-            checkAuth();
+            updateAuthUI();
         });
 
-        function checkAuth() {
-            const storedUser = localStorage.getItem('rv_user');
-            const loginBtn = document.getElementById('nav-login-btn');
-            const userDisplay = document.getElementById('user-display');
-            const usernameText = document.getElementById('username-text');
-            const coinsDisplay = document.getElementById('user-coins');
-
-            if(storedUser) {
-                loginBtn.classList.add('hidden');
-                userDisplay.classList.remove('hidden');
-                usernameText.innerText = storedUser;
-                
-                if(!localStorage.getItem(`rv_coins_${storedUser}`)) {
-                    localStorage.setItem(`rv_coins_${storedUser}`, "750");
-                }
-                
-                coinsDisplay.innerText = localStorage.getItem(`rv_coins_${storedUser}`) + " RVC";
+        function updateAuthUI() {
+            const authBtn = document.getElementById('authNavBtn');
+            if (currentUser) {
+                authBtn.innerHTML = `<img src="https://minotar.net/avatar/${currentUser.username}/20" alt=""> ${currentUser.username}`;
             } else {
-                loginBtn.classList.remove('hidden');
-                userDisplay.classList.add('hidden');
+                authBtn.innerHTML = `<i class="fa-solid fa-user"></i> Fiók`;
             }
         }
 
-        // MODAL DESKTRUKTOROK ÉS NYITÓK
-        function openLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
-        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
-        
-        document.getElementById('login-modal').addEventListener('click', function(e) { if (e.target === this) closeLoginModal(); });
-        document.getElementById('profile-modal').addEventListener('click', function(e) { if (e.target === this) closeProfileModal(); });
-        document.getElementById('coin-modal').addEventListener('click', function(e) { if (e.target === this) closeCoinModal(); });
-
-        function openProfileModal() { 
-            const user = localStorage.getItem('rv_user');
-            document.getElementById('profile-name').innerText = user;
-            document.getElementById('profile-coins').innerHTML = `<i class="fas fa-coins mr-1"></i> ${localStorage.getItem(`rv_coins_${user}`)} RVC`;
-            document.getElementById('profile-modal').classList.remove('hidden'); 
+        function handleAuthNavClick() {
+            if (currentUser) {
+                loadProfileData();
+                switchPage('profile');
+            } else {
+                switchPage('auth');
+            }
         }
-        function closeProfileModal() { document.getElementById('profile-modal').classList.add('hidden'); }
 
-        function openCoinModal() { document.getElementById('coin-modal').classList.remove('hidden'); }
-        function closeCoinModal() { document.getElementById('coin-modal').classList.add('hidden'); }
+        async function fetchServerStatus() {
+            const serverAddress = "play.redvortex.hu";
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('liveStatusText');
+            const playerCount = document.getElementById('livePlayerCount');
+            const playersCloud = document.getElementById('playersTagCloud');
+            const versionText = document.getElementById('serverVersionText');
+            const protocolText = document.getElementById('serverProtocolText');
+            const softwareText = document.getElementById('serverSoftwareText');
 
-        function saveLogin() {
-            const name = document.getElementById('mc-username').value.trim();
-            if(name.length < 3) {
-                alert("Kérjük, adj meg egy érvényes játékosnevet (legalább 3 karakter)!");
+            try {
+                const response = await fetch(`https://api.mcstatus.io/v2/status/java/${serverAddress}`);
+                const data = await response.json();
+
+                if (data.online) {
+                    statusDot.classList.remove('offline');
+                    statusText.innerText = "Online (Aktív)";
+                    playerCount.innerText = `${data.players.online} / ${data.players.max}`;
+                    
+                    if (data.version && data.version.name_raw) {
+                        versionText.innerText = data.version.name_raw;
+                        protocolText.innerText = data.version.protocol || "N/A";
+                    }
+                    if (data.software) {
+                        softwareText.innerText = data.software;
+                    }
+
+                    if (data.players.list && data.players.list.length > 0) {
+                        playersCloud.innerHTML = "";
+                        data.players.list.forEach(player => {
+                            const tag = document.createElement('div');
+                            tag.className = 'player-tag';
+                            tag.innerHTML = `<img src="https://minotar.net/avatar/${player.name_raw}/16" alt=""> ${player.name_raw}`;
+                            playersCloud.appendChild(tag);
+                        });
+                    } else {
+                        playersCloud.innerHTML = `<span style="color: var(--text-muted); font-size: 0.9rem;">Jelenleg nincsenek látható játékosok a listában vagy rejtve vannak.</span>`;
+                    }
+                } else {
+                    statusDot.classList.add('offline');
+                    statusText.innerText = "Offline (Nem érhető el)";
+                    playerCount.innerText = "0 / 0";
+                    playersCloud.innerHTML = `<span style="color: var(--text-muted); font-size: 0.9rem;">A szerver jelenleg nem fut vagy nem válaszol.</span>`;
+                }
+            } catch (error) {
+                statusDot.classList.add('offline');
+                statusText.innerText = "API Hiba / Nem elérhető";
+                playerCount.innerText = "- / -";
+                playersCloud.innerHTML = `<span style="color: var(--text-muted); font-size: 0.9rem;">Nem sikerült lekérdezni a szerver adatait.</span>`;
+            }
+        }
+
+        fetchServerStatus();
+        setInterval(fetchServerStatus, 30000);
+
+        function toggleFaq(element) {
+            element.classList.toggle('open');
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active-page');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active-page');
+            }
+            if(pageId !== 'auth' && pageId !== 'profile') {
+                const navElem = document.getElementById('nav-' + pageId);
+                if(navElem) navElem.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAuthTab(tabName) {
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-register').classList.remove('active');
+            document.getElementById('form-login').classList.remove('active-form');
+            document.getElementById('form-register').classList.remove('active-form');
+
+            document.getElementById('tab-' + tabName).classList.add('active');
+            document.getElementById('form-' + tabName).classList.add('active-form');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            
+            currentUser = { username: username, email: `${username.toLowerCase()}@redvortex.hu` };
+            localStorage.setItem('redvortex_user', JSON.stringify(currentUser));
+            
+            updateAuthUI();
+            showToast(`Sikeres bejelentkezés: ${username}!`);
+            setTimeout(() => {
+                loadProfileData();
+                switchPage('profile');
+            }, 800);
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+
+            currentUser = { username: username, email: email };
+            localStorage.setItem('redvortex_user', JSON.stringify(currentUser));
+
+            updateAuthUI();
+            showToast(`Sikeres regisztráció! Üdv a fedélzeten, ${username}!`);
+            setTimeout(() => {
+                loadProfileData();
+                switchPage('profile');
+            }, 800);
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('redvortex_user');
+            updateAuthUI();
+            showToast("Sikeres kijelentkezés.");
+            switchPage('home');
+        }
+
+        function loadProfileData() {
+            if (!currentUser) return;
+            document.getElementById('profileUsernameDisplay').innerText = currentUser.username;
+            document.getElementById('profileEmailDisplay').innerText = currentUser.email;
+            document.getElementById('userSkinHead').src = `https://minotar.net/avatar/${currentUser.username}/80`;
+
+            const listEl = document.getElementById('purchaseHistoryList');
+            const userPurchases = purchaseHistory.filter(p => p.user.toLowerCase() === currentUser.username.toLowerCase());
+            
+            if (userPurchases.length > 0) {
+                listEl.innerHTML = "";
+                userPurchases.forEach(p => {
+                    listEl.innerHTML += `<li class="purchase-item"><span><b>${p.rank}</b> (${p.price})</span><span style="color:var(--text-muted);">${p.date}</span></li>`;
+                });
+            } else {
+                listEl.innerHTML = `<li class="purchase-item"><span>Még nincsenek vásárlásaid.</span><span>-</span></li>`;
+            }
+        }
+
+        function handlePasswordChange(event) {
+            event.preventDefault();
+            document.getElementById('current-password').value = "";
+            document.getElementById('new-password').value = "";
+            showToast("Jelszó sikeresen megváltoztatva!");
+        }
+
+        function copyIP() {
+            const ip = document.getElementById('serverIpLabel').innerText;
+            navigator.clipboard.writeText(ip).then(() => {
+                showToast("IP-cím vágólapra másolva!");
+            });
+        }
+
+        function claimDailyReward() {
+            const btn = document.getElementById('dailyRewardBtn');
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.innerText = "Már felvéve ma!";
+            showToast("Sikeresen átvetted a mai ajándékodat!");
+        }
+
+        let isSpinning = false;
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+            
+            const wheel = document.getElementById('fortuneWheel');
+            const btn = document.getElementById('spinWheelBtn');
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+
+            const randomDegree = Math.floor(Math.random() * 3600) + 1440;
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+            setTimeout(() => {
+                isSpinning = false;
+                showToast("Gratulálunk! Nyertél egy értékes jutalmat!");
+                btn.innerText = "Holnap újra pörgethetsz";
+            }, 4000);
+        }
+
+        let selectedRank = "";
+        let selectedRankPrice = "";
+        function openCheckout(rankName, price) {
+            selectedRank = rankName;
+            selectedRankPrice = price;
+            document.getElementById('modalRankName').innerText = `${rankName} rang vásárlása`;
+            document.getElementById('modalRankPrice').innerText = `Ár: ${price}. Írd be a Minecraft neved a hitelesítéshez:`;
+            
+            if (currentUser) {
+                document.getElementById('mcUsername').value = currentUser.username;
+            }
+
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            document.getElementById('mcUsername').value = "";
+        }
+
+        function completePurchase() {
+            const username = document.getElementById('mcUsername').value.trim();
+            if(username === "") {
+                alert("Kérlek add meg a Minecraft neved!");
                 return;
             }
-            localStorage.setItem('rv_user', name);
-            closeLoginModal();
-            checkAuth();
+
+            const newPurchase = {
+                user: username,
+                rank: selectedRank,
+                price: selectedRankPrice,
+                date: new Date().toLocaleDateString('hu-HU')
+            };
+            purchaseHistory.push(newPurchase);
+            localStorage.setItem('redvortex_purchases', JSON.stringify(purchaseHistory));
+
+            closeCheckout();
+            showToast(`Sikeres vásárlás: ${selectedRank} (${username})!`);
         }
 
-        function logout() {
-            localStorage.removeItem('rv_user');
-            closeProfileModal();
-            checkAuth();
+        function claimSecretTreasure() {
+            if (currentUser) {
+                document.getElementById('treasureUsername').value = currentUser.username;
+            }
+            document.getElementById('treasureModal').classList.add('active');
         }
 
-        function buyCoins(amount, price) {
-            const user = localStorage.getItem('rv_user');
-            alert(`Biztonságos fizetési ablak megnyitása: ${price} EUR...\nSikeres tranzakció után a ${amount} RV-Coin jóváíródik.`);
-            
-            let currentCoins = parseInt(localStorage.getItem(`rv_coins_${user}`) || "0");
-            localStorage.setItem(`rv_coins_${user}`, (currentCoins + amount).toString());
-            
-            closeCoinModal();
-            checkAuth();
+        function closeTreasureModal() {
+            document.getElementById('treasureModal').classList.remove('active');
         }
 
-        function buyBasePackage(packageName, price) {
-            const storedUser = localStorage.getItem('rv_user');
-            if(!storedUser) {
-                alert("A vásárláshoz kérjük, előbb jelentkezz be!");
-                openLoginModal();
+        function claimTreasureReward() {
+            const username = document.getElementById('treasureUsername').value.trim();
+            if(username === "") {
+                alert("Kérlek add meg a Minecraft neved!");
                 return;
             }
-            alert(`Sikeres választás!\nFiók: ${storedUser}\nCsomag: ${packageName}\nÁr: ${price}.00 EUR\nA fizetési felület betöltése...`);
+
+            const newPurchase = {
+                user: username,
+                rank: "VIP (30 nap - Kincs nyeremény)",
+                price: "0 Ft",
+                date: new Date().toLocaleDateString('hu-HU')
+            };
+            purchaseHistory.push(newPurchase);
+            localStorage.setItem('redvortex_purchases', JSON.stringify(purchaseHistory));
+
+            closeTreasureModal();
+            showToast(`Gratulálunk ${username}! A 30 napos VIP rangod jóváírásra került!`);
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            toast.innerText = text;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
     </script>
 </body>
