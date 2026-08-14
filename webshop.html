@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AethelMC | Főoldal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #0b0f19; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
 
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(11, 15, 25, 0.9); border-bottom: 1px solid #1f2937; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .top-ip { background: #10b981; color: white; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; padding: 10px 15px; border-radius: 6px; cursor: pointer; }
+        
+        .menu-toggle { display: flex; flex-direction: column; justify-content: space-between; width: 30px; height: 22px; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { display: block; height: 3px; width: 100%; background: #fff; border-radius: 3px; }
+
+        .dropdown-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: #0f172a; border-left: 1px solid #1e293b; display: flex; flex-direction: column; padding: 90px 30px 30px 30px; transition: 0.4s ease-in-out; z-index: 999; }
+        .dropdown-menu.active { right: 0; }
+        .dropdown-menu a { color: #cbd5e1; text-decoration: none; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .dropdown-menu a:hover { color: #8b5cf6; }
+
+        .hero-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; text-align: center; }
+        h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .subtitle { color: #94a3b8; font-size: 1rem; margin-bottom: 30px; }
+        
+        .footer-section { width: 100%; background: #070a12; padding: 30px 20px; border-top: 1px solid #1e293b; text-align: center; font-size: 0.8rem; color: #64748b; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="top-ip" onclick="copyIP()">play.aethelmc.fun</div>
+        <div class="menu-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="index.html">🏠 Főoldal</a>
+        <a href="webshop.html">🛒 Webshop & Rangok</a>
+        <a href="https://discord.gg/IttADiscordLink" target="_blank">💬 Discord</a>
+    </div>
+
+    <div class="hero-container">
+        <h1>Üdvözöl az AethelMC-n!</h1>
+        <p class="subtitle">Ez a főoldal. Kattints a menüre a webshop eléréséhez!</p>
+    </div>
+
+    <div class="footer-section">
+        <p>AethelMC Network &copy; 2026</p>
+    </div>
+
+    <script>
+        function copyIP() { navigator.clipboard.writeText('play.aethelmc.fun'); alert('IP másolva!'); }
+        function toggleMenu() { document.getElementById('dropdownMenu').classList.toggle('active'); }
+    </script>
+</body>
+</html>
