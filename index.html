@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Hivatalos Oldal</title>
+    <title>AethelMC | Hivatalos Főoldal</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,137 +14,148 @@
         }
 
         body {
-            background-color: #05070a; /* Mélyebb sötét */
+            background-color: #030508;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            /* Finom háttér textúra, illeszkedik a sötét témához */
             background-image: 
-                radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.05) 0%, transparent 60%),
-                repeating-linear-gradient(45deg, #080a11, #080a11 2px, transparent 2px, transparent 10px);
+                radial-gradient(circle at 50% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
         }
 
         header {
-            padding: 20px;
+            padding: 40px 20px 20px;
             text-align: center;
         }
 
-        /* A logó stílusa */
         .logo-img {
-            max-width: 350px; /* A logó mérete */
+            max-width: 320px;
             height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6)); /* Lenyűgöző lila neon glória */
-            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.5));
+            transition: transform 0.3s ease;
         }
 
         .logo-img:hover {
-            transform: scale(1.03); /* Kicsi hover effekt */
-            filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.8));
+            transform: scale(1.04);
         }
 
-        main {
-            text-align: center;
-            max-width: 700px;
-            padding: 30px;
-            background: rgba(11, 15, 25, 0.5);
-            border: 1px solid rgba(139, 92, 246, 0.2);
+        .container {
+            width: 90%;
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.25);
             border-radius: 20px;
+            padding: 30px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            margin: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
         }
 
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
             font-weight: 800;
-            line-height: 1.1;
+            margin-bottom: 10px;
         }
 
         h1 span {
             background: linear-gradient(45deg, #a78bfa, #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         p {
             color: #94a3b8;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1.05rem;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* Interaktív IP doboz */
-        .ip-container {
-            margin-bottom: 30px;
-        }
-
+        /* IP másoló doboz */
         .ip-box {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(18, 24, 38, 0.8);
             border: 1px solid rgba(139, 92, 246, 0.4);
-            padding: 15px 30px;
+            padding: 12px 25px;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
             gap: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 10px;
         }
 
         .ip-box:hover {
             border-color: #8b5cf6;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
         }
 
         .ip-text {
             font-weight: 600;
             letter-spacing: 1px;
-            color: #e2e8f0;
-            font-size: 1.1rem;
+            color: #f8fafc;
         }
 
         .copy-btn {
             background: #8b5cf6;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .copy-btn:hover {
             background: #7c3aed;
         }
 
-        .buttons-container {
-            display: flex;
+        /* Fő gombok rács */
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
+            margin-top: 5px;
         }
 
         .btn {
-            padding: 12px 28px;
-            border-radius: 50px;
+            padding: 15px 25px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
+            transition: all 0.3s ease;
             font-size: 1rem;
+        }
+
+        .btn-shop {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        .btn-shop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
         }
 
         .btn-discord {
@@ -152,73 +163,89 @@
             color: white;
             box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3);
         }
-
         .btn-discord:hover {
-            background: #4752c4;
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(88, 101, 242, 0.5);
-            transform: translateY(-2px);
         }
 
-        .btn-status {
-            background: rgba(30, 41, 59, 0.8);
-            color: #e2e8f0;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+        .btn-mine {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+        .btn-mine:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5);
         }
 
-        .btn-status:hover {
-            background: rgba(51, 65, 85, 0.9);
-            border-color: #94a3b8;
-            transform: translateY(-2px);
+        /* Kiemelt rész a Kristálykamrának */
+        .feature-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .feature-box h2 {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
         footer {
             padding: 30px;
             color: #475569;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: center;
-            margin-top: auto;
-            width: 100%;
         }
 
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
-            .logo-img { max-width: 250px; }
-            .ip-box { padding: 12px 20px; gap: 10px; }
-            .ip-text { font-size: 1rem; }
+            .logo-img { max-width: 240px; }
+            .card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- A te logód beillesztve, ragyogó effekttel -->
-        <img src="logo.png" alt="AethelMC Logó" class="logo-img">
+        <img src="logo.png" alt="AethelMC Logo" class="logo-img">
     </header>
 
-    <main>
-        <h1>Üdvözlünk az <span>Új Világban</span></h1>
-        <p>Az AethelMC egy prémium Minecraft szerver, ahol a közösség az első. Építs, harcolj, hódíts – légy részese a legendának!</p>
-
-        <div class="ip-container">
+    <div class="container">
+        
+        <!-- Fő üdvözlő kártya -->
+        <div class="card">
+            <h1>Üdvözlünk az <span>AethelMC</span> Világában!</h1>
+            <p>Prémium Minecraft élmény, egyedi rendszerek, barátságos közösség és izgalmas játékmódok várnak rád.</p>
+            
             <div class="ip-box" onclick="copyIP()">
                 <span class="ip-text" id="server-ip">play.aethelmc.fun</span>
-                <button class="copy-btn">Másolás</button>
+                <button class="copy-btn">IP Másolása</button>
             </div>
         </div>
 
-        <div class="buttons-container">
-            <a href="#" class="btn btn-discord">
-                <svg height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.075C3.552 11.185 3.543 17.79 4.143 24.315a.07.07 0 0 0 .032.077a19.98 19.98 0 0 0 6.002 3.056a.076.076 0 0 0 .083-.027a14.654 14.654 0 0 0 1.253-2.089a.077.077 0 0 0-.041-.105a13.048 13.048 0 0 1-1.84-.95a.077.077 0 0 1-.007-.128a19.17 19.17 0 0 0 .126-.1a19.07 19.07 0 0 0 1.515-.739a.076.076 0 0 0 .038-.101a6.338 6.338 0 0 1 .13-9.29a6.34 6.34 0 0 1 8.986 0a6.337 6.337 0 0 1 .13 9.29a.076.076 0 0 0 .038.102a18.81 18.81 0 0 0 1.515.739a19.18 19.18 0 0 0 .126.1a.077.077 0 0 1-.007.127a13.284 13.284 0 0 1-1.84.951a.077.077 0 0 0-.041.105a15.112 15.112 0 0 0 1.253 2.09a.077.077 0 0 0 .083.027a20.002 20.002 0 0 0 6.002-3.056a.077.077 0 0 0 .032-.077c.666-6.617.673-13.25.075-19.87a.07.07 0 0 0-.033-.076ZM8.04 17.455c-1.146 0-2.089-1.05-2.089-2.342s.923-2.342 2.089-2.342c1.174 0 2.109 1.05 2.089 2.342c0 1.292-.915 2.342-2.089 2.342Zm7.92 0c-1.146 0-2.089-1.05-2.089-2.342s.923-2.342 2.089-2.342c1.174 0 2.109 1.05 2.089 2.342c0 1.292-.915 2.342-2.089 2.342Z"/></svg>
-                Discord Közösség
+        <!-- Gyorsgombok (Webshop, Discord) -->
+        <div class="grid-buttons">
+            <a href="shop.html" class="btn btn-shop">
+                🛒 Webshop & Rangok
             </a>
-            <a href="#" class="btn btn-status">
-                Szerver Állapot
+            <a href="https://discord.gg/IttADiscordLink" target="_blank" class="btn btn-discord">
+                💬 Discord Szerver
             </a>
         </div>
-    </main>
+
+        <!-- Aethel-Kristálykamra (Bányaközpont jellegű hely) -->
+        <div class="card feature-box">
+            <h2>💎 Aethel-Kristálykamra (Bányaközpont)</h2>
+            <p>Eleged van abból, hogy órákig kell ásnod a nyersanyagokért? Lépj be az AethelMC hivatalos Kristálykamrájába! Automatikus újratermelődés, védett zónák, prémium bányász rang bónuszok és ritka ércek várnak ránk.</p>
+            <a href="#" class="btn btn-mine">Kristálykamra Infó</a>
+        </div>
+
+    </div>
 
     <footer>
-        <p>&copy; 2025 AethelMC. Minden jog fenntartva. Készítette: GemKick AI.</p>
+        <p>&copy; 2026 AethelMC Network. Minden jog fenntartva.</p>
     </footer>
 
     <script>
@@ -227,9 +254,9 @@
             navigator.clipboard.writeText(ipText);
             const btn = document.querySelector(".copy-btn");
             btn.innerText = "Másolva!";
-            btn.style.background = "#6D28D9";
+            btn.style.background = "#059669";
             setTimeout(() => {
-                btn.innerText = "Másolás";
+                btn.innerText = "IP Másolása";
                 btn.style.background = "#8b5cf6";
             }, 2000);
         }
