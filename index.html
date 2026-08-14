@@ -121,6 +121,41 @@
             z-index: -1;
         }
 
+        /* Allay kabalafigura & Üdvözlő doboz */
+        .welcome-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid #334155;
+            padding: 12px 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            max-width: 450px;
+            backdrop-filter: blur(5px);
+        }
+
+        .allay-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            animation: floatAllay 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAllay {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(-3deg); }
+        }
+
+        .welcome-text {
+            text-align: left;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        .welcome-text b {
+            color: #38bdf8;
+        }
+
         .logo-img { 
             max-width: 140px; 
             margin-bottom: 20px; 
@@ -181,7 +216,7 @@
             margin-right: 5px;
         }
 
-        /* Játékmódok kártyái képekkel */
+        /* Játékmódok kártyái */
         .gamemodes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -204,9 +239,10 @@
         }
         .mode-img {
             width: 100%;
-            height: 130px;
+            height: 140px;
             object-fit: cover;
             border-bottom: 1px solid #1f2937;
+            background: #1e293b;
         }
         .mode-content {
             padding: 20px;
@@ -219,6 +255,59 @@
         .mode-card p {
             font-size: 0.85rem;
             color: #94a3b8;
+        }
+
+        /* Csapattagok szekció */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f8fafc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 850px;
+            margin-bottom: 40px;
+        }
+
+        .team-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .team-card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+        }
+        .team-role {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        /* Rang színek */
+        .role-owner { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .role-admin { background: rgba(249, 115, 22, 0.2); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.4); }
+        .role-mod { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .role-builder { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+
+        .team-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
         }
 
         /* Fő Gombok */
@@ -310,21 +399,27 @@
         .footer-section p {
             margin-bottom: 8px;
         }
+        
         .payment-container {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            align-items: center;
+            gap: 12px;
             flex-wrap: wrap;
             margin: 20px 0;
         }
-        .pay-badge {
-            background: #1e293b;
-            border: 1px solid #334155;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #cbd5e1;
+        .pay-card {
+            background: #ffffff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pay-card span {
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -353,12 +448,21 @@
     <div class="hero-container">
         <div class="bg-glow"></div>
         
+        <!-- Minecraft Allay Üdvözlő -->
+        <div class="welcome-box">
+            <!-- Használhatsz hivatalos Allay képet is helyette: allay.png -->
+            <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b8/Allay_Infobox.png" alt="Allay" class="allay-img" onerror="this.src='logo.png'">
+            <div class="welcome-text">
+                <b>Allay így szól:</b> <i>"Sziasztok kalandorok! Üdvözöllek titeket az AethelMC-n! Kellemes játékot kívánok!"</i>
+            </div>
+        </div>
+
         <img src="logo.png" alt="AethelMC Logo" class="logo-img">
         <h1>AethelMC</h1>
         <p class="subtitle">A te új kedvenc Minecraft szervervilágod</p>
         
         <!-- Verzió jelölés -->
-        <div class="version-badge">🎮 Verzió: 1.8.8 - 1.26.2</div>
+        <div class="version-badge">🎮 Verzió: 1.8.8 - 26.2</div>
         
         <!-- Online Státusz -->
         <div class="status-bar">
@@ -367,28 +471,49 @@
             <span>👥 Játékosok: <b>17 / 1500</b></span>
         </div>
 
-        <!-- Játékmódok kártyái képekkel -->
+        <!-- Játékmódok kártyái -->
         <div class="gamemodes-grid">
             <div class="mode-card">
-                <img src="logo.png" alt="Bányaközpont" class="mode-img">
+                <img src="banya.png" alt="Bányaközpont" class="mode-img" onerror="this.src='logo.png'">
                 <div class="mode-content">
                     <h3>💎 Bányaközpont</h3>
                     <p>Gyűjts Aethelium Coin-t (AETH), vásárolj extrákat és kezeld a fiókod!</p>
                 </div>
             </div>
             <div class="mode-card">
-                <img src="logo.png" alt="Survival" class="mode-img">
+                <img src="survival.png" alt="Survival" class="mode-img" onerror="this.src='logo.png'">
                 <div class="mode-content">
                     <h3>🏰 Survival</h3>
                     <p>Építs klánt, szerezz nyersanyagokat és harcolj a dicsőségért.</p>
                 </div>
             </div>
             <div class="mode-card">
-                <img src="logo.png" alt="PvP" class="mode-img">
+                <img src="pvp.png" alt="PvP Aréna" class="mode-img" onerror="this.src='logo.png'">
                 <div class="mode-content">
                     <h3>⚔️ PvP Aréna</h3>
                     <p>Mutasd meg a tudásod a harcokban és nyerj értékes jutalmakat.</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Csapattagok Szekció -->
+        <h2 class="section-title">A Stáb</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-role role-owner">Tulajdonos</div>
+                <div class="team-name">MrBenceYT</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role role-admin">Admin</div>
+                <div class="team-name">mrpandagroup</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role role-mod">Moderátor</div>
+                <div class="team-name">SubForPower</div>
+            </div>
+            <div class="team-card">
+                <div class="team-role role-builder">Builder</div>
+                <div class="team-name">Keresés alatt</div>
             </div>
         </div>
         
@@ -413,13 +538,13 @@
         <p>AethelMC Network</p>
         <p>Email: support@aethelmc.fun</p>
         
-        <!-- Fizetési módok jelvényei -->
+        <!-- Fizetési eszközök -->
         <div class="payment-container">
-            <div class="pay-badge">PayPal</div>
-            <div class="pay-badge">MasterCard</div>
-            <div class="pay-badge">VISA</div>
-            <div class="pay-badge">Apple Pay</div>
-            <div class="pay-badge">Google Pay</div>
+            <div class="pay-card"><span style="color:#003087; font-weight:bold;">PayPal</span></div>
+            <div class="pay-card"><span style="color:#eb001b; font-weight:bold;">Master</span><span style="color:#f79e1b; font-weight:bold;">Card</span></div>
+            <div class="pay-card"><span style="color:#1434cb; font-weight:bold; font-style:italic;">VISA</span></div>
+            <div class="pay-card"><span style="color:#000; font-weight:bold;"> Pay</span></div>
+            <div class="pay-card"><span style="color:#4285F4; font-weight:bold;">G Pay</span></div>
         </div>
 
         <p style="margin-top: 20px;">COPYRIGHT &copy; 2026 - AETHELMC.FUN | MINDEN JOG FENNTARTVA!</p>
@@ -438,4 +563,4 @@
         }
     </script>
 </body>
-</html>
+                        </html>
