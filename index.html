@@ -21,11 +21,9 @@
 
         .hero-container {
             width: 100%;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 40px 20px;
             text-align: center;
             position: relative;
@@ -33,18 +31,18 @@
 
         .bg-glow {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(139, 92, 246, 0.15);
-            filter: blur(120px);
+            width: 500px;
+            height: 500px;
+            background: rgba(139, 92, 246, 0.12);
+            filter: blur(140px);
             border-radius: 50%;
             z-index: -1;
         }
 
         .logo-img { 
-            max-width: 130px; 
+            max-width: 140px; 
             margin-bottom: 20px; 
-            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)); 
+            filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.7)); 
             animation: float 4s ease-in-out infinite;
         }
 
@@ -54,7 +52,7 @@
         }
         
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 800;
             margin-bottom: 5px;
             background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
@@ -64,16 +62,69 @@
 
         .subtitle {
             color: #94a3b8;
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 30px;
         }
 
+        /* Online státusz sáv */
+        .status-bar {
+            display: flex;
+            gap: 15px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 12px 25px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #10b981;
+            margin-right: 5px;
+        }
+
+        /* Játékmódok kártyái */
+        .gamemodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+        .mode-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+            transition: 0.3s;
+        }
+        .mode-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-4px);
+        }
+        .mode-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #a78bfa;
+        }
+        .mode-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Fő Gombok */
         .btn-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             margin-bottom: 30px;
         }
 
@@ -83,7 +134,7 @@
             justify-content: center;
             gap: 10px;
             width: 100%; 
-            padding: 14px; 
+            padding: 15px; 
             border-radius: 12px; 
             text-decoration: none; 
             font-weight: 600; 
@@ -110,7 +161,7 @@
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
 
-        /* Közösségi ikonok sáv (mint a mintán) */
+        /* Közösségi sáv */
         .social-row {
             display: flex;
             gap: 10px;
@@ -123,8 +174,8 @@
             background: #1e293b;
             border: 2px solid #334155;
             box-shadow: 0 4px 0 #0f172a;
-            padding: 10px 16px;
-            border-radius: 6px;
+            padding: 10px 18px;
+            border-radius: 8px;
             color: white;
             text-decoration: none;
             font-weight: 600;
@@ -136,7 +187,7 @@
             box-shadow: 0 1px 0 #0f172a;
         }
 
-        /* Szerver IP másolós doboz (Minecraftos stílusú gomb) */
+        /* Szerver IP másolós doboz */
         .ip-card {
             background: #111827;
             border: 1px solid #1f2937;
@@ -145,7 +196,7 @@
             width: 100%;
             max-width: 420px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .ip-card p {
             font-size: 0.85rem;
@@ -168,7 +219,7 @@
             border-bottom-width: 2px;
         }
 
-        /* Alul lévő info / üzemeltető szekció (mint a mintán) */
+        /* Alsó üzemeltetői / jogi rész */
         .footer-section {
             width: 100%;
             background: #070a12;
@@ -190,8 +241,8 @@
         }
         .payment-icons {
             margin: 20px 0;
-            font-size: 1.1rem;
-            letter-spacing: 5px;
+            font-size: 1rem;
+            letter-spacing: 3px;
         }
     </style>
 </head>
@@ -202,19 +253,44 @@
         
         <img src="logo.png" alt="AethelMC Logo" class="logo-img">
         <h1>AethelMC</h1>
-        <p class="subtitle">A prémium Minecraft élmény</p>
+        <p class="subtitle">A te új kedvenc Minecraft szervervilágod</p>
+        
+        <!-- Online Státusz -->
+        <div class="status-bar">
+            <span><span class="status-dot"></span> Szerver Állapot: <b>Online</b></span>
+            <span>|</span>
+            <span>👥 Játékosok: <b>17 / 1500</b></span>
+        </div>
+
+        <!-- Játékmódok kártyái -->
+        <div class="gamemodes-grid">
+            <div class="mode-card">
+                <h3>⛏️ Bányaközpont</h3>
+                <p>Gyűjts AC-t (Bányászérmét), vásárolj extrákat és kezeld a fiókod egy helyen!</p>
+            </div>
+            <div class="mode-card">
+                <h3>🏰 Survival</h3>
+                <p>Építs klánt, szerezz nyersanyagokat és harcolj a dicsőségért a többi játékossal.</p>
+            </div>
+            <div class="mode-card">
+                <h3>⚔️ PvP Aréna</h3>
+                <p>Mutasd meg a tudásod a fegyveres összecsapásokban és nyerj jutalmakat.</p>
+            </div>
+        </div>
         
         <!-- Fő Gombok -->
         <div class="btn-container">
             <a href="banyakozpont.html" class="main-btn btn-primary">💎 Bányaközpont & Regisztráció</a>
-            <a href="#" class="main-btn">🛒 Webshop</a>
+            <a href="#" class="main-btn">🛒 Webshop / Vásárlás</a>
+            <a href="#" class="main-btn">📊 Ranglista & Statisztika</a>
         </div>
 
-        <!-- Közösségi sáv (mint a mintán) -->
+        <!-- Közösségi sáv -->
         <div class="social-row">
             <a href="https://discord.gg/IttADiscordLink" class="social-box">💬 Discord</a>
-            <a href="#" class="social-box">iktok TikTok</a>
+            <a href="#" class="social-box">🎵 TikTok</a>
             <a href="#" class="social-box">📘 Facebook</a>
+            <a href="#" class="social-box">🎥 YouTube</a>
         </div>
 
         <!-- IP Másolós blokk -->
@@ -224,9 +300,9 @@
         </div>
     </div>
 
-    <!-- Alsó üzemeltetői / jogi rész (mint a mintás képen) -->
+    <!-- Alsó üzemeltetői / jogi rész -->
     <div class="footer-section">
-        <h3>Üzemeltető</h3>
+        <h3>Üzemeltető & Kapcsolat</h3>
         <p>AethelMC Network</p>
         <p>Email: support@aethelmc.fun</p>
         
