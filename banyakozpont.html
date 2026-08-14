@@ -3,257 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Bányaközpont Bejelentkezés</title>
+    <title>AethelMC | Bányaközpont</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background-image: radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 16px;
-            padding: 30px 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        .logo-img {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
-        }
-
-        h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #f8fafc;
-            margin-bottom: 8px;
-        }
-
-        .register-text {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 25px;
-        }
-
-        .register-text a {
-            color: #10b981;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .register-text a:hover {
-            text-decoration: underline;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: #ffffff;
-            font-size: 0.95krem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-control:focus {
-            border-color: #8b5cf6;
-        }
-
-        .options-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
-        .remember-me input {
-            accent-color: #8b5cf6;
-            width: 16px;
-            height: 16px;
-        }
-
-        .forgot-link {
-            color: #10b981;
-            text-decoration: none;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Hamis Cloudflare Box dizájn */
-        .cloudflare-box {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .cloudflare-box:hover {
-            border-color: #64748b;
-        }
-
-        .cf-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-align: left;
-        }
-
-        .cf-spinner {
-            width: 22px;
-            height: 22px;
-            border: 3px solid #38bdf8;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .cf-text {
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            font-weight: 500;
-        }
-
-        .cf-brand {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .cf-logo-text {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #f97316;
-        }
-
-        .cf-subtext {
-            font-size: 0.65rem;
-            color: #94a3b8;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: #10b981;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-submit:hover {
-            background: #059669;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.98);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #0b0f19; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .card { width: 100%; max-width: 420px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: center; }
+        .logo-img { max-width: 160px; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5)); }
+        h2 { font-size: 1.4rem; margin-bottom: 5px; color: #f8fafc; }
+        .subtitle { font-size: 0.9rem; color: #94a3b8; margin-bottom: 25px; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        label { display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 6px; }
+        input { width: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 12px; color: #fff; font-size: 0.95rem; outline: none; }
+        input:focus { border-color: #8b5cf6; }
+        .btn { width: 100%; background: #10b981; color: white; border: none; border-radius: 8px; padding: 14px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn:hover { background: #059669; }
+        .toggle-link { margin-top: 15px; font-size: 0.85rem; color: #94a3b8; cursor: pointer; }
+        .toggle-link span { color: #8b5cf6; font-weight: 600; }
+        .error-msg { color: #ef4444; font-size: 0.8rem; margin-bottom: 10px; display: none; }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <!-- Logód -->
-        <img src="logo.png" alt="AethelMC Logo" class="logo-img">
-        
-        <h2>Bányaközpont</h2>
-        <p class="register-text">Nincs még fiókod? <a href="#">Regisztrálj itt!</a></p>
+    <div class="card">
+        <img src="logo.png" alt="Logo" class="logo-img">
+        <h2 id="form-title">Bejelentkezés</h2>
+        <p class="subtitle" id="form-subtitle">Lépj be a Bányaközpontba</p>
 
-        <form onsubmit="event.preventDefault(); alert('Ez egy minta felület! Kapcsold össze a szervered backendjével.');">
+        <div class="error-msg" id="errorBox">Hiba történt!</div>
+
+        <form id="authForm">
             <div class="form-group">
                 <label>Játékosnév</label>
-                <input type="text" class="form-control" placeholder="felhasználónév" required>
+                <input type="text" id="username" placeholder="felhasználónév" required>
             </div>
-
             <div class="form-group">
                 <label>Jelszó</label>
-                <input type="password" class="form-control" placeholder="••••••••" required>
+                <input type="password" id="password" placeholder="••••••••" required>
             </div>
-
-            <div class="options-row">
-                <label class="remember-me">
-                    <input type="checkbox"> Emlékezz rám
-                </label>
-                <a href="#" class="forgot-link">Elfelejtetted a jelszót?</a>
-            </div>
-
-            <!-- Cloudflare hitelesítés imitáció -->
-            <div class="cloudflare-box" onclick="alert('Hitelesítés sikeres!')">
-                <div class="cf-left">
-                    <div class="cf-spinner"></div>
-                    <span class="cf-text">Hitelesítés...</span>
-                </div>
-                <div class="cf-brand">
-                    <span class="cf-logo-text">CLOUDFLARE</span>
-                    <span class="cf-subtext">Adatvédelem · Súgó</span>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit">Bejelentkezés a bányaközpontba</button>
+            <button type="submit" class="btn" id="submitBtn">Bejelentkezés</button>
         </form>
+
+        <div class="toggle-link" onclick="toggleMode()">
+            <span id="toggleText">Nincs még fiókod? Regisztrálj itt!</span>
+        </div>
     </div>
 
+    <script>
+        let isRegister = false;
+
+        function toggleMode() {
+            isRegister = !isRegister;
+            document.getElementById('form-title').innerText = isRegister ? 'Regisztráció' : 'Bejelentkezés';
+            document.getElementById('form-subtitle').innerText = isRegister ? 'Hozz létre egy új fiókot' : 'Lépj be a Bányaközpontba';
+            document.getElementById('submitBtn').innerText = isRegister ? 'Fiók létrehozása' : 'Bejelentkezés';
+            document.getElementById('toggleText').innerText = isRegister ? 'Már van fiókod? Jelentkezz be!' : 'Nincs még fiókod? Regisztrálj itt!';
+            document.getElementById('errorBox').style.display = 'none';
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+            const errorBox = document.getElementById('errorBox');
+
+            if (isRegister) {
+                if(localStorage.getItem('user_' + user)) {
+                    errorBox.innerText = 'Ez a felhasználónév már létezik!';
+                    errorBox.style.display = 'block';
+                    return;
+                }
+                localStorage.setItem('user_' + user, pass);
+                localStorage.setItem('currentUser', user);
+                alert('Sikeres regisztráció!');
+                window.location.href = 'dashboard.html';
+            } else {
+                const savedPass = localStorage.getItem('user_' + user);
+                if (!savedPass || savedPass !== pass) {
+                    errorBox.innerText = 'Hibás felhasználónév vagy jelszó!';
+                    errorBox.style.display = 'block';
+                    return;
+                }
+                localStorage.setItem('currentUser', user);
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
 </body>
-  </html>
+</html>
