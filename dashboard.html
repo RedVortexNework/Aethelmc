@@ -10,8 +10,8 @@
         body { background-color: #0c111d; color: #fff; display: flex; min-height: 100vh; }
         
         /* Oldalsó menü */
-        .sidebar { width: 280px; background: #111827; padding: 20px; border-right: 1px solid #1f2937; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: #8b5cf6; margin-bottom: 30px; }
+        .sidebar { width: 280px; background: #111827; padding: 20px; border-right: 1px solid #1f2937; display: flex; flex-direction: column; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #8b5cf6; margin-bottom: 30px; cursor: pointer; }
         
         .menu-group { margin-bottom: 25px; }
         .group-title { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; margin-bottom: 10px; padding-left: 10px; }
@@ -26,51 +26,69 @@
         .stats { display: flex; gap: 20px; }
         .stat-box { background: #1e293b; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; }
         .stat-green { color: #10b981; }
+        
+        .content-card { background: #111827; padding: 30px; border-radius: 15px; border: 1px solid #1f2937; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <div class="logo">AethelMC</div>
+        <div class="logo" onclick="window.location.href='index.html'">AethelMC</div>
         
         <div class="menu-group">
             <div class="group-title">Vezérlőpult</div>
-            <div class="menu-item active">🏠 Áttekintés</div>
-            <div class="menu-item">⭐ Rangok</div>
-            <div class="menu-item">🎡 Szerencsekerék <span class="badge">Pörgethető</span></div>
+            <div class="menu-item active" onclick="loadContent('Áttekintés')">🏠 Áttekintés</div>
+            <div class="menu-item" onclick="loadContent('Rangok')">⭐ Rangok</div>
+            <div class="menu-item" onclick="loadContent('Szerencsekerék')">🎡 Szerencsekerék <span class="badge">Pörgethető</span></div>
         </div>
 
         <div class="menu-group">
             <div class="group-title">Extrák</div>
-            <div class="menu-item">🎨 Áldások</div>
-            <div class="menu-item">💬 Üdvözlő üzenet</div>
-            <div class="menu-item">📦 Rébusz <span class="badge">Új</span></div>
-            <div class="menu-item">🏷️ Névelőtag <span class="badge">Új</span></div>
+            <div class="menu-item" onclick="loadContent('Áldások')">🎨 Áldások</div>
+            <div class="menu-item" onclick="loadContent('Üdvözlő üzenet')">💬 Üdvözlő üzenet</div>
+            <div class="menu-item" onclick="loadContent('Rébusz')">📦 Rébusz <span class="badge">Új</span></div>
+            <div class="menu-item" onclick="loadContent('Névelőtag')">🏷️ Névelőtag <span class="badge">Új</span></div>
         </div>
 
         <div class="menu-group">
             <div class="group-title">Pénzügyek</div>
-            <div class="menu-item">💰 Bányászérme</div>
-            <div class="menu-item">➕ Érme feltöltés</div>
+            <div class="menu-item" onclick="loadContent('Bányászérme')">💰 Bányászérme (AC)</div>
+            <div class="menu-item" onclick="loadContent('Érme feltöltés')">➕ Érme feltöltés</div>
         </div>
 
-        <div class="menu-item" style="margin-top: auto; color: #ef4444;">🚪 Kijelentkezés</div>
+        <div class="menu-item" style="margin-top: auto; color: #ef4444;" onclick="window.location.href='banyakozpont.html'">🚪 Kijelentkezés</div>
     </div>
 
     <div class="main-content">
         <div class="top-bar">
-            <h2>Üdvözlünk, Játékos!</h2>
+            <h2 id="page-title">Áttekintés</h2>
             <div class="stats">
                 <div class="stat-box stat-green">• Online</div>
                 <div class="stat-box">👥 17/1500</div>
-                <div class="stat-box">💎 10 BÉ</div>
+                <div class="stat-box">💎 10 AC</div>
             </div>
         </div>
-        <div class="card" style="background:#111827; padding:40px; border-radius:15px;">
-            <h3>Itt kezelheted a profilodat és a bányászérméidet.</h3>
+        
+        <div class="content-card" id="content-area">
+            <h3>Üdvözlünk, Játékos!</h3>
             <p style="color:#94a3b8; margin-top:10px;">Válogass a bal oldali menüből a funkciók eléréséhez.</p>
         </div>
     </div>
 
+    <script>
+        function loadContent(pageName) {
+            document.getElementById('page-title').innerText = pageName;
+            const contentArea = document.getElementById('content-area');
+            
+            // Itt szimuláljuk a tartalmi váltást
+            if(pageName === 'Szerencsekerék') {
+                contentArea.innerHTML = '<h3>🎡 Szerencsekerék</h3><p>Pörgesd meg a szerencsekereket értékes nyereményekért!</p><button style="margin-top:20px; padding:10px 20px; background:#8b5cf6; border:none; border-radius:8px; color:white; cursor:pointer;">Pörgetés (5 AC)</button>';
+            } else if(pageName === 'Bányászérme') {
+                contentArea.innerHTML = '<h3>💰 Bányászérme (AC)</h3><p>Aktuális egyenleged: <b>10 AC</b></p><p style="color:#94a3b8;">Az AC-t játék közbeni bányászással szerezheted.</p>';
+            } else {
+                contentArea.innerHTML = '<h3>' + pageName + ' oldal</h3><p>Ez a(z) ' + pageName + ' funkció jelenleg karbantartás alatt áll vagy még nincs implementálva.</p>';
+            }
+        }
+    </script>
 </body>
 </html>
