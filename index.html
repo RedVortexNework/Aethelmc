@@ -4,54 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AethelMC | Főoldal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background-color: #030712; 
+            background-color: #0b0f19; 
             color: #fff; 
             min-height: 100vh; 
             display: flex; 
+            flex-direction: column; 
             align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
             position: relative;
         }
 
-        /* Háttér mozgó neon fények */
         .bg-glow {
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(16, 185, 129, 0.1));
-            filter: blur(100px);
+            width: 400px;
+            height: 400px;
+            background: rgba(139, 92, 246, 0.15);
+            filter: blur(120px);
             border-radius: 50%;
             z-index: -1;
-            animation: pulse 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1) translate(-30px, -30px); }
-            100% { transform: scale(1.2) translate(30px, 30px); }
-        }
-
-        .hero { 
-            text-align: center; 
-            max-width: 440px; 
-            width: 90%;
-            padding: 40px 30px; 
-            background: rgba(11, 15, 25, 0.75);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 24px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .logo-img { 
             max-width: 130px; 
-            margin-bottom: 25px; 
-            filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.7)); 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)); 
             animation: float 4s ease-in-out infinite;
         }
 
@@ -61,82 +54,195 @@
         }
         
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p {
+        .subtitle {
             color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 35px;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
         }
 
         .btn-container {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
+            width: 100%;
+            max-width: 360px;
+            margin-bottom: 30px;
         }
 
         .main-btn { 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%; 
-            padding: 15px; 
-            border-radius: 14px; 
+            padding: 14px; 
+            border-radius: 12px; 
             text-decoration: none; 
             font-weight: 600; 
             font-size: 0.95rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(30, 41, 59, 0.5); 
+            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.7); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            color: #e2e8f0; 
+            color: #fff; 
         }
         
         .main-btn:hover { 
-            background: rgba(139, 92, 246, 0.15);
-            border-color: #8b5cf6; 
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25);
+            background: #8b5cf6; 
+            border-color: #a78bfa; 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
         }
 
         .btn-primary { 
             background: linear-gradient(135deg, #10b981, #059669);
             border: none;
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
-        
         .btn-primary:hover {
             background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
-            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Közösségi ikonok sáv (mint a mintán) */
+        .social-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-box {
+            background: #1e293b;
+            border: 2px solid #334155;
+            box-shadow: 0 4px 0 #0f172a;
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.1s;
+        }
+        .social-box:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #0f172a;
+        }
+
+        /* Szerver IP másolós doboz (Minecraftos stílusú gomb) */
+        .ip-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 25px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .ip-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+        .ip-box {
+            background: #10b981;
+            color: white;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
+            padding: 15px;
+            border-radius: 8px;
+            border-bottom: 4px solid #047857;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .ip-box:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+
+        /* Alul lévő info / üzemeltető szekció (mint a mintán) */
+        .footer-section {
+            width: 100%;
+            background: #070a12;
+            padding: 40px 20px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        .footer-section h3 {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .footer-section p {
+            margin-bottom: 8px;
+        }
+        .payment-icons {
+            margin: 20px 0;
+            font-size: 1.1rem;
+            letter-spacing: 5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
-    <div class="hero">
+    <div class="hero-container">
+        <div class="bg-glow"></div>
+        
         <img src="logo.png" alt="AethelMC Logo" class="logo-img">
-        
         <h1>AethelMC</h1>
-        <p>A prémium Minecraft élmény</p>
+        <p class="subtitle">A prémium Minecraft élmény</p>
         
+        <!-- Fő Gombok -->
         <div class="btn-container">
-            <a href="banyakozpont.html" class="main-btn btn-primary">💎 Bányaközpont</a>
+            <a href="banyakozpont.html" class="main-btn btn-primary">💎 Bányaközpont & Regisztráció</a>
             <a href="#" class="main-btn">🛒 Webshop</a>
-            <a href="https://discord.gg/IttADiscordLink" class="main-btn">💬 Discord Közösség</a>
+        </div>
+
+        <!-- Közösségi sáv (mint a mintán) -->
+        <div class="social-row">
+            <a href="https://discord.gg/IttADiscordLink" class="social-box">💬 Discord</a>
+            <a href="#" class="social-box">iktok TikTok</a>
+            <a href="#" class="social-box">📘 Facebook</a>
+        </div>
+
+        <!-- IP Másolós blokk -->
+        <div class="ip-card">
+            <p>Kattints a szervercímre a másoláshoz:</p>
+            <div class="ip-box" onclick="copyIP()">play.aethelmc.fun</div>
         </div>
     </div>
 
+    <!-- Alsó üzemeltetői / jogi rész (mint a mintás képen) -->
+    <div class="footer-section">
+        <h3>Üzemeltető</h3>
+        <p>AethelMC Network</p>
+        <p>Email: support@aethelmc.fun</p>
+        
+        <div class="payment-icons">
+            💳 [ Barion ] [ MasterCard ] [ VISA ] [ ApplePay ] [ GooglePay ]
+        </div>
+
+        <p style="margin-top: 20px;">COPYRIGHT &copy; 2026 - AETHELMC.FUN | MINDEN JOG FENNTARTVA!</p>
+        <p style="margin-top: 10px; color: #8b5cf6; cursor: pointer;">Általános Szerződési Feltételek | Adatkezelési Tájékoztató</p>
+    </div>
+
+    <script>
+        function copyIP() {
+            navigator.clipboard.writeText('play.aethelmc.fun');
+            alert('Szerver IP vágólapra másolva: play.aethelmc.fun');
+        }
+    </script>
 </body>
 </html>
