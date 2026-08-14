@@ -136,8 +136,8 @@
         }
 
         .allay-img {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
             animation: floatAllay 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
@@ -258,7 +258,7 @@
             color: #94a3b8;
         }
 
-        /* Csapattagok szekció */
+        /* Címsorok */
         .section-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -268,6 +268,33 @@
             letter-spacing: 1px;
         }
 
+        /* Rendszerinformációk / Adatok doboz */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 850px;
+            margin-bottom: 40px;
+        }
+        .feature-box {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: left;
+        }
+        .feature-box h4 {
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .feature-box p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Csapattagok szekció */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -308,32 +335,6 @@
             font-size: 1rem;
             font-weight: 700;
             color: #fff;
-        }
-
-        /* Extra információk szekció (ÚJ) */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            width: 100%;
-            max-width: 850px;
-            margin-bottom: 40px;
-        }
-        .feature-box {
-            background: #111827;
-            border: 1px solid #1f2937;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: left;
-        }
-        .feature-box h4 {
-            color: #38bdf8;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        .feature-box p {
-            color: #94a3b8;
-            font-size: 0.85rem;
         }
 
         /* Fő Gombok */
@@ -426,7 +427,7 @@
             margin-bottom: 8px;
         }
         
-        /* Valódi SVG / Grafikus fizetési logók */
+        /* Fizetési logók (Javított VISA és társai) */
         .payment-container {
             display: flex;
             justify-content: center;
@@ -447,7 +448,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .pay-card img {
-            max-height: 24px;
+            max-height: 22px;
             max-width: 100%;
             object-fit: contain;
         }
@@ -482,7 +483,7 @@
         <div class="welcome-box">
             <img src="https://minecraft.wiki/images/Allay.gif" alt="Minecraft Allay" class="allay-img" onerror="this.src='https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b8/Allay_Infobox.png'">
             <div class="welcome-text">
-                <b>Allay üdvözöl:</b> <i>"Sziasztok kalandorok! Gyűjtsétek össze a kincseket az AethelMC-n!"</i>
+                <b>Allay így szól:</b> <i>"Sziasztok kalandorok! Üdvözöllek titeket az AethelMC-n! Kellemes játékot kívánok!"</i>
             </div>
         </div>
 
@@ -525,24 +526,24 @@
             </div>
         </div>
 
-        <!-- Extra Információk Szekció (Még több minden) -->
-        <h2 class="section-title">Miért válassz minket?</h2>
+        <!-- Valós Rendszerinformációk Szekció -->
+        <h2 class="section-title">Hivatalos adatok</h2>
         <div class="features-grid">
             <div class="feature-box">
-                <h4>🚀 Laggmentes Játék</h4>
-                <p>Erőteljes dedikált szerverpark a tökéletes, akadozásmentes PvP és építkezési élményért.</p>
+                <h4>🌐 Csatlakozási adatok</h4>
+                <p>IP cím: play.aethelmc.fun<br>Támogatott verziók: 1.8.x - 1.20+</p>
             </div>
             <div class="feature-box">
-                <h4>🛡️ Fejlett Védelem</h4>
-                <p>Biztonságban van a vagyonod és az épületeid a modern grief elleni rendszereknek köszönhetően.</p>
+                <h4>🔒 Biztonság & Fiókok</h4>
+                <p>Biztonságos jelszókezelés és integrált fiókrendszer a Bányaközponton keresztül.</p>
             </div>
             <div class="feature-box">
-                <h4>🎁 Napi Jutalmak</h4>
-                <p>Lépj be naponta, szavazz a szerverre és gyűjts értékes cuccokat ingyen!</p>
+                <h4>💬 Közösségi Élet</h4>
+                <p>Aktív Discord szerver közösség, eventek, segítőkész stáb és friss hírek.</p>
             </div>
         </div>
 
-        <!-- Csapattagok Szekció -->
+        <!-- Csapattagok Szekció (Kért adatokkal) -->
         <h2 class="section-title">A Stáb</h2>
         <div class="team-grid">
             <div class="team-card">
@@ -584,11 +585,11 @@
         <p>AethelMC Network</p>
         <p>Email: support@aethelmc.fun</p>
         
-        <!-- Valódi megbízható online logó képekkel (Visa, Mastercard, PayPal, Apple Pay, Google Pay) -->
+        <!-- Javított fizetési logók (Hivatalos és működő SVG linkekkel) -->
         <div class="payment-container">
             <div class="pay-card" title="PayPal"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"></div>
             <div class="pay-card" title="MasterCard"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard"></div>
-            <div class="pay-card" title="VISA"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="VISA"></div>
+            <div class="pay-card" title="VISA"><img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="VISA"></div>
             <div class="pay-card" title="Apple Pay"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay"></div>
             <div class="pay-card" title="Google Pay"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay"></div>
         </div>
