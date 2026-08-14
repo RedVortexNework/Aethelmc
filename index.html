@@ -6,7 +6,7 @@
     <title>AethelMC | Főoldal</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
         body { 
             background-color: #0b0f19; 
@@ -337,6 +337,58 @@
             color: #fff;
         }
 
+        /* --- RANGLISTÁK SZEKCIÓ (ÚJ) --- */
+        .leaderboard-container {
+            width: 100%;
+            max-width: 850px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        .lb-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 10px;
+        }
+        .lb-header h3 {
+            color: #a78bfa;
+            font-size: 1.2rem;
+        }
+        .lb-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .lb-table th {
+            color: #64748b;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid #1f2937;
+        }
+        .lb-table td {
+            padding: 12px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+        }
+        .lb-table tr:hover {
+            background: rgba(30, 41, 59, 0.4);
+        }
+        .rank-num {
+            font-weight: 800;
+            color: #38bdf8;
+            width: 40px;
+        }
+        .rank-1 { color: #fbbf24 !important; }
+        .rank-2 { color: #94a3b8 !important; }
+        .rank-3 { color: #b45309 !important; }
+
         /* Fő Gombok */
         .btn-container {
             display: flex;
@@ -427,7 +479,7 @@
             margin-bottom: 8px;
         }
         
-        /* Fizetési logók (Javított VISA és társai) */
+        /* Fizetési logók */
         .payment-container {
             display: flex;
             justify-content: center;
@@ -466,14 +518,14 @@
         </div>
     </div>
 
-    <!-- Lenyíló Menü Oldalról -->
+    <!-- Lenyíló Menü Oldalról (Javított linkekkel) -->
     <div class="dropdown-menu" id="dropdownMenu">
-        <a href="index.html">🏠 Főoldal</a>
-        <a href="banyakozpont.html">💎 Bányaközpont & Fiók</a>
-        <a href="#">🛒 Webshop</a>
-        <a href="#">📊 Ranglisták</a>
-        <a href="https://discord.gg/IttADiscordLink">💬 Discord Közösség</a>
-        <a href="#">📜 Szabályzat</a>
+        <a href="index.html" onclick="toggleMenu()">🏠 Főoldal</a>
+        <a href="banyakozpont.html" onclick="toggleMenu()">💎 Bányaközpont & Fiók</a>
+        <a href="#" onclick="toggleMenu()">🛒 Webshop</a>
+        <a href="#ranglistak" onclick="toggleMenu()">📊 Ranglisták</a>
+        <a href="https://discord.gg/IttADiscordLink" target="_blank">💬 Discord Közösség</a>
+        <a href="#" onclick="toggleMenu()">📜 Szabályzat</a>
     </div>
 
     <div class="hero-container">
@@ -543,7 +595,51 @@
             </div>
         </div>
 
-        <!-- Csapattagok Szekció (Kért adatokkal) -->
+        <!-- RANGLISTÁK SZEKCIÓ (ID-val ellátva, hogy a menüből ide ugorjon) -->
+        <div id="ranglistak" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="section-title">📊 Szerver Ranglisták</h2>
+            
+            <div class="leaderboard-container">
+                <div class="lb-header">
+                    <h3>🏆 Leggazdagabb Játékosok (Top AETH)</h3>
+                    <span style="font-size: 0.8rem; color: #64748b;">Frissítve percenként</span>
+                </div>
+                <table class="lb-table">
+                    <tr>
+                        <th>Hely</th>
+                        <th>Játékos</th>
+                        <th>Egyenleg</th>
+                    </tr>
+                    <tr>
+                        <td class="rank-num rank-1">#1</td>
+                        <td><b>MrBenceYT</b> (Tulaj)</td>
+                        <td style="color: #34d399; font-weight: 700;">145,230 AETH</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-num rank-2">#2</td>
+                        <td>mrpandagroup</td>
+                        <td style="color: #34d399; font-weight: 700;">98,400 AETH</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-num rank-3">#3</td>
+                        <td>SubForPower</td>
+                        <td style="color: #34d399; font-weight: 700;">76,150 AETH</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-num">#4</td>
+                        <td>AethelFan99</td>
+                        <td style="color: #34d399; font-weight: 700;">54,200 AETH</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-num">#5</td>
+                        <td>Steve_Pro</td>
+                        <td style="color: #34d399; font-weight: 700;">41,900 AETH</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Csapattagok Szekció -->
         <h2 class="section-title">A Stáb</h2>
         <div class="team-grid">
             <div class="team-card">
@@ -585,7 +681,7 @@
         <p>AethelMC Network</p>
         <p>Email: support@aethelmc.fun</p>
         
-        <!-- Javított fizetési logók (Hivatalos és működő SVG linkekkel) -->
+        <!-- Fizetési logók -->
         <div class="payment-container">
             <div class="pay-card" title="PayPal"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"></div>
             <div class="pay-card" title="MasterCard"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard"></div>
@@ -610,4 +706,4 @@
         }
     </script>
 </body>
-</html>
+                            </html>
