@@ -3,707 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Főoldal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>AethelMC | Prémium Minecraft Szerver</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            background-color: #0b0f19; 
-            color: #fff; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Fenti fix sáv: IP és Hamburger menü */
-        .top-header {
-            width: 100%;
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navigáció */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px;
-            background: rgba(11, 15, 25, 0.9);
-            border-bottom: 1px solid #1f2937;
-            position: sticky;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
 
-        .top-ip {
-            background: #10b981;
-            color: white;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.6rem;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border-bottom: 3px solid #047857;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .top-ip:active {
-            transform: translateY(2px);
-            border-bottom-width: 1px;
+        nav .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* Hamburger menü ikon */
-        .menu-toggle {
+        nav ul {
+            list-style: none;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 22px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: #fff;
-            border-radius: 3px;
-            transition: 0.3s;
-        }
-
-        /* Lenyíló menü panel */
-        .dropdown-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: #0f172a;
-            border-left: 1px solid #1e293b;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
-            display: flex;
-            flex-direction: column;
-            padding: 90px 30px 30px 30px;
-            transition: 0.4s ease-in-out;
-            z-index: 999;
-        }
-        .dropdown-menu.active {
-            right: 0;
-        }
-        .dropdown-menu a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            transition: 0.2s;
-        }
-        .dropdown-menu a:hover {
-            color: #8b5cf6;
-            padding-left: 5px;
-        }
-
-        .hero-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .bg-glow {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: rgba(139, 92, 246, 0.12);
-            filter: blur(140px);
-            border-radius: 50%;
-            z-index: -1;
-        }
-
-        /* Allay kabalafigura & Üdvözlő doboz */
-        .welcome-box {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid #334155;
-            padding: 12px 20px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            max-width: 480px;
-            backdrop-filter: blur(5px);
-        }
-
-        .allay-img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            animation: floatAllay 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
-        }
-
-        @keyframes floatAllay {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(-3deg); }
-        }
-
-        .welcome-text {
-            text-align: left;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-        }
-        .welcome-text b {
-            color: #38bdf8;
-        }
-
-        .logo-img { 
-            max-width: 140px; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.7)); 
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        
-        h1 {
-            font-size: 2.3rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 20px;
-        }
-
-        /* Verzió sáv */
-        .version-badge {
-            background: #1e293b;
-            color: #38bdf8;
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid #334155;
-            margin-bottom: 30px;
-        }
-
-        /* Online státusz sáv */
-        .status-bar {
-            display: flex;
-            gap: 15px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            padding: 12px 25px;
-            border-radius: 30px;
-            margin-bottom: 40px;
-            font-size: 0.9rem;
-        }
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            background-color: #10b981;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 10px #10b981;
-            margin-right: 5px;
-        }
-
-        /* Játékmódok kártyái */
-        .gamemodes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            width: 100%;
-            max-width: 850px;
-            margin-bottom: 40px;
-        }
-        .mode-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            overflow: hidden;
-            text-align: left;
-            transition: 0.3s;
-        }
-        .mode-card:hover {
-            border-color: #8b5cf6;
-            transform: translateY(-4px);
-        }
-        .mode-img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-bottom: 1px solid #1f2937;
-            background: #1e293b;
-        }
-        .mode-content {
-            padding: 20px;
-        }
-        .mode-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #a78bfa;
-        }
-        .mode-card p {
-            font-size: 0.85rem;
-            color: #94a3b8;
         }
 
-        /* Címsorok */
-        .section-title {
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        /* Hero Szekció */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?q=80&w=1920&auto=format&fit=crop') center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 span {
+            color: #FFD700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        /* IP Másoló Gomb */
+        .ip-box {
+            background: #1e1e1e;
+            border: 2px solid #FFD700;
+            padding: 15px 40px;
+            border-radius: 50px;
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .ip-box:hover {
+            background: #FFD700;
+            color: #121212;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Gombok */
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Rendszerinformációk / Adatok doboz */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            width: 100%;
-            max-width: 850px;
-            margin-bottom: 40px;
-        }
-        .feature-box {
-            background: #111827;
-            border: 1px solid #1f2937;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: left;
-        }
-        .feature-box h4 {
-            color: #38bdf8;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        .feature-box p {
-            color: #94a3b8;
-            font-size: 0.85rem;
-        }
-
-        /* Csapattagok szekció */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            width: 100%;
-            max-width: 850px;
-            margin-bottom: 40px;
-        }
-
-        .team-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: center;
             transition: 0.3s;
         }
-        .team-card:hover {
-            border-color: #38bdf8;
-            transform: translateY(-3px);
-        }
-        .team-role {
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-        .role-owner { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
-        .role-admin { background: rgba(249, 115, 22, 0.2); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.4); }
-        .role-mod { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
-        .role-builder { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
 
-        .team-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* --- RANGLISTÁK SZEKCIÓ --- */
-        .leaderboard-container {
-            width: 100%;
-            max-width: 850px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
-        .lb-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #1f2937;
-            padding-bottom: 10px;
-        }
-        .lb-header h3 {
-            color: #a78bfa;
-            font-size: 1.2rem;
-        }
-        .lb-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .lb-table th {
-            color: #64748b;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            text-align: left;
-            padding: 8px 12px;
-            border-bottom: 1px solid #1f2937;
-        }
-        .lb-table td {
-            padding: 12px;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(31, 41, 55, 0.5);
-        }
-        .lb-table tr:hover {
-            background: rgba(30, 41, 59, 0.4);
-        }
-        .rank-num {
-            font-weight: 800;
-            color: #38bdf8;
-            width: 40px;
-        }
-        .rank-1 { color: #fbbf24 !important; }
-        .rank-2 { color: #94a3b8 !important; }
-        .rank-3 { color: #b45309 !important; }
-
-        /* Fő Gombok */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 380px;
-            margin-bottom: 30px;
-        }
-
-        .main-btn { 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%; 
-            padding: 15px; 
-            border-radius: 12px; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: rgba(30, 41, 59, 0.7); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            color: #fff; 
-        }
-        
-        .main-btn:hover { 
-            background: #8b5cf6; 
-            border-color: #a78bfa; 
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
-        }
-
-        .btn-primary { 
-            background: linear-gradient(135deg, #10b981, #059669);
-            border: none;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Közösségi sáv */
-        .social-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .social-box {
-            background: #1e293b;
-            border: 2px solid #334155;
-            box-shadow: 0 4px 0 #0f172a;
-            padding: 10px 18px;
-            border-radius: 8px;
+        .btn-primary {
+            background: #5865F2; /* Discord kék */
             color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.1s;
-        }
-        .social-box:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #0f172a;
         }
 
-        /* Alsó üzemeltetői / jogi rész */
-        .footer-section {
-            width: 100%;
-            background: #070a12;
-            padding: 40px 20px;
-            border-top: 1px solid #1e293b;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #64748b;
+        .btn-primary:hover {
+            background: #4752C4;
         }
-        .footer-section h3 {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+
+        .btn-secondary {
+            background: #FFA500;
+            color: #121212;
         }
-        .footer-section p {
-            margin-bottom: 8px;
-        }
-        
-        /* Fizetési logók */
-        .payment-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        .pay-card {
-            background: #ffffff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 38px;
-            width: 75px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        .pay-card img {
-            max-height: 22px;
-            max-width: 100%;
-            object-fit: contain;
+
+        .btn-secondary:hover {
+            background: #e69500;
         }
     </style>
 </head>
 <body>
 
-    <!-- Fenti fix sáv (IP + Három vonal menü) -->
-    <div class="top-header">
-        <div class="top-ip" onclick="copyIP()">play.aethelmc.fun</div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    <nav>
+        <div class="logo">AethelMC</div>
+        <ul>
+            <li><a href="#">Kezdőlap</a></li>
+            <li><a href="https://tebex.io" target="_blank">Webshop</a></li>
+            <li><a href="#">Szabályzat</a></li>
+            <li><a href="#">Discord</a></li>
+        </ul>
+    </nav>
 
-    <!-- Lenyíló Menü Oldalról -->
-    <div class="dropdown-menu" id="dropdownMenu">
-        <a href="index.html" onclick="toggleMenu()">🏠 Főoldal</a>
-        <a href="banyakozpont.html" onclick="toggleMenu()">💎 Bányaközpont & Fiók</a>
-        <a href="webshop.html" onclick="toggleMenu()">🛒 Webshop</a>
-        <a href="#ranglistak" onclick="toggleMenu()">📊 Ranglisták</a>
-        <a href="https://discord.gg/IttADiscordLink" target="_blank">💬 Discord Közösség</a>
-        <a href="#" onclick="toggleMenu()">📜 Szabályzat</a>
-    </div>
-
-    <div class="hero-container">
-        <div class="bg-glow"></div>
+    <header class="hero">
+        <h1>Üdvözlünk az <span>AethelMC</span> szerveren!</h1>
+        <p>A prémium játékélmény. Csatlakozz még ma az 1.20 - 1.21-es hálózathoz!</p>
         
-        <!-- Minecraft Allay Kabalafigura & Üdvözlés -->
-        <div class="welcome-box">
-            <img src="https://minecraft.wiki/images/Allay.gif" alt="Minecraft Allay" class="allay-img" onerror="this.src='https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b8/Allay_Infobox.png'">
-            <div class="welcome-text">
-                <b>Allay így szól:</b> <i>"Sziasztok kalandorok! Üdvözöllek titeket az AethelMC-n! Kellemes játékot kívánok!"</i>
-            </div>
+        <!-- Kattintható IP -->
+        <div class="ip-box" onclick="copyIP()" id="ipText">
+            play.aethelmc.hu
         </div>
 
-        <img src="logo.png" alt="AethelMC Logo" class="logo-img">
-        <h1>AethelMC</h1>
-        <p class="subtitle">A te új kedvenc Minecraft szervervilágod</p>
-        
-        <!-- Verzió jelölés -->
-        <div class="version-badge">🎮 Verzió: 1.8.8 - 26.2</div>
-        
-        <!-- Online Státusz -->
-        <div class="status-bar">
-            <span><span class="status-dot"></span> Szerver: <b>Online</b></span>
-            <span>|</span>
-            <span>👥 Játékosok: <b>17 / 1500</b></span>
+        <div class="btn-group">
+            <a href="https://discord.gg/sajatlink" class="btn btn-primary" target="_blank">Discord Szerver</a>
+            <a href="https://sajatwebshop.tebex.io" class="btn btn-secondary" target="_blank">Prémium Webshop</a>
         </div>
-
-        <!-- Játékmódok kártyái -->
-        <div class="gamemodes-grid">
-            <div class="mode-card">
-                <img src="banya.png" alt="Bányaközpont" class="mode-img" onerror="this.src='logo.png'">
-                <div class="mode-content">
-                    <h3>💎 Bányaközpont</h3>
-                    <p>Gyűjts Aethelium Coin-t (AETH), vásárolj extrákat és kezeld a fiókod!</p>
-                </div>
-            </div>
-            <div class="mode-card">
-                <img src="survival.png" alt="Survival" class="mode-img" onerror="this.src='logo.png'">
-                <div class="mode-content">
-                    <h3>🏰 Survival</h3>
-                    <p>Építs klánt, szerezz nyersanyagokat és harcolj a dicsőségért.</p>
-                </div>
-            </div>
-            <div class="mode-card">
-                <img src="pvp.png" alt="PvP Aréna" class="mode-img" onerror="this.src='logo.png'">
-                <div class="mode-content">
-                    <h3>⚔️ PvP Aréna</h3>
-                    <p>Mutasd meg a tudásod a harcokban és nyerj értékes jutalmakat.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Valós Rendszerinformációk Szekció -->
-        <h2 class="section-title">Hivatalos adatok</h2>
-        <div class="features-grid">
-            <div class="feature-box">
-                <h4>🌐 Csatlakozási adatok</h4>
-                <p>IP cím: play.aethelmc.fun<br>Támogatott verziók: 1.8.x - 1.20+</p>
-            </div>
-            <div class="feature-box">
-                <h4>🔒 Biztonság & Fiókok</h4>
-                <p>Biztonságos jelszókezelés és integrált fiókrendszer a Bányaközponton keresztül.</p>
-            </div>
-            <div class="feature-box">
-                <h4>💬 Közösségi Élet</h4>
-                <p>Aktív Discord szerver közösség, eventek, segítőkész stáb és friss hírek.</p>
-            </div>
-        </div>
-
-        <!-- RANGLISTÁK SZEKCIÓ -->
-        <div id="ranglistak" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <h2 class="section-title">📊 Szerver Ranglisták</h2>
-            
-            <div class="leaderboard-container">
-                <div class="lb-header">
-                    <h3>🏆 Leggazdagabb Játékosok (Top AETH)</h3>
-                    <span style="font-size: 0.8rem; color: #64748b;">Frissítve percenként</span>
-                </div>
-                <table class="lb-table">
-                    <tr>
-                        <th>Hely</th>
-                        <th>Játékos</th>
-                        <th>Egyenleg</th>
-                    </tr>
-                    <tr>
-                        <td class="rank-num rank-1">#1</td>
-                        <td><b>MrBenceYT</b> (Tulaj)</td>
-                        <td style="color: #34d399; font-weight: 700;">145,230 AETH</td>
-                    </tr>
-                    <tr>
-                        <td class="rank-num rank-2">#2</td>
-                        <td>mrpandagroup</td>
-                        <td style="color: #34d399; font-weight: 700;">98,400 AETH</td>
-                    </tr>
-                    <tr>
-                        <td class="rank-num rank-3">#3</td>
-                        <td>SubForPower</td>
-                        <td style="color: #34d399; font-weight: 700;">76,150 AETH</td>
-                    </tr>
-                    <tr>
-                        <td class="rank-num">#4</td>
-                        <td>AethelFan99</td>
-                        <td style="color: #34d399; font-weight: 700;">54,200 AETH</td>
-                    </tr>
-                    <tr>
-                        <td class="rank-num">#5</td>
-                        <td>Steve_Pro</td>
-                        <td style="color: #34d399; font-weight: 700;">41,900 AETH</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- Csapattagok Szekció -->
-        <h2 class="section-title">A Stáb</h2>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-role role-owner">Tulajdonos</div>
-                <div class="team-name">MrBenceYT</div>
-            </div>
-            <div class="team-card">
-                <div class="team-role role-admin">Admin</div>
-                <div class="team-name">mrpandagroup</div>
-            </div>
-            <div class="team-card">
-                <div class="team-role role-mod">Moderátor</div>
-                <div class="team-name">SubForPower</div>
-            </div>
-            <div class="team-card">
-                <div class="team-role role-builder">Builder</div>
-                <div class="team-name">Keresés alatt</div>
-            </div>
-        </div>
-        
-        <!-- Fő Gombok -->
-        <div class="btn-container">
-            <a href="banyakozpont.html" class="main-btn btn-primary">💎 Bányaközpont & Regisztráció</a>
-            <a href="webshop.html" class="main-btn">🛒 Webshop / Vásárlás</a>
-        </div>
-
-        <!-- Közösségi sáv -->
-        <div class="social-row">
-            <a href="https://discord.gg/IttADiscordLink" class="social-box">💬 Discord</a>
-            <a href="#" class="social-box">🎵 TikTok</a>
-            <a href="#" class="social-box">📘 Facebook</a>
-            <a href="#" class="social-box">🎥 YouTube</a>
-        </div>
-    </div>
-
-    <!-- Alsó üzemeltetői / jogi rész -->
-    <div class="footer-section">
-        <h3>Üzemeltető & Kapcsolat</h3>
-        <p>AethelMC Network</p>
-        <p>Email: support@aethelmc.fun</p>
-        
-        <!-- Fizetési logók -->
-        <div class="payment-container">
-            <div class="pay-card" title="PayPal"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"></div>
-            <div class="pay-card" title="MasterCard"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard"></div>
-            <div class="pay-card" title="VISA"><img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="VISA"></div>
-            <div class="pay-card" title="Apple Pay"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay"></div>
-            <div class="pay-card" title="Google Pay"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay"></div>
-        </div>
-
-        <p style="margin-top: 20px;">COPYRIGHT &copy; 2026 - AETHELMC.FUN | MINDEN JOG FENNTARTVA!</p>
-        <p style="margin-top: 10px; color: #8b5cf6; cursor: pointer;">Általános Szerződési Feltételek | Adatkezelési Tájékoztató</p>
-    </div>
+    </header>
 
     <script>
+        // IP másolása vágólapra
         function copyIP() {
-            navigator.clipboard.writeText('play.aethelmc.fun');
-            alert('Szerver IP vágólapra másolva: play.aethelmc.fun');
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            menu.classList.toggle('active');
+            const ip = "play.aethelmc.hu";
+            navigator.clipboard.writeText(ip).then(() => {
+                const ipBox = document.getElementById("ipText");
+                const originalText = ipBox.innerText;
+                
+                ipBox.innerText = "IP SIKERESEN MÁSOLVA!";
+                ipBox.style.background = "#4CAF50";
+                ipBox.style.color = "white";
+                ipBox.style.borderColor = "#4CAF50";
+                
+                setTimeout(() => {
+                    ipBox.innerText = originalText;
+                    ipBox.style.background = "#1e1e1e";
+                    ipBox.style.color = "white";
+                    ipBox.style.borderColor = "#FFD700";
+                }, 2000);
+            });
         }
     </script>
 </body>
-                </html>
+</html>
