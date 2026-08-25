@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Prémium Minecraft Szerver</title>
+    <title>AethelMC | Főoldal & Webshop</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #07090e;
             --bg-card: rgba(18, 24, 38, 0.7);
-            --border-glow: rgba(139, 92, 246, 0.2);
             --accent-purple: #8b5cf6;
             --accent-cyan: #06b6d4;
             --text-main: #f8fafc;
@@ -34,7 +33,6 @@
             overflow-x: hidden;
         }
 
-        /* Fejléc / Navigáció */
         header {
             display: flex;
             justify-content: space-between;
@@ -51,7 +49,6 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -60,6 +57,7 @@
         nav {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         nav a {
@@ -74,7 +72,14 @@
             color: var(--accent-cyan);
         }
 
-        /* Főoldal Szekció (Hero) */
+        .btn-login {
+            background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+            color: white !important;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
         .hero {
             text-align: center;
             padding: 7rem 1rem 5rem 1rem;
@@ -82,34 +87,11 @@
             margin: 0 auto;
         }
 
-        .server-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-        }
-
         .hero h1 {
             font-size: 3.8rem;
             font-weight: 800;
-            line-height: 1.15;
             margin-bottom: 1.5rem;
-            letter-spacing: -1px;
+            line-height: 1.15;
         }
 
         .hero h1 span {
@@ -122,7 +104,6 @@
             color: var(--text-muted);
             font-size: 1.15rem;
             margin-bottom: 2.5rem;
-            line-height: 1.6;
         }
 
         .ip-box {
@@ -152,15 +133,8 @@
             border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s;
         }
 
-        .btn-copy:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        /* Webshop Szekció (Rangok) */
         .section-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -178,7 +152,6 @@
             text-align: center;
             color: var(--text-muted);
             margin-bottom: 4rem;
-            font-size: 1.05rem;
         }
 
         .pricing-grid {
@@ -195,14 +168,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            backdrop-filter: blur(12px);
             position: relative;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(6, 182, 212, 0.3);
         }
 
         .card.popular {
@@ -222,7 +188,6 @@
             font-weight: 800;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .rank-title {
@@ -256,13 +221,10 @@
             color: #cbd5e1;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .features li::before {
-            content: "✓";
+            content: "✓ ";
             color: var(--accent-cyan);
             font-weight: 800;
         }
@@ -276,25 +238,13 @@
             font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s;
         }
 
         .card.popular .btn-card {
             background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
             border: none;
-            box-shadow: 0 4px 15px rgba(139, 92, 246,.4);
         }
 
-        .btn-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .card.popular .btn-card:hover {
-            opacity: 0.9;
-        }
-
-        /* Kapcsolat Szekció */
         .contact-section {
             background: rgba(12, 17, 28, 0.6);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -313,21 +263,13 @@
             gap: 1.2rem;
         }
 
-        .contact-info h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
         .contact-row {
             display: flex;
             align-items: center;
             gap: 12px;
             color: var(--text-muted);
-            font-size: 1rem;
         }
 
-        /* Lábléc */
         footer {
             background: #04060a;
             padding: 4rem 2rem 2rem 2rem;
@@ -342,7 +284,6 @@
         .operator-title {
             color: #f59e0b;
             font-weight: 700;
-            letter-spacing: 1px;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
@@ -371,29 +312,16 @@
             justify-content: center;
             gap: 3rem;
             margin-bottom: 2.5rem;
-            font-size: 0.9rem;
         }
 
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-cyan);
         }
 
         .copyright {
             color: #475569;
             font-size: 0.8rem;
-        }
-
-        @media(max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav { display: none; }
-            .contact-section { flex-direction: column; text-align: center; }
-            .footer-links { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
@@ -402,19 +330,16 @@
     <header>
         <div class="logo">AETHELMC</div>
         <nav>
-            <a href="#home">Főoldal</a>
+            <a href="index.html">Főoldal</a>
             <a href="#store">Webshop</a>
-            <a href="#contact">Kapcsolat</a>
+            <a href="dashboard.html" class="btn-login">Fiók / Bejelentkezés</a>
         </nav>
     </header>
 
-    <main id="home">
+    <main>
         <div class="hero">
-            <div class="server-badge">
-                <span class="dot"></span> 1.16 - 1.20+ Verzió támogatás
-            </div>
             <h1>Hódítsd meg az <span>AethelMC</span> világát!</h1>
-            <p>Prémium teljesítmény, egyedi játékmódok és fergeteges közösség vár rád. Csatlakozz még ma!</p>
+            <p>Prémium teljesítmény, egyedi játékmódok és fergeteges közösség vár rád.</p>
             
             <div class="ip-box">
                 <span class="ip-text" id="serverIp">play.aethelmc.fun</span>
@@ -424,7 +349,7 @@
 
         <div class="section-container" id="store">
             <h2 class="section-title">Vásárolj Rangokat</h2>
-            <p class="section-subtitle">Támogasd a szerver működését, és oldj fel exkluzív funkciókat!</p>
+            <p class="section-subtitle">Támogasd a szervert, és oldj fel exkluzív funkciókat!</p>
 
             <div class="pricing-grid">
                 <div class="card">
@@ -435,10 +360,9 @@
                             <li>/fly parancs a lobbiban</li>
                             <li>Egyedi VIP prefix chaten</li>
                             <li>5x /kit vip ajándékcsomag</li>
-                            <li>Kiemelt név a tablistán</li>
                         </ul>
                     </div>
-                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
+                    <button class="btn-card" onclick="location.href='dashboard.html'">Kiválasztás</button>
                 </div>
 
                 <div class="card popular">
@@ -451,10 +375,9 @@
                             <li>/feed és /heal parancsok</li>
                             <li>Színes chates üzenetek</li>
                             <li>10x /kit mvp csomag</li>
-                            <li>Exkluzív MVP ikon</li>
                         </ul>
                     </div>
-                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
+                    <button class="btn-card" onclick="location.href='dashboard.html'">Kiválasztás</button>
                 </div>
 
                 <div class="card">
@@ -465,19 +388,17 @@
                             <li>Örökös (Lifetime) rang</li>
                             <li>Minden MVP előny</li>
                             <li>/enderchest bárhol</li>
-                            <li>Exkluzív kiegészítők</li>
-                            <li>Prioritás teli szervernél</li>
                         </ul>
                     </div>
-                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
+                    <button class="btn-card" onclick="location.href='dashboard.html'">Kiválasztás</button>
                 </div>
             </div>
         </div>
 
-        <div class="contact-section" id="contact">
+        <div class="contact-section">
             <div class="contact-info">
                 <h3>Lépj kapcsolatba velünk</h3>
-                <p style="color: var(--text-muted); max-width: 400px; font-size: 0.95rem;">Kérdésed van a szerverrel vagy egy vásárlással kapcsolatban? Írj nekünk bátran!</p>
+                <p style="color: var(--text-muted);">Kérdésed van a szerverrel kapcsolatban? Írj nekünk!</p>
             </div>
             <div class="contact-info">
                 <div class="contact-row">📞 Telefonszám: +36 30 547 9798</div>
@@ -495,7 +416,6 @@
                 ADÓSZÁM: 57225560-1-42
             </div>
         </div>
-
         <div class="payment-icons">
             <span>BARION</span>
             <span>MASTERCARD</span>
@@ -503,12 +423,10 @@
             <span>APPLE PAY</span>
             <span>G PAY</span>
         </div>
-
         <div class="footer-links">
             <a href="#">Általános Szerződési Feltételek</a>
             <a href="#">Adatkezelési Tájékoztató</a>
         </div>
-
         <div class="copyright">
             COPYRIGHT © 2013 - 2027 – AETHELMC.FUN – MINDEN JOG FENNTARTVA!
         </div>
@@ -522,6 +440,5 @@
             });
         }
     </script>
-
 </body>
 </html>
