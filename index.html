@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Next-Gen Minecraft Server</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <title>AethelMC - Főoldal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --border-color: rgba(56, 189, 248, 0.15);
-            --neon-cyan: #38bdf8;
-            --neon-purple: #c084fc;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Press Start 2P', monospace;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #121212;
+            color: #e0e0e0;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(192, 132, 252, 0.08) 0%, transparent 40%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 12px;
+            line-height: 1.6;
         }
 
         /* Navigáció */
@@ -38,311 +29,282 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 6%;
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(3, 7, 18, 0.8);
+            padding: 2rem 5%;
+            border-bottom: 2px solid #222;
+            background: #181818;
         }
 
         .logo {
-            font-size: 1.6rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
+            font-size: 16px;
+            color: #55ff55;
+            text-shadow: 2px 2px #000;
         }
 
         nav {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         nav a {
-            color: var(--text-muted);
+            color: #aaa;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
+            font-size: 10px;
+            transition: color 0.2s;
         }
 
         nav a:hover, nav a.active {
-            color: var(--neon-cyan);
+            color: #ffff55;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--neon-cyan);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after, nav a.active::after {
-            width: 100%;
-        }
-
-        /* Fő tartalom (Hero) */
+        /* Fő tartalom */
         .hero {
             text-align: center;
-            padding: 7rem 1.5rem 4rem 1.5rem;
+            padding: 4rem 1rem;
             max-width: 900px;
             margin: 0 auto;
         }
 
-        .server-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: rgba(56, 189, 248, 0.05);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--neon-cyan);
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1.1;
+            font-size: 20px;
+            color: #ff5555;
             margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px #000;
         }
 
         .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            color: #aaa;
+            font-size: 11px;
+            margin-bottom: 2.5rem;
         }
 
-        /* IP Másoló Widget */
-        .ip-container {
+        .ip-box {
+            background: #1a1a1a;
+            border: 3px solid #333;
+            padding: 1.5rem 2rem;
             display: inline-flex;
             align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 0.6rem 0.6rem 0.6rem 1.5rem;
-            border-radius: 14px;
-            backdrop-filter: blur(12px);
-            gap: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            margin-bottom: 5rem;
-        }
-
-        .ip-address {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
-            font-weight: 500;
-        }
-
-        .copy-btn {
-            background: linear-gradient(135deg, var(--neon-cyan), #0284c7);
-            color: #fff;
-            border: none;
-            padding: 0.8rem 1.6rem;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-        }
-
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
-        }
-
-        /* Feature kártyák */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            padding: 0 6% 6rem 6%;
-            max-width: 1200px;
-            margin: 0 auto;
+            box-shadow: inset 0 0 10px #000;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+        .ip-text {
+            color: #55ffff;
+            font-size: 13px;
+        }
+
+        .btn-copy {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #2e7d32;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            font-size: 10px;
+            font-family: 'Press Start 2P', monospace;
+            box-shadow: 0 4px #1b5e20;
+        }
+
+        .btn-copy:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #1b5e20;
+        }
+
+        /* Kapcsolat szekció (mint a képen) */
+        .contact-section {
+            background: #161616;
+            border-top: 2px solid #222;
+            border-bottom: 2px solid #222;
+            padding: 3rem 5%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .contact-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .speech-bubble {
+            background: #fff;
+            color: #000;
+            padding: 10px 15px;
+            border-radius: 4px;
             position: relative;
-            overflow: hidden;
+            font-size: 10px;
+            box-shadow: 3px 3px 0px #333;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .skins {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        .skin-avatar {
+            width: 60px;
+            height: 120px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            image-rendering: pixelated;
         }
 
-        .feature-card:hover::before {
-            opacity: 1;
+        .contact-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 10px;
+            color: #ccc;
         }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.2rem;
-            display: inline-block;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: #fff;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Lábléc */
+        /* Lábléc (mint a képen) */
         footer {
+            background: #101010;
+            border-top: 2px solid #222;
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 3rem;
-            color: #4b5563;
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
         }
 
-        /* Reszponzivitás */
+        .operator-title {
+            color: #ffaa00;
+            font-size: 13px;
+            margin-bottom: 1rem;
+        }
+
+        .operator-info {
+            color: #888;
+            font-size: 10px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .payment-methods {
+            background: #fff;
+            padding: 10px;
+            display: inline-flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            border-radius: 4px;
+        }
+
+        .payment-methods span {
+            color: #000;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            color: #777;
+            font-size: 9px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            font-size: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+
+        .footer-links a:hover {
+            color: #ffff55;
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            nav {
-                display: none;
-            }
-            .ip-container {
-                flex-direction: column;
-                padding: 1rem;
-                width: 100%;
-                max-width: 320px;
-            }
-            .copy-btn {
-                width: 100%;
-            }
+            nav { display: none; }
+            .contact-section { flex-direction: column; text-align: center; }
+            .footer-links { flex-direction: column; gap: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">AethelMC</div>
+        <div class="logo">AETHELMC</div>
         <nav>
-            <a href="index.html" class="active">Főoldal</a>
-            <a href="store.html">Webshop</a>
-            <a href="#">Szabályzat</a>
-            <a href="#">Discord</a>
+            <a href="index.html" class="active">FŐOLDAL</a>
+            <a href="store.html">WEBSHOP</a>
+            <a href="#kapcsolat">KAPCSOLAT</a>
         </nav>
     </header>
 
     <main>
         <div class="hero">
-            <div class="server-status">
-                <span class="status-dot"></span>
-                <span>Online • 142 Játékos játszik</span>
-            </div>
-            <h1>Hódítsd meg a <span>Kockavilágot</span></h1>
-            <p>Lépj be az AethelMC univerzumba, ahol a prémium élmény, az egyedi játékmódok és a legkeményebb kihívások várnak rád.</p>
+            <h1>ÜDVÖZLÜNK A SZERVEREN!</h1>
+            <p>Lépj be a legmenőbb magyar Minecraft közösségbe!</p>
             
-            <div class="ip-container">
-                <span class="ip-address" id="serverIp">play.aethelmc.fun</span>
-                <button class="copy-btn" onclick="copyIp()">IP Másolása</button>
+            <div class="ip-box">
+                <span class="ip-text" id="serverIp">play.aethelmc.fun</span>
+                <button class="btn-copy" onclick="copyIp()">IP MÁSOLÁSA</button>
             </div>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Next-Gen Teljesítmény</h3>
-                <p>Akadozásmentes, prémium szerverhardver lagmentes PvP-vel és építkezéssel a nap 24 órájában.</p>
+        <!-- Kapcsolat Szekció (Kép alapján) -->
+        <div class="contact-section" id="kapcsolat">
+            <div class="contact-left">
+                <div class="speech-bubble">Miben segíthetünk?</div>
+                <div class="skins">
+                    <!-- Helyettesítő pixel karakterek CSS-el vagy generált ikonnal -->
+                    <div class="skin-avatar" style="background-color: #555; border: 2px solid #333;"></div>
+                    <div class="skin-avatar" style="background-color: #225577; border: 2px solid #333;"></div>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3>Fair Play & Védelem</h3>
-                <p>Fejlett csalásvédelem és maximális biztonság a területeidnek, hogy ne vesszen el semmi sem.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💎</div>
-                <h3>Közösségi Jutalmak</h3>
-                <p>Napi küldetések, egyedi ládák és exkluzív rangok várnak a szerveren és a webshopban!</p>
+            <div class="contact-right">
+                <div style="font-size: 13px; color: #fff; margin-bottom: 5px;">Kapcsolat</div>
+                <div class="contact-item">📞 Telefonszám: +36 30 547 9798</div>
+                <div class="contact-item">✉️ E-Mail: info@aethelmc.fun</div>
+                <div class="contact-item">🕒 Hétköznaponként: 12:00-16:00</div>
             </div>
         </div>
     </main>
 
+    <!-- Lábléc (Kép alapján) -->
     <footer>
-        <p>&copy; 2026 AethelMC. Minden jog fenntartva. Nem áll kapcsolatban a Mojanggal.</p>
+        <div class="operator-title">ÜZEMELTETŐ</div>
+        <div class="operator-info">
+            CSÁNYI BÁLINT TIBOR EV.<br>
+            ADÓSZÁM: 57225560-1-42
+        </div>
+
+        <div class="payment-methods">
+            <span>barion</span>
+            <span>Mastercard</span>
+            <span>VISA</span>
+            <span>Apple Pay</span>
+            <span>G Pay</span>
+        </div>
+
+        <div class="footer-bottom">
+            COPYRIGHT @ 2013 - 2027 – WWW.AETHELMC.FUN I MINDEN JOG FENNTARTVA!
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Általános<br>Szerződési<br>Feltételek</a>
+            <a href="#">Adatkezelési<br>Tájékoztató</a>
+        </div>
     </footer>
 
     <script>
         function copyIp() {
             const ipText = document.getElementById('serverIp').innerText;
             navigator.clipboard.writeText(ipText).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                btn.innerText = 'Másolva!';
-                btn.style.background = 'linear-gradient(135deg, #22c55e, #15803d)';
-                setTimeout(() => {
-                    btn.innerText = 'IP Másolása';
-                    btn.style.background = 'linear-gradient(135deg, var(--neon-cyan), #0284c7)';
-                }, 2000);
+                alert('IP másolva: ' + ipText);
             });
         }
     </script>
