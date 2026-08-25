@@ -3,179 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Irányítópult</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>AethelMC | Fiók Bejelentkezés</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #0b0f19; color: #fff; display: flex; min-height: 100vh; }
-        
-        /* Oldalsó menü */
-        .sidebar { width: 280px; background: #0f172a; padding: 20px; border-right: 1px solid #1e293b; display: flex; flex-direction: column; }
-        .logo { font-size: 1.4rem; font-weight: 700; color: #8b5cf6; margin-bottom: 30px; cursor: pointer; }
-        
-        .menu-group { margin-bottom: 25px; }
-        .group-title { font-size: 0.7rem; color: #64748b; text-transform: uppercase; margin-bottom: 10px; padding-left: 10px; letter-spacing: 1px; }
-        
-        .menu-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; color: #cbd5e1; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
-        .menu-item:hover, .menu-item.active { background: #1e293b; color: #fff; }
-        .badge { background: #8b5cf6; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; margin-left: auto; font-weight: 600; }
+        :root {
+            --bg-primary: #07090e;
+            --bg-card: rgba(18, 24, 38, 0.85);
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-        /* Fő tartalom */
-        .main-content { flex-grow: 1; padding: 30px; background: #0b0f19; overflow-y: auto; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 15px 25px; border-radius: 12px; border: 1px solid #1e293b; margin-bottom: 30px; }
-        .stats { display: flex; gap: 15px; }
-        .stat-box { background: #1e293b; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; border: 1px solid #334155; }
-        .stat-green { color: #10b981; font-weight: 600; }
-        
-        /* Áttekintés kártya dizájn (mint a képen) */
-        .profile-container { display: flex; flex-direction: column; align-items: center; background: #0f172a; padding: 40px; border-radius: 16px; border: 1px solid #1e293b; max-width: 600px; margin: 0 auto; text-align: center; }
-        .skin-box { width: 140px; height: 220px; background: #1e293b; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); overflow: hidden; }
-        .skin-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .player-name { font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
-        .player-rank { background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 25px; }
-        
-        .info-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; }
-        .info-card { background: #1e293b; padding: 15px; border-radius: 10px; border: 1px solid #334155; text-align: left; }
-        .info-card span { font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 4px; }
-        .info-card p { font-size: 0.95rem; font-weight: 600; color: #fff; }
-        
-        .dynamic-content { background: #0f172a; padding: 30px; border-radius: 16px; border: 1px solid #1e293b; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 1rem;
+            flex-grow: 1;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .login-card h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background: #04060a;
+            padding: 3rem 2rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .operator-box {
+            margin-bottom: 2rem;
+        }
+
+        .operator-title {
+            color: #f59e0b;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .operator-details {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .payment-icons {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 6px;
+            display: inline-flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-weight: 800;
+            color: #111;
+            font-size: 0.75rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .copyright {
+            color: #475569;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo" onclick="window.location.href='index.html'">AethelMC</div>
-        
-        <div class="menu-group">
-            <div class="group-title">Vezérlőpult</div>
-            <div class="menu-item active" onclick="loadPage('overview', this)">🏠 Áttekintés</div>
-            <div class="menu-item" onclick="loadPage('ranks', this)">⭐ Rangok</div>
-            <div class="menu-item" onclick="loadPage('wheel', this)">🎡 Szerencsekerék <span class="badge">Pörgethető</span></div>
-        </div>
+    <header>
+        <a href="index.html" class="logo">AETHELMC</a>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600;">← Vissza a Főoldalra</a>
+    </header>
 
-        <div class="menu-group">
-            <div class="group-title">Extrák</div>
-            <div class="menu-item" onclick="loadPage('blessings', this)">🎨 Áldások</div>
-            <div class="menu-item" onclick="loadPage('welcome', this)">💬 Üdvözlő üzenet</div>
-            <div class="menu-item" onclick="loadPage('rebus', this)">📦 Rébusz <span class="badge">Új</span></div>
-            <div class="menu-item" onclick="loadPage('tags', this)">🏷️ Névelőtag <span class="badge">Új</span></div>
-        </div>
-
-        <div class="menu-group">
-            <div class="group-title">Pénzügyek</div>
-            <div class="menu-item" onclick="loadPage('coins', this)">💰 Bányászérme (AC)</div>
-            <div class="menu-item" onclick="loadPage('topup', this)">➕ Érme feltöltés</div>
-        </div>
-
-        <div class="menu-item" style="margin-top: auto; color: #ef4444;" onclick="logout()">🚪 Kijelentkezés</div>
-    </div>
-
-    <div class="main-content">
-        <div class="top-bar">
-            <h2 id="page-title">Áttekintés</h2>
-            <div class="stats">
-                <div class="stat-box stat-green">● Online</div>
-                <div class="stat-box">👥 14/1500</div>
-                <div class="stat-box" id="top-ac">💎 10 AC</div>
-            </div>
-        </div>
-        
-        <div id="content-area">
-            <!-- Alapértelmezett Áttekintés nézet (mint a képen) -->
-            <div class="profile-container">
-                <div class="skin-box">
-                    <!-- Minecraft skin előnézet Crafatar API-val a bejelentkezett név alapján -->
-                    <img id="playerSkin" src="" alt="Skin">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h2>Fiók Irányítópult</h2>
+            <p>Jelentkezz be a Minecraft neveddel és szerveres jelszavadal.</p>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Minecraft Név</label>
+                    <input type="text" id="mcName" placeholder="pl. Steve" required>
                 </div>
-                <div class="player-name" id="displayName">Játékos</div>
-                <div class="player-rank">Alapműveleti Játékos</div>
                 
-                <div class="info-cards">
-                    <div class="info-card">
-                        <span>Bányászérme egyenleg</span>
-                        <p id="acBalance">10 AC</p>
-                    </div>
-                    <div class="info-card">
-                        <span>Fiók státusza</span>
-                        <p class="stat-green">Aktív / Hitelesítve</p>
-                    </div>
+                <div class="form-group">
+                    <label>Szerver Jelszó</label>
+                    <input type="password" id="mcPassword" placeholder="••••••••" required>
                 </div>
-            </div>
+
+                <button type="submit" class="btn-submit">Bejelentkezés</button>
+            </form>
         </div>
     </div>
+
+    <footer>
+        <div class="operator-box">
+            <div class="operator-title">ÜZEMELTETŐ</div>
+            <div class="operator-details">
+                CSÁNYI BÁLINT TIBOR EV.<br>
+                ADÓSZÁM: 57225560-1-42
+            </div>
+        </div>
+        <div class="payment-icons">
+            <span>BARION</span>
+            <span>MASTERCARD</span>
+            <span>VISA</span>
+            <span>APPLE PAY</span>
+            <span>G PAY</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">Általános Szerződési Feltételek</a>
+            <a href="#">Adatkezelési Tájékoztató</a>
+        </div>
+        <div class="copyright">
+            COPYRIGHT © 2013 - 2027 – AETHELMC.FUN – MINDEN JOG FENNTARTVA!
+        </div>
+    </footer>
 
     <script>
-        // Ellenőrzés, hogy be van-e jelentkezve
-        const currentUser = localStorage.getItem('currentUser');
-        if (!currentUser) {
-            window.location.href = 'banyakozpont.html';
-        } else {
-            document.getElementById('displayName').innerText = currentUser;
-            // Crafatar API a valódi Minecraft skin betöltéséhez a név alapján
-            document.getElementById('playerSkin').src = `https://crafatar.com/renders/body/${currentUser}?scale=2&default=MHF_Steve`;
-        }
-
-        function logout() {
-            localStorage.removeItem('currentUser');
-            window.location.href = 'banyakozpont.html';
-        }
-
-        function loadPage(page, element) {
-            // Aktív menüpont jelölése
-            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-            if(element) element.classList.add('active');
-
-            const contentArea = document.getElementById('content-area');
-            const pageTitle = document.getElementById('page-title');
-
-            if (page === 'overview') {
-                pageTitle.innerText = 'Áttekintés';
-                contentArea.innerHTML = `
-                    <div class="profile-container">
-                        <div class="skin-box">
-                            <img src="https://crafatar.com/renders/body/${currentUser}?scale=2&default=MHF_Steve" alt="Skin">
-                        </div>
-                        <div class="player-name">${currentUser}</div>
-                        <div class="player-rank">Alapműveleti Játékos</div>
-                        <div class="info-cards">
-                            <div class="info-card">
-                                <span>Bányászérme egyenleg</span>
-                                <p>10 AC</p>
-                            </div>
-                            <div class="info-card">
-                                <span>Fiók státusza</span>
-                                <p class="stat-green">Aktív / Hitelesítve</p>
-                            </div>
-                        </div>
-                    </div>`;
-            } else if (page === 'wheel') {
-                pageTitle.innerText = 'Szerencsekerék';
-                contentArea.innerHTML = `
-                    <div class="dynamic-content" style="text-align: center;">
-                        <h3>🎡 Szerencsekerék</h3>
-                        <p style="color:#94a3b8; margin: 15px 0;">Pörgesd meg a kereket értékes nyereményekért és AC-ért!</p>
-                        <button style="padding: 12px 30px; background: #8b5cf6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Pörgetés (5 AC)</button>
-                    </div>`;
-            } else if (page === 'coins') {
-                pageTitle.innerText = 'Bányászérme (AC)';
-                contentArea.innerHTML = `
-                    <div class="dynamic-content">
-                        <h3>💰 Bányászérme Egyenleg</h3>
-                        <p style="color:#94a3b8; margin: 10px 0 20px 0;">Itt láthatod az eddig összegyűjtött AC-idet.</p>
-                        <div style="background: #1e293b; padding: 20px; border-radius: 10px; font-size: 1.2rem; font-weight: bold;">
-                            Jelenlegi egyenleg: <span style="color: #10b981;">10 AC</span>
-                        </div>
-                    </div>`;
-            } else {
-                pageTitle.innerText = page.charAt(0).toUpperCase() + page.slice(1);
-                contentArea.innerHTML = `
-                    <div class="dynamic-content">
-                        <h3>${pageTitle.innerText}</h3>
-                        <p style="color:#94a3b8; margin-top: 10px;">Ez a funkció hamarosan elérhető lesz az AethelMC szerveren!</p>
-                    </div>`;
-            }
+        function handleLogin(event) {
+            event.preventDefault();
+            const name = document.getElementById('mcName').value;
+            alert('Sikeres teszt bejelentkezés, ' + name + '! (Itt kapcsolható majd össze a szerver adatbázisával).');
         }
     </script>
 </body>
