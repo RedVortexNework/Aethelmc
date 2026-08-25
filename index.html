@@ -3,41 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC - Főoldal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>AethelMC | Prémium Minecraft Szerver</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #07090e;
+            --bg-card: rgba(18, 24, 38, 0.7);
+            --border-glow: rgba(139, 92, 246, 0.2);
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Press Start 2P', monospace;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            font-size: 12px;
-            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+            overflow-x: hidden;
         }
 
-        /* Navigáció */
+        /* Fejléc / Navigáció */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
-            border-bottom: 2px solid #222;
-            background: #181818;
+            padding: 1.5rem 8%;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
-            font-size: 16px;
-            color: #55ff55;
-            text-shadow: 2px 2px #000;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         nav {
@@ -46,190 +63,337 @@
         }
 
         nav a {
-            color: #aaa;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
             transition: color 0.2s;
         }
 
-        nav a:hover, nav a.active {
-            color: #ffff55;
+        nav a:hover {
+            color: var(--accent-cyan);
         }
 
-        /* Fő tartalom */
+        /* Főoldal Szekció (Hero) */
         .hero {
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 7rem 1rem 5rem 1rem;
             max-width: 900px;
             margin: 0 auto;
         }
 
+        .server-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
         .hero h1 {
-            font-size: 20px;
-            color: #ff5555;
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
-            text-shadow: 3px 3px #000;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            color: #aaa;
-            font-size: 11px;
+            color: var(--text-muted);
+            font-size: 1.15rem;
             margin-bottom: 2.5rem;
+            line-height: 1.6;
         }
 
         .ip-box {
-            background: #1a1a1a;
-            border: 3px solid #333;
-            padding: 1.5rem 2rem;
             display: inline-flex;
             align-items: center;
-            gap: 2rem;
-            box-shadow: inset 0 0 10px #000;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+            border-radius: 14px;
+            backdrop-filter: blur(10px);
+            gap: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .ip-text {
-            color: #55ffff;
-            font-size: 13px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .btn-copy {
-            background: #4caf50;
+            background: linear-gradient(135deg, var(--accent-cyan), #0284c7);
             color: white;
-            border: 2px solid #2e7d32;
-            padding: 0.8rem 1.2rem;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 10px;
-            font-family: 'Press Start 2P', monospace;
-            box-shadow: 0 4px #1b5e20;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
-        .btn-copy:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px #1b5e20;
+        .btn-copy:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
-        /* Kapcsolat szekció (mint a képen) */
-        .contact-section {
-            background: #161616;
-            border-top: 2px solid #222;
-            border-bottom: 2px solid #222;
-            padding: 3rem 5%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
+        /* Webshop Szekció (Rangok) */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            font-size: 1.05rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
-        .contact-left {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .speech-bubble {
-            background: #fff;
-            color: #000;
-            padding: 10px 15px;
-            border-radius: 4px;
-            position: relative;
-            font-size: 10px;
-            box-shadow: 3px 3px 0px #333;
-        }
-
-        .skins {
-            display: flex;
-            gap: 15px;
-            align-items: flex-end;
-        }
-
-        .skin-avatar {
-            width: 60px;
-            height: 120px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: bottom;
-            image-rendering: pixelated;
-        }
-
-        .contact-right {
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            font-size: 10px;
-            color: #ccc;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
         }
 
-        .contact-item {
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .card.popular {
+            border: 2px solid var(--accent-purple);
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.07) 0%, rgba(18, 24, 38, 0.8) 100%);
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-purple), #c084fc);
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rank-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .features li {
+            padding: 0.6rem 0;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* Lábléc (mint a képen) */
+        .features li::before {
+            content: "✓";
+            color: var(--accent-cyan);
+            font-weight: 800;
+        }
+
+        .btn-card {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.9rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .card.popular .btn-card {
+            background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+            border: none;
+            box-shadow: 0 4px 15px rgba(139, 92, 246,.4);
+        }
+
+        .btn-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card.popular .btn-card:hover {
+            opacity: 0.9;
+        }
+
+        /* Kapcsolat Szekció */
+        .contact-section {
+            background: rgba(12, 17, 28, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 5rem 8%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Lábléc */
         footer {
-            background: #101010;
-            border-top: 2px solid #222;
-            padding: 3rem 2rem;
+            background: #04060a;
+            padding: 4rem 2rem 2rem 2rem;
             text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .operator-box {
+            margin-bottom: 2.5rem;
         }
 
         .operator-title {
-            color: #ffaa00;
-            font-size: 13px;
-            margin-bottom: 1rem;
+            color: #f59e0b;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .operator-info {
-            color: #888;
-            font-size: 10px;
-            margin-bottom: 2rem;
-            line-height: 1.8;
+        .operator-details {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
         }
 
-        .payment-methods {
-            background: #fff;
-            padding: 10px;
+        .payment-icons {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 8px;
             display: inline-flex;
             gap: 15px;
             align-items: center;
-            margin-bottom: 2.5rem;
-            border-radius: 4px;
-        }
-
-        .payment-methods span {
-            color: #000;
-            font-size: 9px;
-            font-weight: bold;
-        }
-
-        .footer-bottom {
-            color: #777;
-            font-size: 9px;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            color: #111;
+            font-size: 0.8rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 4rem;
-            font-size: 10px;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
         }
 
         .footer-links a {
-            color: #aaa;
+            color: var(--text-muted);
             text-decoration: none;
-            line-height: 1.5;
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: #ffff55;
+            color: var(--accent-cyan);
         }
 
-        @media (max-width: 768px) {
+        .copyright {
+            color: #475569;
+            font-size: 0.8rem;
+        }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
             nav { display: none; }
             .contact-section { flex-direction: column; text-align: center; }
-            .footer-links { flex-direction: column; gap: 1.5rem; }
+            .footer-links { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
@@ -238,73 +402,123 @@
     <header>
         <div class="logo">AETHELMC</div>
         <nav>
-            <a href="index.html" class="active">FŐOLDAL</a>
-            <a href="store.html">WEBSHOP</a>
-            <a href="#kapcsolat">KAPCSOLAT</a>
+            <a href="#home">Főoldal</a>
+            <a href="#store">Webshop</a>
+            <a href="#contact">Kapcsolat</a>
         </nav>
     </header>
 
-    <main>
+    <main id="home">
         <div class="hero">
-            <h1>ÜDVÖZLÜNK A SZERVEREN!</h1>
-            <p>Lépj be a legmenőbb magyar Minecraft közösségbe!</p>
+            <div class="server-badge">
+                <span class="dot"></span> 1.16 - 1.20+ Verzió támogatás
+            </div>
+            <h1>Hódítsd meg az <span>AethelMC</span> világát!</h1>
+            <p>Prémium teljesítmény, egyedi játékmódok és fergeteges közösség vár rád. Csatlakozz még ma!</p>
             
             <div class="ip-box">
                 <span class="ip-text" id="serverIp">play.aethelmc.fun</span>
-                <button class="btn-copy" onclick="copyIp()">IP MÁSOLÁSA</button>
+                <button class="btn-copy" onclick="copyIp()">IP Másolása</button>
             </div>
         </div>
 
-        <!-- Kapcsolat Szekció (Kép alapján) -->
-        <div class="contact-section" id="kapcsolat">
-            <div class="contact-left">
-                <div class="speech-bubble">Miben segíthetünk?</div>
-                <div class="skins">
-                    <!-- Helyettesítő pixel karakterek CSS-el vagy generált ikonnal -->
-                    <div class="skin-avatar" style="background-color: #555; border: 2px solid #333;"></div>
-                    <div class="skin-avatar" style="background-color: #225577; border: 2px solid #333;"></div>
+        <div class="section-container" id="store">
+            <h2 class="section-title">Vásárolj Rangokat</h2>
+            <p class="section-subtitle">Támogasd a szerver működését, és oldj fel exkluzív funkciókat!</p>
+
+            <div class="pricing-grid">
+                <div class="card">
+                    <div>
+                        <h3 class="rank-title">VIP Rang</h3>
+                        <div class="price">1,500 Ft <span>/ hó</span></div>
+                        <ul class="features">
+                            <li>/fly parancs a lobbiban</li>
+                            <li>Egyedi VIP prefix chaten</li>
+                            <li>5x /kit vip ajándékcsomag</li>
+                            <li>Kiemelt név a tablistán</li>
+                        </ul>
+                    </div>
+                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
+                </div>
+
+                <div class="card popular">
+                    <div class="badge">Legnépszerűbb</div>
+                    <div>
+                        <h3 class="rank-title">MVP Rang</h3>
+                        <div class="price">3,500 Ft <span>/ hó</span></div>
+                        <ul class="features">
+                            <li>Minden VIP előny</li>
+                            <li>/feed és /heal parancsok</li>
+                            <li>Színes chates üzenetek</li>
+                            <li>10x /kit mvp csomag</li>
+                            <li>Exkluzív MVP ikon</li>
+                        </ul>
+                    </div>
+                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3 class="rank-title">Aethel Rang</h3>
+                        <div class="price">7,000 Ft <span>/ örök</span></div>
+                        <ul class="features">
+                            <li>Örökös (Lifetime) rang</li>
+                            <li>Minden MVP előny</li>
+                            <li>/enderchest bárhol</li>
+                            <li>Exkluzív kiegészítők</li>
+                            <li>Prioritás teli szervernél</li>
+                        </ul>
+                    </div>
+                    <button class="btn-card" onclick="alert('Fizetés hamarosan!')">Kiválasztás</button>
                 </div>
             </div>
-            <div class="contact-right">
-                <div style="font-size: 13px; color: #fff; margin-bottom: 5px;">Kapcsolat</div>
-                <div class="contact-item">📞 Telefonszám: +36 30 547 9798</div>
-                <div class="contact-item">✉️ E-Mail: info@aethelmc.fun</div>
-                <div class="contact-item">🕒 Hétköznaponként: 12:00-16:00</div>
+        </div>
+
+        <div class="contact-section" id="contact">
+            <div class="contact-info">
+                <h3>Lépj kapcsolatba velünk</h3>
+                <p style="color: var(--text-muted); max-width: 400px; font-size: 0.95rem;">Kérdésed van a szerverrel vagy egy vásárlással kapcsolatban? Írj nekünk bátran!</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-row">📞 Telefonszám: +36 30 547 9798</div>
+                <div class="contact-row">✉️ E-Mail: info@aethelmc.fun</div>
+                <div class="contact-row">🕒 Hétköznaponként: 12:00 - 16:00</div>
             </div>
         </div>
     </main>
 
-    <!-- Lábléc (Kép alapján) -->
     <footer>
-        <div class="operator-title">ÜZEMELTETŐ</div>
-        <div class="operator-info">
-            CSÁNYI BÁLINT TIBOR EV.<br>
-            ADÓSZÁM: 57225560-1-42
+        <div class="operator-box">
+            <div class="operator-title">ÜZEMELTETŐ</div>
+            <div class="operator-details">
+                CSÁNYI BÁLINT TIBOR EV.<br>
+                ADÓSZÁM: 57225560-1-42
+            </div>
         </div>
 
-        <div class="payment-methods">
-            <span>barion</span>
-            <span>Mastercard</span>
+        <div class="payment-icons">
+            <span>BARION</span>
+            <span>MASTERCARD</span>
             <span>VISA</span>
-            <span>Apple Pay</span>
-            <span>G Pay</span>
-        </div>
-
-        <div class="footer-bottom">
-            COPYRIGHT @ 2013 - 2027 – WWW.AETHELMC.FUN I MINDEN JOG FENNTARTVA!
+            <span>APPLE PAY</span>
+            <span>G PAY</span>
         </div>
 
         <div class="footer-links">
-            <a href="#">Általános<br>Szerződési<br>Feltételek</a>
-            <a href="#">Adatkezelési<br>Tájékoztató</a>
+            <a href="#">Általános Szerződési Feltételek</a>
+            <a href="#">Adatkezelési Tájékoztató</a>
+        </div>
+
+        <div class="copyright">
+            COPYRIGHT © 2013 - 2027 – AETHELMC.FUN – MINDEN JOG FENNTARTVA!
         </div>
     </footer>
 
     <script>
         function copyIp() {
-            const ipText = document.getElementById('serverIp').innerText;
-            navigator.clipboard.writeText(ipText).then(() => {
-                alert('IP másolva: ' + ipText);
+            const ip = document.getElementById('serverIp').innerText;
+            navigator.clipboard.writeText(ip).then(() => {
+                alert('Szerver IP másolva: ' + ip);
             });
         }
     </script>
