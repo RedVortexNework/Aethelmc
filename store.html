@@ -1,1 +1,322 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AethelMC | Webshop & Rangok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(56, 189, 248, 0.15);
+            --neon-cyan: #38bdf8;
+            --neon-purple: #c084fc;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(192, 132, 252, 0.08) 0%, transparent 40%);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(3, 7, 18, 0.8);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--neon-cyan);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+        }
+
+        .container h1 span {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card.popular {
+            border: 2px solid var(--neon-purple);
+            background: linear-gradient(180deg, rgba(192, 132, 252, 0.05) 0%, rgba(17, 24, 39, 0.8) 100%);
+            box-shadow: 0 0 30px rgba(192, 132, 252, 0.15);
+        }
+
+        .badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--neon-purple), #ec4899);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .rank-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .price {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            margin-bottom: 2.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .price span {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .features li {
+            padding: 0.7rem 0;
+            color: #d1d5db;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--neon-cyan);
+            font-weight: 900;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--neon-cyan), #0284c7);
+            color: white;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .card.popular .btn {
+            background: linear-gradient(135deg, var(--neon-purple), #ec4899);
+            box-shadow: 0 4px 20px rgba(192, 132, 252, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #4b5563;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .container h1 {
+                font-size: 2.4rem;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AethelMC</div>
+        <nav>
+            <a href="index.html">Főoldal</a>
+            <a href="store.html" class="active">Webshop</a>
+            <a href="#">Szabályzat</a>
+            <a href="#">Discord</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Vásárolj <span>Rangokat</span></h1>
+        <p class="subtitle">Támogasd a szervert, és oldd fel a különleges játékon belüli előnyöket!</p>
+
+        <div class="pricing-grid">
+            <!-- VIP Rang -->
+            <div class="card">
+                <div>
+                    <h2 class="rank-title">VIP Rang</h2>
+                    <div class="price">1,500 Ft <span>/ hó</span></div>
+                    <ul class="features">
+                        <li>/fly parancs a lobbiban</li>
+                        <li>Egyedi VIP prefix a chaten</li>
+                        <li>5x /kit vip ajándékcsomag</li>
+                        <li>Kiemelt név a Tablistán</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="alert('Fizetési rendszer hamarosan!')">Kiválasztás</button>
+            </div>
+
+            <!-- MVP Rang (Kiemelt) -->
+            <div class="card popular">
+                <div class="badge">Legnépszerűbb</div>
+                <div>
+                    <h2 class="rank-title">MVP Rang</h2>
+                    <div class="price">3,500 Ft <span>/ hó</span></div>
+                    <ul class="features">
+                        <li>Minden VIP előny</li>
+                        <li>/feed és /heal parancsok</li>
+                        <li>Színes chates írás</li>
+                        <li>10x /kit mvp csomag</li>
+                        <li>Exkluzív MVP ikon</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="alert('Fizetési rendszer hamarosan!')">Kiválasztás</button>
+            </div>
+
+            <!-- Aethel Rang -->
+            <div class="card">
+                <div>
+                    <h2 class="rank-title">Aethel Rang</h2>
+                    <div class="price">7,000 Ft <span>/ örök</span></div>
+                    <ul class="features">
+                        <li>Örökös (Lifetime) rang</li>
+                        <li>Minden MVP előny</li>
+                        <li>/enderchest bárhol</li>
+                        <li>Exkluzív Aethel kiegészítők</li>
+                        <li>Prioritás tele szervernél</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="alert('Fizetési rendszer hamarosan!')">Kiválasztás</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AethelMC. Minden jog fenntartva. Nem áll kapcsolatban a Mojanggal.</p>
+    </footer>
+
+</body>
+</html>
