@@ -3,192 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Prémium Minecraft Szerver</title>
+    <title>AethelMC - Főoldal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Navigáció */
-        nav {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background: rgba(0, 0, 0, 0.8);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            padding: 2rem 5%;
+            border-bottom: 1px solid #1e293b;
         }
 
-        nav .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: #FFD700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
+        nav a {
+            color: #94a3b8;
             text-decoration: none;
-            font-weight: 700;
+            margin-left: 2rem;
             transition: color 0.3s;
+            font-weight: 600;
         }
 
-        nav ul li a:hover {
-            color: #FFD700;
+        nav a:hover, nav a.active {
+            color: #38bdf8;
         }
 
-        /* Hero Szekció */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?q=80&w=1920&auto=format&fit=crop') center/cover;
-            padding: 0 20px;
+            padding: 5rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge-server {
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            display: inline-block;
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .hero h1 span {
-            color: #FFD700;
+            background: linear-gradient(45deg, #38bdf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #ccc;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
         }
 
-        /* IP Másoló Gomb */
         .ip-box {
-            background: #1e1e1e;
-            border: 2px solid #FFD700;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .ip-box:hover {
-            background: #FFD700;
-            color: #121212;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        .ip-text {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #38bdf8;
+            font-weight: bold;
         }
 
-        /* Gombok */
-        .btn-group {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn-primary {
-            background: #5865F2; /* Discord kék */
+        .btn-copy {
+            background: linear-gradient(45deg, #38bdf8, #6366f1);
             color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
         }
 
-        .btn-primary:hover {
-            background: #4752C4;
+        .btn-copy:hover {
+            opacity: 0.9;
         }
 
-        .btn-secondary {
-            background: #FFA500;
-            color: #121212;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .btn-secondary:hover {
-            background: #e69500;
+        .feature-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: left;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #f8fafc;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            nav {
+                display: none;
+            }
+            .ip-box {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <header>
         <div class="logo">AethelMC</div>
-        <ul>
-            <li><a href="#">Kezdőlap</a></li>
-            <li><a href="https://tebex.io" target="_blank">Webshop</a></li>
-            <li><a href="#">Szabályzat</a></li>
-            <li><a href="#">Discord</a></li>
-        </ul>
-    </nav>
-
-    <header class="hero">
-        <h1>Üdvözlünk az <span>AethelMC</span> szerveren!</h1>
-        <p>A prémium játékélmény. Csatlakozz még ma az 1.20 - 1.21-es hálózathoz!</p>
-        
-        <!-- Kattintható IP -->
-        <div class="ip-box" onclick="copyIP()" id="ipText">
-            play.aethelmc.hu
-        </div>
-
-        <div class="btn-group">
-            <a href="https://discord.gg/sajatlink" class="btn btn-primary" target="_blank">Discord Szerver</a>
-            <a href="https://sajatwebshop.tebex.io" class="btn btn-secondary" target="_blank">Prémium Webshop</a>
-        </div>
+        <nav>
+            <a href="index.html" class="active">Főoldal</a>
+            <a href="store.html">Webshop</a>
+            <a href="#">Szabályzat</a>
+            <a href="#">Discord</a>
+        </nav>
     </header>
 
+    <main>
+        <div class="hero">
+            <div class="badge-server">🚀 Verzió: 1.16 - 1.20+</div>
+            <h1>Üdvözlünk az <span>AethelMC</span> szerveren!</h1>
+            <p>Lépj be egy felejthetetlen kalandba! Építs, harcolj, szerezz barátokat és mutasd meg mire vagy képes a közösségünkben.</p>
+            
+            <!-- IP Másoló doboz -->
+            <div class="ip-box">
+                <span class="ip-text" id="serverIp">play.aethelmc.fun</span>
+                <button class="btn-copy" onclick="copyIp()">IP Másolása</button>
+            </div>
+        </div>
+
+        <!-- Jellemzők / Miért mi? -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>⚔️ Egyedi Játékmódok</h3>
+                <p>Próbáld ki izgalmas Survival és PvP módjainkat, amik garantálják a szórakozást órákon át.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Kedves Közösség</h3>
+                <p>Aktív és segítőkész Staff csapat felügyeli a békét és a fair play-t a nap 24 órájában.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💎 Rangok & Jutalmak</h3>
+                <p>Támogasd a szervert, szerezz menő rangokat és extra jogosultságokat a Webshopban!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AethelMC. Minden jog fenntartva. Nem áll kapcsolatban a Mojanggal.</p>
+    </footer>
+
     <script>
-        // IP másolása vágólapra
-        function copyIP() {
-            const ip = "play.aethelmc.hu";
-            navigator.clipboard.writeText(ip).then(() => {
-                const ipBox = document.getElementById("ipText");
-                const originalText = ipBox.innerText;
-                
-                ipBox.innerText = "IP SIKERESEN MÁSOLVA!";
-                ipBox.style.background = "#4CAF50";
-                ipBox.style.color = "white";
-                ipBox.style.borderColor = "#4CAF50";
-                
-                setTimeout(() => {
-                    ipBox.innerText = originalText;
-                    ipBox.style.background = "#1e1e1e";
-                    ipBox.style.color = "white";
-                    ipBox.style.borderColor = "#FFD700";
-                }, 2000);
+        function copyIp() {
+            const ipText = document.getElementById('serverIp').innerText;
+            navigator.clipboard.writeText(ipText).then(() => {
+                alert('Szerver IP sikeresen másolva: ' + ipText);
             });
         }
     </script>
+
 </body>
 </html>
