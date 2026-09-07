@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AethelMC | Webshop</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome ikonok -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1920&auto=format&fit=crop');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Navigáció / Fejléc */
+        header {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .shop-title {
+            text-align: center;
+            margin: 30px 0 20px 0;
+            animation: fadeInDown 1s ease;
+        }
+
+        .shop-title h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .shop-title p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Termékek rácsos elrendezése */
+        .products-container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: auto 0;
+            padding: 10px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .product-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 15px;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            color: #475569;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        /* Animációk */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">AethelMC</a>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Vissza a főoldalra</a>
+    </header>
+
+    <div class="shop-title">
+        <h1>Szerver Webshop</h1>
+        <p>Támogasd a szervert prémium rangokkal és itemekkel!</p>
+    </div>
+
+    <div class="products-container">
+        <!-- Termék 1 -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>VIP Rang</h3>
+                <p>30 napos VIP rang egyedi parancsokkal, repüléssel a lobbiban és különleges előnyökkel.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">1,500 Ft</span>
+                <button class="buy-btn" onclick="openCheckout('VIP Rang', '1,500 Ft')">Vásárlás</button>
+            </div>
+        </div>
+
+        <!-- Termék 2 -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>MVP+ Rang</h3>
+                <p>Örökös MVP+ rang az összes exkluzív funkcióval, egyedi színes chatel és kit-ekkel.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">4,500 Ft</span>
+                <button class="buy-btn" onclick="openCheckout('MVP+ Rang', '4,500 Ft')">Vásárlás</button>
+            </div>
+        </div>
+
+        <!-- Termék 3 -->
+        <div class="product-card">
+            <span class="product-tag">Láda Kulcs</span>
+            <div class="product-info">
+                <h3>5x Legendás Kulcs</h3>
+                <p>Nyiss ki 5 darab ritka legendás ládát a szerveren értékes itemekért és valutáért.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">990 Ft</span>
+                <button class="buy-btn" onclick="openCheckout('5x Legendás Kulcs', '990 Ft')">Vásárlás</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 AethelMC. Minden jog fenntartva.
+    </footer>
+
+    <script>
+        // Egyszerű pop-up jelzés vásárlás gombra kattintáskor (ide köthetsz majd fizetési rendszert pl. Tebex / Buycraft)
+        function openCheckout(productName, price) {
+            alert(`Kiválasztott termék: ${productName} (${price})\n\nA webshop integráció hamarosan elérhető! (Például Tebex / PayPal / Paygol)`);
+        }
+    </script>
+</body>
+</html>
