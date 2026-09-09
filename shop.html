@@ -39,7 +39,7 @@
         /* Navigáció / Fejléc */
         header {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -122,9 +122,9 @@
         /* Termékek rácsos elrendezése */
         .products-container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
             margin: 0 auto auto auto;
             padding: 10px;
@@ -170,14 +170,15 @@
             font-size: 1.5rem;
             font-weight: 800;
             color: #f8fafc;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            text-transform: capitalize;
         }
 
         .product-info p {
             color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
         .product-footer {
@@ -189,7 +190,7 @@
         }
 
         .product-price {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: #10b981;
         }
@@ -198,10 +199,10 @@
             background: #5865F2;
             color: white;
             text-decoration: none;
-            padding: 11px 20px;
+            padding: 10px 18px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -242,7 +243,7 @@
 
     <div class="shop-title">
         <h1>Szerver Webshop</h1>
-        <p>Vásárolj prémium rangokat és csomagokat gyorsan és biztonságosan!</p>
+        <p>Vásárolj prémium rangokat gyorsan és biztonságosan!</p>
     </div>
 
     <!-- Információs csík a Discord ticketes vásárlásról -->
@@ -252,45 +253,120 @@
     </div>
 
     <div class="products-container">
-        <!-- Termék 1 -->
+        <!-- Solstice -->
         <div class="product-card">
             <span class="product-tag">Rang</span>
             <div class="product-info">
-                <h3>VIP Rang</h3>
-                <p>30 napos VIP rang egyedi parancsokkal, repüléssel a lobbiban és különleges előnyökkel a szerveren.</p>
+                <h3>Solstice</h3>
+                <p>A legmagasabb szintű prémium rang egyedi jogokkal, extra előnyökkel és maximális csomagokkal.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">5,500 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Apex -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Apex</h3>
+                <p>Kiemelt elit rang különleges parancsokkal és extra jutalmakkal a szerveren.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">4,900 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Zeus -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Zeus</h3>
+                <p>Isteni hatalom a szerveren! Egyedi funkciók, chat színek és kiváltságok.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">4,200 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Zenith -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Zenith</h3>
+                <p>Magas szintű rang fejlett parancsokhoz és egyedi szerver előnyökhöz.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">3,600 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Eclipsar -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Eclipsar</h3>
+                <p>Sötét és stílusos rang exkluzív jutalmakkal és bónuszokkal.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">3,000 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Nexus -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Nexus</h3>
+                <p>Központi rang hasznos funkciókkal és extra lehetőségekkel a játékban.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">2,500 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Omni -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Omni</h3>
+                <p>Univerzális rang a mindennapi játékélmény megkönnyítésére.</p>
+            </div>
+            <div class="product-footer">
+                <span class="product-price">2,000 Ft</span>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
+                    <i class="fa-brands fa-discord"></i> Vásárlás
+                </a>
+            </div>
+        </div>
+
+        <!-- Spirit -->
+        <div class="product-card">
+            <span class="product-tag">Rang</span>
+            <div class="product-info">
+                <h3>Spirit</h3>
+                <p>Alap prémium rang a kedvező áru támogatáshoz és az első lépésekhez.</p>
             </div>
             <div class="product-footer">
                 <span class="product-price">1,500 Ft</span>
-                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
-                    <i class="fa-brands fa-discord"></i> Vásárlás
-                </a>
-            </div>
-        </div>
-
-        <!-- Termék 2 -->
-        <div class="product-card">
-            <span class="product-tag">Rang</span>
-            <div class="product-info">
-                <h3>MVP+ Rang</h3>
-                <p>Örökös MVP+ rang az összes exkluzív funkcióval, egyedi színes chatekkel, kit-ekkel és elônyökkel.</p>
-            </div>
-            <div class="product-footer">
-                <span class="product-price">4,500 Ft</span>
-                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
-                    <i class="fa-brands fa-discord"></i> Vásárlás
-                </a>
-            </div>
-        </div>
-
-        <!-- Termék 3 -->
-        <div class="product-card">
-            <span class="product-tag">Láda Kulcs</span>
-            <div class="product-info">
-                <h3>5x Legendás Kulcs</h3>
-                <p>Nyiss ki 5 darab ritka legendás ládát a szerveren értékes itemekért, fegyverekért és valutáért.</p>
-            </div>
-            <div class="product-footer">
-                <span class="product-price">990 Ft</span>
                 <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="buy-btn">
                     <i class="fa-brands fa-discord"></i> Vásárlás
                 </a>
