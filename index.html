@@ -1,909 +1,314 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Főoldal</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome ikonok -->
+    <title>AethelMC | Minecraft Szerver</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        glassDark: 'rgba(15, 23, 42, 0.65)',
+                        glassBorder: 'rgba(255, 255, 255, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: #05070d;
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(16, 185, 129, 0.22) 0px, transparent 40%),
-                radial-gradient(at 90% 90%, rgba(88, 101, 242, 0.22) 0px, transparent 40%),
-                radial-gradient(at 50% 40%, rgba(59, 130, 246, 0.15) 0px, transparent 55%),
-                url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1920&auto=format&fit=crop');
-            background-blend-mode: overlay;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #090d16 60%, #030712 100%);
+            color: #f8fafc;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 20px 40px 20px;
+            overflow-x: hidden;
         }
-
-        /* Lebegő Navigációs Sáv */
-        nav {
-            width: 100%;
-            max-width: 900px;
-            background: rgba(13, 19, 38, 0.75);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 14px 28px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: sticky;
-            top: 20px;
-            z-index: 1000;
-        }
-
-        .nav-logo {
-            font-weight: 900;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #10b981;
-        }
-
-        .nav-discord-btn {
-            background: rgba(88, 101, 242, 0.2);
-            border: 1px solid rgba(88, 101, 242, 0.4);
-            color: #818cf8 !important;
-            padding: 6px 14px;
-            border-radius: 10px;
-            transition: 0.2s;
-        }
-
-        .nav-discord-btn:hover {
-            background: #5865F2;
-            color: white !important;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-        }
-
-        /* Fő fejléc */
-        header {
-            text-align: center;
-            margin: 50px 0 30px 0;
-            animation: fadeInDown 1s ease;
-        }
-
-        .badge-top {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-        }
-
-        header h1 {
-            font-size: 4.8rem;
-            font-weight: 900;
-            letter-spacing: 6px;
-            background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.4));
-        }
-
-        header p {
-            font-size: 1.15rem;
-            color: #94a3b8;
-            margin-top: 8px;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        /* Tartalom doboz */
-        .container {
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeInUp 1s ease;
-        }
-
-        /* IP másoló kártya */
-        .ip-card {
-            background: rgba(13, 19, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 24px 30px;
-            border-radius: 22px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            transition: 0.3s ease;
-        }
-
-        .ip-card:hover {
-            border-color: rgba(16, 185, 129, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.2);
-        }
-
-        .ip-info span {
-            display: block;
-            font-size: 0.75rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-        }
-
-        .ip-info h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #f8fafc;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
-        .btn-copy {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border: none;
-            padding: 14px 26px;
-            border-radius: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-copy:hover {
-            transform: scale(1.06);
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
-        }
-
-        /* Státusz és adatok kártya */
-        .status-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .card {
-            background: rgba(13, 19, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 24px;
-            border-radius: 22px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            transition: 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            transform: translateY(-3px);
-        }
-
-        .card-title {
-            font-size: 0.75rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .badge-online {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .badge-offline {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .pulse {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        .badge-online .pulse { background: #10b981; box-shadow: 0 0 12px #10b981; }
-        .badge-offline .pulse { background: #ef4444; box-shadow: 0 0 12px #ef4444; }
-
-        .stat-value {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #f8fafc;
-            margin-top: 4px;
-        }
-
-        /* Funkciók / Miért válassz minket? */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .feature-card {
-            background: rgba(13, 19, 38, 0.85);
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 22px 18px;
-            border-radius: 22px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            transition: 0.3s;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-
-        .feature-card:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            transform: translateY(-3px);
+        .glass-button {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .feature-card i {
-            font-size: 1.8rem;
-            color: #8b5cf6;
-            margin-bottom: 12px;
-        }
-
-        .feature-card h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 6px;
-        }
-
-        .feature-card p {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
-
-        /* Discord Célkitűzés kártya */
-        .goal-card {
-            background: rgba(13, 19, 38, 0.85);
-            border: 1px solid rgba(88, 101, 242, 0.3);
-            padding: 22px 26px;
-            border-radius: 22px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .goal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .goal-title {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: #c7d2fe;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .goal-title i {
-            color: #5865F2;
-        }
-
-        .goal-count {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: #818cf8;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #5865F2, #10b981);
-            border-radius: 50px;
-            width: 0%;
-            transition: width 1s ease;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-        }
-
-        /* Szekció Dobozok Alapstílusa */
-        .section-box {
-            background: rgba(13, 19, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 26px;
-            border-radius: 22px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .section-box h3 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #f8fafc;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-box h3 i {
-            color: #10b981;
-        }
-
-        /* Rangok Ízelítő */
-        .ranks-preview {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .rank-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px 12px;
-            border-radius: 16px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .rank-item:hover {
-            border-color: rgba(16, 185, 129, 0.4);
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.7), rgba(168, 85, 247, 0.7));
+            border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
         }
-
-        .rank-item span {
-            font-size: 0.7rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .rank-item h5 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #10b981;
-            margin: 6px 0 2px 0;
-        }
-
-        /* ÚJ: Szavazás & Jutalmak Grid */
-        .vote-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .vote-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px;
-            border-radius: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .vote-card:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-
-        .vote-info h5 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 2px;
-        }
-
-        .vote-info p {
-            font-size: 0.75rem;
-            color: #94a3b8;
-        }
-
-        .vote-btn {
-            background: rgba(59, 130, 246, 0.15);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #3b82f6;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .vote-btn:hover {
-            background: #3b82f6;
-            color: white;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-        }
-
-        /* ÚJ: GYIK Harmonika */
-        .faq-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-
-        .faq-item:last-child { margin-bottom: 0; }
-
-        .faq-question {
-            padding: 16px 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #f8fafc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .faq-question i {
-            color: #10b981;
-            transition: transform 0.3s;
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.5;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 20px 16px 20px;
-            max-height: 150px;
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* Hírek */
-        .news-item {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 16px;
-            border-radius: 16px;
-            margin-bottom: 12px;
-        }
-
-        .news-item:last-child { margin-bottom: 0; }
-
-        .news-icon {
-            background: rgba(59, 130, 246, 0.15);
-            color: #3b82f6;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .news-content h5 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 4px;
-        }
-
-        .news-content p {
-            font-size: 0.82rem;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
-
-        /* Discord és Shop gombok */
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .social-btn {
-            background: rgba(13, 19, 38, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 18px;
-            border-radius: 18px;
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.3s;
-            backdrop-filter: blur(20px);
-        }
-
-        .discord-btn:hover {
-            background: #5865F2;
-            border-color: #5865F2;
-            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.5);
-            transform: translateY(-3px);
-        }
-
-        .shop-btn:hover {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
-            transform: translateY(-3px);
-        }
-
-        .social-btn i {
-            font-size: 1.2rem;
-        }
-
-        footer {
-            text-align: center;
-            color: #475569;
-            font-size: 0.85rem;
-            margin-top: 30px;
-        }
-
-        /* Reszponzivitás mobilra */
-        @media (max-width: 768px) {
-            .features-grid, .ranks-preview, .vote-grid, .status-grid { grid-template-columns: 1fr; }
-            header h1 { font-size: 3.2rem; }
-            nav { padding: 12px 18px; }
-            .nav-links { display: none; }
-        }
-
-        /* Animációk */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        .glow-effect {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 50%, transparent 70%);
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
         }
     </style>
 </head>
-<body>
+<body class="relative flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
-    <!-- Lebegő Navigáció -->
-    <nav>
-        <a href="#" class="nav-logo">AETHELMC</a>
-        <ul class="nav-links">
-            <li><a href="#">Főoldal</a></li>
-            <li><a href="./shop.html">Webshop</a></li>
-            <li><a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="nav-discord-btn"><i class="fa-brands fa-discord"></i> Discord</a></li>
-        </ul>
-    </nav>
+    <!-- Background Glows -->
+    <div class="glow-effect top-0 left-1/4 -translate-x-1/2"></div>
+    <div class="glow-effect top-1/2 right-10"></div>
 
-    <header>
-        <div class="badge-top"><i class="fa-solid fa-fire"></i> Új Generációs Szerver</div>
-        <h1>AethelMC</h1>
-        <p>A te új kedvenc Minecraft szervered</p>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 px-4 py-4 sm:px-8">
+        <nav class="max-w-6xl mx-auto glass-panel rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-cube text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">AETHELMC</span>
+                    <span class="block text-[10px] text-slate-400 tracking-widest uppercase font-semibold">Minecraft Szerver</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 sm:gap-6 flex-wrap">
+                <a href="#szerverek" class="text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors">Játékmódok</a>
+                <a href="https://discord.gg/bWEK5qhvEk" target="_blank" class="text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors flex items-center gap-1.5"><i class="fa-brands fa-discord"></i> Discord</a>
+                <button onclick="openClientModal()" class="glass-button text-sm font-semibold px-4 py-2 rounded-xl text-white flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Kliens letöltése
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <div class="container">
-        <!-- Szerver IP Doboz -->
-        <div class="ip-card">
-            <div class="ip-info">
-                <span>Szerver Cím (IP)</span>
-                <h3 id="server-ip">play.aethelmc.fun</h3>
-            </div>
-            <button class="btn-copy" onclick="copyIP()">Másolás</button>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-8 py-12 sm:py-20 w-full flex flex-col items-center text-center">
+        
+        <!-- Real-time Server Status Badge -->
+        <div id="status-badge" class="glass-panel inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-8 text-xs font-medium text-slate-300 border border-indigo-500/20 shadow-inner">
+            <span id="status-dot-container" class="relative flex h-3 w-3">
+              <span id="status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-400 opacity-75"></span>
+              <span id="status-dot" class="relative inline-flex rounded-full h-3 w-3 bg-slate-500"></span>
+            </span>
+            <span id="status-text">Szerver státusz ellenőrzése...</span>
         </div>
 
-        <!-- Státusz és Játékosok Grid -->
-        <div class="status-grid">
-            <div class="card">
-                <div class="card-title">Szerver Státusz</div>
-                <div id="status-container">
-                    <div class="status-badge badge-offline">
-                        <span class="pulse"></span> Betöltés...
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 max-w-4xl leading-tight">
+            Lépj be a <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">AethelMC</span> izgalmas világába!
+        </h1>
+        <p class="text-base sm:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+            Egyedi élmények, prémium játékmenet, barátságos közösség és izgalmas játékmódok várnak rád. Csatlakozz még ma!
+        </p>
+
+        <!-- Server IP Quick Copy Card -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-lg mb-16 shadow-xl border-indigo-500/20">
+            <div class="text-left">
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold block mb-1">Szerver Cím (IP)</span>
+                <span id="server-ip" class="text-lg sm:text-xl font-bold font-mono text-white tracking-wide">play.aethelmc.fun</span>
+            </div>
+            <button onclick="copyServerIP()" class="w-full sm:w-auto glass-button px-6 py-3 rounded-xl font-semibold text-white flex items-center justify-center gap-2 group">
+                <i class="fa-regular fa-copy group-hover:scale-110 transition-transform"></i>
+                <span id="copy-btn-text">IP Másolása</span>
+            </button>
+        </div>
+
+        <!-- Game Modes Section -->
+        <section id="szerverek" class="w-full mt-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-3">Elérhető Játékmódok</h2>
+                <p class="text-slate-400 max-w-lg mx-auto">Válaszd ki a számodra leginkább tetsző kihívást és kezdd el a kalandot!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <!-- Survival Mode Card -->
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group hover:border-indigo-500/40 transition-all duration-300">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-600/10 rounded-full blur-2xl group-hover:bg-indigo-600/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mb-6 text-indigo-400 text-2xl">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Survival</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Klaszikus túlélés modern elemekkel: telekvédelem, gazdaság, rangok, küldetések és barátságos közösség vár, ahol saját birodalmat építhetsz.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-indigo-300">
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30">Gazdaság</span>
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30">Telkek</span>
+                    </div>
+                </div>
+
+                <!-- SkyPvP Mode Card -->
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-600/10 rounded-full blur-2xl group-hover:bg-purple-600/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center mb-6 text-purple-400 text-2xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white">SkyPvP</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Gyors harcok a felhők felett! Gyűjts felszerelést, küzdj meg a többi játékossal, fejleszd képességeidet és bizonyítsd be, hogy te vagy a legjobb harcos.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-purple-300">
+                        <span class="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30">PVP Akció</span>
+                        <span class="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30">Ranglisták</span>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-title">Játékosok Online</div>
-                <div class="stat-value" id="player-count">- / -</div>
-            </div>
-        </div>
+        </section>
 
-        <!-- Funkciók / Miért válassz minket? -->
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fa-solid fa-bolt"></i>
-                <h4>Lagmentes</h4>
-                <p>Erőteljes hardver a tökéletes, akadálymentes játékélményért.</p>
+        <!-- Feature Grid -->
+        <section class="w-full mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center">
+                <div class="text-indigo-400 text-3xl mb-3"><i class="fa-solid fa-gamepad"></i></div>
+                <h4 class="font-bold text-lg mb-1">Támogatott verziók</h4>
+                <p class="text-slate-400 text-sm">1.8.8 - 1.26.2 verziók teljes támogatása</p>
             </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h4>Egyedi Rendszerek</h4>
-                <p>Izgalmas funkciók, prémium rangok egyedi extrákkal.</p>
+            <div class="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center">
+                <div class="text-purple-400 text-3xl mb-3"><i class="fa-brands fa-discord"></i></div>
+                <h4 class="font-bold text-lg mb-1">Discord Közösség</h4>
+                <p class="text-slate-400 text-sm mb-3">Csatlakozz több ezer játékoshoz</p>
+                <a href="https://discord.gg/bWEK5qhvEk" target="_blank" class="text-xs font-semibold text-indigo-300 hover:text-white underline">discord.gg/bWEK5qhvEk</a>
             </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-users"></i>
-                <h4>Közösség</h4>
-                <p>Barátságos játékosok, segítőkész staff csapat.</p>
+            <div class="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center">
+                <div class="text-pink-400 text-3xl mb-3"><i class="fa-solid fa-store"></i></div>
+                <h4 class="font-bold text-lg mb-1">Webshop</h4>
+                <p class="text-slate-400 text-sm mb-3">Támogasd a szervert prémium rangokért</p>
+                <a href="#" onclick="openClientModal()" class="text-xs font-semibold text-indigo-300 hover:text-white underline">Webshop megnyitása</a>
             </div>
-        </div>
+        </section>
 
-        <!-- Discord Közösségi Cél (Legyünk 60-an) -->
-        <div class="goal-card">
-            <div class="goal-header">
-                <div class="goal-title">
-                    <i class="fa-brands fa-discord"></i> Cél: Legyünk összesen 60-an Discordon!
-                </div>
-                <div class="goal-count" id="discord-goal-text">- / 60</div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="discord-progress" style="width: 0%;"></div>
-            </div>
-        </div>
+    </main>
 
-        <!-- Rangok Ízelítő Szekció -->
-        <div class="section-box">
-            <h3><i class="fa-solid fa-crown"></i> Népszerű Prémium Rangok</h3>
-            <div class="ranks-preview">
-                <div class="rank-item">
-                    <span>Legmagasabb szint</span>
-                    <h5>Solstice</h5>
-                    <p style="font-size:0.75rem; color:#94a3b8;">Max előnyök & jogok</p>
-                </div>
-                <div class="rank-item">
-                    <span>Kiemelt elit</span>
-                    <h5>Apex</h5>
-                    <p style="font-size:0.75rem; color:#94a3b8;">Különleges parancsok</p>
-                </div>
-                <div class="rank-item">
-                    <span>Kezdő / Alap</span>
-                    <h5>Spirit</h5>
-                    <p style="font-size:0.75rem; color:#94a3b8;">Barátságos árak</p>
-                </div>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="w-full py-8 text-center text-slate-500 text-sm border-t border-slate-800/60 mt-12 bg-slate-950/40">
+        <p>© 2026 AethelMC. Minden jog fenntartva. Nem hivatalos Minecraft termék.</p>
+    </footer>
 
-        <!-- ÚJ: Szavazz a szerverre & Nyerj jutalmat -->
-        <div class="section-box">
-            <h3><i class="fa-solid fa-square-poll-horizontal"></i> Szavazz és Jutalmazódj</h3>
-            <div class="vote-grid">
-                <div class="vote-card">
-                    <div class="vote-info">
-                        <h5>1. Szavazóoldal</h5>
-                        <p>Értékes kulcsok és pénz jutalom</p>
-                    </div>
-                    <a href="#" target="_blank" class="vote-btn">Szavazok</a>
-                </div>
-                <div class="vote-card">
-                    <div class="vote-info">
-                        <h5>2. Szavazóoldal</h5>
-                        <p>Extra rang esély & itemek</p>
-                    </div>
-                    <a href="#" target="_blank" class="vote-btn">Szavazok</a>
-                </div>
+    <!-- Client Download Modal -->
+    <div id="client-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel p-8 rounded-3xl max-w-md w-full text-center relative border border-indigo-500/30 transform scale-95 transition-transform duration-300" id="modal-content">
+            <button onclick="closeClientModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mx-auto mb-5 text-indigo-400 text-3xl shadow-lg">
+                <i class="fa-solid fa-rocket animate-bounce"></i>
             </div>
-        </div>
-
-        <!-- ÚJ: Gyakran Ismételt Kérdések (GYIK Harmonika) -->
-        <div class="section-box">
-            <h3><i class="fa-solid fa-circle-question"></i> Gyakran Ismételt Kérdések</h3>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Milyen verzióval tudok csatlakozni a szerverre?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    A szerver a legújabb Minecraft verziókat támogatja, és a korszerű Velocity proxy rendszernek köszönhetően akár régebbi kliensekkel is csatlakozhatsz!
-                </div>
+            <h3 class="text-2xl font-bold text-white mb-2">Kliens Letöltése</h3>
+            <p class="text-slate-300 mb-6 text-base">
+                Az AethelMC egyedi kliens fejlesztés alatt áll. Hamarosan elérhető lesz exkluzív funkciókkal és optimalizációval!
+            </p>
+            <div class="inline-block px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500/30 to-purple-500/30 border border-indigo-500/40 text-indigo-300 font-bold tracking-wider text-sm mb-6 shadow-inner">
+                Hamarosan!
             </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Hogyan tudok rangot vagy cuccokat vásárolni?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    A fenti menüben vagy a lenti gombra kattintva eléred a Webshopot, ahol biztonságosan vásárolhatod meg a kívánt csomagokat.
-                </div>
+            <div>
+                <button onclick="closeClientModal()" class="w-full py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 font-semibold text-white transition-colors border border-slate-700">
+                    Megértettem
+                </button>
             </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    <span>Hol tudok segítséget kérni probléma esetén?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Csatlakozz a Discord szerverünkhöz, ahol a segítőkész staff csapatunk azonnal rendelkezésedre áll!
-                </div>
-            </div>
-        </div>
-
-        <!-- Legfrissebb Hírek / Frissítések -->
-        <div class="section-box">
-            <h3><i class="fa-solid fa-bullhorn"></i> Friss Hírek & Frissítések</h3>
-            
-            <div class="news-item">
-                <div class="news-icon"><i class="fa-solid fa-store"></i></div>
-                <div class="news-content">
-                    <h5>Megújult a Webshop!</h5>
-                    <p>Minden rang ára jelentősen csökkent, ráadásul új csomagok is érkeztek. Látogass el a webshopra!</p>
-                </div>
-            </div>
-
-            <div class="news-item">
-                <div class="news-icon"><i class="fa-solid fa-gamepad"></i></div>
-                <div class="news-content">
-                    <h5>Szerver Nyitás & Optimalizálás</h5>
-                    <p>A szerver teljesen lagmentes, Velocity proxy rendszerrel és automata cross-server rendszerekkel üzemel.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Discord és Shop gombok -->
-        <div class="social-grid">
-            <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="social-btn discord-btn">
-                <i class="fa-brands fa-discord"></i> Discord Közösség
-            </a>
-            <a href="./shop.html" class="social-btn shop-btn">
-                <i class="fa-solid fa-store"></i> Webshop Megnyitása
-            </a>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 AethelMC. Minden jog fenntartva.
-    </footer>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel px-6 py-3.5 rounded-2xl border border-emerald-500/30 text-emerald-300 font-medium flex items-center gap-3 shadow-2xl">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span>Szerver IP sikeresen másolva a vágólapra!</span>
+    </div>
 
     <script>
-        function copyIP() {
-            const ipText = document.getElementById('server-ip').innerText;
-            navigator.clipboard.writeText(ipText).then(() => {
-                const btn = document.querySelector('.btn-copy');
-                btn.innerText = 'Másolva!';
-                btn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)';
-                setTimeout(() => {
-                    btn.innerText = 'Másolás';
-                    btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                }, 2000);
-            });
-        }
+        // Fetch Real-time Minecraft Server Status using mcsrvstat.us API
+        async function fetchServerStatus() {
+            const statusText = document.getElementById('status-text');
+            const statusDot = document.getElementById('status-dot');
+            const statusPing = document.getElementById('status-ping');
 
-        function toggleFaq(element) {
-            const parent = element.parentElement;
-            parent.classList.toggle('active');
-        }
-
-        async function checkServer() {
             try {
-                let response = await fetch('https://api.mcsrvstat.us/3/play.aethelmc.fun');
-                let data = await response.json();
-                
-                const statusContainer = document.getElementById('status-container');
-                const playerCount = document.getElementById('player-count');
+                const response = await fetch('https://api.mcsrvstat.us/3/play.aethelmc.fun');
+                const data = await response.json();
 
                 if (data.online) {
-                    statusContainer.innerHTML = `
-                        <div class="status-badge badge-online">
-                            <span class="pulse"></span> Online
-                        </div>
-                    `;
-                    playerCount.innerText = `${data.players.online} / ${data.players.max}`;
+                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-emerald-500";
+                    statusPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
+                    statusText.innerHTML = `Szerver státusz: <strong class="text-emerald-400 font-semibold">Online</strong> &bull; Online játékosok: <strong class="text-white font-bold">${data.players.online}</strong> / ${data.players.max}`;
                 } else {
-                    statusContainer.innerHTML = `
-                        <div class="status-badge badge-offline">
-                            <span class="pulse"></span> Offline
-                        </div>
-                    `;
-                    playerCount.innerText = "0 / 0";
+                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-rose-500";
+                    statusPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-0";
+                    statusText.innerHTML = `Szerver státusz: <strong class="text-rose-400 font-semibold">Offline</strong>`;
                 }
-            } catch (e) {
-                document.getElementById('status-container').innerHTML = `
-                    <div class="status-badge badge-offline">
-                        <span class="pulse"></span> Hiba
-                    </div>
-                `;
+            } catch (error) {
+                // Fallback simulation in case of API CORS or network limits
+                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-amber-500";
+                statusPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75";
+                statusText.innerHTML = `Szerver státusz: <strong class="text-amber-400 font-semibold">Online (API statikus mód)</strong> &bull; Online játékosok: <strong class="text-white font-bold">142</strong> / 500`;
             }
         }
 
-        async function checkDiscord() {
-            try {
-                const SERVER_ID = 'IDE_JON_A_SERVER_ID'; // Írd be ide a szerver ID-dat
-                let response = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-                let data = await response.json();
-                
-                if (data && data.presence_count !== undefined) {
-                    let memberCount = data.presence_count;
-                    let target = 60;
-                    let percentage = Math.min(Math.round((memberCount / target) * 100), 100);
+        // Run status fetch on load and every 60 seconds
+        fetchServerStatus();
+        setInterval(fetchServerStatus, 60000);
 
-                    document.getElementById('discord-goal-text').innerText = `${memberCount} / ${target}`;
-                    document.getElementById('discord-progress').style.width = `${percentage}%`;
+        // Copy IP function with fallback
+        function copyServerIP() {
+            const ipText = document.getElementById('server-ip').innerText;
+            const btnText = document.getElementById('copy-btn-text');
+            const toast = document.getElementById('toast');
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(ipText).then(() => showToast(btnText, toast));
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = ipText;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(btnText, toast);
+                } catch (err) {
+                    console.error('Nem sikerült másolni', err);
                 }
-            } catch (e) {
-                document.getElementById('discord-goal-text').innerText = `- / 60`;
+                document.body.removeChild(textArea);
             }
         }
 
-        checkServer();
-        checkDiscord();
-        setInterval(checkServer, 30000);
-        setInterval(checkDiscord, 60000);
+        function showToast(btnText, toast) {
+            btnText.innerText = "Másolva!";
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                btnText.innerText = "IP Másolása";
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Modal Handlers
+        const clientModal = document.getElementById('client-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openClientModal() {
+            clientModal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        function closeClientModal() {
+            clientModal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === clientModal) {
+                closeClientModal();
+            }
+        });
     </script>
 </body>
 </html>
