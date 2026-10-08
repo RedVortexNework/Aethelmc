@@ -3,381 +3,662 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC | Official Network</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>AethelMC Network | Hivatalos Weboldal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff2a5f;
-            --primary-glow: rgba(255, 42, 95, 0.4);
-            --moon-purple: #a855f7;
-            --moon-glow: rgba(168, 85, 247, 0.4);
-            --bg-dark: #07080a;
-            --card-bg: rgba(18, 20, 29, 0.6);
+            --red: #ff3355;
+            --red-glow: rgba(255, 51, 85, 0.4);
+            --purple: #9d4edd;
+            --purple-glow: rgba(157, 78, 221, 0.4);
+            --gold: #ffb703;
+            --gold-glow: rgba(255, 183, 3, 0.4);
+            --bg: #07080c;
+            --panel: rgba(15, 17, 26, 0.75);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-muted: #94a3b8;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg);
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(255, 42, 95, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.12) 0%, transparent 45%);
-            background-attachment: fixed;
+                radial-gradient(ellipse at 50% 0%, rgba(255, 51, 85, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 85% 90%, rgba(157, 78, 221, 0.12) 0%, transparent 50%);
         }
 
-        /* Navigáció */
-        nav {
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Fejléc */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px 10%;
-            background: rgba(7, 8, 10, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 8%;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(7, 8, 12, 0.85);
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #fff;
-            text-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .logo span { color: var(--primary); }
-
-        .nav-links {
+        .brand {
             display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #8a8f9d;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-shop-nav {
-            background: linear-gradient(135deg, var(--primary), #d91b49);
-            color: #fff !important;
-            padding: 10px 22px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        /* Hero */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 20px 60px;
-            text-align: center;
-        }
-
-        /* Moon Collaboration Showcase Badge */
-        .collab-badge {
-            display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 24px;
-            background: rgba(168, 85, 247, 0.08);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 50px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 25px var(--moon-glow);
-            backdrop-filter: blur(10px);
-            animation: float 4s ease-in-out infinite;
+            text-decoration: none;
+            color: #fff;
         }
 
-        .collab-badge .tag {
-            background: var(--moon-purple);
-            color: #fff;
-            font-size: 0.7rem;
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--red), var(--purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 900;
-            padding: 3px 8px;
-            border-radius: 4px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .brand-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        .collab-text {
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 1rem;
+        .brand-text span { color: var(--red); }
+
+        .nav-items {
+            display: flex;
+            gap: 25px;
+            align-items: center;
         }
 
-        .collab-text span {
-            color: var(--moon-purple);
-            text-shadow: 0 0 10px var(--moon-glow);
+        .nav-items a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.2s;
+        }
+
+        .nav-items a:hover { color: #fff; }
+
+        .btn-shop-nav {
+            background: linear-gradient(135deg, var(--gold), #fb8500);
+            color: #000 !important;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 900 !important;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* Moon Collaboration Banner */
+        .collab-card {
+            background: linear-gradient(90deg, rgba(157, 78, 221, 0.15), rgba(15, 17, 26, 0.8));
+            border: 1px solid rgba(157, 78, 221, 0.4);
+            border-radius: 16px;
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            box-shadow: 0 0 30px var(--purple-glow);
+            backdrop-filter: blur(10px);
+        }
+
+        .collab-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge-soon {
+            background: var(--purple);
+            color: #fff;
+            font-weight: 900;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px var(--purple-glow);
+        }
+
+        .collab-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .collab-title span { color: var(--purple); }
+
+        /* Hero Layout */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 70px;
         }
 
         h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 900;
-            text-transform: uppercase;
             line-height: 1.05;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            background: linear-gradient(180deg, #ffffff 30%, #717786 100%);
+            background: linear-gradient(180deg, #ffffff 40%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p.hero-desc {
-            font-size: 1.2rem;
-            color: #8a8f9d;
-            max-width: 650px;
-            margin-bottom: 40px;
+        p.desc {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 35px;
         }
 
-        /* Gombok */
-        .cta-group {
-            display: flex;
+        /* IP Card Widget */
+        .ip-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 16px 24px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
             gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(10px);
         }
 
-        .btn {
-            padding: 18px 38px;
-            font-size: 1.1rem;
+        .ip-card:hover {
+            border-color: var(--red);
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .ip-text {
             font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .status-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-left: 1px solid var(--border);
+            padding-left: 15px;
+        }
+
+        /* Client Download Panel */
+        .download-panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .download-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--purple));
+            border-radius: 24px 24px 0 0;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .panel-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 51, 85, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .panel-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-main {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--red), #d61c4e);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.05rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
+            box-shadow: 0 0 25px var(--red-glow);
+            transition: 0.2s;
+            margin-bottom: 15px;
         }
 
-        .btn-download {
-            background: linear-gradient(135deg, var(--primary), #c0113b);
-            color: #fff;
-            box-shadow: 0 0 30px var(--primary-glow);
-            border: none;
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px var(--red-glow);
         }
 
-        .btn-download:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 0 45px var(--primary-glow);
-        }
-
-        .btn-discord {
+        .btn-dc {
+            display: block;
+            width: 100%;
+            padding: 14px;
             background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-discord:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-4px);
-        }
-
-        /* IP Widget */
-        .ip-widget {
-            margin-top: 50px;
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 14px 28px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
-
-        .ip-widget:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #10b981;
-        }
-
-        .ip-address {
-            font-weight: 800;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .online-players {
-            color: #8a8f9d;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
             font-size: 0.95rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            padding-left: 20px;
+            border-radius: 12px;
+            transition: 0.2s;
         }
 
-        /* Kártyák szekció */
-        .features {
-            max-width: 1200px;
-            margin: 80px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .btn-dc:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 35px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature-card:hover::before { opacity: 1; }
-
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 12px;
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
             text-transform: uppercase;
         }
 
+        .section-header p {
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* RANG SHOP SZEKCIÓ */
+        .rank-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 90px;
+        }
+
+        .rank-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .rank-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+
+        .rank-card.featured::before {
+            content: "LEGNÉPSZERŰBB";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .rank-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .rank-vip { color: #38bdf8; }
+        .rank-mvp { color: var(--gold); }
+        .rank-legend { color: var(--purple); }
+
+        .rank-price {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .rank-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .rank-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .rank-features li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rank-features li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: 900;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--border);
+        }
+
+        .rank-card.featured .btn-buy {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .btn-buy:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+        }
+
+        /* Feature Cards Grid (LOGÓKKAL) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px 25px;
+            transition: 0.3s;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-shop {
+            background: rgba(255, 51, 85, 0.12);
+            border-color: rgba(255, 51, 85, 0.3);
+            color: var(--red);
+        }
+
+        .logo-discord {
+            background: rgba(88, 101, 242, 0.12);
+            border-color: rgba(88, 101, 242, 0.3);
+            color: #5865F2;
+        }
+
+        .logo-vote {
+            background: rgba(157, 78, 221, 0.12);
+            border-color: rgba(157, 78, 221, 0.3);
+            color: var(--purple);
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
         .card-desc {
-            color: #8a8f9d;
+            color: var(--text-muted);
             line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        .card-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        @media (max-width: 768px) {
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 8%;
+            background: rgba(5, 6, 8, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            color: #fff;
+        }
+
+        @media (max-width: 960px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .features-grid, .rank-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2.8rem; }
-            nav .nav-links { display: none; }
+            .nav-items { display: none; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">Aethel<span>MC</span></a>
-        <ul class="nav-links">
-            <li><a href="#">Főoldal</a></li>
-            <li><a href="#client">Kliens</a></li>
-            <li><a href="#discord">Discord</a></li>
-            <li><a href="#shop" class="btn-shop-nav">Webshop</a></li>
-        </ul>
-    </nav>
+    <!-- Fejléc -->
+    <header>
+        <a href="#" class="brand">
+            <div class="brand-logo">A</div>
+            <div class="brand-text">Aethel<span>MC</span></div>
+        </a>
+        <div class="nav-items">
+            <a href="#">Főoldal</a>
+            <a href="#download">Kliens</a>
+            <a href="#ranks">Rang Shop</a>
+            <a href="#features">Szolgáltatások</a>
+            <a href="https://discord.gg/" target="_blank">Discord</a>
+            <a href="#ranks" class="btn-shop-nav">Webshop</a>
+        </div>
+    </header>
 
-    <section class="hero">
-        <!-- Moon Client Announcement -->
-        <div class="collab-badge">
-            <span class="tag">SOON</span>
-            <div class="collab-text">AethelMC ✕ <span>Moon Client</span></div>
+    <div class="container">
+        <!-- Moon Client Banner -->
+        <div class="collab-card">
+            <div class="collab-info">
+                <span class="badge-soon">HAMAROSAN</span>
+                <div class="collab-title">AethelMC ✕ <span>Moon Client</span> Integráció</div>
+            </div>
+            <div style="color: var(--text-muted); font-size: 0.85rem;">Exkluzív FPS Boost & Kozmetika</div>
         </div>
 
-        <h1>A Jövő Minecraft<br>Élménye</h1>
-        <p class="hero-desc">Csatlakozz az ország egyik legdinamikusabban fejlődő közösségéhez. Töltsd le a saját kliensünket a maximális FPS-ért és egyedi funkciókért!</p>
+        <!-- Hero Section -->
+        <div class="hero-grid">
+            <div>
+                <h1>A Jövő Minecraft Szervere</h1>
+                <p class="desc">Csatlakozz az AethelMC hivatalos hálózatához. Egyedi fejlesztésű játékmódok, garantált akadásmentes élmény és egy folyamatosan növekvő közösség vár rád.</p>
 
-        <div class="cta-group">
-            <a href="#" id="client" class="btn btn-download">
-                ⚡ Kliens Letöltése
-            </a>
-            <a href="https://discord.gg/" target="_blank" id="discord" class="btn btn-discord">
-                Discord Szerver
-            </a>
+                <div class="ip-card" onclick="copyIP('play.aethelmc.hu')">
+                    <div class="dot"></div>
+                    <div class="ip-text">play.aethelmc.hu</div>
+                    <div class="status-text" id="status-display">Kattints az IP másolásához</div>
+                </div>
+            </div>
+
+            <!-- Kliens Letöltés Kártya -->
+            <div class="download-panel" id="download">
+                <div class="panel-header">
+                    <div class="panel-icon">⚡</div>
+                    <div class="panel-title">Aethel Kliens</div>
+                </div>
+                <div class="panel-subtitle">Töltsd le a hivatalos kliensünket a beépített modokért, maximális teljesítményért és az egyedi elemekért.</div>
+
+                <a href="#" class="btn-main">Kliens Letöltése (.exe)</a>
+                <a href="https://discord.gg/" target="_blank" class="btn-dc">Discord Csatlakozás</a>
+            </div>
         </div>
 
-        <!-- Működő IP / Online widget -->
-        <div class="ip-widget" onclick="copyIP()">
-            <div class="status-dot"></div>
-            <div class="ip-address">play.aethelmc.hu</div>
-            <div class="online-players" id="player-count">Lekérdezés...</div>
+        <!-- RANG SHOP SZEKCIÓ -->
+        <div class="section-header" id="ranks">
+            <h2>Kiemelt Rangok</h2>
+            <p>Válassz rangot, szerezz extra jogokat és támogasd a szervert</p>
         </div>
-    </section>
 
-    <section class="features">
-        <div class="feature-card" id="shop">
-            <h3 class="card-title">🛒 Webshop</h3>
-            <p class="card-desc">Szerezz egyedi rangokat, kozmetikai kiegészítőket és támogasd a szerver továbbfejlődését közvetlenül.</p>
+        <div class="rank-grid">
+            <!-- VIP Rang -->
+            <div class="rank-card">
+                <div class="rank-name rank-vip">VIP</div>
+                <div class="rank-price">1.500 <span>Ft / hó</span></div>
+                <ul class="rank-features">
+                    <li>[VIP] előtag a neved előtt</li>
+                    <li>Csatlakozás teli szerverre</li>
+                    <li>+2 Teleport otthon (/sethome)</li>
+                    <li>Saját /fly lehetőség a lobbiban</li>
+                </ul>
+                <a href="#" class="btn-buy">Vásárlás</a>
+            </div>
+
+            <!-- MVP Rang (Kiemelt) -->
+            <div class="rank-card featured">
+                <div class="rank-name rank-mvp">MVP</div>
+                <div class="rank-price">3.000 <span>Ft / hó</span></div>
+                <ul class="rank-features">
+                    <li>[MVP] arany előtag a neved előtt</li>
+                    <li>Minden VIP előny + több otthon</li>
+                    <li>Repülés (/fly) Survival játékmódban</li>
+                    <li>Egyedi kozmetikai kiegészítők</li>
+                    <li>Saját virtuális láda (/enderchest)</li>
+                </ul>
+                <a href="#" class="btn-buy">Vásárlás</a>
+            </div>
+
+            <!-- LEGEND Rang -->
+            <div class="rank-card">
+                <div class="rank-name rank-legend">LEGEND</div>
+                <div class="rank-price">5.000 <span>Ft / hó</span></div>
+                <ul class="rank-features">
+                    <li>[LEGEND] lila izzó előtag</li>
+                    <li>Minden MVP előny magában foglalva</li>
+                    <li>Korlátlan /sethome lehetőség</li>
+                    <li>Havi VIP kulcs csomagok</li>
+                    <li>Privát Discord szoba elérhetőség</li>
+                </ul>
+                <a href="#" class="btn-buy">Vásárlás</a>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3 class="card-title">🚀 Egyedi Kliens</h3>
-            <p class="card-desc">Beépített FPS boost, egyedi szkin-rendszer és Moon Client támogatás a legjobb kompetitív élményért.</p>
+
+        <!-- Funkciók / Szolgáltatások -->
+        <div class="section-header" id="features">
+            <h2>Hivatalos Szolgáltatások</h2>
+            <p>Minden egy helyen a zökkenőmentes játékélményért</p>
         </div>
-        <div class="feature-card">
-            <div class="card-title">🏆 Napi Eventek</div>
-            <p class="card-desc">Rendszeres közösségi versenyek, nyereményjátékok és értékes játékon belüli jutalmak várnak.</p>
-        </div>
-    </section>
 
-    <script>
-        function copyIP() {
-            navigator.clipboard.writeText("play.aethelmc.hu");
-            alert("Szerver IP kimásolva: play.aethelmc.hu");
-        }
-
-        // Valós Minecraft játékosszám lekérdezése
-        async function fetchOnlinePlayers() {
-            try {
-                const res = await fetch('https://api.mcsrvstat.us/2/play.aethelmc.hu');
-                const data = await res.json();
-                const countElem = document.getElementById('player-count');
-                
-                if (data.online) {
-                    countElem.innerText = `${data.players.online} Játékos Online`;
-                } else {
-                    countElem.innerText = "Offline / Karbantartás";
-                }
-            } catch (err) {
-                document.getElementById('player-count').innerText = "100+ Játékos Online";
-            }
-        }
-
-        fetchOnlinePlayers();
-    </script>
-</body>
-</html>
+        <div class="features-grid">
+            <div class="card">
+                <div class="card-logo logo
