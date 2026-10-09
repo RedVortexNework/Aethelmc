@@ -67,6 +67,18 @@ body.mc .logo{background:none;color:#dfe3ff;-webkit-text-fill-color:#dfe3ff;anim
 .mp h3{font-family:Silkscreen,monospace;color:#9fb0ff;text-transform:uppercase;letter-spacing:1px}
 .mp ol{counter-reset:s;list-style:none;padding:0}.mp li{counter-increment:s;margin:10px 0;padding-left:44px;position:relative}
 .mp li::before{content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;background:#4f5dff;color:#fff;text-align:center;line-height:30px;font-family:Silkscreen,monospace;box-shadow:3px 3px 0 #05061a}
+.dg{display:grid;grid-template-columns:200px 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:760px){.dg{grid-template-columns:1fr}.sb{flex-direction:row!important;overflow-x:auto}}
+.sb{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--ac);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:4px;align-self:start}
+.sb a{padding:10px 12px;border-radius:10px;font-weight:700;font-size:.82rem;letter-spacing:.5px;color:var(--mut);white-space:nowrap;text-transform:uppercase}
+.sb a:hover,.sb a.on{background:#8b5cf622;color:var(--tx)}
+.sg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:12px}
+.sc{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;transition:.25s}.sc:hover{border-color:var(--ac);box-shadow:0 0 24px #8b5cf633}
+.sc i{font-style:normal;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--ac),var(--ac2));font-size:1.2rem;flex:none;box-shadow:0 4px 16px #8b5cf666}
+.sc div{margin-left:auto;text-align:right}.sc small{color:var(--mut);display:block;font-size:.72rem}.sc b{font-size:1.2rem}
+.pn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.pn h3{border-left:4px solid var(--ac);padding-left:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dh{background:#5865f2;padding:14px 16px;font-weight:800;display:flex;justify-content:space-between;color:#fff}
 </style>
 </head>
 <body>
@@ -102,7 +114,7 @@ body.mc .logo{background:none;color:#dfe3ff;-webkit-text-fill-color:#dfe3ff;anim
 <div class="mp">
 <div class="mh"><div id="pm"></div><div><h1 class="mt">MOON</h1><p class="ms">CLIENT</p></div></div>
 <div style="text-align:center;margin:10px 0 30px"><p style="color:var(--mut);max-width:480px;margin:0 auto 20px;font-family:system-ui,sans-serif">Az AethelMC saját kliense. Gyorsabb játék, több FPS, tisztább kép.</p>
-<a class="btn" href="#" onclick="mdl(event)">⬇ Letöltés</a> <a class="btn o" style="background:transparent" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">Discord</a>
+<a class="btn" href="#" onclick="mdl(event)">⬇ Letöltés</a> <a class="btn o" style="background:transparent" href="https://discord.gg/zeZmU5WQjN" target="_blank" rel="noopener">Discord</a>
 <p class="msg" id="mdm" style="font-family:system-ui,sans-serif"></p></div>
 <div class="grid">
 <div class="card"><h3>FPS Boost</h3><p style="font-family:system-ui,sans-serif">Optimalizált render, gyorsabb játék gyengébb gépen is.</p></div>
@@ -135,6 +147,14 @@ body.mc .logo{background:none;color:#dfe3ff;-webkit-text-fill-color:#dfe3ff;anim
 <p class="msg" id="am" style="color:#f87171"></p>
 </div>
 <div id="dash" style="display:none">
+<div class="dg">
+<div class="sb"><a class="on" href="#hub">🏠 Főoldal</a><a href="#shop">👑 Rangok</a><a href="#moon">🌙 Moon Client</a><a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">💬 Discord</a><a href="#" onclick="out();return false">🚪 Kilépés</a></div>
+<div><div class="sg" id="sg"></div>
+<div class="pn">
+<div class="card"><h3 id="dn"></h3><svg viewBox="0 0 16 32" shape-rendering="crispEdges" style="height:230px;display:block;margin:10px auto;filter:drop-shadow(0 0 16px #8b5cf688)"><rect x="4" y="0" width="8" height="8" fill="#e0b48a"/><rect x="4" y="0" width="8" height="3" fill="#2b2140"/><rect x="5" y="4" width="2" height="1" fill="#222"/><rect x="9" y="4" width="2" height="1" fill="#222"/><rect x="4" y="8" width="8" height="12" fill="#8b5cf6"/><rect x="0" y="8" width="4" height="12" fill="#e0b48a"/><rect x="12" y="8" width="4" height="12" fill="#e0b48a"/><rect x="4" y="20" width="4" height="12" fill="#3b3f8f"/><rect x="8" y="20" width="4" height="12" fill="#2d3070"/></svg></div>
+<div class="card" style="padding:0;overflow:hidden;display:flex;flex-direction:column"><div class="dh"><span>💬 Discord</span><span>AethelMC</span></div><div style="padding:16px;flex:1"><p style="margin:0">Nincs összekötve Discord fiókkal.</p><p style="font-size:.85rem">Csatlakozz a közösséghez, és kösd össze a fiókod.</p></div><a class="btn" style="border-radius:0;background:#5865f2;text-align:center" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">Csatlakozás a Discordhoz</a></div>
+<div class="card"><h3>Online <button class="btn" id="tb" style="padding:6px 10px;font-size:.7rem" onclick="tw()">Váltás heti nézetre</button></h3><svg id="cs" viewBox="0 0 300 175" style="width:100%;color:var(--tx)"></svg><small style="color:var(--mut)">Demó adatok</small></div>
+</div></div></div>
 <div class="card"><h2 style="margin-top:0">Üdv, <span id="who"></span>! 👋</h2><p>Itt kezelheted a fiókod és a rangjaid.</p>
 <a class="btn" href="#shop">Rang vásárlás</a> <button class="btn o" onclick="out()">Kilépés</button></div>
 <div class="card" style="margin-top:16px"><h3>Hogyan csatlakozz a szerverhez?</h3>
@@ -186,7 +206,7 @@ if(p.length<6){m.textContent="A jelszó legalább 6 karakter legyen.";return}
 if(mode=="r"&&p!==$("pw2").value){m.textContent="A két jelszó nem egyezik.";return}
 try{localStorage.setItem("aethel_user",u)}catch(e){}
 show(u)}
-function show(u){$("auth").style.display="none";$("dash").style.display="block";$("who").textContent=u}
+function show(u){fill(u);$("auth").style.display="none";$("dash").style.display="block";$("who").textContent=u}
 function out(){try{localStorage.removeItem("aethel_user")}catch(e){}$("dash").style.display="none";$("auth").style.display="block"}
 try{var s=localStorage.getItem("aethel_user");if(s)show(s)}catch(e){}
 function buy(r){var u="";try{u=localStorage.getItem("aethel_user")||""}catch(e){}
@@ -197,6 +217,14 @@ $("rk").innerHTML=R.map(function(r,i){return '<div class="card rk" style="--c:'+
 $("rb").innerHTML=R.slice().reverse().map(function(r){return '<a href="#shop" style="--c:'+r[1]+'">'+r[0]+'</a>'}).join("");
 (function(){var s='<svg viewBox="0 0 14 14" shape-rendering="crispEdges" class="mm">';for(var y=0;y<14;y++)for(var x=0;x<14;x++){var a=Math.hypot(x+.5-7,y+.5-7)<=6.8,b=Math.hypot(x+.5-9.5,y+.5-6)<=5.6;if(a&&!b)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+(x<3?'#aab8ff':'#e3e8ff')+'"/>'}$("pm").innerHTML=s+'</svg>'})();
 function mdl(e){e.preventDefault();$("mdm").textContent="Itt indul majd a letöltés – add meg a kliens fájl linkét!"}
+var wk=0;
+function fill(u){$("dn").textContent=u;var S=[["⭐","Rangok","Tag"],["🪙","AethelCoin","130"],["🎰","Zseton","300"],["🛡️","Guild","Nincs"],["⏱️","Online töltött idő","21 óra"],["📊","Szint","5"],["⛔","Büntetés","nincs"]];
+$("sg").innerHTML=S.map(function(a){return '<div class="sc"><i>'+a[0]+'</i><div><small>'+a[1]+'</small><b>'+a[2]+'</b></div></div>'}).join("");ch(wk)}
+function tw(){wk=!wk;ch(wk);$("tb").textContent=wk?"Váltás napi nézetre":"Váltás heti nézetre"}
+function ch(w){var v=w?[12,18,9,21]:[1.5,2.5,.5,3,2,3.5,1],l=w?["1. hét","2. hét","3. hét","4. hét"]:["H","K","Sze","Cs","P","Szo","V"],m=w?24:4,s="",i,y,bw=260/v.length;
+for(i=0;i<=3;i++){y=10+i*46.7;s+='<line x1="30" x2="290" y1="'+y+'" y2="'+y+'" stroke="currentColor" opacity=".15"/><text x="2" y="'+(y+3)+'" font-size="9" fill="currentColor" opacity=".6">'+(m-i*m/3).toFixed(1)+'</text>'}
+v.forEach(function(a,j){var h=a/m*140;s+='<rect x="'+(34+j*bw)+'" y="'+(150-h)+'" width="'+(bw-10)+'" height="'+h+'" rx="4" fill="url(#bg)"/><text x="'+(34+j*bw+(bw-10)/2)+'" y="166" font-size="9" text-anchor="middle" fill="currentColor" opacity=".7">'+l[j]+'</text>'});
+$("cs").innerHTML='<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>'+s}
 </script>
 </body>
 </html>
