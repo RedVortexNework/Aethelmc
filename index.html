@@ -1,230 +1,100 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AethelMC</title>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="AethelMC — magyar Minecraft közösség. Survival, PvP, minijátékok és Moon Client. Találkozunk a hold alatt.">
+<title>AethelMC — Az éjszaka a tiéd.</title>
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0b0a1a;--card:#15132b;--tx:#ecebff;--mut:#9a98c4;--ac:#8b5cf6;--ac2:#22d3ee;--bd:#2a2750;--ok:#34d399}
-:root[data-theme="light"]{--bg:#f4f3ff;--card:#fff;--tx:#17143a;--mut:#5b5890;--bd:#dcd9f7}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f3ff;--card:#fff;--tx:#17143a;--mut:#5b5890;--bd:#dcd9f7}}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;min-height:100vh;display:flex;flex-direction:column;background-image:radial-gradient(circle at 20% -10%,#8b5cf633,transparent 50%),radial-gradient(circle at 90% 10%,#22d3ee22,transparent 45%)}
-a{color:inherit;text-decoration:none}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--bd)}
-nav{max-width:1000px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.logo{font-weight:900;font-size:1.4rem;margin-right:auto;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
-nav a.l{padding:8px 14px;border-radius:10px;color:var(--mut);font-weight:600}
-nav a.l:hover,nav a.on{background:var(--card);color:var(--tx)}
-main{flex:1;max-width:1000px;width:100%;margin:auto;padding:28px 18px}
-.pg{display:none}.pg.on{display:block;animation:f .4s}
-@keyframes f{from{opacity:0;transform:translateY(8px)}}
-.hero{text-align:center;padding:40px 0 20px}
-.hero h1{font-size:clamp(2.6rem,9vw,5rem);margin:0;font-weight:900;letter-spacing:-2px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);font-size:1.1rem;max-width:520px;margin:10px auto 22px}
-.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:700;padding:12px 22px;border-radius:12px;color:#fff;background:linear-gradient(90deg,var(--ac),#6366f1);box-shadow:0 6px 24px #8b5cf655;transition:.2s}
-.btn:hover{transform:translateY(-2px)}.btn.o{background:transparent;border:1px solid var(--bd);color:var(--tx);box-shadow:none}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:22px 0}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px}
-.card h3{margin:0 0 8px}.card p{color:var(--mut);margin:0 0 12px}
-.stat{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);margin-right:8px;animation:p 1.6s infinite}
-@keyframes p{50%{opacity:.4}}
-.bar{height:8px;border-radius:8px;background:var(--bd);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width 1s}
-code{background:var(--bd);padding:3px 9px;border-radius:8px;font-family:ui-monospace,Consolas,monospace}
-.moon{font-size:5rem;text-align:center;filter:drop-shadow(0 0 24px #22d3ee88)}
-input{width:100%;padding:12px 14px;margin:6px 0 14px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
-.tabs{display:flex;gap:8px;margin-bottom:16px}.tabs button{flex:1}
-.price{font-size:1.8rem;font-weight:900}
-.msg{margin:10px 0 0;color:var(--ok);font-weight:600}
-ol{padding-left:20px;color:var(--mut)}ol b{color:var(--tx)}
-footer{border-top:1px solid var(--bd);padding:26px 18px;text-align:center;color:var(--mut);font-size:.9rem}
-.pay{display:flex;gap:14px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
-.pay svg{height:38px;width:auto;border-radius:8px}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.6;background-image:radial-gradient(1.5px 1.5px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 55% 35%,#a5f3fc,transparent),radial-gradient(1px 1px at 75% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 90% 15%,#ddd6fe,transparent),radial-gradient(1px 1px at 45% 90%,#fff,transparent);background-size:340px 340px;animation:tw 5s ease-in-out infinite alternate}
-@keyframes tw{from{opacity:.25}to{opacity:.8}}
-.hero h1,.logo{background-image:linear-gradient(90deg,var(--ac),var(--ac2),var(--ac));background-size:200% auto;animation:sh 5s linear infinite}
-@keyframes sh{to{background-position:200% center}}
-.hero h1{filter:drop-shadow(0 0 28px #8b5cf666)}
-.card{transition:.25s}.card:hover{border-color:var(--ac);box-shadow:0 0 30px #8b5cf622}
-.btn.dc{background:#5865f2;box-shadow:0 6px 24px #5865f255}
-.rk{border-top:3px solid var(--c);text-align:center}.rk:hover{box-shadow:0 0 36px color-mix(in srgb,var(--c) 45%,transparent);transform:translateY(-5px)}
-.rk svg{width:52px;height:52px;filter:drop-shadow(0 0 10px var(--c))}.rk h3{color:var(--c);letter-spacing:3px;margin:8px 0}
-.rb{display:flex;flex-wrap:wrap;gap:8px}.rb a{padding:6px 14px;border-radius:99px;border:1px solid var(--c);color:var(--c);font-weight:800;font-size:.85rem;letter-spacing:1px}.rb a:hover{background:var(--c);color:#000}
-body.mc{--bg:#0a0b2a;--card:#11133a;--tx:#e8eaff;--mut:#8f96d6;--ac:#6d7bff;--ac2:#9fb0ff;--bd:#2b3185;background-image:radial-gradient(circle at 15% 20%,#2a2f8f66,transparent 45%),radial-gradient(circle at 85% 80%,#1b1f6a66,transparent 45%)}
-body.mc .card,body.mc .btn,body.mc input{border-radius:0}
-body.mc .card{box-shadow:5px 5px 0 #05061a}
-body.mc .logo{background:none;color:#dfe3ff;-webkit-text-fill-color:#dfe3ff;animation:none;font-family:Silkscreen,monospace}
-.mp{font-family:Silkscreen,"Courier New",monospace}
-.mh{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;padding:40px 0 14px;text-align:left}
-.mm{width:150px;height:150px;filter:drop-shadow(0 0 30px #6d7bffaa);animation:fl 4s ease-in-out infinite alternate}
-@keyframes fl{to{transform:translateY(-12px)}}
-.mt{font-size:clamp(3.2rem,13vw,6.5rem);line-height:1;color:#dfe3ff;text-shadow:4px 4px 0 #3b3f8f,8px 8px 0 #1a1c58;margin:0;font-weight:700}
-.ms{letter-spacing:.7em;color:#5b7bff;font-size:1.1rem;margin:12px 0 0 6px}
-.mp .btn{background:#4f5dff;box-shadow:4px 4px 0 #05061a;font-family:Silkscreen,monospace;text-transform:uppercase;letter-spacing:1px}
-.mp .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #05061a}
-.mp h3{font-family:Silkscreen,monospace;color:#9fb0ff;text-transform:uppercase;letter-spacing:1px}
-.mp ol{counter-reset:s;list-style:none;padding:0}.mp li{counter-increment:s;margin:10px 0;padding-left:44px;position:relative}
-.mp li::before{content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;background:#4f5dff;color:#fff;text-align:center;line-height:30px;font-family:Silkscreen,monospace;box-shadow:3px 3px 0 #05061a}
-.dg{display:grid;grid-template-columns:200px 1fr;gap:16px;margin-bottom:16px}
-@media(max-width:760px){.dg{grid-template-columns:1fr}.sb{flex-direction:row!important;overflow-x:auto}}
-.sb{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--ac);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:4px;align-self:start}
-.sb a{padding:10px 12px;border-radius:10px;font-weight:700;font-size:.82rem;letter-spacing:.5px;color:var(--mut);white-space:nowrap;text-transform:uppercase}
-.sb a:hover,.sb a.on{background:#8b5cf622;color:var(--tx)}
-.sg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:12px}
-.sc{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;transition:.25s}.sc:hover{border-color:var(--ac);box-shadow:0 0 24px #8b5cf633}
-.sc i{font-style:normal;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--ac),var(--ac2));font-size:1.2rem;flex:none;box-shadow:0 4px 16px #8b5cf666}
-.sc div{margin-left:auto;text-align:right}.sc small{color:var(--mut);display:block;font-size:.72rem}.sc b{font-size:1.2rem}
-.pn{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.pn h3{border-left:4px solid var(--ac);padding-left:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.dh{background:#5865f2;padding:14px 16px;font-weight:800;display:flex;justify-content:space-between;color:#fff}
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{color-scheme:dark;--bg:#080808;--fg:#f1f1ed;--muted:#92928e;--line:#ffffff24;--font:'Space Grotesk',Arial,sans-serif;--display:'Barlow Condensed',Impact,'Arial Narrow',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.65}body:has(dialog[open]){overflow:hidden}::selection{background:#eee;color:#080808}button,a{-webkit-tap-highlight-color:transparent}button,input{font:inherit}button,a{touch-action:manipulation}a{color:inherit;text-decoration:none}button{color:inherit;cursor:pointer}button:disabled{cursor:wait}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #fff;outline-offset:6px}button{border-radius:0}svg{display:block}p,h1,h2,h3{margin:0}button svg,a svg{width:18px;height:18px;flex:none}button{background:none}.wrap{max-width:1280px;margin:auto;padding:0 56px}.eyebrow{font-family:monospace;letter-spacing:.19em;font-size:11px;text-transform:uppercase;color:#acaca7}.plus{font-size:22px;line-height:1}.muted{color:var(--muted)}.skip{position:fixed;top:-100px;left:16px;z-index:100;background:white;color:black;padding:12px}.skip:focus{top:12px}
+header{height:86px;position:absolute;z-index:10;inset:0 0 auto;border-bottom:1px solid var(--line)}.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font-size:21px;letter-spacing:-1px;font-weight:700}.brand svg{width:30px;height:34px}.brand small{font-size:10px;letter-spacing:1px;color:#888;align-self:flex-start;margin-top:6px}.nav-links{display:flex;align-items:center;gap:32px;font-size:12px}.nav-links a{color:#b5b5b1;transition:color .2s}.nav-links a:hover{color:white}.nav-links .nav-discord{border:1px solid #ffffff40;padding:10px 18px;display:flex;gap:16px;align-items:center;color:white}.menu-toggle{display:none;border:1px solid var(--line);padding:8px 14px}
+.hero{min-height:860px;height:min(960px,100svh);position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 76% 29%,#25252555,transparent 38%),#080808}.stars{position:absolute;inset:0;width:100%;height:100%;z-index:-4}.hero:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#080808 0%,transparent 30%,#08080800 85%);pointer-events:none}.hero-inner{position:relative;text-align:center;padding-top:155px;z-index:2}.hero-tag{display:inline-flex;align-items:center;gap:12px;color:#c7c7c1}.tiny-square{width:5px;height:5px;background:#deded9;box-shadow:0 0 10px #fff6;display:inline-block}.hero h1{font-family:var(--display);font-size:clamp(100px,15.5vw,220px);font-weight:800;line-height:.92;letter-spacing:-.045em;margin:22px 0 25px;text-shadow:0 8px 50px #0008}.hero h1 span{color:transparent;-webkit-text-stroke:1.3px #ddd;letter-spacing:-.03em}.hero h1 sup{font-family:var(--font);font-size:13px;display:inline-block;vertical-align:top;margin:14px 0 0 9px;letter-spacing:0}.hero-subtitle{font-size:16px;color:#b0b0aa;max-width:450px;margin:auto}.hero-subtitle strong{color:white;font-weight:500}.hero-actions{display:flex;justify-content:center;gap:12px;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:15px 25px;border:1px solid #ffffff40;font-size:12px;font-weight:700;letter-spacing:.025em;transition:background .2s,transform .2s,border-color .2s}.btn:hover{background:#ffffff14;border-color:#888;transform:translateY(-2px)}.btn.primary{background:#eeeee9;color:#101010;border-color:#eeeee9;box-shadow:4px 4px 0 #ffffff20}.btn.primary:hover{background:white;box-shadow:6px 6px 0 #ffffff30}.hero-ip{margin-top:19px;border:0;font-family:monospace;font-size:11px;letter-spacing:.05em;color:#a8a8a1;display:inline-flex;gap:10px;align-items:center}.hero-ip:hover{color:white}.hero-ip svg{width:12px;height:12px}.terrain{mask-image:linear-gradient(to bottom,transparent,black 26%);position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:max(100%,1200px);height:500px;z-index:-2}.moon{position:absolute;width:112px;height:112px;right:13%;top:130px;transform:rotate(-9deg);z-index:-3;filter:drop-shadow(0 0 38px #fff3);opacity:.85}.moon svg{width:100%;height:100%}.hero-bottom{position:absolute;bottom:34px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:end;font-family:monospace;font-size:10px;letter-spacing:.13em;color:#888}.hero-bottom .coordinates{line-height:2}.scroll-link{display:flex;align-items:center;gap:15px;color:#c9c9c4}.scroll-link span{border:1px solid #555;width:25px;height:35px;display:grid;place-items:center}.side-label{position:absolute;top:45%;left:25px;writing-mode:vertical-rl;font:9px monospace;letter-spacing:.2em;color:#646461}
+.server-strip{display:flex;justify-content:space-between;align-items:center;gap:25px;min-height:116px;border-bottom:1px solid var(--line)}.server-info{display:flex;align-items:center;gap:17px}.status-dot{height:8px;width:8px;border:1px solid #aaa;display:block;flex-shrink:0}.status-dot.online{background:#efefea;box-shadow:0 0 13px #ffffff66}.status-copy{font-size:13px}.status-copy small{display:block;color:#888;font-size:10px;font-family:monospace}.server-address{font-size:20px;letter-spacing:-.7px;display:flex;align-items:center;gap:20px}.server-address button{border:1px solid var(--line);height:34px;width:34px;display:grid;place-items:center}.server-address button:hover{background:#222}.server-label{font:10px monospace;color:#80807b;letter-spacing:.12em}.players{font-size:13px;text-align:right}.players small{font-size:10px;color:#777;display:block;font-family:monospace}
+.section{padding:106px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}.section h2{font-family:var(--display);font-size:clamp(42px,5vw,65px);line-height:1.04;text-transform:uppercase;font-weight:700;letter-spacing:-.02em;margin-top:13px}.section-head>p{max-width:290px;font-size:13px;color:#91918b}.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mode{border:1px solid var(--line);background:#0d0d0d;position:relative;overflow:hidden;transition:border-color .3s}.mode:hover{border-color:#ffffff60}.mode-image{height:210px;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#282828 0%,#101010 68%)}.mode-image svg{width:100%;height:100%;transition:transform .6s}.mode:hover .mode-image svg{transform:scale(1.07) translateY(-3px)}.mode-image:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#0d0d0d,transparent 40%);pointer-events:none}.mode-number{position:absolute;top:20px;left:22px;color:#777;font:10px monospace;z-index:1}.mode-tag{position:absolute;right:18px;top:19px;border:1px solid #fff2;padding:2px 7px;color:#aaa;font:9px monospace;letter-spacing:.1em;z-index:1}.mode-copy{padding:8px 25px 26px}.mode-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}.mode h3{font-family:var(--display);font-size:32px;text-transform:uppercase;letter-spacing:.01em}.mode-copy p{color:#92928c;font-size:12px;line-height:1.85;min-height:47px}.icon-link{width:30px;height:30px;border:1px solid #ffffff30;display:grid;place-items:center}.icon-link:hover{background:white;color:black}.section-foot{margin-top:25px;display:flex;gap:10px;align-items:center;font:10px monospace;color:#777;letter-spacing:.04em}.section-foot:before{content:'+';font-size:16px;color:#c4c4bd}
+.client-section{border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:#0b0b0b}.client-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:90px}.client-art{min-height:380px;position:relative;display:grid;place-items:center}.orbit{width:320px;height:320px;border:1px solid #ffffff13;border-radius:50%;position:absolute}.orbit:before,.orbit:after{content:'';position:absolute;inset:35px;border:1px dashed #ffffff12;border-radius:50%}.orbit:after{inset:-35px;border-style:solid;transform:scaleY(.42) rotate(-25deg)}.orbit-point{position:absolute;width:7px;height:7px;background:#e3e3dc;top:7px;left:91px;box-shadow:0 0 15px #fff5}.client-moon{width:190px;height:190px;filter:drop-shadow(0 0 45px #ffffff15);transform:rotate(-8deg);position:relative}.client-art .art-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font:9px monospace;letter-spacing:.2em;color:#60605d}.client-copy h2{font-size:72px;line-height:.9;margin:18px 0 24px}.client-copy h2 span{color:#777}.client-copy>p{font-size:13px;max-width:400px;color:#999991}.client-features{margin:28px 0;display:grid;grid-template-columns:1fr 1fr;gap:12px;font:11px monospace;color:#c8c8bf}.client-features span:before{content:'+';margin-right:12px;color:#666}.client-copy .text-link{font-size:11px;color:#a7a79f;display:inline-flex;margin:18px 0 0;gap:12px;align-items:center}.text-link:hover{color:white}
+.rank-layout{display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:start}.rank-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rank-choice{padding:14px 16px;border:1px solid var(--line);text-align:left;display:flex;justify-content:space-between;align-items:center;font:12px monospace;letter-spacing:.07em;transition:background .2s}.rank-choice small{font-size:9px;opacity:.5}.rank-choice:hover{background:#191919}.rank-choice[aria-pressed=true]{background:#efefe9;color:#080808;border-color:#efefe9}.rank-feature{padding:30px 32px;border-top:1px solid #aaa;background:linear-gradient(135deg,#ffffff08,transparent);position:relative;min-height:292px}.rank-feature:after{content:'✦';position:absolute;right:28px;top:22px;font-size:66px;color:#ffffff18}.rank-feature h3{font-family:var(--display);font-size:52px;line-height:1.1;margin:15px 0 12px}.rank-feature p{font-size:12px;color:#99998f;max-width:320px}.rank-bottom{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-top:27px}.rank-price{font-size:23px;letter-spacing:-1px;white-space:nowrap}.rank-price small{font-size:11px;letter-spacing:0;color:#999}.rank-note{font-size:10px!important;color:#777!important;margin-top:15px;max-width:none!important}.community{border-top:1px solid var(--line);padding:70px 0 80px;position:relative;overflow:hidden}.community-inner{display:flex;align-items:center;justify-content:space-between;gap:35px}.community h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(44px,6vw,76px);line-height:1;margin:14px 0}.community p{font-size:13px;color:#93938b}.community .btn{white-space:nowrap}.community:before{content:'+';position:absolute;left:58%;top:30px;font:170px monospace;color:#ffffff06;pointer-events:none}footer{border-top:1px solid var(--line);padding:30px 0}.footer-top{display:flex;align-items:center;justify-content:space-between;gap:20px}.footer-bottom{display:flex;justify-content:space-between;gap:25px;color:#62625e;font:9px monospace;margin-top:25px}.footer-links{display:flex;gap:24px;font-size:11px;color:#a3a39b}.footer-links a:hover{color:white}.footer-brand{font-size:17px}.footer-brand svg{width:23px;height:27px}
+dialog{background:#111;color:#eee;border:1px solid #ffffff40;width:min(520px,calc(100% - 32px));padding:38px;box-shadow:0 30px 100px #000c}dialog::backdrop{background:#000b;backdrop-filter:blur(8px)}.dialog-close{position:absolute;right:15px;top:12px;border:0;padding:6px;font-size:20px}.dialog-title{font-family:var(--display);font-size:44px;line-height:1.1;margin:15px 0 25px}dialog ol{list-style:none;padding:0;counter-reset:steps;margin:0 0 25px}dialog li{counter-increment:steps;display:flex;gap:16px;font-size:13px;padding:14px 0;border-bottom:1px solid var(--line);color:#a8a89f}dialog li:before{content:'0' counter(steps);font:12px monospace;color:white;padding-top:4px}dialog li strong{color:#efefe8;font-weight:500}dialog .btn{width:100%}.manual-copy{margin-top:18px;font-size:12px;color:#b5b5aa;display:none}.manual-copy input{display:block;background:#080808;border:1px solid #777;padding:10px;color:white;width:100%;margin-top:6px}.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,20px);padding:13px 23px;background:#edede7;color:#111;font:12px var(--font);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:4px 4px 0 #555;max-width:calc(100% - 32px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1500px){.hero-inner{padding-top:180px}.hero{max-height:1000px}.terrain{height:540px}.hero-bottom{left:calc((100% - 1168px)/2);right:calc((100% - 1168px)/2)}}
+@media(max-width:1000px){.wrap{padding:0 32px}.nav-links{gap:20px}.hero{min-height:780px;height:90svh}.hero h1{font-size:17vw}.moon{right:8%;top:125px;width:90px;height:90px}.hero-bottom{left:32px;right:32px}.client-grid{gap:30px}.rank-layout{gap:30px}.rank-bottom{align-items:start;flex-direction:column}.mode-copy{padding:8px 20px 24px}.side-label{display:none}.hero-inner{padding-top:165px}.hero-subtitle{font-size:14px}.terrain{height:460px}}
+@media(max-width:700px){.wrap{padding:0 22px}header{height:72px}.brand{font-size:19px}.brand svg{width:26px}.menu-toggle{display:block;font-size:11px}.nav-links{display:none;position:absolute;top:71px;left:0;right:0;background:#111;border-bottom:1px solid #444;padding:24px;align-items:stretch;gap:0;flex-direction:column}.nav-links.open{display:flex}.nav-links a{padding:14px 0}.nav-links .nav-discord{margin-top:10px;justify-content:space-between}.hero{min-height:760px;height:92svh;max-height:860px}.hero-inner{padding-top:171px}.hero-tag{font-size:8px;letter-spacing:.14em}.hero h1{font-size:20vw;letter-spacing:-.035em;margin:24px 0}.hero h1 sup{font-size:8px;margin:5px 0 0 2px}.hero-subtitle{max-width:275px;font-size:13px}.hero-actions{gap:9px;margin-top:25px}.hero-actions .btn{padding:13px 16px;gap:14px;font-size:11px}.moon{width:67px;height:67px;right:15%;top:104px;opacity:.65}.hero-bottom{left:22px;right:22px;bottom:28px;font-size:8px}.coordinates{max-width:130px}.terrain{height:380px;bottom:0;width:1040px;transform:translateX(-53%)}.server-strip{flex-wrap:wrap;padding:25px 0;gap:20px}.server-info{gap:12px}.server-address{font-size:17px;gap:12px}.players{width:100%;display:flex;justify-content:space-between;text-align:left;border-top:1px solid var(--line);padding-top:14px;font-size:11px}.players small{font-size:9px}.status-copy{font-size:11px}.status-copy small{font-size:9px}.section{padding:65px 0}.section-head{display:block;margin-bottom:28px}.section-head>p{margin-top:18px;max-width:340px}.section h2{font-size:46px}.modes{grid-template-columns:1fr;gap:16px}.mode{display:grid;grid-template-columns:40% 60%;min-height:188px}.mode-image{height:100%;min-height:188px}.mode-image svg{width:130%;margin-left:-15%}.mode-number{top:13px;left:14px}.mode-tag{display:none}.mode-copy{padding:24px 20px 24px 12px;align-self:center}.mode h3{font-size:29px}.mode-copy p{font-size:11px;min-height:0}.mode-image:after{background:linear-gradient(90deg,transparent,#0d0d0d)}.mode-title{gap:8px}.icon-link{width:25px;height:25px;flex:none}.client-grid{grid-template-columns:1fr;gap:35px}.client-art{min-height:280px;order:2}.orbit{width:220px;height:220px}.client-moon{width:135px;height:135px}.client-copy h2{font-size:65px}.client-art .art-label{bottom:-5px}.rank-layout{grid-template-columns:1fr;gap:20px}.rank-choice{font-size:11px;padding:13px}.rank-feature{padding:24px;min-height:270px}.rank-bottom{flex-direction:row;align-items:center}.rank-bottom .btn{font-size:10px;padding:12px 14px;gap:10px}.community{padding:55px 0}.community-inner{display:block}.community .btn{margin-top:25px}.footer-top{flex-wrap:wrap}.footer-links{gap:18px;font-size:10px}.footer-bottom{flex-direction:column;gap:9px;line-height:1.8}.eyebrow{font-size:9px}dialog{padding:30px 24px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<header><nav>
-<a class="logo" href="#home">AethelMC</a>
-<a class="l" href="#home" data-p="home">Főoldal</a>
-<a class="l" href="#moon" data-p="moon">🌙 Moon Client</a>
-<a class="l" href="#hub" data-p="hub">Központ</a>
-<a class="l" href="#shop" data-p="shop">Rangok</a>
-<a class="btn dc" style="padding:8px 14px" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">Discord</a>
-</nav></header>
-<main>
-
-<section class="pg" id="home">
-<div class="hero"><h1>AethelMC</h1><p>Magyar Minecraft szerver – kalandok, közösség és egy saját kliens: a Moon Client.</p>
-<a class="btn" href="#hub">Belépés a Központba</a> <a class="btn o" href="#moon">Moon Client</a> <a class="btn dc" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">💬 Discord</a></div>
-
-<div class="card stat" id="status">
-<div><h3 style="margin:0"><span class="dot"></span>Szerver státusz: <span id="st">Online</span></h3>
-<p style="margin:4px 0 0">IP: <code id="ip"></code> <button class="btn o" style="padding:4px 10px" onclick="cp()">Másolás</button></p></div>
-<div style="min-width:200px"><b id="pl"></b> játékos<div class="bar"><i id="pb"></i></div></div>
-</div>
-
-<div class="card" style="margin-top:16px"><h3>👑 Rangjaink</h3><div class="rb" id="rb"></div></div>
-<div class="grid">
-<div class="card"><h3>⚔️ Játékmódok</h3><p>Survival, PvP és minijátékok egy helyen.</p></div>
-<div class="card"><h3>🌙 Moon Client</h3><p>Saját kliensünk FPS-boosttal és extrákkal.</p><a class="btn o" href="#moon">Megnézem</a></div>
-<div class="card"><h3>👑 Rangok</h3><p>Támogasd a szervert és kapj előnyöket.</p><a class="btn o" href="#shop">Rangok</a></div>
-</div>
-</section>
-
-<section class="pg" id="moon">
-<div class="mp">
-<div class="mh"><div id="pm"></div><div><h1 class="mt">MOON</h1><p class="ms">CLIENT</p></div></div>
-<div style="text-align:center;margin:10px 0 30px"><p style="color:var(--mut);max-width:480px;margin:0 auto 20px;font-family:system-ui,sans-serif">Az AethelMC saját kliense. Gyorsabb játék, több FPS, tisztább kép.</p>
-<a class="btn" href="#" onclick="mdl(event)">⬇ Letöltés</a> <a class="btn o" style="background:transparent" href="https://discord.gg/zeZmU5WQjN" target="_blank" rel="noopener">Discord</a>
-<p class="msg" id="mdm" style="font-family:system-ui,sans-serif"></p></div>
-<div class="grid">
-<div class="card"><h3>FPS Boost</h3><p style="font-family:system-ui,sans-serif">Optimalizált render, gyorsabb játék gyengébb gépen is.</p></div>
-<div class="card"><h3>Zoom</h3><p style="font-family:system-ui,sans-serif">Egy gombnyomásra közelebb a távoli dolgok.</p></div>
-<div class="card"><h3>Egyedi HUD</h3><p style="font-family:system-ui,sans-serif">Rakd össze a saját felületed.</p></div>
-<div class="card"><h3>Keybindek</h3><p style="font-family:system-ui,sans-serif">Minden gyorsgomb a te kezében.</p></div>
-</div>
-<div class="card"><h3>Telepítés</h3><ol style="font-family:system-ui,sans-serif;color:var(--tx)"><li>Töltsd le a Moon Clientet.</li><li>Indítsd el a letöltött fájlt.</li><li>Válaszd ki a Moon Client profilt.</li><li>Csatlakozz: <code class="ipc"></code></li></ol></div>
-</div>
-<div style="display:none">
-<div class="card" style="text-align:center"><div class="moon">🌙</div><h1 style="margin:0">Moon Client</h1>
-<p>Az AethelMC saját kliense. Gyorsabb játék, jobb FPS, extra funkciók.</p>
-<a class="btn" id="dl" href="#" onclick="dlc(event)">⬇ Kliens letöltése</a>
-<p class="msg" id="dlm"></p></div>
-<div class="grid">
-<div class="card"><h3>Telepítés</h3><ol><li>Töltsd le a klienst</li><li>Indítsd el a fájlt</li><li>Válaszd a Moon Client profilt</li><li>Csatlakozz: <code class="ipc"></code></li></ol></div>
-<div class="card"><h3>Funkciók</h3><p>FPS növelés, zoom, keybind, egyedi HUD.</p></div>
-</div>
-</div>
-</section>
-
-<section class="pg" id="hub">
-<div class="card" style="max-width:460px;margin:auto" id="auth">
-<h1 style="margin-top:0">Központ</h1>
-<div class="tabs"><button class="btn" id="tl" onclick="tab('l')">Belépés</button><button class="btn o" id="tr" onclick="tab('r')">Regisztráció</button></div>
-<label>Minecraft név</label><input id="u" maxlength="16" placeholder="pl. Steve123" autocomplete="username">
-<label>Jelszó</label><input id="pw" type="password" placeholder="••••••••" autocomplete="current-password">
-<div id="pw2w" style="display:none"><label>Jelszó újra</label><input id="pw2" type="password" placeholder="••••••••"></div>
-<button class="btn" style="width:100%" onclick="go()" id="gob">Belépés</button>
-<p class="msg" id="am" style="color:#f87171"></p>
-</div>
-<div id="dash" style="display:none">
-<div class="dg">
-<div class="sb"><a class="on" href="#hub">🏠 Főoldal</a><a href="#shop">👑 Rangok</a><a href="#moon">🌙 Moon Client</a><a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">💬 Discord</a><a href="#" onclick="out();return false">🚪 Kilépés</a></div>
-<div><div class="sg" id="sg"></div>
-<div class="pn">
-<div class="card"><h3 id="dn"></h3><svg viewBox="0 0 16 32" shape-rendering="crispEdges" style="height:230px;display:block;margin:10px auto;filter:drop-shadow(0 0 16px #8b5cf688)"><rect x="4" y="0" width="8" height="8" fill="#e0b48a"/><rect x="4" y="0" width="8" height="3" fill="#2b2140"/><rect x="5" y="4" width="2" height="1" fill="#222"/><rect x="9" y="4" width="2" height="1" fill="#222"/><rect x="4" y="8" width="8" height="12" fill="#8b5cf6"/><rect x="0" y="8" width="4" height="12" fill="#e0b48a"/><rect x="12" y="8" width="4" height="12" fill="#e0b48a"/><rect x="4" y="20" width="4" height="12" fill="#3b3f8f"/><rect x="8" y="20" width="4" height="12" fill="#2d3070"/></svg></div>
-<div class="card" style="padding:0;overflow:hidden;display:flex;flex-direction:column"><div class="dh"><span>💬 Discord</span><span>AethelMC</span></div><div style="padding:16px;flex:1"><p style="margin:0">Nincs összekötve Discord fiókkal.</p><p style="font-size:.85rem">Csatlakozz a közösséghez, és kösd össze a fiókod.</p></div><a class="btn" style="border-radius:0;background:#5865f2;text-align:center" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener">Csatlakozás a Discordhoz</a></div>
-<div class="card"><h3>Online <button class="btn" id="tb" style="padding:6px 10px;font-size:.7rem" onclick="tw()">Váltás heti nézetre</button></h3><svg id="cs" viewBox="0 0 300 175" style="width:100%;color:var(--tx)"></svg><small style="color:var(--mut)">Demó adatok</small></div>
-</div></div></div>
-<div class="card"><h2 style="margin-top:0">Üdv, <span id="who"></span>! 👋</h2><p>Itt kezelheted a fiókod és a rangjaid.</p>
-<a class="btn" href="#shop">Rang vásárlás</a> <button class="btn o" onclick="out()">Kilépés</button></div>
-<div class="card" style="margin-top:16px"><h3>Hogyan csatlakozz a szerverhez?</h3>
-<ol><li>Indítsd el a Minecraftot (vagy a <b>Moon Client</b>-et)</li><li>Multiplayer → <b>Szerver hozzáadása</b></li><li>Szerver címe: <code class="ipc"></code></li><li>Első belépéskor: <code>/register jelszó jelszó</code></li><li>Később: <code>/login jelszó</code></li></ol></div>
-</div>
-</section>
-
-<section class="pg" id="shop">
-<h1>Rangok</h1>
-<div class="grid" id="rk"></div>
-<div class="grid" style="display:none">
-<div class="card"><h3>⭐ VIP</h3><div class="price">1 990 Ft</div><p>Prefix, /kit vip, extra otthon.</p><button class="btn" onclick="buy('VIP')">Vásárlás</button></div>
-<div class="card"><h3>💎 MVP</h3><div class="price">3 990 Ft</div><p>Mindent tud a VIP, plusz fly a lobbiban.</p><button class="btn" onclick="buy('MVP')">Vásárlás</button></div>
-<div class="card"><h3>🌙 Moon+</h3><div class="price">6 990 Ft</div><p>Egyedi részecskék, Moon Client kozmetikumok.</p><button class="btn" onclick="buy('Moon+')">Vásárlás</button></div>
-</div>
-<p class="msg" id="bm"></p>
-</section>
+<a class="skip" href="#main">Ugrás a tartalomra</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="logo" viewBox="0 0 32 36"><path fill="currentColor" d="M12 0h8v4h4v8h4v8h4v16h-8v-8H8v8H0V20h4v-8h4V4h4zm0 16v4h8v-4h-4V8h-4z"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="copy" viewBox="0 0 24 24"><path d="M8 8h12v12H8zM16 4H4v12" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+<symbol id="discord" viewBox="0 0 24 24"><path fill="currentColor" d="M19.8 5.2A18 18 0 0 0 15.4 4l-.6 1.2a16 16 0 0 0-5.6 0L8.6 4a18 18 0 0 0-4.4 1.2C1.5 9.2.8 13 1.2 16.8c1.8 1.3 3.5 2 5.1 2.4l1-1.7-1.6-.8.4-.3c3.8 1.7 8 1.7 11.8 0l.4.3-1.6.8 1 1.7a19 19 0 0 0 5.1-2.4c.5-4.4-.8-8.2-3-11.6ZM8.4 14.5c-1 0-1.7-.9-1.7-2s.7-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2Zm7.2 0c-1 0-1.7-.9-1.7-2s.7-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2Z"/></symbol>
+<symbol id="pixelmoon" viewBox="0 0 128 128"><path fill="#e3e3dc" d="M16 0h96v8h8v8h8v96h-8v8h-8v8H16v-8H8v-8H0V16h8V8h8z"/><path fill="#b6b6af" d="M16 0h16v8H16zM0 16h8v64H0zm8 64h8v32H8zm8 32h32v8H16zm32 8h64v8H48zM88 8h24v8H88zm16 8h16v16h-16zM24 24h24v8H24zm-8 8h40v16H16zm8 16h24v8H24zM80 72h24v8H80zm-8 8h40v24H72zm8 24h24v8H80z"/><path fill="#cdcdc6" d="M56 8h24v16H56zM8 56h16v16H8zm24 8h24v24H32zm24-24h24v16H56zm48 0h16v24h-16zM48 96h16v16H48z"/><path fill="#989892" d="M24 32h24v8H24zM80 80h24v8H80zm-8 8h16v16H72z"/><path fill="#f5f5ef" d="M32 8h24v8H32zM8 16h8v24H8zm72 24h16v8H80zM56 64h8v8h-8zM32 96h8v8h-8z"/></symbol>
+</defs></svg>
+<header><div class="wrap nav"><a href="#home" class="brand" aria-label="AethelMC főoldal"><svg><use href="#logo"/></svg>AETHEL<small>MC</small></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">MENÜ +</button><nav class="nav-links" id="navigation" aria-label="Fő navigáció"><a href="#jatekok">Játékmódok</a><a href="#moon">Moon Client</a><a href="#shop">Rangok</a><button class="btn" data-join style="padding:8px 14px;font-size:11px">Csatlakozás</button><a class="nav-discord" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer">Discord <svg><use href="#arrow"/></svg></a></nav></div></header>
+<main id="main">
+<section class="hero" id="home" aria-labelledby="hero-title"><canvas class="stars" aria-hidden="true"></canvas><div class="moon" aria-hidden="true"><svg><use href="#pixelmoon"/></svg></div><div class="side-label" aria-hidden="true">AETHELMC / MINECRAFT AFTER DARK</div><div class="wrap hero-inner"><div class="eyebrow hero-tag"><span class="tiny-square"></span> Magyar Minecraft közösség <span>/</span> A hold alatt</div><h1 id="hero-title">AETHEL<span>MC</span><sup>✦</sup></h1><p class="hero-subtitle"><strong>Az éjszaka a tiéd.</strong> Építs valami maradandót.<br>Vagy csak egy jó estét a haverokkal.</p><div class="hero-actions"><button class="btn primary" data-join>Irány a szerver <svg><use href="#arrow"/></svg></button><a href="#jatekok" class="btn">Fedezd fel <span aria-hidden="true">↓</span></a></div><button class="hero-ip" data-copy aria-label="Szervercím másolása: play.aethelmc.fun">play.aethelmc.fun <svg><use href="#copy"/></svg></button></div><canvas class="terrain" aria-hidden="true"></canvas><div class="hero-bottom"><div class="coordinates">OVERWORLD / ÉJSZAKAI MŰSZAK<br><span style="color:#555">BLOKKRÓL BLOKKRA. EGYÜTT.</span></div><a class="scroll-link" href="#jatekok">VAN MÉG LEJJEBB <span>↓</span></a></div></section>
+<div class="wrap"><div class="server-strip" aria-label="Szerverinformáció"><div class="server-info"><span class="status-dot" id="status-dot"></span><div class="status-copy"><span id="status-text">Státusz lekérdezése…</span><small>MAGYAR MINECRAFT SZERVER</small></div></div><div><div class="server-label">A KÖVETKEZŐ KALANDOD CÍME</div><div class="server-address">play.aethelmc.fun<button data-copy aria-label="Szervercím másolása"><svg><use href="#copy"/></svg></button></div></div><div class="players"><span id="player-count">— / — játékos</span><small id="status-detail">ÉLŐ SZERVERSTÁTUSZ</small></div></div></div>
+<section class="section" id="jatekok"><div class="wrap"><div class="section-head"><div><div class="eyebrow">01 / Találd meg a helyed</div><h2>Egy szerver.<br>A te világod.</h2></div><p>Van, aki épít. Van, aki harcol.<br>Van, aki csak még egy körre marad.<br>Te hogyan játszol?</p></div><div class="modes">
+<article class="mode"><div class="mode-image"><span class="mode-number">01 /</span><span class="mode-tag">ÉPÍTS & FEDEZZ FEL</span><svg viewBox="0 0 340 230" aria-hidden="true"><g id="survival-art"></g></svg></div><div class="mode-copy"><div class="mode-title"><h3>Survival</h3><button class="icon-link" data-join aria-label="Csatlakozás a Survival játékmódhoz"><svg><use href="#arrow"/></svg></button></div><p>Az első faháztól a saját birodalmadig.<br>Minden nagy sztori egy blokkal kezdődik.</p></div></article>
+<article class="mode"><div class="mode-image"><span class="mode-number">02 /</span><span class="mode-tag">MUTASD, MIT TUDSZ</span><svg viewBox="0 0 340 230" aria-hidden="true"><defs><path id="sword" d="M-8-90h16v80h12v12H8v30H-8V2h-12v-12h12z"/></defs><g transform="translate(170 132)"><circle r="75" fill="none" stroke="#ffffff0d"/><circle r="92" fill="none" stroke="#ffffff08"/><g transform="rotate(-42)"><use href="#sword" fill="#555" stroke="#777" stroke-width="4"/><path d="M0-84v74" stroke="#aaa" stroke-width="7"/></g><g transform="rotate(42)"><use href="#sword" fill="#bbb" stroke="#ddd" stroke-width="4"/><path d="M0-84v74" stroke="#eee" stroke-width="7"/><path d="M-20-10h40v12h-40z" fill="#777"/><path d="M-6 4h12v27H-6z" fill="#444"/></g><path d="M-88 15h8m-4-4v8M65-60h10m-5-5v10M25 70h6" stroke="#888"/></g></svg></div><div class="mode-copy"><div class="mode-title"><h3>PvP</h3><button class="icon-link" data-join aria-label="Csatlakozás a PvP játékmódhoz"><svg><use href="#arrow"/></svg></button></div><p>Szemtől szemben. Kard a kézben.<br>A következő mozdulat a tiéd.</p></div></article>
+<article class="mode"><div class="mode-image"><span class="mode-number">03 /</span><span class="mode-tag">MÉG EGY UTOLSÓ KÖR</span><svg viewBox="0 0 340 230" aria-hidden="true"><g id="minigame-art"></g></svg></div><div class="mode-copy"><div class="mode-title"><h3>Minijátékok</h3><button class="icon-link" data-join aria-label="Csatlakozás a minijátékokhoz"><svg><use href="#arrow"/></svg></button></div><p>Rövid körök, hosszú esték.<br>Hozd a csapatot, a többi jön magától.</p></div></article>
+</div><p class="section-foot">Egy IP. Rengeteg lehetőség. Találkozunk bent.</p></div></section>
+<section class="section client-section" id="moon"><div class="wrap client-grid"><div class="client-art" aria-hidden="true"><div class="orbit"><span class="orbit-point"></span></div><svg class="client-moon"><use href="#pixelmoon"/></svg><span class="art-label">LUNAR SYSTEM / AETHELMC ORIGINAL</span></div><div class="client-copy"><div class="eyebrow">02 / A saját kliensünk</div><h2>MOON<br><span>CLIENT.</span></h2><p>Kevesebb sallang. Több játék. Az AethelMC saját kliense azoknak, akik a részletekre is figyelnek.</p><div class="client-features"><span>FPS boost</span><span>Egyedi HUD</span><span>Zoom</span><span>Saját keybindek</span></div><a class="btn primary" href="https://discord.gg/zeZmU5WQjN" target="_blank" rel="noopener noreferrer">Moon Client Discord <svg><use href="#arrow"/></svg></a><br><a class="text-link" href="https://discord.gg/zeZmU5WQjN" target="_blank" rel="noopener noreferrer">Letöltés és friss hírek a kliens közösségében <span>↗</span></a></div></div></section>
+<section class="section" id="shop"><div class="wrap"><div class="section-head"><div><div class="eyebrow">03 / Hagyd itt a névjegyed</div><h2>Más szint.<br>Ugyanaz a közösség.</h2></div><p>Támogasd az AethelMC-t, és válassz saját rangot. A VIP-től egészen a Solstice-ig.</p></div><div class="rank-layout"><div class="rank-list" role="group" aria-label="Rang kiválasztása"></div><div class="rank-feature" aria-live="polite" aria-atomic="true"><div class="eyebrow" id="rank-level">SZINT 10 / 10</div><h3 id="rank-name">SOLSTICE</h3><p>Exkluzív prefix és ranghoz tartozó előnyök. A pontos tartalomról és a vásárlásról a Discordon érdeklődhetsz.</p><div class="rank-bottom"><div class="rank-price"><span id="rank-price">17 990</span> <small>Ft</small></div><a class="btn" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer">Érdekel a rang <svg><use href="#arrow"/></svg></a></div><p class="rank-note">Tájékoztató ár az eredeti kínálat alapján.</p></div></div></div></section>
+<section class="community"><div class="wrap community-inner"><div><div class="eyebrow">A játék a szerveren. A társaság itt.</div><h2>Ne csak nézd.<br>Légy ott.</h2><p>Hírek, csapattársak, meg az a bizonyos „jössz még egyre?”</p></div><a class="btn primary" href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer"><svg><use href="#discord"/></svg>Csatlakozz a Discordhoz <svg><use href="#arrow"/></svg></a></div></section>
 </main>
-
-<footer>
-<div class="pay">
-<svg viewBox="0 0 80 48"><rect width="80" height="48" rx="8" fill="#1a1f71"/><text x="40" y="32" text-anchor="middle" font-family="Arial" font-weight="900" font-style="italic" font-size="22" fill="#fff">VISA</text></svg>
-<svg viewBox="0 0 80 48"><rect width="80" height="48" rx="8" fill="#fff"/><text x="40" y="31" text-anchor="middle" font-family="Arial" font-weight="900" font-style="italic" font-size="17"><tspan fill="#003087">Pay</tspan><tspan fill="#009cde">Pal</tspan></text></svg>
-<svg viewBox="0 0 80 48"><rect width="80" height="48" rx="8" fill="#1c1c28"/><circle cx="32" cy="24" r="14" fill="#eb001b"/><circle cx="48" cy="24" r="14" fill="#f79e1b" fill-opacity=".9"/></svg>
-</div>
-<p><a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener" style="color:var(--ac2);font-weight:700">💬 Csatlakozz a Discordra</a></p>© 2026 AethelMC – Nem hivatalos Minecraft termék, nem áll kapcsolatban a Mojang-gal.
-</footer>
-
+<footer><div class="wrap"><div class="footer-top"><a href="#home" class="brand footer-brand"><svg><use href="#logo"/></svg>AETHEL<small>MC</small></a><div class="footer-links"><a href="#moon">Moon Client</a><a href="#shop">Rangok</a><a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer">Discord ↗</a><a href="#home">Vissza fel ↑</a></div></div><div class="footer-bottom"><span>© <span id="year">2026</span> AethelMC. Blokkról blokkra.</span><span>Nem hivatalos Minecraft termék. Nem áll kapcsolatban a Mojang vagy a Microsoft vállalattal.</span></div></div></footer>
+<dialog id="join-dialog" aria-labelledby="join-title"><button class="dialog-close" aria-label="Bezárás">×</button><div class="eyebrow">A következő fejezet itt indul</div><h2 class="dialog-title" id="join-title">TALÁLKOZUNK BENT.</h2><ol><li><span>Indítsd el a <strong>Minecraft Java Edition</strong> játékot.</span></li><li><span>Nyisd meg a <strong>Többjátékos → Szerver hozzáadása</strong> menüt.</span></li><li><span>Szervercímnek add meg:<br><strong>play.aethelmc.fun</strong></span></li></ol><button class="btn primary" data-copy>Szervercím másolása <svg><use href="#copy"/></svg></button><div class="manual-copy" id="manual-copy">Jelöld ki és másold ki a szervercímet:<input aria-label="Másolható szervercím" value="play.aethelmc.fun" readonly></div><p class="muted" style="font-size:11px;margin-top:20px">Elakadtál? <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">Kérj segítséget a Discordon ↗</a></p></dialog>
+<div class="toast" role="status" aria-live="polite"></div>
 <script>
-var IP="play.aethelmc.fun", ON=true, PL=37, MAX=100;
-var $=function(i){return document.getElementById(i)};
-document.querySelectorAll(".ipc").forEach(function(e){e.textContent=IP});
-$("ip").textContent=IP;
-$("st").textContent=ON?"Online":"Offline";
-$("pl").textContent=PL+" / "+MAX;
-setTimeout(function(){$("pb").style.width=(PL/MAX*100)+"%"},200);
-function cp(){try{navigator.clipboard.writeText(IP)}catch(e){}}
-function route(){var h=(location.hash||"#home").slice(1);if(!$(h))h="home";
-document.querySelectorAll(".pg").forEach(function(s){s.classList.toggle("on",s.id===h)});
-document.querySelectorAll("nav a.l").forEach(function(a){a.classList.toggle("on",a.dataset.p===h)});document.body.classList.toggle("mc",h==="moon");scrollTo(0,0)}
-addEventListener("hashchange",route);route();
-function dlc(e){e.preventDefault();$("dlm").textContent="Itt indul majd a letöltés – add meg a kliens fájl linkjét!"}
-var mode="l";
-function tab(m){mode=m;$("tl").className="btn"+(m=="l"?"":" o");$("tr").className="btn"+(m=="r"?"":" o");
-$("pw2w").style.display=m=="r"?"block":"none";$("gob").textContent=m=="r"?"Regisztráció":"Belépés";$("am").textContent=""}
-function go(){var u=$("u").value.trim(),p=$("pw").value,m=$("am");
-if(!/^\w{3,16}$/.test(u)){m.textContent="Érvénytelen Minecraft név (3-16 karakter).";return}
-if(p.length<6){m.textContent="A jelszó legalább 6 karakter legyen.";return}
-if(mode=="r"&&p!==$("pw2").value){m.textContent="A két jelszó nem egyezik.";return}
-try{localStorage.setItem("aethel_user",u)}catch(e){}
-show(u)}
-function show(u){fill(u);$("auth").style.display="none";$("dash").style.display="block";$("who").textContent=u}
-function out(){try{localStorage.removeItem("aethel_user")}catch(e){}$("dash").style.display="none";$("auth").style.display="block"}
-try{var s=localStorage.getItem("aethel_user");if(s)show(s)}catch(e){}
-function buy(r){var u="";try{u=localStorage.getItem("aethel_user")||""}catch(e){}
-$("bm").textContent=u?(r+" rang kiválasztva ("+u+"). A fizetés itt indulna Visa / PayPal / Mastercard-dal."):"Előbb lépj be a Központban!"}
-var R=[["VIP","#4ade80",1990],["WEAVER","#2dd4bf",2990],["SPIRIT","#14b8a6",3990],["OMNI","#d9690f",4990],["NEXUS","#22c55e",5990],["ECLIPSAR","#8b3fb5",7490],["ZENITH","#c084fc",8990],["ZEUS","#a855f7",10990],["APEX","#ef4444",13990],["SOLSTICE","#facc15",17990]];
-function shd(c){return '<svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.500 9-8 11-4.500-2-8-6-8-11V5z" fill="'+c+'"/><circle cx="12" cy="10" r="2.600" fill="#0007"/><path d="M7.500 17c1-2.500 2.700-3.500 4.500-3.500s3.500 1 4.500 3.500c-1.300 1.300-2.800 2.200-4.500 2.800-1.700-.6-3.200-1.500-4.500-2.800z" fill="#0007"/></svg>'}
-$("rk").innerHTML=R.map(function(r,i){return '<div class="card rk" style="--c:'+r[1]+'">'+shd(r[1])+'<h3>'+r[0]+'</h3><div class="price">'+r[2].toLocaleString("hu-HU")+' Ft</div><p>Szint '+(i+1)+'/10 – exkluzív prefix és előnyök.</p><button class="btn" onclick="buy(\''+r[0]+'\')">Vásárlás</button></div>'}).join("");
-$("rb").innerHTML=R.slice().reverse().map(function(r){return '<a href="#shop" style="--c:'+r[1]+'">'+r[0]+'</a>'}).join("");
-(function(){var s='<svg viewBox="0 0 14 14" shape-rendering="crispEdges" class="mm">';for(var y=0;y<14;y++)for(var x=0;x<14;x++){var a=Math.hypot(x+.5-7,y+.5-7)<=6.8,b=Math.hypot(x+.5-9.5,y+.5-6)<=5.6;if(a&&!b)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+(x<3?'#aab8ff':'#e3e8ff')+'"/>'}$("pm").innerHTML=s+'</svg>'})();
-function mdl(e){e.preventDefault();$("mdm").textContent="Itt indul majd a letöltés – add meg a kliens fájl linkét!"}
-var wk=0;
-function fill(u){$("dn").textContent=u;var S=[["⭐","Rangok","Tag"],["🪙","AethelCoin","130"],["🎰","Zseton","300"],["🛡️","Guild","Nincs"],["⏱️","Online töltött idő","21 óra"],["📊","Szint","5"],["⛔","Büntetés","nincs"]];
-$("sg").innerHTML=S.map(function(a){return '<div class="sc"><i>'+a[0]+'</i><div><small>'+a[1]+'</small><b>'+a[2]+'</b></div></div>'}).join("");ch(wk)}
-function tw(){wk=!wk;ch(wk);$("tb").textContent=wk?"Váltás napi nézetre":"Váltás heti nézetre"}
-function ch(w){var v=w?[12,18,9,21]:[1.5,2.5,.5,3,2,3.5,1],l=w?["1. hét","2. hét","3. hét","4. hét"]:["H","K","Sze","Cs","P","Szo","V"],m=w?24:4,s="",i,y,bw=260/v.length;
-for(i=0;i<=3;i++){y=10+i*46.7;s+='<line x1="30" x2="290" y1="'+y+'" y2="'+y+'" stroke="currentColor" opacity=".15"/><text x="2" y="'+(y+3)+'" font-size="9" fill="currentColor" opacity=".6">'+(m-i*m/3).toFixed(1)+'</text>'}
-v.forEach(function(a,j){var h=a/m*140;s+='<rect x="'+(34+j*bw)+'" y="'+(150-h)+'" width="'+(bw-10)+'" height="'+h+'" rx="4" fill="url(#bg)"/><text x="'+(34+j*bw+(bw-10)/2)+'" y="166" font-size="9" text-anchor="middle" fill="currentColor" opacity=".7">'+l[j]+'</text>'});
-$("cs").innerHTML='<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>'+s}
+'use strict';
+// Minden grafika helyben készül. A betűtípusok és az élő státusz opcionális hálózati kérések.
+const CONFIG={ip:'play.aethelmc.fun',statusUrl:'https://api.mcsrvstat.us/3/play.aethelmc.fun'};
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+$('#year').textContent=new Date().getFullYear();
+const dialog=$('#join-dialog');
+$$('[data-join]').forEach(b=>b.addEventListener('click',()=>{if(!dialog.open)dialog.showModal()}));
+$('.dialog-close').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
+let toastTimer;
+function notify(message){const t=$('.toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3200)}
+async function copyIP(){let ok=false;try{await navigator.clipboard.writeText(CONFIG.ip);ok=true}catch{const input=document.createElement('textarea');input.value=CONFIG.ip;input.style.cssText='position:fixed;opacity:0;pointer-events:none';(dialog.open?dialog:document.body).append(input);input.select();try{ok=document.execCommand('copy')}catch{}input.remove()}if(ok){notify('Szervercím kimásolva. Találkozunk bent!')}else{if(!dialog.open)dialog.showModal();$('#manual-copy').style.display='block';$('#manual-copy input').select()}}
+$$('[data-copy]').forEach(b=>b.addEventListener('click',copyIP));
+const menu=$('.menu-toggle'),nav=$('#navigation');
+function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='MENÜ +'}
+menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'BEZÁRÁS −':'MENÜ +'});
+nav.querySelectorAll('a,button').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+const ranks=[['VIP',1990],['WEAVER',2990],['SPIRIT',3990],['OMNI',4990],['NEXUS',5990],['ECLIPSAR',7490],['ZENITH',8990],['ZEUS',10990],['APEX',13990],['SOLSTICE',17990]];
+ranks.forEach(([name,price],i)=>{const b=document.createElement('button');b.className='rank-choice';b.setAttribute('aria-pressed',String(i===9));b.innerHTML='<span>'+name+'</span><small>'+String(i+1).padStart(2,'0')+' ↗</small>';b.addEventListener('click',()=>{$$('.rank-choice').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');$('#rank-name').textContent=name;$('#rank-price').textContent=price.toLocaleString('hu-HU');$('#rank-level').textContent='SZINT '+(i+1)+' / 10'});$('.rank-list').append(b)});
+async function updateStatus(){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);try{const res=await fetch(CONFIG.statusUrl,{signal:controller.signal});if(!res.ok)throw Error('status');const data=await res.json();if(typeof data.online!=='boolean')throw Error('data');$('#status-text').textContent=data.online?'A szerver online':'A szerver offline';$('#status-dot').classList.toggle('online',data.online);const valid=data.online&&Number.isFinite(data.players?.online)&&Number.isFinite(data.players?.max);$('#player-count').textContent=valid?data.players.online+' / '+data.players.max+' játékos':'— / — játékos';$('#status-detail').textContent='ELLENŐRIZVE '+new Date().toLocaleTimeString('hu-HU',{hour:'2-digit',minute:'2-digit'})}catch{$('#status-text').textContent='Státusz nem elérhető';$('#status-dot').classList.remove('online');$('#player-count').textContent='— / — játékos';$('#status-detail').textContent='PRÓBÁLJ CSATLAKOZNI A JÁTÉKBAN'}finally{clearTimeout(timeout)}}
+updateStatus();setInterval(()=>{if(!document.hidden)updateStatus()},120000);
+// Determinisztikus, izometrikus blokkvilág; nincs külső kép vagy grafikus könyvtár.
+function seeded(seed){return()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
+const terrain=$('.terrain'),ctx=terrain.getContext('2d');
+function landscape(){if(!ctx)return;const w=1440,h=540,dpr=Math.min(devicePixelRatio||1,2);terrain.width=w*dpr;terrain.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);const random=seeded(927);
+function poly(p,color){ctx.fillStyle=color;ctx.beginPath();p.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill()}
+function block(x,y,z,size,shade){const sx=720+(x-y)*size,sy=100+(x+y)*size*.43-z*size;const a=size,b=size*.43,c=size;poly([[sx,sy],[sx+a,sy+b],[sx,sy+2*b],[sx-a,sy+b]],`rgb(${shade+17},${shade+17},${shade+17})`);poly([[sx-a,sy+b],[sx,sy+2*b],[sx,sy+2*b+c],[sx-a,sy+b+c]],`rgb(${shade-9},${shade-9},${shade-9})`);poly([[sx,sy+2*b],[sx+a,sy+b],[sx+a,sy+b+c],[sx,sy+2*b+c]],`rgb(${shade},${shade},${shade})`)}
+// Távoli, lépcsőzetes hegyvonulatok.
+for(let layer=0;layer<3;layer++){const r=seeded(110+layer),base=250+layer*55;ctx.fillStyle=['#131313','#191919','#202020'][layer];ctx.beginPath();ctx.moveTo(0,h);let py=base;for(let x=0;x<=w;x+=24){const ny=base+Math.sin(x*.009+layer)*35+r()*35;ctx.lineTo(x,py);ctx.lineTo(x,ny);py=ny}ctx.lineTo(w,h);ctx.fill()}
+const cells=[];for(let x=-20;x<24;x++)for(let y=-20;y<24;y++){const river=Math.abs(x-y+1);if(river<4.4)continue;const distance=Math.sqrt((x*.8)**2+(y*.8)**2);if(distance>25)continue;const hill=Math.sin(x*.29)*1.5+Math.cos(y*.34)*1.4;const z=Math.max(0,Math.floor(1.6+hill+(river>14?1:0)));cells.push({x,y,z,shade:29+Math.floor(random()*16),tree:random()>.943&&river>7&&z>1})}
+cells.sort((a,b)=>(a.x+a.y)-(b.x+b.y));for(const c of cells){for(let z=-2;z<=c.z;z++)block(c.x,c.y,z,24,c.shade-(c.z-z)*3);if(c.tree){for(let j=1;j<5;j++)block(c.x,c.y,c.z+j,24,23);for(let level=0;level<3;level++){const radius=level===2?0:1;for(let dx=-radius;dx<=radius;dx++)for(let dy=-radius;dy<=radius;dy++){block(c.x+dx,c.y+dy,c.z+4+level,24,34+level*7+Math.floor(random()*8))}}}}
+// Blokkhíd a szurdok fölött.
+for(let n=-5;n<8;n++)block(n,1,2,24,58);
+const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'#08080800');grad.addColorStop(.55,'#08080800');grad.addColorStop(1,'#080808');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+}
+landscape();
+function cubeSVG(x,y,s,v){return `<path d="M${x} ${y}l${s} ${s/2} -${s} ${s/2} -${s} -${s/2}Z" fill="rgb(${v+35},${v+35},${v+35})"/><path d="M${x-s} ${y+s/2}l${s} ${s/2}v${s}l-${s} -${s/2}Z" fill="rgb(${v-20},${v-20},${v-20})"/><path d="M${x} ${y+s}l${s} -${s/2}v${s}l-${s} ${s/2}Z" fill="rgb(${v},${v},${v})"/>`}
+let survival='';for(let sum=0;sum<5;sum++)for(let x=0;x<3;x++){let y=sum-x;if(y>=0&&y<3)survival+=cubeSVG(170+(x-y)*26,105+(x+y)*13,26,65+(x+y)*3)}survival+=cubeSVG(170,80,14,63)+cubeSVG(170,56,14,63);for(let sum=0;sum<3;sum++)for(let x=0;x<2;x++){let y=sum-x;if(y>=0&&y<2)survival+=cubeSVG(170+(x-y)*25,35+(x+y)*12.5,25,105+x*8)}$('#survival-art').innerHTML=survival;
+$('#minigame-art').innerHTML=cubeSVG(100,135,29,70)+cubeSVG(170,93,27,100)+cubeSVG(233,48,24,133)+'<path d="M96 112h8m-4-4v8M233 26h10m-5-5v10M135 64h6" stroke="#a5a5a5"/><path d="M109 128Q130 79 162 88M182 85Q202 37 230 42" stroke="#666" stroke-dasharray="3 5" fill="none"/>';
+const stars=$('.stars'),sc=stars.getContext('2d'),motion=matchMedia('(prefers-reduced-motion: reduce)');let starPoints=[],sw=0,sh=0,frame=0,visible=true;
+function setupStars(){if(!sc)return;const r=stars.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);sw=r.width;sh=r.height;stars.width=sw*d;stars.height=sh*d;sc.setTransform(d,0,0,d,0,0);const rand=seeded(712);starPoints=Array.from({length:Math.floor(sw/5)},()=>({x:rand()*sw,y:rand()*sh*.88,size:rand()>.93?2:1,phase:rand()*Math.PI*2,alpha:.15+rand()*.5}));drawStars(0)}
+function drawStars(t){if(!sc)return;sc.clearRect(0,0,sw,sh);starPoints.forEach(s=>{const a=s.alpha*(motion.matches?1:.72+.28*Math.sin(t*.00055+s.phase));sc.fillStyle=`rgba(230,230,220,${a})`;sc.fillRect(s.x,s.y,s.size,s.size);if(s.size===2&&s.alpha>.58){sc.fillStyle=`rgba(230,230,220,${a*.5})`;sc.fillRect(s.x-3,s.y+.5,8,1);sc.fillRect(s.x+.5,s.y-3,1,8)}})}
+function animate(t){frame=0;if(!document.hidden&&visible&&!motion.matches){drawStars(t);frame=requestAnimationFrame(animate)}}
+function resume(){if(frame)cancelAnimationFrame(frame);frame=0;if(!motion.matches&&!document.hidden&&visible)frame=requestAnimationFrame(animate);else drawStars(0)}
+setupStars();new ResizeObserver(()=>setupStars()).observe(stars);new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;resume()}).observe($('.hero'));document.addEventListener('visibilitychange',resume);motion.addEventListener('change',resume);
 </script>
 </body>
 </html>
