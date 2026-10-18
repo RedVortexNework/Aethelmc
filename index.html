@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC - Vezérlőpult</title>
+    <title>AethelMC - Vezérlőpult & Webshop</title>
     <style>
         :root {
             --orange: #ff9800;
@@ -30,6 +30,7 @@
             flex-direction: column;
         }
 
+        /* HEADER */
         header {
             background: #0d0d0d;
             padding: 15px 30px;
@@ -89,6 +90,7 @@
             background: var(--orange-hover);
         }
 
+        /* LAYOUT (SIDEBAR + MAIN) */
         .app-layout {
             display: flex;
             flex: 1;
@@ -150,6 +152,7 @@
             display: block;
         }
 
+        /* STATS & CHARTS */
         .dash-stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -210,6 +213,86 @@
             transition: height 0.3s;
         }
 
+        /* CARDS GRID FOR RANKS / COINS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .store-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .store-card h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .store-card .price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 15px;
+        }
+
+        .store-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .store-card ul li {
+            margin-bottom: 8px;
+        }
+
+        .store-card ul li::before {
+            content: '✓ ';
+            color: var(--orange);
+        }
+
+        /* BANK INFO BOX */
+        .bank-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .bank-item {
+            background: #121212;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .bank-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .bank-item span {
+            font-family: monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* FOOTER */
         footer {
             background: #18181b;
             text-align: center;
@@ -222,18 +305,21 @@
 </head>
 <body>
 
+    <!-- HEADER -->
     <header>
         <div class="header-left">
             <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
             <div class="brand">AethelMC</div>
         </div>
         <div class="user-info">
-            <span>Üdv, <strong id="userNameDisp">MrBenceYT</strong></span>
-            <button class="btn-orange" onclick="alert('Kijelentkezve!')">Kijelentkezés</button>
+            <span>Fiók: <strong id="userNameDisp">Játékos</strong></span>
+            <button class="btn-orange" onclick="changeUser()">Név váltás</button>
         </div>
     </header>
 
+    <!-- APP LAYOUT -->
     <div class="app-layout">
+        <!-- SIDEBAR -->
         <div class="sidebar" id="sidebarMenu">
             <ul class="sidebar-menu">
                 <li><a href="#" class="active" onclick="switchPanel('fooldal', this)">Főoldal</a></li>
@@ -244,7 +330,10 @@
             </ul>
         </div>
 
+        <!-- MAIN CONTENT PANELS -->
         <div class="main-content">
+
+            <!-- 1. FŐOLDAL / STATISZTIKA -->
             <div id="fooldal" class="panel-section active">
                 <div class="dash-stats-grid">
                     <div class="dash-stat-card">
@@ -253,69 +342,224 @@
                     </div>
                     <div class="dash-stat-card">
                         <div class="val">7 óra, 20 perc</div>
-                        <div class="lbl">Játékidő</div>
+                        <div class="lbl">Átlagos Játékidő</div>
                     </div>
                     <div class="dash-stat-card">
                         <div class="val">322 001</div>
-                        <div class="lbl">Regisztrált Játékos</div>
+                        <div class="lbl">Regisztrált Játékos (NanoAuth)</div>
                     </div>
                 </div>
 
                 <div class="chart-card">
-                    <h3>Online Játékosok Statisztika (Napi Aktivitás)</h3>
+                    <h3>Online Játékosok Napi Aktivitási Görbéje</h3>
                     <div class="chart-container" id="activityChart"></div>
                 </div>
             </div>
 
+            <!-- 2. COIN SHOP -->
             <div id="coinshop" class="panel-section">
                 <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Coin Csomagok</h3>
-                <p style="color: var(--text-muted);">Válaszd ki a csomagot, majd utald át az összeget a bankszámlánkra.</p>
+                <div class="cards-grid">
+                    <div class="store-card">
+                        <div>
+                            <h4>500 Coin</h4>
+                            <div class="price">1 000 Ft</div>
+                            <ul>
+                                <li>Alap coin csomag</li>
+                                <li>Azonnali jóváírás</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('500 Coin', 1000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>1 200 Coin</h4>
+                            <div class="price">2 000 Ft</div>
+                            <ul>
+                                <li>Bónusz coin csomag</li>
+                                <li>200 Coin ajándékba</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('1200 Coin', 2000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>3 000 Coin</h4>
+                            <div class="price">4 500 Ft</div>
+                            <ul>
+                                <li>Haladó fejlesztésekhez</li>
+                                <li>Prémium tartalom</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('3000 Coin', 4500)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>10 000 Coin</h4>
+                            <div class="price">12 000 Ft</div>
+                            <ul>
+                                <li>Maximalista csomag</li>
+                                <li>Exkluzív bónuszok</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('10000 Coin', 12000)">Kiválasztás</button>
+                    </div>
+                </div>
             </div>
 
+            <!-- 3. COIN KEZELÉS ÉS ÁTUTALÁS -->
             <div id="coinkezeles" class="panel-section">
-                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Coin Kezelés</h3>
+                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Coin Kezelés & Átutalási Adatok</h3>
+                <div class="dash-stats-grid" style="margin-bottom: 20px;">
+                    <div class="dash-stat-card">
+                        <div class="val" id="userCoinsDisplay">0 Coin</div>
+                        <div class="lbl">Aktuális Egyenleged</div>
+                    </div>
+                </div>
+
+                <div class="bank-box">
+                    <h4 style="margin-bottom: 10px; color: #fff;">Direkt Banki Átutalási Információk</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Miután kiválasztottad a csomagot a shopban, az alábbi számlaszámra utald el a pontos összeget:</p>
+                    
+                    <div class="bank-item">
+                        <label>Bankszámlaszám</label>
+                        <span>11773344-22112211-00000000</span>
+                    </div>
+                    <div class="bank-item">
+                        <label>Kedvezményezett</label>
+                        <span>AethelMC Network</span>
+                    </div>
+                    <div class="bank-item">
+                        <label>Közlemény (Kötelezően ide írd a neved és a csomagot!)</label>
+                        <span id="transferNotice">[Minecraft Neved] - [Kiválasztott Csomag]</span>
+                    </div>
+                </div>
             </div>
 
+            <!-- 4. RANG VÁSÁRLÁS -->
             <div id="rangvasarlas" class="panel-section">
-                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Rang Vásárlás</h3>
+                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Szerver Rangok</h3>
+                <div class="cards-grid">
+                    <div class="store-card">
+                        <div>
+                            <h4>SOLSTICE</h4>
+                            <div class="price">1 500 Ft</div>
+                            <ul>
+                                <li>Alap VIP rang & Prefix</li>
+                                <li>/fly a lobbiban</li>
+                                <li>2 Kezdő Kit</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('SOLSTICE rang', 1500)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>APEX</h4>
+                            <div class="price">2 500 Ft</div>
+                            <ul>
+                                <li>/feed & /heal parancsok</li>
+                                <li>3 Home hely</li>
+                                <li>Színes chat használat</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('APEX rang', 2500)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>ZEUS</h4>
+                            <div class="price">4 000 Ft</div>
+                            <ul>
+                                <li>Mitikus rang & Villámok</li>
+                                <li>/workbench & /hat</li>
+                                <li>5 Home hely</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('ZEUS rang', 4000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>ZENITH</h4>
+                            <div class="price">6 000 Ft</div>
+                            <ul>
+                                <li>Repülés túlélőben</li>
+                                <li>/enderchest elérés</li>
+                                <li>Egyedi prefix</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('ZENITH rang', 6000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>ECLIPSAR</h4>
+                            <div class="price">8 000 Ft</div>
+                            <ul>
+                                <li>Exkluzív kozmetikumok</li>
+                                <li>/repair tárgyjavítás</li>
+                                <li>Korlátlan home hely</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('ECLIPSAR rang', 8000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>NEXUS</h4>
+                            <div class="price">10 000 Ft</div>
+                            <ul>
+                                <li>Prioritásos csatlakozás</li>
+                                <li>Összes alap VIP parancs</li>
+                                <li>Egyedi rangszín</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('NEXUS rang', 10000)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>OMNI</h4>
+                            <div class="price">12 500 Ft</div>
+                            <ul>
+                                <li>Különleges aura</li>
+                                <li>Max kit-ek & Discord szinkron</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('OMNI rang', 12500)">Kiválasztás</button>
+                    </div>
+                    <div class="store-card">
+                        <div>
+                            <h4>SPIRIT</h4>
+                            <div class="price">15 000 Ft</div>
+                            <ul>
+                                <li>Legmagasabb szintű rang</li>
+                                <li>Örökös státusz</li>
+                                <li>Teljes parancselérés</li>
+                            </ul>
+                        </div>
+                        <button class="btn-orange" onclick="selectPackage('SPIRIT rang', 15000)">Kiválasztás</button>
+                    </div>
+                </div>
             </div>
 
+            <!-- 5. BÜNTETÉS FELOLDÁSA -->
             <div id="buntetes" class="panel-section">
-                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Büntetés Feloldása</h3>
+                <h3 style="margin-bottom: 20px; font-size: 1.4rem;">Büntetés Feloldása (Unban)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Tiltás vagy némítás feloldásához kérelmet nyújthatsz be az adminisztrációnál.</p>
+                <button class="btn-orange" onclick="alert('Kérlek vedd fel a kapcsolatot az adminokkal Discordon a kitiltás indokával!')">Feloldás Kérése</button>
             </div>
+
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <p>AethelMC - © 2026 Minden jog fenntartva</p>
     </footer>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebarMenu');
-            sidebar.classList.toggle('open');
-        }
+        let currentUsername = prompt("Add meg a NanoAuth / Minecraft neved a belépéshez:") || "Játékos";
+        document.getElementById('userNameDisp').innerText = currentUsername;
+        updateNotice();
 
-        function switchPanel(panelId, element) {
-            document.querySelectorAll('.panel-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(panelId).classList.add('active');
-            element.classList.add('active');
-
-            if(window.innerWidth <= 768) {
-                document.getElementById('sidebarMenu').classList.remove('open');
-            }
-        }
-
-        const chart = document.getElementById('activityChart');
-        const sampleData = [40, 60, 30, 20, 15, 25, 50, 90, 140, 170, 165, 150];
-        sampleData.forEach(val => {
-            const bar = document.createElement('div');
-            bar.className = 'bar';
-            bar.style.height = (val / 180) * 100 + '%';
-            chart.appendChild(bar);
-        });
-    </script>
-</body>
-</html>
+        function changeUser() {
+            const newName = prompt("Add meg a NanoAuth / Minecraft neved:", currentUsername);
+            if(newName) {
+                currentUsername = newName.trim();
+                document.getElement
