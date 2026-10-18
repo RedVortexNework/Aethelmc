@@ -8,7 +8,7 @@
         :root {
             --orange: #ff9800;
             --orange-hover: #e68a00;
-            --bg-dark: #121212;
+            --bg-dark: #0f0f10;
             --bg-card: #18181b;
             --border-color: #27272a;
             --text-dark: #222222;
@@ -29,12 +29,14 @@
             color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* MOBILBARÁT HEADER */
+        /* HEADER */
         header {
             background: #000000;
-            padding: 12px 20px;
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -48,16 +50,20 @@
             background: #1a1a1a;
             border: 1px solid #333;
             color: #fff;
-            padding: 10px 14px;
+            padding: 8px 14px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* ONLINE COUNTER BANNER */
+        /* PUBLIKUS KEZDŐOLDAL ELEMEI */
         .online-counter-banner {
             text-align: center;
-            padding: 25px 15px;
+            padding: 30px 20px;
             background: #000000;
         }
 
@@ -65,24 +71,23 @@
             background: var(--orange);
             color: #000;
             display: inline-block;
-            padding: 12px 24px;
+            padding: 14px 30px;
             border-radius: 8px;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
         }
 
-        /* WHITE HERO SECTION */
         .hero-white {
             background: #ffffff;
             color: var(--text-dark);
-            padding: 45px 15px;
+            padding: 50px 20px;
             text-align: center;
         }
 
         .hero-white h3 {
             color: var(--orange);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 8px;
@@ -90,80 +95,79 @@
         }
 
         .hero-white h1 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #111111;
-            line-height: 1.2;
         }
 
         .ip-box {
             display: inline-flex;
-            width: 100%;
-            max-width: 340px;
             background: #f4f4f5;
             border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             border: 1px solid #e4e4e7;
         }
 
         .ip-box .copy-btn {
             background: var(--orange);
             color: #000;
-            padding: 14px 16px;
+            padding: 12px 20px;
             font-weight: 900;
             border: none;
             cursor: pointer;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .ip-box .ip-text {
-            flex: 1;
-            padding: 14px 10px;
+            padding: 12px 22px;
             font-family: monospace;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #27272a;
             display: flex;
             align-items: center;
-            justify-content: center;
         }
 
         .btn-orange-lg {
             background: var(--orange);
             color: #000;
             border: none;
-            padding: 14px 24px;
+            padding: 14px 30px;
             font-weight: 900;
             border-radius: 6px;
             text-transform: uppercase;
             cursor: pointer;
-            font-size: 0.9rem;
-            width: 100%;
-            max-width: 340px;
+            font-size: 0.95rem;
+            transition: 0.2s;
         }
 
-        /* GREY SOCIAL SECTION */
+        .btn-orange-lg:hover {
+            background: var(--orange-hover);
+        }
+
         .section-grey {
             background: #eceeed;
             color: var(--text-dark);
-            padding: 40px 20px;
+            padding: 45px 20px;
         }
 
         .section-container {
             max-width: 800px;
             margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 25px;
         }
 
         .social-text h3 {
             color: var(--orange);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 900;
@@ -171,17 +175,18 @@
         }
 
         .social-text h2 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: #111827;
         }
 
         .social-text p {
             color: #4b5563;
+            max-width: 420px;
             line-height: 1.5;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
         }
 
@@ -190,36 +195,37 @@
             flex-direction: column;
             gap: 10px;
             width: 100%;
+            max-width: 200px;
         }
 
         .social-btn {
-            padding: 14px 20px;
+            padding: 12px 20px;
             color: #fff;
             font-weight: 900;
             border-radius: 6px;
             text-decoration: none;
             text-align: center;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .btn-fb { background: #ff9800; }
         .btn-insta { background: #e1306c; }
         .btn-dc { background: #5865f2; }
 
-        /* FOOTER */
         footer {
             background: #262626;
             text-align: center;
-            padding: 30px 20px 20px;
+            padding: 35px 20px 20px;
             color: #ffffff;
+            margin-top: auto;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 25px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .footer-links a {
@@ -235,7 +241,7 @@
             display: flex;
             justify-content: center;
             gap: 18px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 1.2rem;
             color: #a1a1aa;
         }
@@ -243,7 +249,7 @@
         .footer-legal {
             color: #71717a;
             font-size: 0.7rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .footer-legal a {
@@ -251,7 +257,7 @@
             text-decoration: none;
         }
 
-        /* MODALS (MOBILRA IS OPTIMALIZÁLva) */
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -270,16 +276,16 @@
         .modal-card {
             background: #18181b;
             border: 1px solid #27272a;
-            padding: 25px 20px;
+            padding: 30px;
             border-radius: 12px;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             text-align: center;
         }
 
         .modal-card h2 {
             margin-bottom: 20px;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
 
         .form-group {
@@ -290,11 +296,11 @@
             width: 100%;
             background: #27272a;
             border: 1px solid #3f3f46;
-            padding: 14px;
+            padding: 12px;
             border-radius: 6px;
             color: #fff;
-            font-size: 1rem;
             outline: none;
+            font-size: 0.9rem;
         }
 
         .btn-purple {
@@ -302,12 +308,11 @@
             color: #fff;
             border: none;
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border-radius: 6px;
             font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
-            font-size: 0.95rem;
         }
 
         .modal-footer-link {
@@ -322,52 +327,90 @@
             font-weight: 700;
         }
 
-        /* DASHBOARD MOBILE VIEW */
+        /* BELSŐ DASHBOARD & MENÜ RENDSZER */
         .dashboard-container {
             display: none;
-            min-height: calc(100vh - 60px);
-            flex-direction: column;
+            flex: 1;
+            position: relative;
         }
 
         .dashboard-container.active {
             display: flex;
         }
 
-        .sidebar {
-            width: 100%;
-            background: #18181b;
-            border-bottom: 1px solid #27272a;
+        /* HÁTTÉR SÖTÉTÍTŐ MOBILON (BACKDROP) */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 998;
             display: none;
         }
-
-        .sidebar.open {
+        .sidebar-overlay.active {
             display: block;
         }
 
-        .sidebar-menu { list-style: none; }
+        .sidebar {
+            width: 260px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 999;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+                height: 100%;
+                box-shadow: 10px 0 30px rgba(0,0,0,0.9);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
         .sidebar-menu li a {
             display: block;
-            padding: 14px 20px;
-            color: #a1a1aa;
+            padding: 16px 25px;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 600;
-            border-bottom: 1px solid #222;
+            border-left: 4px solid transparent;
+            transition: 0.2s;
         }
+
         .sidebar-menu li a:hover, .sidebar-menu li a.active {
             background: #27272a;
             color: #fff;
-            border-left: 4px solid var(--orange);
+            border-left-color: var(--orange);
         }
 
         .main-content {
             flex: 1;
-            padding: 20px;
-            background: #0f0f10;
+            padding: 30px;
+            background: var(--bg-dark);
+            overflow-y: auto;
         }
 
-        .panel-section { display: none; }
-        .panel-section.active { display: block; }
+        .panel-section {
+            display: none;
+        }
+
+        .panel-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -375,7 +418,7 @@
     <!-- PUBLIKUS KEZDŐOLDAL -->
     <div id="publicSite">
         <header>
-            <button class="menu-toggle-btn" onclick="openModal('loginModal')">☰ Fiók</button>
+            <button class="menu-toggle-btn" onclick="openModal('loginModal')">☰ Bejelentkezés</button>
         </header>
 
         <div class="online-counter-banner">
@@ -390,7 +433,7 @@
                 <button class="copy-btn" onclick="copyIp()">MÁSOLÁS</button>
                 <div class="ip-text" id="ipAddress">play.aethelmc.fun</div>
             </div>
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 15px;">
                 <button class="btn-orange-lg" onclick="openModal('loginModal')">LAUNCHER LETÖLTÉSE</button>
             </div>
         </div>
@@ -403,17 +446,17 @@
                     <p>Kövess minket közösségi oldalainkon, ahol megtalálsz mindent a szerverrel kapcsolatban. Ez mellett persze minden újdonságot is kiírunk oda.</p>
                 </div>
                 <div class="social-btns">
-                    <a href="#" class="social-btn btn-fb">f Facebook</a>
-                    <a href="#" class="social-btn btn-insta">📷 Instagram</a>
-                    <a href="#" class="social-btn btn-dc">💬 Discord</a>
+                    <a href="#" class="social-btn btn-fb">Facebook</a>
+                    <a href="#" class="social-btn btn-insta">Instagram</a>
+                    <a href="#" class="social-btn btn-dc">Discord</a>
                 </div>
             </div>
         </div>
 
         <div class="hero-white">
             <h1>CSATLAKOZZ 200K+ JÁTÉKOSHOZ!</h1>
-            <div style="margin-top: 12px;">
-                <button class="btn-orange-lg" style="padding: 16px;" onclick="openModal('regModal')">REGISZTRÁCIÓ</button>
+            <div style="margin-top: 15px;">
+                <button class="btn-orange-lg" style="padding: 16px 40px;" onclick="openModal('regModal')">REGISZTRÁCIÓ</button>
             </div>
         </div>
 
@@ -431,42 +474,64 @@
         </footer>
     </div>
 
-    <!-- BELSŐ CONTROL PANEL -->
+    <!-- BELSŐ CONTROL PANEL (BEJELENTKEZÉS UTÁN) -->
     <div class="dashboard-container" id="dashboardSite">
-        <header>
-            <button class="menu-toggle-btn" onclick="toggleMobileSidebar()">☰ Menü</button>
-            <button class="btn-orange-lg" style="width: auto; padding: 8px 14px; font-size: 0.8rem;" onclick="logout()">Kilépés</button>
-        </header>
+        <!-- MOBIL HÁTTÉR SÖTÉTÍTŐ -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-        <div class="sidebar open" id="sidebarMenu">
+        <!-- BAL OLDALI MENÜ -->
+        <div class="sidebar" id="sidebarMenu">
+            <div style="padding: 15px 25px; font-weight: 900; font-size: 1.1rem; color: var(--orange); border-bottom: 1px solid var(--border-color); margin-bottom: 10px;">
+                AETHELMC
+            </div>
             <ul class="sidebar-menu">
                 <li><a href="#" class="active" onclick="switchPanel('fooldal', this)">Főoldal & Statisztika</a></li>
                 <li><a href="#" onclick="switchPanel('coinshop', this)">Coin Vásárlás</a></li>
                 <li><a href="#" onclick="switchPanel('coinkezeles', this)">Coin Kezelés & Utalás</a></li>
                 <li><a href="#" onclick="switchPanel('rangvasarlas', this)">Rang Vásárlás</a></li>
                 <li><a href="#" onclick="switchPanel('buntetes', this)">Unban / Mute</a></li>
+                <li><a href="#" style="color: #ef4444;" onclick="logout()">Kijelentkezés</a></li>
             </ul>
         </div>
 
-        <div class="main-content">
-            <div id="fooldal" class="panel-section active">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">Vezérlőpult</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Válassz a fenti menüből a Coin és Rang vásárláshoz.</p>
-            </div>
-            <div id="coinshop" class="panel-section">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">Coin Vásárlás</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Válaszd ki a csomagot az átutaláshoz.</p>
-            </div>
-            <div id="coinkezeles" class="panel-section">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">Átutalási Adatok</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Számlaszám: 11773344-22112211-00000000</p>
-            </div>
-            <div id="rangvasarlas" class="panel-section">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">Rang Vásárlás</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">SOLSTICE, APEX, ZEUS, ZENITH, ECLIPSAR, NEXUS, OMNI, SPIRIT.</p>
-            </div>
-            <div id="buntetes" class="panel-section">
-                <h2 style="font-size: 1.2rem; margin-bottom: 15px;">Büntetés Feloldása</h2>
+        <!-- JOBB OLDALI TARTALOM -->
+        <div style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+            <!-- BELSŐ FEJLÉC A MENÜGOMBAL -->
+            <header style="background: var(--bg-card); border-bottom: 1px solid var(--border-color);">
+                <button class="menu-toggle-btn" onclick="toggleSidebar()">☰ Menü</button>
+                <span style="font-size: 0.9rem; color: var(--text-muted);">Fiók: <strong id="loggedInUserDisplay" style="color: #fff;">Játékos</strong></span>
+            </header>
+
+            <div class="main-content">
+                <div id="fooldal" class="panel-section active">
+                    <h2 style="font-size: 1.4rem; margin-bottom: 15px;">Vezérlőpult Főoldal</h2>
+                    <p style="color: var(--text-muted); line-height: 1.5;">Üdvözlünk a szerver kezelőfelületén! Használd a bal oldali menüt a Coin vásárláshoz, rangok megtekintéséhez vagy az átutalási adatok eléréséhez.</p>
+                </div>
+
+                <div id="coinshop" class="panel-section">
+                    <h2 style="font-size: 1.4rem; margin-bottom: 15px;">Coin Vásárlás</h2>
+                    <p style="color: var(--text-muted); line-height: 1.5;">Válaszd ki a kívánt csomagot, majd utald át a pénzt a megadott bankszámlára.</p>
+                </div>
+
+                <div id="coinkezeles" class="panel-section">
+                    <h2 style="font-size: 1.4rem; margin-bottom: 15px;">Átutalási Adatok</h2>
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; margin-top: 15px;">
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">Bankszámlaszám:</p>
+                        <p style="font-family: monospace; font-size: 1.1rem; font-weight: bold; color: #fff; margin-bottom: 15px;">11773344-22112211-00000000</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 5px;">Közlemény:</p>
+                        <p style="font-family: monospace; font-size: 0.95rem; color: var(--orange);" id="transferNotice">[Minecraft Neved] - [Csomag]</p>
+                    </div>
+                </div>
+
+                <div id="rangvasarlas" class="panel-section">
+                    <h2 style="font-size: 1.4rem; margin-bottom: 15px;">Rang Vásárlás</h2>
+                    <p style="color: var(--text-muted); line-height: 1.5;">Elérhető rangok: SOLSTICE, APEX, ZEUS, ZENITH, ECLIPSAR, NEXUS, OMNI, SPIRIT.</p>
+                </div>
+
+                <div id="buntetes" class="panel-section">
+                    <h2 style="font-size: 1.4rem; margin-bottom: 15px;">Büntetés Feloldása</h2>
+                    <p style="color: var(--text-muted); line-height: 1.5;">Kitiltás vagy némítás feloldásához nyiss egy jegyet a szerver Discord szerverén.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -520,6 +585,8 @@
             const user = document.getElementById('loginUser').value.trim();
             if(user) {
                 closeModal('loginModal');
+                document.getElementById('loggedInUserDisplay.innerText = user;');
+                document.getElementById('transferNotice').innerText = `${user} - [Csomag]`;
                 document.getElementById('publicSite').style.display = 'none';
                 document.getElementById('dashboardSite').classList.add('active');
             } else {
@@ -532,22 +599,4 @@
             document.getElementById('publicSite').style.display = 'block';
         }
 
-        function toggleMobileSidebar() {
-            const sb = document.getElementById('sidebarMenu');
-            sb.classList.toggle('open');
-        }
-
-        function switchPanel(panelId, element) {
-            document.querySelectorAll('.panel-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu a').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(panelId).classList.add('active');
-            element.classList.add('active');
-            
-            // Mobilon kattintás után bezárja a menüt a jobb áttekinthetőségért
-            document.getElementById('sidebarMenu').classList.remove('open');
-        }
-    </script>
-</body>
-                                                                                  </html>
-                                                                                  
+        //
