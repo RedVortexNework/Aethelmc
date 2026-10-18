@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC - Minecraft Szerver</title>
+    <title>Minecraft Szerver</title>
     <style>
         :root {
             --orange: #ff9800;
@@ -31,7 +31,7 @@
 
         /* HEADER & NAVBAR */
         header {
-            background: #000;
+            background: #0d0d0d;
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
@@ -39,16 +39,20 @@
             border-bottom: 1px solid #222;
         }
 
-        .brand {
-            font-size: 1.4rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .header-btn-group {
-            display: flex;
-            gap: 10px;
+        .menu-toggle-btn {
+            background: transparent;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
         }
 
         .btn-orange {
@@ -74,7 +78,7 @@
         .online-counter-banner {
             text-align: center;
             padding: 20px;
-            background: #0a0a0a;
+            background: #000000;
         }
 
         .counter-badge {
@@ -117,7 +121,7 @@
             background: #f0f0f0;
             border-radius: 6px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .ip-box .copy-btn {
@@ -172,7 +176,7 @@
             font-size: 0.9rem;
         }
 
-        .btn-fb { background: #3b5998; }
+        .btn-fb { background: #ff9800; }
         .btn-insta { background: #e1306c; }
         .btn-dc { background: #5865f2; }
 
@@ -240,16 +244,16 @@
             color: var(--text-muted);
         }
 
-        .modal-footer-link a {
+        .modal-footer-link span {
             color: #ef4444;
             text-decoration: none;
             font-weight: 700;
             cursor: pointer;
         }
 
-        /* DASHBOARD LAYOUT (PANEL) */
+        /* DASHBOARD LAYOUT */
         .dashboard-container {
-            display: none; /* Akkor látható ha be van jelentkezve */
+            display: none;
             min-height: calc(100vh - 65px);
         }
 
@@ -302,9 +306,6 @@
             border: 1px solid #27272a;
             padding: 20px;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         .dash-stat-card .val {
@@ -318,20 +319,42 @@
             text-transform: uppercase;
         }
 
-        .chart-card {
-            background: #18181b;
-            border: 1px solid #27272a;
-            padding: 25px;
-            border-radius: 8px;
+        /* EXACT FOOTER (Sötét alj) */
+        footer {
+            background: #222222;
+            text-align: center;
+            padding: 30px 20px 15px;
+            color: #ffffff;
         }
 
-        footer {
-            background: #0d0d0d;
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid #222;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-legal {
+            color: #777777;
+            font-size: 0.75rem;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -339,10 +362,11 @@
 
     <!-- NAV BAR -->
     <header>
-        <div class="brand">AETHELMC</div>
-        <div class="header-btn-group" id="publicNavBtns">
+        <div class="header-left">
+            <button class="menu-toggle-btn" onclick="toggleMenu()">☰</button>
+        </div>
+        <div id="publicNavBtns">
             <button class="btn-orange" onclick="openModal('loginModal')">Bejelentkezés</button>
-            <button class="btn-orange" onclick="openModal('regModal')">Regisztráció</button>
         </div>
         <div id="userNavInfo" style="display:none; align-items:center; gap:15px;">
             <span>Üdv, <strong id="userDisplay">Játékos</strong></span>
@@ -361,8 +385,11 @@
             <h1>CSATLAKOZZ A SZERVERRE!</h1>
             
             <div class="ip-box">
-                <button class="copy-btn" onclick="navigator.clipboard.writeText('play.aethelmc.fun'); alert('IP Másolva!');">MÁSOLÁS</button>
-                <div class="ip-text">play.aethelmc.fun</div>
+                <button class="copy-btn" onclick="copyIp()">MÁSOLÁS</button>
+                <div class="ip-text" id="ipAddress">play.aethelmc.fun</div>
+            </div>
+            <div>
+                <button class="btn-orange" style="margin-top: 5px;" onclick="openModal('regModal')">📁 LAUNCHER LETÖLTÉSE</button>
             </div>
         </div>
 
@@ -383,7 +410,7 @@
 
         <div class="hero-white">
             <h1>CSATLAKOZZ 200K+ JÁTÉKOSHOZ!</h1>
-            <button class="btn-orange" style="padding: 15px 40px; font-size: 1.1rem;" onclick="openModal('regModal')">REGISZTRÁCIÓ</button>
+            <button class="btn-orange" style="padding: 15px 40px; font-size: 1.1rem; margin-top: 15px;" onclick="openModal('regModal')">REGISZTRÁCIÓ</button>
         </div>
     </div>
 
@@ -392,7 +419,7 @@
         <div class="sidebar">
             <ul class="sidebar-menu">
                 <li><a href="#" class="active">Főoldal</a></li>
-                <li><a href="#" onclick="alert('Itt tudsz AethelCoin-t venni banki átutalással! Számlaszám: 11773344-22112211-00000000')">Coin Vásárlás</a></li>
+                <li><a href="#" onclick="alert('Átutalási adatok: Számlaszám: 11773344-22112211-00000000')">Coin Vásárlás</a></li>
                 <li><a href="#">Coin Kezelés</a></li>
                 <li><a href="#">Rang Vásárlás</a></li>
                 <li><a href="#">Büntetés Feloldása</a></li>
@@ -401,28 +428,17 @@
         <div class="main-content">
             <div class="dash-stats-grid">
                 <div class="dash-stat-card">
-                    <div>
-                        <div class="val">173</div>
-                        <div class="lbl">Online Játékos</div>
-                    </div>
+                    <div class="val">173</div>
+                    <div class="lbl">Online Játékos</div>
                 </div>
                 <div class="dash-stat-card">
-                    <div>
-                        <div class="val">7 óra, 20 perc</div>
-                        <div class="lbl">Játékidő</div>
-                    </div>
+                    <div class="val">7 óra, 20 perc</div>
+                    <div class="lbl">Játékidő</div>
                 </div>
                 <div class="dash-stat-card">
-                    <div>
-                        <div class="val">322 001</div>
-                        <div class="lbl">Regisztrált Játékos</div>
-                    </div>
+                    <div class="val">322 001</div>
+                    <div class="lbl">Regisztrált Játékos</div>
                 </div>
-            </div>
-
-            <div class="chart-card">
-                <h4 style="color: #5865f2; margin-bottom: 15px;">Online Játékosok (Aktivitás)</h4>
-                <p style="color: #666; font-size: 0.9rem;">A szerver folyamatosan fut. Kövesd nyomon az online statisztikát!</p>
             </div>
         </div>
     </div>
@@ -436,7 +452,7 @@
             <div class="form-group"><input type="password" placeholder="Jelszó"></div>
             <div class="form-group"><input type="password" placeholder="Jelszó újra"></div>
             <button class="btn-purple" onclick="registerUser()">Regisztrálás</button>
-            <div class="modal-footer-link">Van már karaktered? <a onclick="switchModal('regModal', 'loginModal')">Jelentkezz be!</a></div>
+            <div class="modal-footer-link">Van már karaktered? <span onclick="switchModal('regModal', 'loginModal')">Jelentkezz be!</span></div>
         </div>
     </div>
 
@@ -447,12 +463,22 @@
             <div class="form-group"><input type="text" id="loginUser" placeholder="Felhasználónév"></div>
             <div class="form-group"><input type="password" placeholder="Jelszó"></div>
             <button class="btn-purple" onclick="loginUserFunc()">Bejelentkezés</button>
-            <div class="modal-footer-link">Nincs még karaktered? <a onclick="switchModal('loginModal', 'regModal')">Regisztrálj!</a></div>
+            <div class="modal-footer-link">Nincs még karaktered? <span onclick="switchModal('loginModal', 'regModal')">Regisztrálj!</span></div>
         </div>
     </div>
 
+    <!-- PONTOSAN OLAYAN FOOTER MINT A KÉPEDEN -->
     <footer>
-        <p>AethelMC - © 2026 Minden jog fenntartva | Webshop & Szabályzat</p>
+        <div class="footer-links">
+            <a href="#" onclick="openModal('loginModal')">WEBSHOP</a>
+            <a href="#">SZABÁLYZAT</a>
+        </div>
+        <div class="footer-socials">
+            📷 &nbsp; 📘 &nbsp; 💬
+        </div>
+        <div class="footer-legal">
+            © 2026 Minden jog fenntartva | Adatvédelem
+        </div>
     </footer>
 
     <script>
@@ -469,13 +495,23 @@
             openModal(to);
         }
 
+        function copyIp() {
+            const ipText = document.getElementById('ipAddress').innerText;
+            navigator.clipboard.writeText(ipText);
+            alert('IP-cím másolva a vágólapra: ' + ipText);
+        }
+
+        function toggleMenu() {
+            openModal('loginModal');
+        }
+
         function registerUser() {
             const user = document.getElementById('regUser').value.trim();
             if(user) {
-                alert('Sikeres regisztráció! Most lépj be.');
+                alert('Sikeres regisztráció! Most jelentkezz be.');
                 switchModal('regModal', 'loginModal');
             } else {
-                alert('Töltsd ki a mezőket!');
+                alert('Kérlek töltsd ki a mezőket!');
             }
         }
 
@@ -497,7 +533,7 @@
         function logout() {
             document.getElementById('dashboardSite').classList.remove('active');
             document.getElementById('publicSite').style.display = 'block';
-            document.getElementById('publicNavBtns').style.display = 'flex';
+            document.getElementById('publicNavBtns').style.display = 'block';
             document.getElementById('userNavInfo').style.display = 'none';
         }
     </script>
