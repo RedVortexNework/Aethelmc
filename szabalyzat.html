@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AethelMC | Szerverszabályzat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { brand: { 500: '#8b5cf6', 600: '#7c3aed', accent: '#06b6d4' } } } } }
+    </script>
+    <style>.glass { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(139, 92, 246, 0.2); }</style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 glass border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="font-black text-2xl bg-gradient-to-r from-white via-brand-400 to-cyan-400 bg-clip-text text-transparent">AETHELMC</a>
+            <div class="flex space-x-6 text-sm font-medium">
+                <a href="index.html" class="hover:text-brand-400">Főoldal</a>
+                <a href="rang.html" class="hover:text-brand-400 text-cyan-400"><i class="fa-solid fa-gem mr-1"></i> Rangok & Bolt</a>
+                <a href="szerencsekerek.html" class="hover:text-brand-400">Szerencsekerék</a>
+                <a href="szabalyzat.html" class="text-red-400 font-bold"><i class="fa-solid fa-book mr-1"></i> Szabályzat</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="py-12 px-4 max-w-4xl mx-auto w-full">
+        <div class="glass p-8 md:p-12 rounded-3xl border border-red-500/30 space-y-8">
+            <div class="border-b border-gray-800 pb-6 text-center">
+                <h1 class="text-4xl font-black text-red-400 mb-2">Hivatalos Szerverszabályzat</h1>
+                <p class="text-gray-400 text-sm">A szerverre való felcsatlakozással automatikusan elfogadod az alábbi szabályokat!</p>
+            </div>
+
+            <!-- Szabály 1 -->
+            <div class="space-y-2">
+                <h3 class="text-lg font-bold text-brand-400">1. Általános Magatartás & Chat Szabályzat</h3>
+                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                    <li>Tilos a káromkodás, más játékosok szidalmazása és provokálása.</li>
+                    <li>Szigorúan tilos a rasszista, gyűlöletkeltő vagy diszkriminatív megnyilvánulás! (Azonnali Végleges Ban)</li>
+                    <li>Tilos a Chat Spam, CapsLock használata és a reklámozás (más szerverek IP címe, Discord linkek).</li>
+                </ul>
+            </div>
+
+            <!-- Szabály 2 -->
+            <div class="space-y-2">
+                <h3 class="text-lg font-bold text-brand-400">2. Csalások & Kliensek (Hacking)</h3>
+                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                    <li>Bármilyen módosított kliens (Killaura, Fly, X-Ray, Speed, Autoclicker >15 CPS) használata szigorúan TILOS!</li>
+                    <li>Bugeffektusok, glitch-ek és szerverhibák kihasználása tilos, ezeket azonnal jelenteni kell az Adminoknak.</li>
+                </ul>
+            </div>
+
+            <!-- Szabály 3 -->
+            <div class="space-y-2">
+                <h3 class="text-lg font-bold text-brand-400">3. Fiókbiztonság & Kereskedelem</h3>
+                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                    <li>Minden játékos saját maga felelős a fiókjáért és jelszaváért.</li>
+                    <li>Valódi pénzes kereskedelem (Real Money Trading - RMT) a szerver elemeivel szigorúan tilos.</li>
+                </ul>
+            </div>
+
+            <!-- Szabály 4 -->
+            <div class="space-y-2">
+                <h3 class="text-lg font-bold text-brand-400">4. Vezetőség Utasításai</h3>
+                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                    <li>A Vezetőség (Tulajdonosok: MrBenceYT, SubForFlash | Adminok: MrJoe15429, SubForPower) döntései jogerősek.</li>
+                    <li>Az Adminisztrátorok félrevezetése vagy megtévesztése súlyosabb büntetést von maga után.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-auto border-t border-gray-800 py-6 text-center text-xs text-gray-500">
+        &copy; 2026 AethelMC Network | Szabályzat
+    </footer>
+</body>
+</html>
