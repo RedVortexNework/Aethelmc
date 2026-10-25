@@ -23,18 +23,6 @@
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 4s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-12px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(139, 92, 246, 0.4)' },
-                            '100%': { shadow: '0 0 35px rgba(6, 182, 212, 0.8)' }
-                        }
                     }
                 }
             }
@@ -72,6 +60,9 @@
             left: 0;
             z-index: 0;
         }
+        .mc-head {
+            image-rendering: pixelated;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-white">
@@ -107,16 +98,14 @@
     </nav>
 
     <!-- Ultra Hero Szekció -->
-    <section class="relative pt-20 pb-20 px-4 flex items-center justify-center min-h-[85vh] z-10">
+    <section class="relative pt-20 pb-20 px-4 flex items-center justify-center min-h-[80vh] z-10">
         <div class="max-w-5xl mx-auto text-center space-y-8">
             
-            <!-- Verzió jelvény -->
             <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full glass-card neon-border-purple text-brand-300 text-xs font-black uppercase tracking-widest animate-pulse-slow">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span> 
                 Támogatott Verziók: <span class="text-white">1.18.2 – 1.26.2</span>
             </div>
 
-            <!-- Fő Cím -->
             <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-none">
                 LÉPJ BE A <br>
                 <span class="bg-gradient-to-r from-brand-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent text-glow">
@@ -129,7 +118,6 @@
                 Egyedi közösség, akadásmentes játékmenet és professzionális szervervezetés.
             </p>
 
-            <!-- Másoló Gomb & Csatlakozás -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-6">
                 <button onclick="copyIP()" class="w-full sm:w-auto px-10 py-5 rounded-2xl bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:opacity-90 text-white font-black text-xl shadow-[0_0_30px_rgba(124,58,237,0.5)] transition duration-300 hover:scale-105 flex items-center justify-center gap-4">
                     <i class="fa-solid fa-play"></i>
@@ -172,80 +160,68 @@
         </div>
     </section>
 
-    <!-- Játékmódok -->
-    <section class="py-16 px-4 max-w-6xl mx-auto w-full relative z-10">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-black mb-3 text-glow">JÁTÉKMÓDOK</h2>
-            <p class="text-gray-400">Mivel játszhatsz az AethelMC hálózatán?</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Survival -->
-            <div class="glass-card p-8 rounded-3xl neon-border-purple relative hover:scale-[1.02] transition duration-300">
-                <div class="absolute top-6 right-6 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-black">
-                    EGYENLŐRE EZ VAN
-                </div>
-                <div class="w-16 h-16 rounded-2xl bg-brand-600/30 border border-brand-500 flex items-center justify-center text-3xl text-brand-400 mb-6 shadow-lg shadow-brand-500/20">
-                    <i class="fa-solid fa-tree"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-3">Survival Játékmód</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Jelenleg a Survival játékmód érhető el a szerveren! Gazdag gazdaság, levédések, egyedi küldetések és barátságos közösség vár!
-                </p>
-                <div class="text-xs font-bold text-emerald-400 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Aktívan Játszható
-                </div>
-            </div>
-
-            <!-- ComboFly -->
-            <div class="glass-card p-8 rounded-3xl border border-gray-800 relative hover:border-cyan-500/40 transition duration-300 opacity-90">
-                <div class="absolute top-6 right-6 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-xs font-black">
-                    HAMAROSAN
-                </div>
-                <div class="w-16 h-16 rounded-2xl bg-cyan-600/30 border border-cyan-500 flex items-center justify-center text-3xl text-cyan-400 mb-6 shadow-lg shadow-cyan-500/20">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <h3 class="text-2xl font-black mb-3">1.8 ComboFly</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    Készülj fel a pörgős, klasszikus 1.8-as harcrendszerre és légi csatákra! Hamarosan nyitja kapuit a ComboFly aréna!
-                </p>
-                <div class="text-xs font-bold text-cyan-400 flex items-center gap-2">
-                    <i class="fa-solid fa-hourglass-half animate-spin"></i> Fejlesztés Alatt
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vezetőség -->
+    <!-- Szerver Vezetőség Minecraft Karakterekkel -->
     <section class="py-16 px-4 max-w-6xl mx-auto w-full relative z-10">
         <div class="text-center mb-12">
             <h2 class="text-4xl font-black mb-3">SZERVER VEZETŐSÉG</h2>
-            <p class="text-gray-400">Akik a háttérben dolgoznak a zökkenőmentes élményért</p>
+            <p class="text-gray-400">A csapat, akik a szerver folyamatos működéséért felelnek</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="glass-card p-6 rounded-3xl text-center space-y-3 hover:scale-105 transition duration-300 border-red-500/30 border">
-                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-red-600 to-orange-500 flex items-center justify-center font-black text-2xl shadow-lg">MB</div>
-                <h3 class="text-xl font-bold">MrBenceYT</h3>
-                <span class="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/30">Tulajdonos</span>
+            <!-- MrBenceYT -->
+            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-red-500/40 border">
+                <div class="relative w-24 h-24 mx-auto">
+                    <img src="https://crafatar.com/renders/head/MrBenceYT?overlay=true" 
+                         alt="MrBenceYT Minecraft Head" 
+                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-white">MrBenceYT</h3>
+                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/40">Tulajdonos</span>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl text-center space-y-3 hover:scale-105 transition duration-300 border-red-500/30 border">
-                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-red-600 to-purple-500 flex items-center justify-center font-black text-2xl shadow-lg">SF</div>
-                <h3 class="text-xl font-bold">SubForFlash</h3>
-                <span class="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/30">Tulajdonos</span>
+            <!-- SubForFlash -->
+            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-red-500/40 border">
+                <div class="relative w-24 h-24 mx-auto">
+                    <img src="https://crafatar.com/renders/head/SubForFlash?overlay=true" 
+                         alt="SubForFlash Minecraft Head" 
+                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-white">SubForFlash</h3>
+                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/40">Tulajdonos</span>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl text-center space-y-3 hover:scale-105 transition duration-300 border-cyan-500/30 border">
-                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center font-black text-2xl shadow-lg">MJ</div>
-                <h3 class="text-xl font-bold">MrJoe15429</h3>
-                <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/30">Admin / rangixZ</span>
+            <!-- MrJoe15429 -->
+            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-cyan-500/40 border">
+                <div class="relative w-24 h-24 mx-auto">
+                    <img src="https://crafatar.com/renders/head/MrJoe15429?overlay=true" 
+                         alt="MrJoe15429 Minecraft Head" 
+                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-white">MrJoe15429</h3>
+                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/40">Admin / rangixZ</span>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-3xl text-center space-y-3 hover:scale-105 transition duration-300 border-cyan-500/30 border">
-                <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-600 to-teal-500 flex items-center justify-center font-black text-2xl shadow-lg">SP</div>
-                <h3 class="text-xl font-bold">SubForPower</h3>
-                <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/30">Admin</span>
+            <!-- SubForPower -->
+            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-cyan-500/40 border">
+                <div class="relative w-24 h-24 mx-auto">
+                    <img src="https://crafatar.com/renders/head/SubForPower?overlay=true" 
+                         alt="SubForPower Minecraft Head" 
+                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-white">SubForPower</h3>
+                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/40">Admin</span>
+                </div>
             </div>
         </div>
 
@@ -272,7 +248,6 @@
     </footer>
 
     <script>
-        // Particle JS Beállítás
         particlesJS('particles-js', {
             particles: {
                 number: { value: 60, density: { enable: true, value_area: 800 } },
