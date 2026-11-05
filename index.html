@@ -1,56 +1,50 @@
 <!DOCTYPE html>
-<html lang="hu" class="dark">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC Network | A Legmenőbb Minecraft Szerver</title>
+    <title>AethelMC - Minecraft Szerver Hálózat</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Particles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
                     colors: {
                         brand: {
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            accent: '#06b6d4',
-                            neon: '#a855f7'
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4',
+                            dark: '#0B0F19',
+                            card: '#131A2A',
+                            accent: '#a855f7'
                         }
                     },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    boxShadow: {
+                        'neon-purple': '0 0 25px rgba(139, 92, 246, 0.45)',
+                        'neon-cyan': '0 0 25px rgba(6, 182, 212, 0.45)',
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        .glass-nav {
-            background: rgba(10, 10, 18, 0.75);
-            backdrop-filter: blur(20px);
-            border-b: 1px solid rgba(139, 92, 246, 0.2);
-        }
-        .neon-border-purple {
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-            border: 1px solid rgba(168, 85, 247, 0.5);
-        }
-        .neon-border-cyan {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-            border: 1px solid rgba(6, 182, 212, 0.5);
-        }
-        .text-glow {
-            text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        body {
+            background-color: #0B0F19;
+            color: #E2E8F0;
+            overflow-x: hidden;
         }
         #particles-js {
             position: absolute;
@@ -58,231 +52,373 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 0;
+            z-index: 1;
+            pointer-events: none;
         }
-        .mc-head {
-            image-rendering: pixelated;
+        .glass-panel {
+            background: rgba(19, 26, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(22, 30, 49, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3);
+        }
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-glow {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .btn-glow:hover::after {
+            opacity: 1;
         }
     </style>
 </head>
-<body class="bg-black text-gray-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-white">
+<body class="min-h-screen flex flex-col relative selection:bg-brand-purple selection:text-white">
 
-    <!-- Animált Részecske Háttér -->
+    <!-- Background Particle Animation -->
     <div id="particles-js"></div>
 
-    <!-- Navigáció -->
-    <nav class="sticky top-0 z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-10">
-            <a href="index.html" class="flex items-center space-x-3 group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 via-purple-600 to-cyan-500 p-0.5 shadow-lg group-hover:scale-105 transition duration-300">
-                    <div class="w-full h-full bg-black rounded-[14px] flex items-center justify-center font-black text-2xl text-white">A</div>
-                </div>
-                <span class="text-3xl font-black tracking-wider bg-gradient-to-r from-white via-brand-300 to-cyan-400 bg-clip-text text-transparent group-hover:brightness-125 transition">
-                    AETHEL<span class="text-cyan-400">MC</span>
-                </span>
-            </a>
-            
-            <div class="hidden md:flex items-center space-x-8 font-bold text-sm tracking-wide">
-                <a href="index.html" class="text-brand-400 text-glow flex items-center gap-2"><i class="fa-solid fa-house"></i> Főoldal</a>
-                <a href="rang.html" class="text-gray-300 hover:text-cyan-400 transition flex items-center gap-2"><i class="fa-solid fa-gem text-cyan-400"></i> Rangok & Bolt</a>
-                <a href="szerencsekerek.html" class="text-gray-300 hover:text-brand-400 transition flex items-center gap-2"><i class="fa-solid fa-arrows-spin text-purple-400"></i> Szerencsekerék</a>
-                <a href="szabalyzat.html" class="text-gray-300 hover:text-red-400 transition flex items-center gap-2"><i class="fa-solid fa-shield-halved text-red-400"></i> Szabályzat</a>
-            </div>
+    <!-- Background Glow Blobs -->
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-1/4 right-10 w-[400px] h-[400px] bg-brand-cyan/15 rounded-full blur-[140px] pointer-events-none"></div>
 
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 w-full glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-cyan flex items-center justify-center font-display font-black text-white text-xl shadow-neon-purple group-hover:scale-105 transition-transform">
+                    A
+                </div>
+                <span class="font-display text-2xl font-black tracking-wider text-white">AETHEL<span class="text-brand-cyan">MC</span></span>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm">
+                <a href="#hero" class="text-white hover:text-brand-cyan transition-colors">Főoldal</a>
+                <a href="#features" class="text-gray-300 hover:text-brand-cyan transition-colors">Játékmódok</a>
+                <a href="#store" class="text-gray-300 hover:text-brand-purple transition-colors">Bolt & Rangok</a>
+                <a href="#community" class="text-gray-300 hover:text-brand-cyan transition-colors">Közösség</a>
+            </nav>
+
+            <!-- Header Action Buttons -->
             <div class="flex items-center space-x-4">
-                <a href="https://discord.gg/7KCxdWpU2b" target="_blank" class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-brand-600 hover:from-indigo-500 hover:to-brand-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 transition duration-300 hover:scale-105 flex items-center gap-2">
-                    <i class="fa-brands fa-discord text-lg"></i> Discord
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/30 text-white font-semibold text-sm transition-all hover:scale-105">
+                    <i class="fa-brands fa-discord text-indigo-400"></i>
+                    <span>Discord</span>
+                </a>
+                <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 transition-all hover:scale-105">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Bolt</span>
                 </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Ultra Hero Szekció -->
-    <section class="relative pt-20 pb-20 px-4 flex items-center justify-center min-h-[80vh] z-10">
-        <div class="max-w-5xl mx-auto text-center space-y-8">
+    <!-- Main Content -->
+    <main class="flex-grow z-10">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-16 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
             
-            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full glass-card neon-border-purple text-brand-300 text-xs font-black uppercase tracking-widest animate-pulse-slow">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span> 
-                Támogatott Verziók: <span class="text-white">1.18.2 – 1.26.2</span>
+            <!-- Version Badge -->
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card border-brand-purple/40 text-xs sm:text-sm font-semibold mb-8 animate-bounce">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-gray-300">Támogatott verziók:</span>
+                <span class="text-brand-cyan font-bold">1.16.5 - 26.2</span>
             </div>
 
-            <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight leading-none">
-                LÉPJ BE A <br>
-                <span class="bg-gradient-to-r from-brand-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent text-glow">
-                    JÖVŐ MINECRAFT
-                </span>
-                <br>ÉLMÉNYÉBE!
+            <!-- Main Heading -->
+            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white max-w-4xl leading-tight mb-6">
+                Üdvözöl az <span class="text-gradient-purple">AethelMC</span> Minecraft Szerverén!
             </h1>
 
-            <p class="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto font-medium">
-                Egyedi közösség, akadásmentes játékmenet és professzionális szervervezetés.
+            <p class="text-gray-400 text-base sm:text-xl max-w-2xl mb-10 font-normal">
+                Fedezd fel a legújabb élményeket nyújtó magyar Minecraft szervert! Egyedülálló közösség, izgalmas kihívások és folyamatos frissítések várnak rád.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-6">
-                <button onclick="copyIP()" class="w-full sm:w-auto px-10 py-5 rounded-2xl bg-gradient-to-r from-brand-600 via-purple-600 to-cyan-500 hover:opacity-90 text-white font-black text-xl shadow-[0_0_30px_rgba(124,58,237,0.5)] transition duration-300 hover:scale-105 flex items-center justify-center gap-4">
-                    <i class="fa-solid fa-play"></i>
-                    <span id="ip-text">play.aethelmc.fun</span>
-                    <i class="fa-regular fa-copy text-sm opacity-80"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Élő Szerver Statisztika -->
-    <section class="py-12 px-4 max-w-5xl mx-auto w-full relative z-10">
-        <div class="glass-card p-8 rounded-3xl neon-border-cyan relative overflow-hidden">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8 border-b border-gray-800/80 pb-6">
-                <div>
-                    <h2 class="text-2xl font-black text-white flex items-center gap-3">
-                        <i class="fa-solid fa-chart-line text-cyan-400"></i> Élő Szerver Statisztika
-                    </h2>
-                    <p class="text-xs text-gray-400 mt-1">Valós idejű adatok közvetlenül a szerverről</p>
+            <!-- IP Box & Copy Button -->
+            <div class="w-full max-w-md glass-panel p-3 sm:p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-white/10 mb-12">
+                <div class="flex items-center space-x-3 pl-2 w-full sm:w-auto">
+                    <div class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></div>
+                    <div class="text-left">
+                        <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Szerver Cím</div>
+                        <div class="text-white font-mono font-bold text-lg sm:text-xl tracking-wide select-all" id="serverIp">play.aethelmc.fun</div>
+                    </div>
                 </div>
-                <button onclick="fetchStats()" class="px-4 py-2 rounded-xl bg-gray-900/80 hover:bg-gray-800 text-xs font-bold border border-gray-700 transition flex items-center gap-2">
-                    <i class="fa-solid fa-rotate-right text-brand-400"></i> Frissítés
+                <button onclick="copyIp()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan hover:opacity-90 text-white font-bold text-sm tracking-wide transition-all active:scale-95 flex items-center justify-center space-x-2 shadow-lg">
+                    <i class="fa-regular fa-copy" id="copyIcon"></i>
+                    <span id="copyBtnText">Másolás</span>
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div class="bg-black/60 p-6 rounded-2xl border border-gray-800/80 hover:border-brand-500/50 transition">
-                    <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Szerver Státusz</div>
-                    <div id="stat-status" class="text-2xl font-black text-gray-500">Lekérés...</div>
-                </div>
-                <div class="bg-black/60 p-6 rounded-2xl border border-gray-800/80 hover:border-brand-500/50 transition">
-                    <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Online Játékosok</div>
-                    <div id="stat-players" class="text-2xl font-black text-white">-- / --</div>
-                </div>
-                <div class="bg-black/60 p-6 rounded-2xl border border-gray-800/80 hover:border-brand-500/50 transition">
-                    <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">Válaszidő (Ping)</div>
-                    <div id="stat-ping" class="text-2xl font-black text-cyan-400">-- ms</div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- Action Cards (Store & Discord quick links) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
+                <!-- Store Card -->
+                <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl text-left group flex items-start space-x-4 border border-purple-500/20 hover:border-purple-500/50">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-purple-400 uppercase tracking-wider">Rangok & Támogatás</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">AethelMC Webshop</h3>
+                        <p class="text-sm text-gray-400 mt-1">Vásárolj rangokat, kulcsokat és extra kiegészítőket a boltban!</p>
+                        <span class="inline-flex items-center text-xs font-bold text-purple-400 mt-3 group-hover:translate-x-1 transition-transform">
+                            Megnyitás: store.aethelmc.fun <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </span>
+                    </div>
+                </a>
 
-    <!-- Szerver Vezetőség Minecraft Karakterekkel -->
-    <section class="py-16 px-4 max-w-6xl mx-auto w-full relative z-10">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-black mb-3">SZERVER VEZETŐSÉG</h2>
-            <p class="text-gray-400">A csapat, akik a szerver folyamatos működéséért felelnek</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <!-- MrBenceYT -->
-            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-red-500/40 border">
-                <div class="relative w-24 h-24 mx-auto">
-                    <img src="https://crafatar.com/renders/head/MrBenceYT?overlay=true" 
-                         alt="MrBenceYT Minecraft Head" 
-                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
-                </div>
-                <div>
-                    <h3 class="text-xl font-black text-white">MrBenceYT</h3>
-                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/40">Tulajdonos</span>
-                </div>
+                <!-- Discord Card -->
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl text-left group flex items-start space-x-4 border border-indigo-500/20 hover:border-indigo-500/50">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Közösségi Élet</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">Discord Szerver</h3>
+                        <p class="text-sm text-gray-400 mt-1">Csatlakozz a közösséghez, vegyél részt nyereményjátékokban!</p>
+                        <span class="inline-flex items-center text-xs font-bold text-indigo-400 mt-3 group-hover:translate-x-1 transition-transform">
+                            Csatlakozás <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </span>
+                    </div>
+                </a>
             </div>
 
-            <!-- SubForFlash -->
-            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-red-500/40 border">
-                <div class="relative w-24 h-24 mx-auto">
-                    <img src="https://crafatar.com/renders/head/SubForFlash?overlay=true" 
-                         alt="SubForFlash Minecraft Head" 
-                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
-                </div>
-                <div>
-                    <h3 class="text-xl font-black text-white">SubForFlash</h3>
-                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-xs font-black border border-red-500/40">Tulajdonos</span>
-                </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mb-4">Miért válaszd az <span class="text-gradient-purple">AethelMC</span>-t?</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Kiváló teljesítmény, kiegyensúlyozott játékmódok és egy barátságos közösség vár a szerveren.</p>
             </div>
 
-            <!-- MrJoe15429 -->
-            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-cyan-500/40 border">
-                <div class="relative w-24 h-24 mx-auto">
-                    <img src="https://crafatar.com/renders/head/MrJoe15429?overlay=true" 
-                         alt="MrJoe15429 Minecraft Head" 
-                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-xl bg-brand-purple/20 text-brand-purple flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Maximális Teljesítmény</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Akadásmentes játékélmény és alacsony válaszidő (ping), hogy a legfontosabb pillanatokban se szaggasson a játék.
+                    </p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-black text-white">MrJoe15429</h3>
-                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/40">Admin / rangixZ</span>
-                </div>
-            </div>
 
-            <!-- SubForPower -->
-            <div class="glass-card p-6 rounded-3xl text-center space-y-4 hover:scale-105 transition duration-300 border-cyan-500/40 border">
-                <div class="relative w-24 h-24 mx-auto">
-                    <img src="https://crafatar.com/renders/head/SubForPower?overlay=true" 
-                         alt="SubForPower Minecraft Head" 
-                         class="w-full h-full object-contain mc-head drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-                         onerror="this.src='https://crafatar.com/renders/head/MHF_Steve?overlay=true'">
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Aktív Moderáció</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Segítőkész és igazságos admincsapatunk garantálja a csalómentes és barátságos környezetet mindenki számára.
+                    </p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-black text-white">SubForPower</h3>
-                    <span class="inline-block mt-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-black border border-cyan-500/40">Admin</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- VoidSMP Partner -->
-        <div class="mt-12 glass-card p-8 rounded-3xl neon-border-purple flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-5">
-                <div class="w-14 h-14 rounded-2xl bg-purple-600/30 border border-purple-500 flex items-center justify-center text-2xl text-purple-300">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-black text-purple-400 uppercase tracking-widest">Hivatalos Partnerünk</span>
-                    <h3 class="text-2xl font-black text-white">VoidSMP</h3>
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Széles Verziótámogatás</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Csatlakozz szinte bármilyen verzióval 1.16.5-től egészen a legújabb 26.2-es frissítésekig!
+                    </p>
                 </div>
             </div>
-            <a href="#" class="px-6 py-3 rounded-xl bg-gray-900 border border-gray-700 text-gray-400 text-xs font-black tracking-wider cursor-not-allowed">
-                LINK: HAMAROSAN
+        </section>
+
+        <!-- Store Call-to-Action Section -->
+        <section id="store" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="glass-panel p-8 sm:p-14 rounded-3xl border border-purple-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="max-w-xl text-center md:text-left z-10">
+                    <span class="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold text-xs uppercase tracking-wider mb-4">Prémium Előnyök</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">Szeretnél Rangot vagy Extra Tárgyakat?</h2>
+                    <p class="text-gray-300 text-base mb-6">Támogasd a szerver működését és élvezd a különleges rangokkal járó előnyöket, mint például az egyedi kozmetikákat, plusz parancsokat és előjogokat!</p>
+                    <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-base shadow-lg shadow-purple-600/40 hover:scale-105 transition-all">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Ugrás a Webshopra (store.aethelmc.fun)</span>
+                    </a>
+                </div>
+                <div class="z-10 flex-shrink-0">
+                    <div class="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 p-1 animate-pulse shadow-neon-purple">
+                        <div class="w-full h-full bg-brand-dark rounded-full flex flex-col items-center justify-center text-center p-4">
+                            <i class="fa-solid fa-crown text-5xl text-yellow-400 mb-3"></i>
+                            <span class="font-display font-black text-xl text-white">VIP & RANGOK</span>
+                            <span class="text-xs text-gray-400 mt-1">Azonnali jóváírás</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">Légy része a Közösségnek!</h2>
+            <p class="text-gray-400 max-w-lg mx-auto mb-8">Ne maradj le semmiről! Csatlakozz Hivatalos Discord szerverünkre a friss hírekért és eseményekért.</p>
+            <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base shadow-lg shadow-indigo-600/30 hover:scale-105 transition-all">
+                <i class="fa-brands fa-discord text-xl"></i>
+                <span>Csatlakozás a Discordra</span>
             </a>
-        </div>
-    </section>
+        </section>
 
-    <!-- Lábléc -->
-    <footer class="mt-auto border-t border-gray-800/80 bg-black/90 py-10 px-4 relative z-10 text-center text-xs text-gray-500">
-        <p>&copy; 2026 AethelMC Network. Minden jog fenntartva. Nem állunk kapcsolatban a Mojang AB-val.</p>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-white/10 py-8 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+            <div>
+                <p>&copy; 2026 <span class="text-white font-bold">AethelMC</span>. Minden jog fenntartva.</p>
+                <p class="text-xs text-gray-500 mt-1">Nem állunk kapcsolatban a Mojang AB-vel.</p>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="https://store.aethelmc.fun" target="_blank" class="hover:text-brand-purple transition-colors">Bolt</a>
+                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="hover:text-indigo-400 transition-colors">Discord</a>
+            </div>
+        </div>
     </footer>
 
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out pointer-events-none">
+        <div class="glass-panel px-5 py-3 rounded-xl border border-emerald-500/40 text-emerald-300 flex items-center space-x-3 shadow-2xl">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+            <span class="font-semibold text-sm">Szerver IP sikeresen másolva!</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script>
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 60, density: { enable: true, value_area: 800 } },
-                color: { value: '#8b5cf6' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.4, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#06b6d4', opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out' }
-            }
-        });
+        // Copy IP logic
+        function copyIp() {
+            const ip = "play.aethelmc.fun";
+            
+            // Temporary text area for fallback clipboard support
+            const el = document.createElement('textarea');
+            el.value = ip;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
 
-        function copyIP() {
-            navigator.clipboard.writeText('play.aethelmc.fun');
-            alert('IP Cím másolva: play.aethelmc.fun');
+            // UI Feedback update
+            const btnText = document.getElementById('copyBtnText');
+            const icon = document.getElementById('copyIcon');
+            const toast = document.getElementById('toast');
+
+            btnText.innerText = "Másolva!";
+            icon.className = "fa-solid fa-check";
+
+            // Show Toast Notification
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                btnText.innerText = "Másolás";
+                icon.className = "fa-regular fa-copy";
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
         }
 
-        async function fetchStats() {
-            try {
-                const res = await fetch('https://api.mcsrvstat.us/3/play.aethelmc.fun');
-                const data = await res.json();
-                if(data.online) {
-                    document.getElementById('stat-status').innerText = 'ONLINE';
-                    document.getElementById('stat-status').className = 'text-2xl font-black text-emerald-400';
-                    document.getElementById('stat-players').innerText = `${data.players.online} / ${data.players.max}`;
-                    document.getElementById('stat-ping').innerText = `${data.debug?.ping || 24} ms`;
-                } else {
-                    document.getElementById('stat-status').innerText = 'OFFLINE';
-                    document.getElementById('stat-status').className = 'text-2xl font-black text-red-500';
-                }
-            } catch(e) {
-                document.getElementById('stat-status').innerText = 'HIBA';
-            }
-        }
-        fetchStats();
+        // Particle.js Configuration
+        window.onload = function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 40,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#8b5cf6"
+                    },
+                    "shape": {
+                        "type": "circle"
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 4,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#06b6d4",
+                        "opacity": 0.15,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": false
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.4
+                            }
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        };
     </script>
 </body>
 </html>
