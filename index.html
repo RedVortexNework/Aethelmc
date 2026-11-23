@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AethelMC — Hivatalos Portál</title>
+  <title>AethelMC — BoxPvP Arena</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-base: #070a10;
-      --bg-elevated: rgba(15, 21, 34, 0.72);
-      --bg-card: rgba(18, 25, 41, 0.78);
-      --border: rgba(255, 255, 255, 0.09);
-      --border-strong: rgba(56, 189, 248, 0.35);
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent: #38bdf8;
-      --accent-indigo: #818cf8;
-      --accent-emerald: #34d399;
-      --glow: rgba(56, 189, 248, 0.24);
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
+      --bg-void: #05070d;
+      --bg-panel: rgba(14, 20, 34, 0.76);
+      --bg-panel-hover: rgba(20, 29, 48, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-neon: rgba(56, 189, 248, 0.45);
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --cyan: #38bdf8;
+      --violet: #818cf8;
+      --discord: #5865f2;
+      --discord-glow: rgba(88, 101, 242, 0.36);
+      --rose: #fb7185;
+      --emerald: #34d399;
+      --glow-cyan: rgba(56, 189, 248, 0.32);
     }
 
     * {
@@ -37,84 +37,105 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-base);
-      color: var(--text-primary);
-      line-height: 1.6;
+      background-color: var(--bg-void);
+      color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.6;
       background-image:
-        radial-gradient(circle at 15% 12%, rgba(56, 189, 248, 0.16), transparent 42%),
-        radial-gradient(circle at 85% 18%, rgba(129, 140, 248, 0.16), transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(52, 211, 153, 0.08), transparent 50%);
+        radial-gradient(ellipse 75% 45% at 50% -8%, rgba(56, 189, 248, 0.22), transparent 65%),
+        radial-gradient(circle at 12% 28%, rgba(129, 140, 248, 0.16), transparent 45%),
+        radial-gradient(circle at 88% 35%, rgba(251, 113, 133, 0.12), transparent 45%),
+        linear-gradient(to bottom, rgba(5, 7, 13, 0.2), var(--bg-void));
     }
 
-    .container {
-      width: 100%;
-      max-width: 1120px;
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at 50% 25%, #000 20%, transparent 78%);
+      -webkit-mask-image: radial-gradient(circle at 50% 25%, #000 20%, transparent 78%);
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    /* Fejléc / Navigáció */
+    /* Fejléc */
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 40;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      background: rgba(7, 10, 16, 0.75);
-      border-bottom: 1px solid var(--border);
+      background: rgba(5, 7, 13, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .nav-inner {
+    .nav-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 70px;
+      height: 72px;
       gap: 16px;
     }
 
-    .brand {
-      display: flex;
+    .logo {
+      display: inline-flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      color: var(--text-primary);
+      color: var(--text-main);
       font-weight: 900;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
     }
 
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-indigo));
-      color: #060911;
       font-weight: 900;
-      font-size: 1rem;
-      box-shadow: 0 6px 20px var(--glow);
+      font-size: 1.05rem;
+      color: #05070d;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 24px var(--glow-cyan);
     }
 
-    .nav-links {
+    .nav-menu {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 26px;
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-menu a {
       text-decoration: none;
-      color: var(--text-secondary);
-      font-weight: 500;
+      color: var(--text-dim);
       font-size: 0.92rem;
+      font-weight: 600;
       transition: color 0.2s ease;
     }
 
-    .nav-links a:hover {
-      color: var(--text-primary);
+    .nav-menu a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
@@ -123,444 +144,516 @@
       justify-content: center;
       gap: 8px;
       border: none;
-      border-radius: var(--radius-sm);
-      padding: 11px 18px;
+      border-radius: 12px;
+      padding: 12px 20px;
       font-family: inherit;
-      font-weight: 700;
       font-size: 0.92rem;
+      font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
     .btn:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-indigo));
-      color: #060911;
-      box-shadow: 0 8px 26px var(--glow);
+    .btn-neon {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #05070d;
+      box-shadow: 0 10px 28px var(--glow-cyan);
     }
 
-    .btn-primary:hover {
-      box-shadow: 0 12px 32px rgba(56, 189, 248, 0.36);
+    .btn-neon:hover {
+      box-shadow: 0 14px 36px rgba(56, 189, 248, 0.45);
+      transform: translateY(-1px);
     }
 
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
+    .btn-discord {
+      background: var(--discord);
+      color: #ffffff;
+      box-shadow: 0 10px 26px var(--discord-glow);
     }
 
-    .btn-ghost:hover {
-      border-color: var(--border-strong);
+    .btn-discord:hover {
+      background: #4752c4;
+      box-shadow: 0 14px 34px rgba(88, 101, 242, 0.48);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-neon);
       background: rgba(56, 189, 248, 0.08);
     }
 
-    /* Hero szekció */
+    /* Hero */
     .hero {
-      padding: 76px 0 56px;
+      padding: 84px 0 64px;
       text-align: center;
     }
 
-    .status-pill {
+    .live-chip {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
+      gap: 9px;
+      padding: 7px 15px;
       border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent-emerald);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--emerald);
       background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.28);
-      margin-bottom: 20px;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      margin-bottom: 22px;
     }
 
-    .status-dot {
+    .pulse {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 10px var(--accent-emerald);
+      background: var(--emerald);
+      box-shadow: 0 0 12px var(--emerald);
     }
 
-    h1 {
-      font-size: clamp(2.2rem, 6vw, 4rem);
+    .hero-title {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
       font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
       margin-bottom: 18px;
-      background: linear-gradient(135deg, #ffffff 15%, var(--accent) 55%, var(--accent-indigo) 95%);
+      background: linear-gradient(135deg, #ffffff 10%, var(--cyan) 50%, var(--violet) 95%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-desc {
-      max-width: 660px;
-      margin: 0 auto 30px;
-      color: var(--text-secondary);
-      font-size: 1.05rem;
+    .hero-sub {
+      max-width: 640px;
+      margin: 0 auto 34px;
+      color: var(--text-dim);
+      font-size: 1.06rem;
     }
 
-    .ip-bar {
+    .ip-dock {
       display: inline-flex;
       align-items: center;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      padding: 10px 14px 10px 18px;
+      gap: 14px;
+      padding: 11px 14px 11px 20px;
+      border-radius: 16px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-neon);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(56, 189, 248, 0.14);
       margin-bottom: 24px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
     }
 
-    .ip-label {
-      font-size: 0.78rem;
+    .ip-meta {
+      text-align: left;
+    }
+
+    .ip-caption {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary);
-      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
     }
 
-    .ip-value {
+    .ip-addr {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--accent);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--cyan);
     }
 
-    .hero-actions {
+    .hero-cta {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
     }
 
-    /* Szekciók */
-    section {
-      padding: 44px 0;
+    /* Stat sáv */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 48px;
     }
 
-    .section-head {
+    .stat-box {
+      background: var(--bg-panel);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .stat-num {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Szekciók */
+    section {
+      padding: 52px 0;
+    }
+
+    .sec-header {
       display: flex;
-      align-items: baseline;
+      align-items: flex-end;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 24px;
     }
 
-    .section-title {
-      font-size: 1.55rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+    .sec-title {
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
     }
 
-    .section-sub {
-      color: var(--text-secondary);
+    .sec-desc {
+      color: var(--text-dim);
       font-size: 0.92rem;
     }
 
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .grid-3 {
+    .cards-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
-    @media (max-width: 960px) {
-      .grid-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
+    .arena-card {
+      position: relative;
+      background: var(--bg-panel);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
-    @media (max-width: 560px) {
-      .grid-4 {
-        grid-template-columns: 1fr;
-      }
-      .nav-links {
-        display: none;
-      }
+    .arena-card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-panel-hover);
+      border-color: var(--border-neon);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
     }
 
-    .card {
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .tag {
+    .pill {
       display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.7rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.24);
-      padding: 4px 9px;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
       border-radius: 999px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
     }
 
-    .card h3 {
-      font-size: 1.12rem;
-      font-weight: 700;
+    .pill-rose {
+      color: var(--rose);
+      background: rgba(251, 113, 133, 0.12);
+      border-color: rgba(251, 113, 133, 0.3);
+    }
+
+    .arena-card h3 {
+      font-size: 1.18rem;
+      font-weight: 800;
       margin-bottom: 8px;
     }
 
-    .card p {
-      color: var(--text-secondary);
+    .arena-card p {
+      color: var(--text-dim);
       font-size: 0.9rem;
     }
 
-    /* TGF / Jelentkezés blokk */
-    .tgf-box {
+    /* TGF Banner */
+    .tgf-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 24px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.12));
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-      padding: 28px;
+      padding: 32px;
+      border-radius: 22px;
+      background:
+        linear-gradient(125deg, rgba(56, 189, 248, 0.14), rgba(129, 140, 248, 0.14), rgba(251, 113, 133, 0.08));
+      border: 1px solid var(--border-neon);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
 
-    .tgf-box h2 {
-      font-size: 1.45rem;
-      font-weight: 800;
+    .tgf-banner h2 {
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
       margin-bottom: 6px;
     }
 
-    .tgf-box p {
-      color: var(--text-secondary);
-      max-width: 600px;
+    .tgf-banner p {
+      color: var(--text-dim);
+      max-width: 620px;
       font-size: 0.95rem;
+    }
+
+    .banner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     /* Lábléc */
     footer {
-      margin-top: 48px;
+      margin-top: 44px;
       padding: 28px 0;
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-dim);
       font-size: 0.86rem;
     }
 
-    .footer-inner {
+    .foot-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
     }
 
+    /* Toast */
     .toast {
       position: fixed;
-      bottom: 22px;
-      right: 22px;
-      background: #0f172a;
-      color: var(--accent-emerald);
-      border: 1px solid rgba(52, 211, 153, 0.4);
-      padding: 12px 16px;
-      border-radius: var(--radius-sm);
+      bottom: 24px;
+      right: 24px;
+      z-index: 90;
+      background: #0b1220;
+      color: var(--emerald);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      padding: 12px 18px;
+      border-radius: 12px;
       font-size: 0.88rem;
-      font-weight: 600;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+      font-weight: 700;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(12px);
       pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 100;
     }
 
-    .toast.show {
+    .toast.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @media (max-width: 820px) {
+      .stats-strip,
+      .cards-3 {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
+      .hero {
+        padding: 60px 0 44px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
   <header>
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <span class="brand-mark">A</span>
+    <div class="wrap nav-row">
+      <a href="#" class="logo">
+        <span class="logo-badge">A</span>
         <span>AethelMC</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#modes">Játékmódok</a></li>
-        <li><a href="#features">Miért AethelMC?</a></li>
-        <li><a href="#tgf">TGF</a></li>
+      <ul class="nav-menu">
+        <li><a href="#arena">Aréna</a></li>
+        <li><a href="#rules">Szabályzat &amp; Fair Play</a></li>
+        <li><a href="tgf.html">TGF</a></li>
       </ul>
 
-      <a href="#tgf" class="btn btn-primary">Jelentkezés</a>
+      <div class="nav-actions">
+        <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord</a>
+        <a href="tgf.html" class="btn btn-neon">Csatlakozz a csapathoz</a>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container">
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>1.8.8 – 26.2 Támogatás • Aktív Hálózat</span>
+      <div class="wrap">
+        <div class="live-chip">
+          <span class="pulse"></span>
+          <span>Pure BoxPvP • 1.8.8 – 26.2</span>
         </div>
 
-        <h1>AethelMC Hálózat</h1>
-        <p class="hero-desc">
-          Pörgős PvP arénák, fejlődős túlélő és égi módok egyetlen, gyors és letisztult közösségi szerveren. Csatlakozz most és építsd fel a saját utadat.
+        <h1 class="hero-title">AethelMC BoxPvP</h1>
+        <p class="hero-sub">
+          Tiszta, pörgős BoxPvP harcok felesleges sallangok nélkül. Gyűjts felszerelést, nyiss ládákat, urald az arénát és lépd le az ellenfeleidet.
         </p>
 
-        <div class="ip-bar">
-          <span class="ip-label">Szerver IP</span>
-          <span class="ip-value" id="server-ip">play.aethelmc.fun</span>
-          <button type="button" class="btn btn-primary" id="copy-ip-btn">IP másolása</button>
+        <div class="ip-dock">
+          <div class="ip-meta">
+            <span class="ip-caption">Csatlakozási cím</span>
+            <span class="ip-addr" id="mc-ip">play.aethelmc.fun</span>
+          </div>
+          <button type="button" class="btn btn-neon" id="copy-ip">IP másolása</button>
         </div>
 
-        <div class="hero-actions">
-          <a href="#modes" class="btn btn-ghost">Játékmódok felfedezése</a>
-          <a href="#tgf" class="btn btn-ghost">Jr. &amp; Chat Mod TGF</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="modes">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Játékmódok</h2>
-          <p class="section-sub">Válaszd ki a stílusodhoz illő módot a proxy menüben.</p>
+        <div class="hero-cta">
+          <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord csatlakozás</a>
+          <a href="#arena" class="btn btn-outline">Mit nyújt a BoxPvP?</a>
+          <a href="tgf.html" class="btn btn-outline">Jr. &amp; Chat Mod TGF</a>
         </div>
 
-        <div class="grid-4">
-          <article class="card">
-            <span class="tag">PvP</span>
-            <h3>BoxPvP</h3>
-            <p>Gyors harcok, egyedi felszerelések és folyamatos fejlődés zárt, intenzív arénákban.</p>
-          </article>
-
-          <article class="card">
-            <span class="tag">PvP / Speed</span>
-            <h3>ComboFly</h3>
-            <p>Lendületes kombózás és repülős mechanikák a pörgős, akciódús összecsapásokhoz.</p>
-          </article>
-
-          <article class="card">
-            <span class="tag">Sziget</span>
-            <h3>SkyBlock</h3>
-            <p>Építsd fel a saját lebegő szigeted, fejlessz generátorokat és kereskedj a közösséggel.</p>
-          </article>
-
-          <article class="card">
-            <span class="tag">Sziget</span>
-            <h3>OneBlock</h3>
-            <p>Kezdj egyetlen blokkról, nyiss meg új fázisokat és bővítsd ki a birodalmadat lépésről lépésre.</p>
-          </article>
+        <div class="stats-strip">
+          <div class="stat-box">
+            <div class="stat-num">BoxPvP Only</div>
+            <div class="stat-label">100%-ban a harcra és fejlődésre fókuszálva</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">1.8.8 – 26.2</div>
+            <div class="stat-label">Széles kliens- és verziótámogatás</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">Aktív Staff</div>
+            <div class="stat-label">Gyors chat- és jegykezelés, tiszta közösség</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="features">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Miért AethelMC?</h2>
-          <p class="section-sub">Stabil alapok, átlátható szabályok és aktív fejlesztés.</p>
+    <section id="arena">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2 class="sec-title">Az Aréna Felépítése</h2>
+          <p class="sec-desc">Minden a folyamatos grindról, a lootolásról és az intenzív bunyókról szól.</p>
         </div>
 
-        <div class="grid-3">
-          <article class="card">
-            <span class="tag">Kompatibilitás</span>
-            <h3>Széles verziótámogatás</h3>
-            <p>Csatlakozz 1.8.8-tól egészen a 26.2-es verziókig, kényelmes belépéssel és gyors szerverváltással.</p>
+        <div class="cards-3">
+          <article class="arena-card">
+            <span class="pill">Harc</span>
+            <h3>Folyamatos BoxPvP Akció</h3>
+            <p>Üss, fejlődj, cserélj jobb gearre és teszteld a reakcióidődet zárt, pörgős arénazonákban.</p>
           </article>
 
-          <article class="card">
-            <span class="tag">Közösség</span>
-            <h3>Aktív moderáció</h3>
-            <p>Korrekt chat- és szerverfelügyelet, gyors ticketkezelés és átlátható elvárások minden játékos számára.</p>
+          <article class="arena-card">
+            <span class="pill">Fejlődés</span>
+            <h3>Gear, Ládák &amp; Rangok</h3>
+            <p>Dolgozz fel egyre erősebb szetteket, nyiss ládákat és építsd fel a dominanciádat lépésről lépésre.</p>
           </article>
 
-          <article class="card">
-            <span class="tag">Fejlődés</span>
-            <h3>Folyamatos frissítések</h3>
-            <p>Új rendszerek, finomhangolt egyensúly és szezonális tartalmak a visszajelzések alapján.</p>
+          <article class="arena-card">
+            <span class="pill pill-rose">Közösség</span>
+            <h3>Pörgős, Élő Chat</h3>
+            <p>Kereskedés, kihívások és állandó aktivitás — moderátoraink pedig figyelnek arra, hogy élhető maradjon a chat.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="tgf">
-      <div class="container">
-        <div class="tgf-box">
+    <section id="rules">
+      <div class="wrap">
+        <div class="sec-header">
+          <h2 class="sec-title">Alapszabályok</h2>
+          <p class="sec-desc">Egyszerű elvek a normális játékélményért.</p>
+        </div>
+
+        <div class="cards-3">
+          <article class="arena-card">
+            <span class="pill pill-rose">01</span>
+            <h3>Tiltott segédprogramok</h3>
+            <p>Csalások és előnyt adó módosítások használata szankciót von maga után. Játssz tisztán.</p>
+          </article>
+
+          <article class="arena-card">
+            <span class="pill">02</span>
+            <h3>Chatkultúra</h3>
+            <p>Nincs spam, reklám vagy minősíthetetlen trágárság — a chat a játékosoké, ne rontsd el másoknak.</p>
+          </article>
+
+          <article class="arena-card">
+            <span class="pill">03</span>
+            <h3>Bugkihasználás tilos</h3>
+            <p>Ha hibát vagy duplikálási lehetőséget találsz, jelezd a staffnak ahelyett, hogy kihasználnád.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="tgf-banner">
           <div>
-            <span class="tag">Csapatfelvétel</span>
+            <span class="pill">Felvétel</span>
             <h2>Junior &amp; Chat Moderátor TGF</h2>
             <p>
-              Jól kezeled a chatet, türelmes vagy, és szívesen segítesz a játékosoknak? Töltsd ki a jelentkezési űrlapot, és mutasd meg, mit tudsz!
+              Jól kezeled a chatet, átlátod a helyzeteket, és szívesen lennél az AethelMC csapat része? Töltsd ki a külön oldalon elérhető TGF lapot!
             </p>
           </div>
-          <a href="tgf.html" class="btn btn-primary">TGF űrlap megnyitása</a>
+          <div class="banner-actions">
+            <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord szerver</a>
+            <a href="tgf.html" class="btn btn-neon">TGF oldal megnyitása</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> AethelMC • aethelmc.fun</span>
-      <span>Szerver IP: play.aethelmc.fun</span>
+    <div class="wrap foot-row">
+      <span>© <span id="yr"></span> AethelMC • aethelmc.fun</span>
+      <span>BoxPvP • play.aethelmc.fun</span>
     </div>
   </footer>
 
-  <div class="toast" id="toast">IP kimásolva: play.aethelmc.fun</div>
+  <div class="toast" id="toast">IP másolva: play.aethelmc.fun</div>
 
   <script>
     (function () {
-      const copyBtn = document.getElementById("copy-ip-btn");
-      const ipText = document.getElementById("server-ip").textContent.trim();
+      const btn = document.getElementById("copy-ip");
+      const ip = document.getElementById("mc-ip").textContent.trim();
       const toast = document.getElementById("toast");
-      const yearEl = document.getElementById("year");
+      document.getElementById("yr").textContent = new Date().getFullYear();
 
-      yearEl.textContent = new Date().getFullYear();
-
-      function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add("show");
-        clearTimeout(window.__aethelToastTimer);
-        window.__aethelToastTimer = setTimeout(() => {
-          toast.classList.remove("show");
-        }, 2200);
+      let timer;
+      function notify(msg) {
+        toast.textContent = msg;
+        toast.classList.add("visible");
+        clearTimeout(timer);
+        timer = setTimeout(() => toast.classList.remove("visible"), 2200);
       }
 
-      copyBtn.addEventListener("click", async function () {
+      btn.addEventListener("click", async function () {
         try {
-          await navigator.clipboard.writeText(ipText);
-          showToast("IP kimásolva: " + ipText);
+          await navigator.clipboard.writeText(ip);
+          notify("IP másolva: " + ip);
         } catch {
-          showToast("Másold ki kézzel: " + ipText);
+          notify("Másold ki kézzel: " + ip);
         }
       });
     })();
