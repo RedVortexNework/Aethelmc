@@ -1,1 +1,696 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AethelMC — Junior &amp; Chat Moderátor TGF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-void: #05070d;
+      --bg-panel: rgba(14, 20, 34, 0.78);
+      --bg-panel-hover: rgba(20, 29, 48, 0.9);
+      --input-bg: rgba(7, 11, 20, 0.82);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-neon: rgba(56, 189, 248, 0.45);
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --cyan: #38bdf8;
+      --violet: #818cf8;
+      --discord: #5865f2;
+      --discord-glow: rgba(88, 101, 242, 0.36);
+      --emerald: #34d399;
+      --danger: #f87171;
+      --glow-cyan: rgba(56, 189, 248, 0.32);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image:
+        radial-gradient(ellipse 75% 45% at 50% -8%, rgba(56, 189, 248, 0.22), transparent 65%),
+        radial-gradient(circle at 12% 28%, rgba(129, 140, 248, 0.16), transparent 45%),
+        radial-gradient(circle at 88% 35%, rgba(251, 113, 133, 0.12), transparent 45%),
+        linear-gradient(to bottom, rgba(5, 7, 13, 0.2), var(--bg-void));
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at 50% 25%, #000 20%, transparent 78%);
+      -webkit-mask-image: radial-gradient(circle at 50% 25%, #000 20%, transparent 78%);
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .form-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Fejléc */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 7, 13, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: -0.025em;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: #05070d;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 24px var(--glow-cyan);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: 12px;
+      padding: 11px 18px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-neon {
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #05070d;
+      box-shadow: 0 10px 28px var(--glow-cyan);
+    }
+
+    .btn-neon:hover {
+      box-shadow: 0 14px 36px rgba(56, 189, 248, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-discord {
+      background: var(--discord);
+      color: #ffffff;
+      box-shadow: 0 10px 26px var(--discord-glow);
+    }
+
+    .btn-discord:hover {
+      background: #4752c4;
+      box-shadow: 0 14px 34px rgba(88, 101, 242, 0.48);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-neon);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    main {
+      padding: 44px 0 24px;
+    }
+
+    .card {
+      background: var(--bg-panel);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .card:hover {
+      background: var(--bg-panel-hover);
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+
+    .hero-card {
+      border-top: 3px solid var(--cyan);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      padding: 5px 11px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 10%, var(--cyan) 50%, var(--violet) 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 0.96rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-pill {
+      font-size: 0.74rem;
+      font-weight: 900;
+      color: #05070d;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      padding: 3px 9px;
+      border-radius: 8px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.94rem;
+      margin-bottom: 4px;
+    }
+
+    .req {
+      color: var(--danger);
+      margin-left: 3px;
+    }
+
+    .hint {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      background: var(--input-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.94rem;
+      font-family: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      outline: none;
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px var(--glow-cyan);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 18px;
+      }
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--input-bg);
+      border: 1px solid var(--border-subtle);
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .option:hover {
+      border-color: var(--border-neon);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .option input {
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .status {
+      margin-top: 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--emerald);
+      display: none;
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .preview-box {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .preview-box pre {
+      background: #04060b;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px;
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    footer {
+      margin-top: 44px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+      font-size: 0.86rem;
+    }
+
+    .foot-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap nav-row">
+      <a href="index.html" class="logo">
+        <span class="logo-badge">A</span>
+        <span>AethelMC</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord</a>
+        <a href="index.html" class="btn btn-outline">&larr; Vissza a főoldalra</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-wrap">
+      <form id="tgf-form" novalidate>
+        <div class="card hero-card">
+          <div class="pill">AethelMC BoxPvP • TGF</div>
+          <h1>Csapattag jelentkezés (Jr. &amp; Chat Mod)</h1>
+          <p class="subtitle">
+            ha ezt olvasod 10%-kal csökkent a kortizol szinted. Sok sikert a kitöltéshez, ne írj sablon dumákat, mert úgyis kiszúrjuk!
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">
+            <span class="section-pill">01</span> Alapok (hogy tudjuk, ki vagy)
+          </h2>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="label" for="mc-nick">Mi a játékosneved?<span class="req">*</span></label>
+              <span class="hint">Csak az a fiók, amivel ténylegesen fent vagy a szerveren.</span>
+              <input class="input" id="mc-nick" name="mcNick" type="text" required placeholder="Pl.: JatekosNev123" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="discord-id">Discord ID<span class="req">*</span></label>
+              <span class="hint">Fejlesztői mód bekapcsolása után jobb klikk a profilodon &rarr; ID másolása.</span>
+              <input class="input" id="discord-id" name="discordId" type="text" required placeholder="Pl.: 123456789012345678" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="label" for="age">Hány éves vagy?<span class="req">*</span></label>
+              <span class="hint">Ne azt írd, hogy mennyi leszel, hanem mennyi vagy most.</span>
+              <input class="input" id="age" name="age" type="number" min="10" max="99" required placeholder="Pl.: 15" />
+            </div>
+
+            <div class="field">
+              <label class="label">Van mikrofonod?<span class="req">*</span></label>
+              <span class="hint">Ha nincs, akkor meg is állhatsz, mivel kötelező.</span>
+              <div class="options">
+                <label class="option"><input type="radio" name="mic" value="Van" required /> Van</label>
+                <label class="option"><input type="radio" name="mic" value="Nincs" required /> Nincs</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="activity-mode">Mióta nyomod az AethelMC BoxPvP-n, és mennyire ismered az arénát?<span class="req">*</span></label>
+            <span class="hint">Pl.: 2 hete játszom, vágom a ládákat, rangokat és a mindennapi harcokat.</span>
+            <input class="input" id="activity-mode" name="activityMode" type="text" required placeholder="Időtartam és BoxPvP tapasztalat..." />
+          </div>
+
+          <div class="field">
+            <label class="label">Napi szinten mennyi időt tudsz a szerverre és a Discordra szánni?<span class="req">*</span></label>
+            <span class="hint">Ne írj 10 órát, ha iskola mellett csak 1-2 órád van, az őszinteség többet ér.</span>
+            <div class="options">
+              <label class="option"><input type="radio" name="dailyTime" value="1–2 óra" required /> 1–2 óra</label>
+              <label class="option"><input type="radio" name="dailyTime" value="2–4 óra" required /> 2–4 óra</label>
+              <label class="option"><input type="radio" name="dailyTime" value="4+ óra" required /> 4+ óra</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">
+            <span class="section-pill">02</span> Tapasztalat &amp; Motiváció
+          </h2>
+
+          <div class="field">
+            <label class="label" for="past-staff">Voltál már valahol staff? Ha igen, hol és miért léptél ki / raktak ki?<span class="req">*</span></label>
+            <span class="hint">Ha még sehol nem voltál, simán írd be, hogy "Még nem", nem kizáró ok.</span>
+            <textarea class="textarea" id="past-staff" name="pastStaff" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="why-you">Miért pont téged vegyünk fel az AethelMC csapatába?<span class="req">*</span></label>
+            <span class="hint">Írj legalább 3-4 értelmes mondatot. A "mert jó fej vagyok és segítenék" kevés lesz.</span>
+            <textarea class="textarea" id="why-you" name="whyYou" required></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">
+            <span class="section-pill">03</span> Szituációk (itt dől el minden)
+          </h2>
+
+          <div class="field">
+            <label class="label" for="sit-1">Valaki elkezdi szidni a másik anyját a chaten, és nincs fent admin. Mit csinálsz pontosan?<span class="req">*</span></label>
+            <span class="hint">Írd le lépésről lépésre, mit teszel a chat tisztítása előtt és után.</span>
+            <textarea class="textarea" id="sit-1" name="sit1" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-2">Bejön egy arc és beírja: "Gyertek fel XY szerverre, sokkal jobb, IP: play.pelda.hu". Mi a teendőd?<span class="req">*</span></label>
+            <span class="hint">Gondold végig, mi a fontosabb először: elrejteni az IP-t vagy kiosztani a büntetést?</span>
+            <textarea class="textarea" id="sit-2" name="sit2" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-3">Két játékos összeveszik a chaten, mindkettő téged pingel, hogy a másik kezdte, de te csak a végét láttad. Mit lépsz?<span class="req">*</span></label>
+            <span class="hint">Hogyan kezeled, ha nincs nálad az egész előzmény?</span>
+            <textarea class="textarea" id="sit-3" name="sit3" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-4">Nyitnak egy ticketet, hogy eltűnt a cuccuk egy bug miatt, de neked nincs jogod visszaadni. Mit válaszolsz nekik?<span class="req">*</span></label>
+            <textarea class="textarea" id="sit-4" name="sit4" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-5">Egy játékos téged kezd el szidni / provokálni, amiért jogosan némítottad. Hogyan reagálsz?<span class="req">*</span></label>
+            <span class="hint">Visszaszólsz neki, vagy mi a protokoll?</span>
+            <textarea class="textarea" id="sit-5" name="sit5" required></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">
+            <span class="section-pill">04</span> Tech &amp; Hozzáállás
+          </h2>
+
+          <div class="field">
+            <label class="label" for="commands">Vágod az alap büntetőparancsokat (/mute, /tempmute, /warn, /kick, /history)?<span class="req">*</span></label>
+            <span class="hint">Írj 1-2 példát pontos szintaxissal (pl. kinek, mennyi időre, milyen indokkal).</span>
+            <textarea class="textarea" id="commands" name="commands" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label">Készítesz bizonyítékot (képet / videót) mielőtt büntetsz valakit?<span class="req">*</span></label>
+            <span class="hint">Bizonyíték nélkül nincs szankció – ha reklamál a játékos, ezzel véded magad.</span>
+            <div class="options">
+              <label class="option"><input type="radio" name="proof" value="Igen, mindig" required /> Igen, mindig</label>
+              <label class="option"><input type="radio" name="proof" value="Csak komolyabb eseteknél" required /> Csak komolyabb eseteknél</label>
+              <label class="option"><input type="radio" name="proof" value="Még nem csináltam, de vágom hogyan kell" required /> Még nem csináltam, de vágom hogyan kell</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">A legjobb haverod káromkodik a chaten. Ugyanúgy megbünteted, mint egy random játékost?<span class="req">*</span></label>
+            <div class="options">
+              <label class="option"><input type="radio" name="friendRule" value="Igen, mindenkire ugyanaz a szabályzat vonatkozik" required /> Igen, mindenkire ugyanaz a szabályzat vonatkozik</label>
+              <label class="option"><input type="radio" name="friendRule" value="Először csak privátban rászólok, hogy ne csinálja" required /> Először csak privátban rászólok, hogy ne csinálja</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="actions">
+            <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord szerver</a>
+            <button type="button" id="copy-btn" class="btn btn-outline">Összefoglaló másolása</button>
+            <button type="submit" class="btn btn-neon">Jelentkezés beküldése</button>
+          </div>
+
+          <div id="status" class="status"></div>
+          <div id="preview-box" class="preview-box">
+            <pre id="preview-text"></pre>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap foot-row">
+      <span>© <span id="year"></span> AethelMC • aethelmc.fun</span>
+      <span>BoxPvP • play.aethelmc.fun</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const form = document.getElementById("tgf-form");
+      const copyBtn = document.getElementById("copy-btn");
+      const statusEl = document.getElementById("status");
+      const previewBox = document.getElementById("preview-box");
+      const previewText = document.getElementById("preview-text");
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      function getRadio(name) {
+        const el = form.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : "";
+      }
+
+      function getData() {
+        return {
+          mcNick: form.mcNick.value.trim(),
+          discordId: form.discordId.value.trim(),
+          age: form.age.value.trim(),
+          mic: getRadio("mic"),
+          activityMode: form.activityMode.value.trim(),
+          dailyTime: getRadio("dailyTime"),
+          pastStaff: form.pastStaff.value.trim(),
+          whyYou: form.whyYou.value.trim(),
+          sit1: form.sit1.value.trim(),
+          sit2: form.sit2.value.trim(),
+          sit3: form.sit3.value.trim(),
+          sit4: form.sit4.value.trim(),
+          sit5: form.sit5.value.trim(),
+          commands: form.commands.value.trim(),
+          proof: getRadio("proof"),
+          friendRule: getRadio("friendRule")
+        };
+      }
+
+      function isValid(d) {
+        return Object.values(d).every(Boolean);
+      }
+
+      function formatText(d) {
+        return [
+          "=== AethelMC BoxPvP – Jr. & Chat Mod Jelentkezés ===",
+          `Játékosnév: ${d.mcNick}`,
+          `Discord ID: ${d.discordId}`,
+          `Életkor: ${d.age}`,
+          `Mikrofon: ${d.mic}`,
+          `BoxPvP aktivitás: ${d.activityMode}`,
+          `Napi idő: ${d.dailyTime}`,
+          "",
+          `Korábbi staff: ${d.pastStaff}`,
+          `Miért pont ő: ${d.whyYou}`,
+          "",
+          `1. Családszidás admin nélkül: ${d.sit1}`,
+          `2. Szerverhirdetés: ${d.sit2}`,
+          `3. Vita előzmény nélkül: ${d.sit3}`,
+          `4. Bug miatt eltűnt tárgy ticket: ${d.sit4}`,
+          `5. Provokáció némítás után: ${d.sit5}`,
+          "",
+          `Parancsok: ${d.commands}`,
+          `Bizonyíték: ${d.proof}`,
+          `Haver szabályzata: ${d.friendRule}`
+        ].join("\n");
+      }
+
+      function showStatus(msg, isErr) {
+        statusEl.textContent = msg;
+        statusEl.className = isErr ? "status error" : "status";
+        statusEl.style.display = "block";
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const d = getData();
+        if (!isValid(d)) {
+          showStatus("Töltsd ki az összes kötelező (*) mezőt!", true);
+          return;
+        }
+        previewText.textContent = formatText(d);
+        previewBox.style.display = "block";
+        showStatus("Jelentkezés összeállítva! Ha még nincs bekötve Discord Webhook vagy backend, másold ki az összefoglalót.", false);
+      });
+
+      copyBtn.addEventListener("click", async function () {
+        const text = formatText(getData());
+        try {
+          await navigator.clipboard.writeText(text);
+          showStatus("Összefoglaló vágólapra másolva!", false);
+        } catch {
+          previewText.textContent = text;
+          previewBox.style.display = "block";
+          showStatus("Nem sikerült az automatikus másolás, de lent kimásolhatod.", true);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
