@@ -79,7 +79,6 @@
       padding: 0 20px;
     }
 
-    /* Fejléc */
     header {
       position: sticky;
       top: 0;
@@ -142,10 +141,15 @@
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
     }
 
-    .btn:active {
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn:active:not(:disabled) {
       transform: scale(0.97);
     }
 
@@ -155,7 +159,7 @@
       box-shadow: 0 10px 28px var(--glow-cyan);
     }
 
-    .btn-neon:hover {
+    .btn-neon:hover:not(:disabled) {
       box-shadow: 0 14px 36px rgba(56, 189, 248, 0.45);
       transform: translateY(-1px);
     }
@@ -166,7 +170,7 @@
       box-shadow: 0 10px 26px var(--discord-glow);
     }
 
-    .btn-discord:hover {
+    .btn-discord:hover:not(:disabled) {
       background: #4752c4;
       box-shadow: 0 14px 34px rgba(88, 101, 242, 0.48);
       transform: translateY(-1px);
@@ -178,7 +182,7 @@
       border: 1px solid var(--border-subtle);
     }
 
-    .btn-outline:hover {
+    .btn-outline:hover:not(:disabled) {
       border-color: var(--border-neon);
       background: rgba(56, 189, 248, 0.08);
     }
@@ -578,7 +582,7 @@
           <div class="actions">
             <a href="https://discord.gg/yTTQhZaFwf" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discord szerver</a>
             <button type="button" id="copy-btn" class="btn btn-outline">Összefoglaló másolása</button>
-            <button type="submit" class="btn btn-neon">Jelentkezés beküldése</button>
+            <button type="submit" id="submit-btn" class="btn btn-neon">Jelentkezés beküldése</button>
           </div>
 
           <div id="status" class="status"></div>
@@ -599,8 +603,11 @@
 
   <script>
     (function () {
+      const WEBHOOK_URL = "https://discord.com/api/webhooks/1574508123438456842/R6N2ALKJAjFgvSbCsrCe0IicxWzLhBtk3PTtB1cj5gg2jlE56dRmf1tjM2tSWJCWi4_s";
+
       const form = document.getElementById("tgf-form");
       const copyBtn = document.getElementById("copy-btn");
+      const submitBtn = document.getElementById("submit-btn");
       const statusEl = document.getElementById("status");
       const previewBox = document.getElementById("preview-box");
       const previewText = document.getElementById("preview-text");
@@ -661,22 +668,82 @@
         ].join("\n");
       }
 
+      function trimField(str, maxLen = 1000) {
+        const clean = str || "—";
+        return clean.length > maxLen ? clean.slice(0, maxLen - 3) + "..." : clean;
+      }
+
+      function buildWebhookPayload(d) {
+        return {
+          username: "AethelMC TGF",
+          embeds: [
+            {
+              title: "Új Jr. & Chat Mod Jelentkezés — BoxPvP",
+              color: 3718648,
+              fields: [
+                { name: "Játékosnév", value: trimField(d.mcNick, 256), inline: true },
+                { name: "Discord ID", value: trimField(d.discordId, 256), inline: true },
+                { name: "Életkor", value: trimField(d.age, 64), inline: true },
+                { name: "Mikrofon", value: trimField(d.mic, 64), inline: true },
+                { name: "Napi idő", value: trimField(d.dailyTime, 128), inline: true },
+                { name: "BoxPvP aktivitás", value: trimField(d.activityMode, 512), inline: false },
+                { name: "Korábbi staff", value: trimField(d.pastStaff, 1000), inline: false },
+                { name: "Miért pont ő", value: trimField(d.whyYou, 1000), inline: false },
+                { name: "1. Családszidás admin nélkül", value: trimField(d.sit1, 1000), inline: false },
+                { name: "2. Szerverhirdetés", value: trimField(d.sit2, 1000), inline: false },
+                { name: "3. Vita előzmény nélkül", value: trimField(d.sit3, 1000), inline: false },
+                { name: "4. Bug miatt eltűnt tárgy ticket", value: trimField(d.sit4, 1000), inline: false },
+                { name: "5. Provokáció némítás után", value: trimField(d.sit5, 1000), inline: false },
+                { name: "Büntetőparancsok", value: trimField(d.commands, 1000), inline: false },
+                { name: "Bizonyíték", value: trimField(d.proof, 256), inline: true },
+                { name: "Haver szabályzata", value: trimField(d.friendRule, 256), inline: true }
+              ],
+              timestamp: new Date().toISOString()
+            }
+          ]
+        };
+      }
+
       function showStatus(msg, isErr) {
         statusEl.textContent = msg;
         statusEl.className = isErr ? "status error" : "status";
         statusEl.style.display = "block";
       }
 
-      form.addEventListener("submit", function (e) {
+      form.addEventListener("submit", async function (e) {
         e.preventDefault();
         const d = getData();
         if (!isValid(d)) {
           showStatus("Töltsd ki az összes kötelező (*) mezőt!", true);
           return;
         }
-        previewText.textContent = formatText(d);
+
+        const summary = formatText(d);
+        previewText.textContent = summary;
         previewBox.style.display = "block";
-        showStatus("Jelentkezés összeállítva! Ha még nincs bekötve Discord Webhook vagy backend, másold ki az összefoglalót.", false);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Küldés...";
+
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(buildWebhookPayload(d))
+          });
+
+          if (!res.ok) {
+            throw new Error("HTTP " + res.status);
+          }
+
+          showStatus("Jelentkezés sikeresen elküldve Discordra! Sok sikert!", false);
+          form.reset();
+        } catch (err) {
+          showStatus("Hiba történt a Discord küldésnél (" + err.message + "). Másold ki az összefoglalót kézzel!", true);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Jelentkezés beküldése";
+        }
       });
 
       copyBtn.addEventListener("click", async function () {
