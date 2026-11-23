@@ -1,424 +1,569 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AethelMC - Minecraft Szerver Hálózat</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Canvas Particles -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AethelMC — Hivatalos Portál</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base: #070a10;
+      --bg-elevated: rgba(15, 21, 34, 0.72);
+      --bg-card: rgba(18, 25, 41, 0.78);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(56, 189, 248, 0.35);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --glow: rgba(56, 189, 248, 0.24);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            purple: '#8b5cf6',
-                            cyan: '#06b6d4',
-                            dark: '#0B0F19',
-                            card: '#131A2A',
-                            accent: '#a855f7'
-                        }
-                    },
-                    boxShadow: {
-                        'neon-purple': '0 0 25px rgba(139, 92, 246, 0.45)',
-                        'neon-cyan': '0 0 25px rgba(6, 182, 212, 0.45)',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #0B0F19;
-            color: #E2E8F0;
-            overflow-x: hidden;
-        }
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .glass-panel {
-            background: rgba(19, 26, 42, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glass-card {
-            background: rgba(22, 30, 49, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3);
-        }
-        .text-gradient-purple {
-            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .btn-glow {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .btn-glow::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: inherit;
-            opacity: 0;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        .btn-glow:hover::after {
-            opacity: 1;
-        }
-    </style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 12%, rgba(56, 189, 248, 0.16), transparent 42%),
+        radial-gradient(circle at 85% 18%, rgba(129, 140, 248, 0.16), transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(52, 211, 153, 0.08), transparent 50%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Fejléc / Navigáció */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7, 10, 16, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-indigo));
+      color: #060911;
+      font-weight: 900;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px var(--glow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.92rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 11px 18px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-indigo));
+      color: #060911;
+      box-shadow: 0 8px 26px var(--glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 32px rgba(56, 189, 248, 0.36);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--border-strong);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Hero szekció */
+    .hero {
+      padding: 76px 0 56px;
+      text-align: center;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.28);
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff 15%, var(--accent) 55%, var(--accent-indigo) 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 660px;
+      margin: 0 auto 30px;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .ip-bar {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 10px 14px 10px 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .ip-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .ip-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Szekciók */
+    section {
+      padding: 44px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 960px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      padding: 4px 9px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* TGF / Jelentkezés blokk */
+    .tgf-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(129, 140, 248, 0.12));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+
+    .tgf-box h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .tgf-box p {
+      color: var(--text-secondary);
+      max-width: 600px;
+      font-size: 0.95rem;
+    }
+
+    /* Lábléc */
+    footer {
+      margin-top: 48px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.86rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #0f172a;
+      color: var(--accent-emerald);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col relative selection:bg-brand-purple selection:text-white">
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <span class="brand-mark">A</span>
+        <span>AethelMC</span>
+      </a>
 
-    <!-- Background Particle Animation -->
-    <div id="particles-js"></div>
+      <ul class="nav-links">
+        <li><a href="#modes">Játékmódok</a></li>
+        <li><a href="#features">Miért AethelMC?</a></li>
+        <li><a href="#tgf">TGF</a></li>
+      </ul>
 
-    <!-- Background Glow Blobs -->
-    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-1/4 right-10 w-[400px] h-[400px] bg-brand-cyan/15 rounded-full blur-[140px] pointer-events-none"></div>
-
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-50 w-full glass-panel border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="#" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-purple to-brand-cyan flex items-center justify-center font-display font-black text-white text-xl shadow-neon-purple group-hover:scale-105 transition-transform">
-                    A
-                </div>
-                <span class="font-display text-2xl font-black tracking-wider text-white">AETHEL<span class="text-brand-cyan">MC</span></span>
-            </a>
-
-            <!-- Navigation Links (Desktop) -->
-            <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm">
-                <a href="#hero" class="text-white hover:text-brand-cyan transition-colors">Főoldal</a>
-                <a href="#features" class="text-gray-300 hover:text-brand-cyan transition-colors">Játékmódok</a>
-                <a href="#store" class="text-gray-300 hover:text-brand-purple transition-colors">Bolt & Rangok</a>
-                <a href="#community" class="text-gray-300 hover:text-brand-cyan transition-colors">Közösség</a>
-            </nav>
-
-            <!-- Header Action Buttons -->
-            <div class="flex items-center space-x-4">
-                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/30 text-white font-semibold text-sm transition-all hover:scale-105">
-                    <i class="fa-brands fa-discord text-indigo-400"></i>
-                    <span>Discord</span>
-                </a>
-                <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 transition-all hover:scale-105">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Bolt</span>
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex-grow z-10">
-
-        <!-- Hero Section -->
-        <section id="hero" class="relative py-16 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
-            
-            <!-- Version Badge -->
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-card border-brand-purple/40 text-xs sm:text-sm font-semibold mb-8 animate-bounce">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-gray-300">Támogatott verziók:</span>
-                <span class="text-brand-cyan font-bold">1.16.5 - 26.2</span>
-            </div>
-
-            <!-- Main Heading -->
-            <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white max-w-4xl leading-tight mb-6">
-                Üdvözöl az <span class="text-gradient-purple">AethelMC</span> Minecraft Szerverén!
-            </h1>
-
-            <p class="text-gray-400 text-base sm:text-xl max-w-2xl mb-10 font-normal">
-                Fedezd fel a legújabb élményeket nyújtó magyar Minecraft szervert! Egyedülálló közösség, izgalmas kihívások és folyamatos frissítések várnak rád.
-            </p>
-
-            <!-- IP Box & Copy Button -->
-            <div class="w-full max-w-md glass-panel p-3 sm:p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-white/10 mb-12">
-                <div class="flex items-center space-x-3 pl-2 w-full sm:w-auto">
-                    <div class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></div>
-                    <div class="text-left">
-                        <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Szerver Cím</div>
-                        <div class="text-white font-mono font-bold text-lg sm:text-xl tracking-wide select-all" id="serverIp">play.aethelmc.fun</div>
-                    </div>
-                </div>
-                <button onclick="copyIp()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan hover:opacity-90 text-white font-bold text-sm tracking-wide transition-all active:scale-95 flex items-center justify-center space-x-2 shadow-lg">
-                    <i class="fa-regular fa-copy" id="copyIcon"></i>
-                    <span id="copyBtnText">Másolás</span>
-                </button>
-            </div>
-
-            <!-- Action Cards (Store & Discord quick links) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-3xl">
-                <!-- Store Card -->
-                <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl text-left group flex items-start space-x-4 border border-purple-500/20 hover:border-purple-500/50">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all">
-                        <i class="fa-solid fa-gem"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-purple-400 uppercase tracking-wider">Rangok & Támogatás</div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">AethelMC Webshop</h3>
-                        <p class="text-sm text-gray-400 mt-1">Vásárolj rangokat, kulcsokat és extra kiegészítőket a boltban!</p>
-                        <span class="inline-flex items-center text-xs font-bold text-purple-400 mt-3 group-hover:translate-x-1 transition-transform">
-                            Megnyitás: store.aethelmc.fun <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Discord Card -->
-                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="glass-card p-6 rounded-2xl text-left group flex items-start space-x-4 border border-indigo-500/20 hover:border-indigo-500/50">
-                    <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                        <i class="fa-brands fa-discord"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Közösségi Élet</div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">Discord Szerver</h3>
-                        <p class="text-sm text-gray-400 mt-1">Csatlakozz a közösséghez, vegyél részt nyereményjátékokban!</p>
-                        <span class="inline-flex items-center text-xs font-bold text-indigo-400 mt-3 group-hover:translate-x-1 transition-transform">
-                            Csatlakozás <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </span>
-                    </div>
-                </a>
-            </div>
-
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mb-4">Miért válaszd az <span class="text-gradient-purple">AethelMC</span>-t?</h2>
-                <p class="text-gray-400 max-w-xl mx-auto">Kiváló teljesítmény, kiegyensúlyozott játékmódok és egy barátságos közösség vár a szerveren.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-brand-purple/20 text-brand-purple flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3">Maximális Teljesítmény</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Akadásmentes játékélmény és alacsony válaszidő (ping), hogy a legfontosabb pillanatokban se szaggasson a játék.
-                    </p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3">Aktív Moderáció</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Segítőkész és igazságos admincsapatunk garantálja a csalómentes és barátságos környezetet mindenki számára.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-white mb-3">Széles Verziótámogatás</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Csatlakozz szinte bármilyen verzióval 1.16.5-től egészen a legújabb 26.2-es frissítésekig!
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Store Call-to-Action Section -->
-        <section id="store" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="glass-panel p-8 sm:p-14 rounded-3xl border border-purple-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="max-w-xl text-center md:text-left z-10">
-                    <span class="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-bold text-xs uppercase tracking-wider mb-4">Prémium Előnyök</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">Szeretnél Rangot vagy Extra Tárgyakat?</h2>
-                    <p class="text-gray-300 text-base mb-6">Támogasd a szerver működését és élvezd a különleges rangokkal járó előnyöket, mint például az egyedi kozmetikákat, plusz parancsokat és előjogokat!</p>
-                    <a href="https://store.aethelmc.fun" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-base shadow-lg shadow-purple-600/40 hover:scale-105 transition-all">
-                        <i class="fa-solid fa-store"></i>
-                        <span>Ugrás a Webshopra (store.aethelmc.fun)</span>
-                    </a>
-                </div>
-                <div class="z-10 flex-shrink-0">
-                    <div class="w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 p-1 animate-pulse shadow-neon-purple">
-                        <div class="w-full h-full bg-brand-dark rounded-full flex flex-col items-center justify-center text-center p-4">
-                            <i class="fa-solid fa-crown text-5xl text-yellow-400 mb-3"></i>
-                            <span class="font-display font-black text-xl text-white">VIP & RANGOK</span>
-                            <span class="text-xs text-gray-400 mt-1">Azonnali jóváírás</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community Section -->
-        <section id="community" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">Légy része a Közösségnek!</h2>
-            <p class="text-gray-400 max-w-lg mx-auto mb-8">Ne maradj le semmiről! Csatlakozz Hivatalos Discord szerverünkre a friss hírekért és eseményekért.</p>
-            <a href="https://discord.gg/VNHUDWdcjn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base shadow-lg shadow-indigo-600/30 hover:scale-105 transition-all">
-                <i class="fa-brands fa-discord text-xl"></i>
-                <span>Csatlakozás a Discordra</span>
-            </a>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="glass-panel border-t border-white/10 py-8 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <div>
-                <p>&copy; 2026 <span class="text-white font-bold">AethelMC</span>. Minden jog fenntartva.</p>
-                <p class="text-xs text-gray-500 mt-1">Nem állunk kapcsolatban a Mojang AB-vel.</p>
-            </div>
-            <div class="flex items-center space-x-6">
-                <a href="https://store.aethelmc.fun" target="_blank" class="hover:text-brand-purple transition-colors">Bolt</a>
-                <a href="https://discord.gg/VNHUDWdcjn" target="_blank" class="hover:text-indigo-400 transition-colors">Discord</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out pointer-events-none">
-        <div class="glass-panel px-5 py-3 rounded-xl border border-emerald-500/40 text-emerald-300 flex items-center space-x-3 shadow-2xl">
-            <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
-            <span class="font-semibold text-sm">Szerver IP sikeresen másolva!</span>
-        </div>
+      <a href="#tgf" class="btn btn-primary">Jelentkezés</a>
     </div>
+  </header>
 
-    <!-- Scripts -->
-    <script>
-        // Copy IP logic
-        function copyIp() {
-            const ip = "play.aethelmc.fun";
-            
-            // Temporary text area for fallback clipboard support
-            const el = document.createElement('textarea');
-            el.value = ip;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>1.8.8 – 26.2 Támogatás • Aktív Hálózat</span>
+        </div>
 
-            // UI Feedback update
-            const btnText = document.getElementById('copyBtnText');
-            const icon = document.getElementById('copyIcon');
-            const toast = document.getElementById('toast');
+        <h1>AethelMC Hálózat</h1>
+        <p class="hero-desc">
+          Pörgős PvP arénák, fejlődős túlélő és égi módok egyetlen, gyors és letisztult közösségi szerveren. Csatlakozz most és építsd fel a saját utadat.
+        </p>
 
-            btnText.innerText = "Másolva!";
-            icon.className = "fa-solid fa-check";
+        <div class="ip-bar">
+          <span class="ip-label">Szerver IP</span>
+          <span class="ip-value" id="server-ip">play.aethelmc.fun</span>
+          <button type="button" class="btn btn-primary" id="copy-ip-btn">IP másolása</button>
+        </div>
 
-            // Show Toast Notification
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
+        <div class="hero-actions">
+          <a href="#modes" class="btn btn-ghost">Játékmódok felfedezése</a>
+          <a href="#tgf" class="btn btn-ghost">Jr. &amp; Chat Mod TGF</a>
+        </div>
+      </div>
+    </section>
 
-            setTimeout(() => {
-                btnText.innerText = "Másolás";
-                icon.className = "fa-regular fa-copy";
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 2500);
+    <section id="modes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Játékmódok</h2>
+          <p class="section-sub">Válaszd ki a stílusodhoz illő módot a proxy menüben.</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="card">
+            <span class="tag">PvP</span>
+            <h3>BoxPvP</h3>
+            <p>Gyors harcok, egyedi felszerelések és folyamatos fejlődés zárt, intenzív arénákban.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">PvP / Speed</span>
+            <h3>ComboFly</h3>
+            <p>Lendületes kombózás és repülős mechanikák a pörgős, akciódús összecsapásokhoz.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Sziget</span>
+            <h3>SkyBlock</h3>
+            <p>Építsd fel a saját lebegő szigeted, fejlessz generátorokat és kereskedj a közösséggel.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Sziget</span>
+            <h3>OneBlock</h3>
+            <p>Kezdj egyetlen blokkról, nyiss meg új fázisokat és bővítsd ki a birodalmadat lépésről lépésre.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Miért AethelMC?</h2>
+          <p class="section-sub">Stabil alapok, átlátható szabályok és aktív fejlesztés.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <span class="tag">Kompatibilitás</span>
+            <h3>Széles verziótámogatás</h3>
+            <p>Csatlakozz 1.8.8-tól egészen a 26.2-es verziókig, kényelmes belépéssel és gyors szerverváltással.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Közösség</span>
+            <h3>Aktív moderáció</h3>
+            <p>Korrekt chat- és szerverfelügyelet, gyors ticketkezelés és átlátható elvárások minden játékos számára.</p>
+          </article>
+
+          <article class="card">
+            <span class="tag">Fejlődés</span>
+            <h3>Folyamatos frissítések</h3>
+            <p>Új rendszerek, finomhangolt egyensúly és szezonális tartalmak a visszajelzések alapján.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tgf">
+      <div class="container">
+        <div class="tgf-box">
+          <div>
+            <span class="tag">Csapatfelvétel</span>
+            <h2>Junior &amp; Chat Moderátor TGF</h2>
+            <p>
+              Jól kezeled a chatet, türelmes vagy, és szívesen segítesz a játékosoknak? Töltsd ki a jelentkezési űrlapot, és mutasd meg, mit tudsz!
+            </p>
+          </div>
+          <a href="tgf.html" class="btn btn-primary">TGF űrlap megnyitása</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> AethelMC • aethelmc.fun</span>
+      <span>Szerver IP: play.aethelmc.fun</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">IP kimásolva: play.aethelmc.fun</div>
+
+  <script>
+    (function () {
+      const copyBtn = document.getElementById("copy-ip-btn");
+      const ipText = document.getElementById("server-ip").textContent.trim();
+      const toast = document.getElementById("toast");
+      const yearEl = document.getElementById("year");
+
+      yearEl.textContent = new Date().getFullYear();
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(window.__aethelToastTimer);
+        window.__aethelToastTimer = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2200);
+      }
+
+      copyBtn.addEventListener("click", async function () {
+        try {
+          await navigator.clipboard.writeText(ipText);
+          showToast("IP kimásolva: " + ipText);
+        } catch {
+          showToast("Másold ki kézzel: " + ipText);
         }
-
-        // Particle.js Configuration
-        window.onload = function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 40,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#8b5cf6"
-                    },
-                    "shape": {
-                        "type": "circle"
-                    },
-                    "opacity": {
-                        "value": 0.3,
-                        "random": true
-                    },
-                    "size": {
-                        "value": 4,
-                        "random": true
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#06b6d4",
-                        "opacity": 0.15,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1.5,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": false
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 0.4
-                            }
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        };
-    </script>
+      });
+    })();
+  </script>
 </body>
 </html>
