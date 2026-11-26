@@ -478,10 +478,18 @@
             </div>
           </div>
 
-          <div class="field">
-            <label class="label" for="activity-mode">Mióta nyomod az AethelMC BoxPvP-n, és mennyire ismered az arénát?<span class="req">*</span></label>
-            <span class="hint">Pl.: 2 hete játszom, vágom a ládákat, rangokat és a mindennapi harcokat.</span>
-            <input class="input" id="activity-mode" name="activityMode" type="text" required placeholder="Időtartam és BoxPvP tapasztalat..." />
+          <div class="grid-2">
+            <div class="field">
+              <label class="label" for="timezone-peak">Melyik napszakokban vagy aktívabb?<span class="req">*</span></label>
+              <span class="hint">Délután, este, hétvégén, hajnali műszak?</span>
+              <input class="input" id="timezone-peak" name="timezonePeak" type="text" required placeholder="Pl.: Hétköznap 16–21, hétvégén több" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="activity-mode">Mióta nyomod az AethelMC BoxPvP-n, és mennyire ismered az arénát?<span class="req">*</span></label>
+              <span class="hint">Ládák, rangok, bányák, zónák, PvP dinamika.</span>
+              <input class="input" id="activity-mode" name="activityMode" type="text" required placeholder="Időtartam és BoxPvP tapasztalat..." />
+            </div>
           </div>
 
           <div class="field">
@@ -510,6 +518,18 @@
             <label class="label" for="why-you">Miért pont téged vegyünk fel az AethelMC csapatába?<span class="req">*</span></label>
             <span class="hint">Írj legalább 3-4 értelmes mondatot. A "mert jó fej vagyok és segítenék" kevés lesz.</span>
             <textarea class="textarea" id="why-you" name="whyYou" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="strengths-weaknesses">Mi a legnagyobb erősséged és mi a gyenge pontod moderátorként?<span class="req">*</span></label>
+            <span class="hint">Legyél önkritikus: pl. türelmetlenség, túlzott szigor, fáradtság stb.</span>
+            <textarea class="textarea" id="strengths-weaknesses" name="strengthsWeaknesses" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="afk-notice">Mi a teendőd, ha váratlanul közbejön valami, és napokig nem tudsz feljönni?<span class="req">*</span></label>
+            <span class="hint">Hogyan jelzed a csapatnak, hogy ne tűnj el szó nélkül?</span>
+            <textarea class="textarea" id="afk-notice" name="afkNotice" required></textarea>
           </div>
         </div>
 
@@ -546,6 +566,24 @@
             <span class="hint">Visszaszólsz neki, vagy mi a protokoll?</span>
             <textarea class="textarea" id="sit-5" name="sit5" required></textarea>
           </div>
+
+          <div class="field">
+            <label class="label" for="sit-6">Valaki félreérthető módon vagy "poénból" spammel, káromkodik vagy fake alertet ír (pl. "/ban all" stílusban). Mit csinálsz?<span class="req">*</span></label>
+            <span class="hint">Számít-e, hogy "csak vicc volt" a chatben?</span>
+            <textarea class="textarea" id="sit-6" name="sit6" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-7">Egy másik stafftag szerinted túl szigorúan vagy hibásan büntet a chatben. Hogyan jársz el?<span class="req">*</span></label>
+            <span class="hint">Nyilvánosan vitatkozol vele a chatben, vagy privátban / vezetőség felé jelzed?</span>
+            <textarea class="textarea" id="sit-7" name="sit7" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="sit-8">Valaki folyamatosan /msg-ben vagy /r-ben zaklat/spammel egy másik játékost, de a publikus chat nyugodt. Mit teszel?<span class="req">*</span></label>
+            <span class="hint">Mit vizsgálsz ki és milyen lépéseket teszel?</span>
+            <textarea class="textarea" id="sit-8" name="sit8" required></textarea>
+          </div>
         </div>
 
         <div class="card">
@@ -557,6 +595,12 @@
             <label class="label" for="commands">Vágod az alap büntetőparancsokat (/mute, /tempmute, /warn, /kick, /history)?<span class="req">*</span></label>
             <span class="hint">Írj 1-2 példát pontos szintaxissal (pl. kinek, mennyi időre, milyen indokkal).</span>
             <textarea class="textarea" id="commands" name="commands" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="evidence-workflow">Hogyan rögzíted és tárolod a bizonyítékot (képernyőkép, videó, fájlnév, dátum)?<span class="req">*</span></label>
+            <span class="hint">Írd le, hogy 2 hét múlva is könnyen visszakereshető legyen egy esetleges fellebbezésnél.</span>
+            <textarea class="textarea" id="evidence-workflow" name="evidenceWorkflow" required></textarea>
           </div>
 
           <div class="field">
@@ -574,6 +618,14 @@
             <div class="options">
               <label class="option"><input type="radio" name="friendRule" value="Igen, mindenkire ugyanaz a szabályzat vonatkozik" required /> Igen, mindenkire ugyanaz a szabályzat vonatkozik</label>
               <label class="option"><input type="radio" name="friendRule" value="Először csak privátban rászólok, hogy ne csinálja" required /> Először csak privátban rászólok, hogy ne csinálja</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Elfogadod, hogy próbaidős időszakban szigorúbban ellenőriznek, és a hibákból tanulni kell?<span class="req">*</span></label>
+            <div class="options">
+              <label class="option"><input type="radio" name="probationAccept" value="Igen, teljesen elfogadom" required /> Igen, teljesen elfogadom</label>
+              <label class="option"><input type="radio" name="probationAccept" value="Igen, de szeretném, ha előre tisztázva lennének a feltételek" required /> Igen, de szeretném, ha előre tisztázva lennének a feltételek</label>
             </div>
           </div>
         </div>
@@ -624,18 +676,26 @@
           discordId: form.discordId.value.trim(),
           age: form.age.value.trim(),
           mic: getRadio("mic"),
+          timezonePeak: form.timezonePeak.value.trim(),
           activityMode: form.activityMode.value.trim(),
           dailyTime: getRadio("dailyTime"),
           pastStaff: form.pastStaff.value.trim(),
           whyYou: form.whyYou.value.trim(),
+          strengthsWeaknesses: form.strengthsWeaknesses.value.trim(),
+          afkNotice: form.afkNotice.value.trim(),
           sit1: form.sit1.value.trim(),
           sit2: form.sit2.value.trim(),
           sit3: form.sit3.value.trim(),
           sit4: form.sit4.value.trim(),
           sit5: form.sit5.value.trim(),
+          sit6: form.sit6.value.trim(),
+          sit7: form.sit7.value.trim(),
+          sit8: form.sit8.value.trim(),
           commands: form.commands.value.trim(),
+          evidenceWorkflow: form.evidenceWorkflow.value.trim(),
           proof: getRadio("proof"),
-          friendRule: getRadio("friendRule")
+          friendRule: getRadio("friendRule"),
+          probationAccept: getRadio("probationAccept")
         };
       }
 
@@ -650,21 +710,29 @@
           `Discord ID: ${d.discordId}`,
           `Életkor: ${d.age}`,
           `Mikrofon: ${d.mic}`,
+          `Aktív napszakok: ${d.timezonePeak}`,
           `BoxPvP aktivitás: ${d.activityMode}`,
           `Napi idő: ${d.dailyTime}`,
           "",
           `Korábbi staff: ${d.pastStaff}`,
           `Miért pont ő: ${d.whyYou}`,
+          `Erősségek és gyengeségek: ${d.strengthsWeaknesses}`,
+          `Váratlan távollét jelzése: ${d.afkNotice}`,
           "",
           `1. Családszidás admin nélkül: ${d.sit1}`,
           `2. Szerverhirdetés: ${d.sit2}`,
           `3. Vita előzmény nélkül: ${d.sit3}`,
           `4. Bug miatt eltűnt tárgy ticket: ${d.sit4}`,
           `5. Provokáció némítás után: ${d.sit5}`,
+          `6. Poén/fake alert/spam: ${d.sit6}`,
+          `7. Másik stafftag hibás/szigorú büntetése: ${d.sit7}`,
+          `8. Privát üzenetes zaklatás/spam: ${d.sit8}`,
           "",
           `Parancsok: ${d.commands}`,
+          `Bizonyíték rögzítése/tárolása: ${d.evidenceWorkflow}`,
           `Bizonyíték: ${d.proof}`,
-          `Haver szabályzata: ${d.friendRule}`
+          `Haver szabályzata: ${d.friendRule}`,
+          `Próbaidő elfogadása: ${d.probationAccept}`
         ].join("\n");
       }
 
@@ -674,11 +742,12 @@
       }
 
       function buildWebhookPayload(d) {
+        const isoTime = new Date().toISOString();
         return {
           username: "AethelMC TGF",
           embeds: [
             {
-              title: "Új Jr. & Chat Mod Jelentkezés — BoxPvP",
+              title: "Új Jr. & Chat Mod Jelentkezés (1/2) — Alapok & Motiváció",
               color: 3718648,
               fields: [
                 { name: "Játékosnév", value: trimField(d.mcNick, 256), inline: true },
@@ -686,19 +755,34 @@
                 { name: "Életkor", value: trimField(d.age, 64), inline: true },
                 { name: "Mikrofon", value: trimField(d.mic, 64), inline: true },
                 { name: "Napi idő", value: trimField(d.dailyTime, 128), inline: true },
+                { name: "Aktív napszakok", value: trimField(d.timezonePeak, 512), inline: true },
                 { name: "BoxPvP aktivitás", value: trimField(d.activityMode, 512), inline: false },
                 { name: "Korábbi staff", value: trimField(d.pastStaff, 1000), inline: false },
                 { name: "Miért pont ő", value: trimField(d.whyYou, 1000), inline: false },
+                { name: "Erősségek és gyengeségek", value: trimField(d.strengthsWeaknesses, 1000), inline: false },
+                { name: "Váratlan távollét jelzése", value: trimField(d.afkNotice, 1000), inline: false }
+              ],
+              timestamp: isoTime
+            },
+            {
+              title: "Új Jr. & Chat Mod Jelentkezés (2/2) — Szituációk & Tech",
+              color: 8424703,
+              fields: [
                 { name: "1. Családszidás admin nélkül", value: trimField(d.sit1, 1000), inline: false },
                 { name: "2. Szerverhirdetés", value: trimField(d.sit2, 1000), inline: false },
                 { name: "3. Vita előzmény nélkül", value: trimField(d.sit3, 1000), inline: false },
                 { name: "4. Bug miatt eltűnt tárgy ticket", value: trimField(d.sit4, 1000), inline: false },
                 { name: "5. Provokáció némítás után", value: trimField(d.sit5, 1000), inline: false },
+                { name: "6. Poén / fake alert / spam", value: trimField(d.sit6, 1000), inline: false },
+                { name: "7. Másik stafftag hibás/szigorú büntetése", value: trimField(d.sit7, 1000), inline: false },
+                { name: "8. Privát üzenetes zaklatás/spam", value: trimField(d.sit8, 1000), inline: false },
                 { name: "Büntetőparancsok", value: trimField(d.commands, 1000), inline: false },
+                { name: "Bizonyíték rögzítése/tárolása", value: trimField(d.evidenceWorkflow, 1000), inline: false },
                 { name: "Bizonyíték", value: trimField(d.proof, 256), inline: true },
-                { name: "Haver szabályzata", value: trimField(d.friendRule, 256), inline: true }
+                { name: "Haver szabályzata", value: trimField(d.friendRule, 256), inline: true },
+                { name: "Próbaidő elfogadása", value: trimField(d.probationAccept, 256), inline: false }
               ],
-              timestamp: new Date().toISOString()
+              timestamp: isoTime
             }
           ]
         };
